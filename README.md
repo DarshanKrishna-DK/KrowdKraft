@@ -166,12 +166,12 @@ KrowdKraft/
 
 <table>
   <tr>
-<td align="center"><a href="https://github.com/DarshanKrishna-DK"><img src="https://avatars.githubusercontent.com/u/80464993?v=4" width="100px;" alt="DarshanKrishna-DK"/><br /><sub><b>DarshanKrishna-DK</b></sub></a><br />60 contributions</td>
+<td align="center"><a href="https://github.com/DarshanKrishna-DK"><img src="https://avatars.githubusercontent.com/u/80464993?v=4" width="100px;" alt="DarshanKrishna-DK"/><br /><sub><b>DarshanKrishna-DK</b></sub></a><br />62 contributions</td>
 <td align="center"><a href="https://github.com/Udith-creates"><img src="https://avatars.githubusercontent.com/u/189503580?v=4" width="100px;" alt="Udith-creates"/><br /><sub><b>Udith-creates</b></sub></a><br />8 contributions</td>
+<td align="center"><a href="https://github.com/vansh2408"><img src="https://avatars.githubusercontent.com/u/77244334?v=4" width="100px;" alt="vansh2408"/><br /><sub><b>vansh2408</b></sub></a><br />8 contributions</td>
 <td align="center"><a href="https://github.com/Nel4Nelson"><img src="https://avatars.githubusercontent.com/u/79995989?v=4" width="100px;" alt="Nel4Nelson"/><br /><sub><b>Nel4Nelson</b></sub></a><br />4 contributions</td>
 <td align="center"><a href="https://github.com/HarjobandeepSingh"><img src="https://avatars.githubusercontent.com/u/81474463?v=4" width="100px;" alt="HarjobandeepSingh"/><br /><sub><b>HarjobandeepSingh</b></sub></a><br />4 contributions</td>
 <td align="center"><a href="https://github.com/amitkushh"><img src="https://avatars.githubusercontent.com/u/140083127?v=4" width="100px;" alt="amitkushh"/><br /><sub><b>amitkushh</b></sub></a><br />3 contributions</td>
-<td align="center"><a href="https://github.com/apps/github-actions"><img src="https://avatars.githubusercontent.com/in/15368?v=4" width="100px;" alt="github-actions[bot]"/><br /><sub><b>github-actions[bot]</b></sub></a><br />3 contributions</td>
   </tr>
 </table>
 
