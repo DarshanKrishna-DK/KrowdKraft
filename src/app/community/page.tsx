@@ -14,13 +14,15 @@ export default function CommunityPage() {
   return (
     <main className="min-h-screen">
       <CommunityNavigation />
-      <CommunityHero />
-      <section id="about">
+      <section id="hero" className="flex items-center justify-center max-h-screen min-h-screen">
+        <CommunityHero />
+      </section>
+      <section id="about" className="flex items-center justify-center max-h-screen min-h-screen">
         <ParallaxWrapper speed={0.3}>
           <CommunityAbout />
         </ParallaxWrapper>
       </section>
-      <section id="dev-hub">
+      <section id="dev-hub" className="flex items-center justify-center max-h-screen min-h-screen">
         <ParallaxWrapper speed={0.4}>
           <DevHub />
         </ParallaxWrapper>
@@ -30,23 +32,22 @@ export default function CommunityPage() {
           <PastEvents />
         </ParallaxWrapper>
       </section>
-      <section id="upcoming-events">
+      <section id="upcoming-events" className="flex items-center justify-center max-h-screen min-h-screen">
         <ParallaxWrapper speed={0.2}>
           <UpcomingEvents />
         </ParallaxWrapper>
       </section>
-      <section id="latest-articles">
+      <section id="latest-articles" className="flex items-center justify-center max-h-screen min-h-screen">
         <ParallaxWrapper speed={0.2}>
           <LatestArticles />
         </ParallaxWrapper>
       </section>
-      <section id="event-proposal">
+      <section id="event-proposal" className="flex items-center justify-center max-h-screen min-h-screen">
         <ParallaxWrapper speed={0.5}>
           <EventProposal />
         </ParallaxWrapper>
       </section>
-
-      <section id="collaborations">
+      <section id="collaborations" className="flex items-center justify-center max-h-screen min-h-screen">
         <ParallaxWrapper speed={0.3}>
           <PastCollaborations />
         </ParallaxWrapper>
