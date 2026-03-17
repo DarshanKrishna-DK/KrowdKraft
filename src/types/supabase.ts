@@ -4,7 +4,6 @@ export interface Event {
     created_at: string;
     title: string | null;
     description: string | null;
-    status: 'registered' | 'not_registered' | string | null;
     mode: 'online' | 'offline' | string | null;
     location: string | null;
     total_seats: number | null;

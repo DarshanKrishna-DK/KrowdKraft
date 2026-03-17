@@ -6,27 +6,27 @@ export interface Collaborator {
 }
 
 export const collaborators: Collaborator[] = [
-  { 
-    name: "REVA University", 
-    logo: "RU", 
+  {
+    name: "REVA University",
+    logo: "RU",
     logoImage: "/images/partners/reva-university.png",
     type: 'institution'
   },
-  { 
-    name: "MS Ramaiah Institute of Technology", 
-    logo: "MSRIT", 
+  {
+    name: "MS Ramaiah Institute of Technology",
+    logo: "MSRIT",
     logoImage: "/images/partners/ms-ramaiah.png",
     type: 'institution'
   },
-  { 
-    name: "Harsha Institute of Management Studies", 
-    logo: "HIMS", 
+  {
+    name: "Harsha Institute of Management Studies",
+    logo: "HIMS",
     logoImage: "/images/partners/harsha-institute.png",
     type: 'institution'
   },
-  { 
-    name: "T John Institute of Technology", 
-    logo: "TJIT", 
+  {
+    name: "T John Institute of Technology",
+    logo: "TJIT",
     logoImage: "/images/partners/t-john-institute.png",
     type: 'institution'
   },
@@ -42,10 +42,16 @@ export const collaborators: Collaborator[] = [
     logoImage: "/images/partners/Keploy.png",
     type: 'organization'
   },
-  { 
-    name: "CMR University", 
-    logo: "CMR", 
+  {
+    name: "CMR University",
+    logo: "CMR",
     logoImage: "/images/partners/CMR_University.png",
     type: 'institution'
+  },
+  {
+    name: "Shardeum",
+    logo: "Shardeum",
+    logoImage: "/images/partners/shardeum.png",
+    type: 'organization'
   }
 ]
