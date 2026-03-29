@@ -1,11 +1,11 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { Calendar, MapPin } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
+import { Calendar, MapPin, XCircle } from "lucide-react"
 import { Event } from "@/types/supabase"
 import Image from "next/image"
-import { useState } from "react"
-import RegistrationModal from "./registration-modal"
+import { useState, useEffect } from "react"
+import { createPortal } from "react-dom"
 import { Button } from "@/components/ui/button"
 
 interface EventCardProps {
@@ -14,23 +14,21 @@ interface EventCardProps {
 }
 
 export function EventCard({ event, index }: EventCardProps) {
-    const [isModalOpen, setIsModalOpen] = useState(false)
+    const handleRegister = () => {
+        if (event.luma_event_url) {
+            window.open(event.luma_event_url, "_blank", "noopener,noreferrer")
+        }
+    }
 
     return (
-        <>
-            <RegistrationModal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                eventUrl={event.luma_event_url}
-            />
-            <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-                className="group relative h-full glass-card overflow-hidden hover:border-neon/50 transition-colors duration-300 flex flex-col"
-            >
+        <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.1 }}
+            whileHover={{ y: -5 }}
+            className="group relative h-full glass-card overflow-hidden hover:border-neon/50 transition-colors duration-300 flex flex-col"
+        >
                 {/* Image Container */}
                 <div className="relative h-52 w-full overflow-hidden">
                     {event.banner_url ? (
@@ -46,8 +44,6 @@ export function EventCard({ event, index }: EventCardProps) {
                         </div>
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-
-                    {/* Date Badge */}
 
                     <div className="absolute top-4 right-4 bg-background/80 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium border border-white/10 flex items-center gap-1">
                         <Calendar className="w-3 h-3 text-neon" />
@@ -74,7 +70,7 @@ export function EventCard({ event, index }: EventCardProps) {
 
                     <div className="mt-auto pt-4 border-t border-white/10 flex items-center justify-between text-xs text-muted-foreground">
                         <Button
-                            onClick={() => setIsModalOpen(true)}
+                            onClick={handleRegister}
                             variant="outline"
                             className="border-neon/50 text-neon hover:bg-neon hover:text-black transition-colors px-6"
                         >
@@ -86,8 +82,7 @@ export function EventCard({ event, index }: EventCardProps) {
                             {event.mode || 'TBD'}
                         </span>
                     </div>
-                </div>
-            </motion.div>
-        </>
+        </div>
+    </motion.div>
     )
 }
