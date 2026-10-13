@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState, type KeyboardEvent } from "react";
+import { useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
 import Link from "next/link";
 import {
   formatEventDate,
@@ -47,6 +47,7 @@ export function Timeline({
     );
   const current = visible.find((event) => event.id === selected) ?? visible[0];
   function moveFocus(event: KeyboardEvent<HTMLButtonElement>, index: number) {
+    drag.current.moved = false;
     const direction =
       event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : 0;
     if (!direction && !["Home", "End"].includes(event.key)) return;
@@ -57,8 +58,12 @@ export function Timeline({
         : event.key === "End"
           ? visible.length - 1
           : (index + direction + visible.length) % visible.length;
-    setSelected(visible[next].id);
-    track.current?.querySelectorAll<HTMLButtonElement>("button")[next].focus();
+    if (visible[next]) setSelected(visible[next].id);
+    track.current?.querySelectorAll<HTMLButtonElement>("button")[next]?.focus();
+  }
+  function release(event: PointerEvent<HTMLDivElement>) {
+    drag.current.down = false;
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
   }
   return (
     <div className="timeline-area">
@@ -99,18 +104,17 @@ export function Timeline({
               const dx = event.clientX - drag.current.startX;
               if (Math.abs(dx) > 6) {
                 drag.current.moved = true;
-                event.currentTarget.setPointerCapture(event.pointerId);
+                if (!event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.setPointerCapture(event.pointerId);
                 event.currentTarget.scrollLeft = drag.current.scroll - dx;
               }
             }}
-            onPointerUp={() => {
-              drag.current.down = false;
-            }}
-            onPointerCancel={() => {
-              drag.current.down = false;
+            onPointerUp={release}
+            onPointerCancel={(event) => { release(event); drag.current.moved = false; }}
+            onPointerLeave={(event) => {
+              if (!event.currentTarget.hasPointerCapture(event.pointerId)) drag.current.down = false;
             }}
             onClickCapture={(event) => {
-              if (drag.current.moved) {
+              if (drag.current.moved && event.detail > 0) {
                 event.preventDefault();
                 event.stopPropagation();
                 drag.current.moved = false;

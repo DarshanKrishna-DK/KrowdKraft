@@ -15,6 +15,7 @@ export function Dialog({
   className?: string;
 }) {
   const ref = useRef<HTMLDialogElement>(null);
+  const backdropPress = useRef(false);
   const closeRef = useRef(onClose);
   useEffect(() => {
     closeRef.current = onClose;
@@ -33,9 +34,11 @@ export function Dialog({
       if (event.key !== "Tab" || !dialog) return;
       const stops = Array.from(dialog.querySelectorAll<HTMLElement>(
         'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
-      )).filter((element) => element.getClientRects().length > 0);
+      )).filter((element) => element.tabIndex >= 0 && element.getClientRects().length > 0);
       const first = stops[0], last = stops.at(-1);
-      if (event.shiftKey && document.activeElement === first) {
+      if (!stops.includes(document.activeElement as HTMLElement)) {
+        event.preventDefault(); (event.shiftKey ? last : first)?.focus();
+      } else if (event.shiftKey && document.activeElement === first) {
         event.preventDefault(); last?.focus();
       } else if (!event.shiftKey && document.activeElement === last) {
         event.preventDefault(); first?.focus();
@@ -54,12 +57,19 @@ export function Dialog({
       ref={ref}
       aria-labelledby={titleId}
       className={`clay dialog ${className}`}
+      onPointerDown={(event) => {
+        const rect = event.currentTarget.getBoundingClientRect();
+        backdropPress.current = event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom;
+      }}
       onCancel={(event) => {
         event.preventDefault();
         closeRef.current();
       }}
       onClick={(event) => {
-        if (event.target === event.currentTarget) closeRef.current();
+        const rect = event.currentTarget.getBoundingClientRect();
+        const outside = event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom;
+        if (backdropPress.current && outside && event.target === event.currentTarget) closeRef.current();
+        backdropPress.current = false;
       }}
     >
       <div className="dialog-inner">
