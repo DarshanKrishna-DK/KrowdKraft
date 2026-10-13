@@ -4,7 +4,8 @@ export async function sendSmtp(message: MailMessage, config: MailConfig & { url:
   const options = {
     url: config.url,
     connectionTimeout: 10000, greetingTimeout: 10000, socketTimeout: 10000,
-    dnsTimeout: 10000, requireTLS: true,
+    dnsTimeout: 10000, requireTLS: true, ignoreTLS: false, opportunisticTLS: false,
+    tls: { rejectUnauthorized: true },
     disableFileAccess: true, disableUrlAccess: true,
   };
   const transport = nodemailer.createTransport(options);
