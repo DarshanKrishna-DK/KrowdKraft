@@ -106,3 +106,19 @@ test("join sends an interest note without claiming list enrollment", async ({ pa
   await page.getByRole("button", { name: "Join the Krowd", exact: true }).click();
   await expect(page.locator("#join").getByRole("alert")).toContainText("mail isn't configured");
 });
+
+test("hiding Krafty cancels pending audio without a stale error or re-enable", async ({ page }) => {
+  await page.addInitScript(() => {
+    AudioContext.prototype.resume = function () {
+      return new Promise<void>(resolve => { Reflect.set(window, "finishDuckAudio", resolve); });
+    };
+  });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Open Krafty, the duck guide" }).click();
+  await page.getByRole("button", { name: "Turn duck sounds on" }).click();
+  await page.getByRole("button", { name: "Hide duck" }).click();
+  await page.evaluate(() => Reflect.get(window, "finishDuckAudio")());
+  await page.getByRole("button", { name: "Show Krafty, the duck guide" }).click();
+  await expect(page.getByRole("button", { name: "Turn duck sounds on" })).toHaveAttribute("aria-pressed", "false");
+  await expect(page.getByText("Sound is unavailable in this browser.", { exact: false })).toHaveCount(0);
+});

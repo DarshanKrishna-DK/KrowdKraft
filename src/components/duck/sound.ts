@@ -2,16 +2,18 @@
 export class DuckSound {
   private context: AudioContext | null = null;
   private enabled = false;
+  private generation = 0;
   async enable(): Promise<boolean> {
+    const ticket = ++this.generation;
     try {
       this.enabled = true;
       const context = this.context ?? new AudioContext(); this.context = context;
       await context.resume();
-      if (!this.enabled || this.context !== context) return false;
+      if (ticket !== this.generation || !this.enabled || this.context !== context) return false;
       this.quack(); return true;
-    } catch { this.disable(); return false; }
+    } catch { if (ticket === this.generation) this.disable(); return false; }
   }
-  disable() { this.enabled = false; const context = this.context; this.context = null; if (context && context.state !== "closed") void context.close().catch(() => {}); }
+  disable() { this.generation++; this.enabled = false; const context = this.context; this.context = null; if (context && context.state !== "closed") void context.close().catch(() => {}); }
   quack(celebrate = false) {
     const context = this.context;
     if (!this.enabled || !context || context.state !== "running") return;

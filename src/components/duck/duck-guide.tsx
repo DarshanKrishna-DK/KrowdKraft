@@ -28,6 +28,7 @@ export function DuckGuide() {
   const [reaction, setReaction] = useState(0);
   const launcher = useRef<HTMLButtonElement>(null), heading = useRef<HTMLHeadingElement>(null);
   const audio = useRef<DuckSound | null>(null);
+  const soundIntent = useRef(0);
   const detail = pathname !== "/";
   useEffect(() => {
     const observer = new IntersectionObserver(entries => {
@@ -48,7 +49,7 @@ export function DuckGuide() {
       }
     }
     window.addEventListener("krowd:mail", received);
-    return () => { window.removeEventListener("krowd:mail", received); audio.current?.disable(); };
+    return () => { window.removeEventListener("krowd:mail", received); soundIntent.current++; audio.current?.disable(); };
   }, []);
   useEffect(() => {
     if (!open) return;
@@ -59,9 +60,12 @@ export function DuckGuide() {
   function react() { setReaction(value => value + 1); setMail(null); audio.current?.quack(); }
   function close() { setOpen(false); launcher.current?.focus(); }
   async function toggleSound() {
+    const ticket = ++soundIntent.current;
     if (sound === "on") { audio.current?.disable(); setSound("off"); return; }
     audio.current ??= new DuckSound();
-    setSound(await audio.current.enable() ? "on" : "unavailable");
+    setSound("on");
+    const enabled = await audio.current.enable();
+    if (ticket === soundIntent.current) setSound(enabled ? "on" : "unavailable");
   }
   const stop = stops[active], next = stops[(active + 1) % stops.length];
   const expression = detail ? { mood: "thinking" as const, copy: "Here's the event's date, place, and source. Follow its registration link when you're ready, or come back to the Krowd Map." } : mail ? mailMessages[mail] : stop;
@@ -75,7 +79,7 @@ export function DuckGuide() {
         {[stops[3], stops[5], stops[8]].map(item => <a href={`${detail ? "/" : ""}#${item.id}`} key={item.id} onClick={react}>{item.label}</a>)}
       </nav>
       <div className="guide-controls"><button type="button" onClick={() => void toggleSound()} aria-pressed={sound === "on"} aria-label={sound === "on" ? "Turn duck sounds off" : "Turn duck sounds on"}><span aria-hidden="true">{sound === "on" ? "♫" : "♪"}</span> Sound {sound === "on" ? "on" : "off"}</button>
-        <button type="button" onClick={() => { setHidden(true); close(); audio.current?.disable(); setSound("off"); }}>Hide duck</button></div>
+        <button type="button" onClick={() => { setHidden(true); close(); soundIntent.current++; audio.current?.disable(); setSound("off"); }}>Hide duck</button></div>
       {sound === "unavailable" && <p className="guide-note" role="status">Sound is unavailable in this browser. I can still show you around.</p>}
     </div>}
     <button ref={launcher} type="button" className="duck-launcher" aria-expanded={open} aria-controls={open ? "krafty-panel" : undefined} aria-label={hidden ? "Show Krafty, the duck guide" : open ? "Close Krafty, the duck guide" : "Open Krafty, the duck guide"} onClick={() => { setHidden(false); setOpen(value => !value); setReaction(value => value + 1); audio.current?.quack(); }}>

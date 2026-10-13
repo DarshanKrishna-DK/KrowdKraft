@@ -11,7 +11,7 @@ npm ci
 npm run dev
 ```
 
-For production locally, run `npm run build`, then `npm start`. Figure modules and standalone benches are generated automatically before development, production builds and typechecking. Set `SITE_URL` to the final public origin when deploying. Vercel previews use their own origin and are marked noindex.
+For production locally, run `npm run build`, then `npm start`. Figure modules and standalone benches are generated automatically before development, production builds and typechecking. Set `SITE_URL` to the final public origin when deploying. Vercel previews use their own origin and are marked noindex. Without a known origin, production omits the absolute social-image URL instead of publishing localhost metadata.
 
 ## Content
 
@@ -21,7 +21,7 @@ Use `event:add`, `event:list`, `event:edit`, `event:remove` and `event:validate`
 
 ## Mail and join interest
 
-Copy `.env.example` to `.env.local`. Configure `MAIL_FROM` with a sender verified by your provider and either `RESEND_API_KEY` or `SMTP_URL`. Resend wins when both are set; the server logs that SMTP was ignored, without exposing credentials. SMTP requires authenticated TLS certificate validation. `MAIL_TO` accepts one email address and defaults to `krowdkraft.official@gmail.com`.
+Copy `.env.example` to `.env.local`. Configure `MAIL_FROM` with a sender verified by your provider (one address, optionally `KrowdKraft <hello@example.com>`) and either `RESEND_API_KEY` or `SMTP_URL`. Resend wins when both are set; the server logs that SMTP was ignored, without exposing credentials. SMTP requires authenticated TLS certificate validation. `MAIL_TO` accepts one email address and defaults to `krowdkraft.official@gmail.com`.
 
 Client and server both validate submissions. A missing sender/provider gives an explicit unconfigured response and preserves the input. Provider acceptance is required for success copy; it is not a guarantee of inbox delivery. Join interest sends a note to the team, not automatic mailing-list enrollment. No addresses are stored in a database, and payloads are not logged.
 
@@ -49,3 +49,5 @@ npx playwright test
 ```
 
 `npm run test:events` temporarily builds fixture events, checks populated timelines and event routes, then restores the original JSON and rebuilds it. Stop the local server first. Standard unit tests use isolated temporary files. Browser tests exercise mail's unconfigured state and never send real mail. Production dependencies currently audit clean; an unpatched dev-only glob dependency advisory is recorded in the implementation status.
+
+If the event browser process is interrupted, stop its remaining build/server processes before recovery. Compare `src/data/events.json` with `.artifacts/event-browser-original.json` and any work you made during the run. The backup contains the original data. Restore it only after preserving newer legitimate edits; never commit fixture records. Once the correct data is restored, remove that backup and the stale `src/data/events.json.lock`, run `npm run event:validate`, and rebuild. The harness deliberately refuses to overwrite an existing backup or concurrent edits.

@@ -27,7 +27,11 @@ let installed = false, restored = false;
 try {
   if (await readFile(path, "utf8") !== original) throw new Error("Event data changed before the test. Retry with the current data.");
   await mkdir(new URL("../.artifacts/", import.meta.url), { recursive: true });
-  await writeFile(backup, original, { flag: "wx" });
+  try { await writeFile(backup, original, { flag: "wx" }); }
+  catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "EEXIST") throw new Error(`A previous test backup exists at ${backup}. Follow README.md's interrupted-test recovery instructions before retrying. No event data was changed.`);
+    throw error;
+  }
   installed = true;
   await writeFile(path, fixture);
   await run("next/dist/bin/next", ["build"]);
