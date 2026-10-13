@@ -1,59 +1,40 @@
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
-import { ThemeProvider } from "@/components/theme-provider"
-import { QueryProvider } from "@/providers/query-provider"
-import Script from "next/script"
-import "@/styles/globals.css"
-import ScrollToTop from '@/components/ScrollToTop'
-
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
-
+import type { Metadata } from "next";
+import { Geist } from "next/font/google";
+import { heroDescription } from "@/data/community";
+import { DuckGuide } from "@/components/duck/duck-guide";
+import "@/styles/globals.css";
+const geist = Geist({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-geist",
+  display: "swap",
+});
+const origin = process.env.SITE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : process.env.NODE_ENV === "development" ? "http://localhost:3000" : undefined);
 export const metadata: Metadata = {
-  title: "KrowdKraft - Culture Moves Fast. We Move Faster.",
-  description: "Modern marketing agency targeting Gen Z & Millennials. Creator collabs, community builds, and authentic brand connections.",
-  keywords: ["marketing", "Gen Z", "Millennials", "creator", "community", "brand"],
-  icons: {
-    icon: "/logo.png",
-    shortcut: "/logo.png",
-    apple: "/logo.png",
+  metadataBase: origin ? new URL(origin) : undefined,
+  robots: process.env.VERCEL_ENV === "preview" ? { index: false, follow: false } : undefined,
+  title: "KrowdKraft — Where Bengaluru's developers connect",
+  description: heroDescription,
+  openGraph: {
+    title: "KrowdKraft",
+    description: heroDescription,
+    images: origin ? [
+      {
+        url: "/brand/og.png",
+        width: 1200,
+        height: 630,
+        alt: "KrowdKraft, Bengaluru developer community",
+      },
+    ] : undefined,
   },
-}
-
+  icons: { icon: "/favicon.ico", apple: "/apple-touch-icon.png" },
+};
 export default function RootLayout({
   children,
-}: {
-  children: React.ReactNode
-}) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        {/* Google Analytics */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-QM44WYFLFR"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-QM44WYFLFR');
-          `}
-        </Script>
-      </head>
-      <body className={`${inter.variable} font-sans antialiased`}>
-        <QueryProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-            <ScrollToTop />
-          </ThemeProvider>
-        </QueryProvider>
-      </body>
+    <html lang="en" className={geist.variable}>
+      <body>{children}<DuckGuide /><noscript><style>{".duck-guide { display: none; }"}</style></noscript></body>
     </html>
-  )
+  );
 }

@@ -1,0 +1,28 @@
+name: Checks
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      # Match the npm version that generates the lockfile, including peer placement.
+      - run: npm install --global npm@11.6.2
+      - run: npm ci
+      - run: npm run event:validate
+      - run: npm test
+      - run: npm run lint
+      - run: npm run build
+      - run: npm run figures:validate
+      - run: npm run typecheck
+      - run: npx --no-install playwright install --with-deps chromium
+      - run: npx --no-install playwright test

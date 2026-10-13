@@ -1,238 +1,64 @@
 # KrowdKraft
 
-[![Hacktoberfest](https://img.shields.io/badge/Hacktoberfest-2024-blueviolet.svg)](https://hacktoberfest.com/)
-[![Next.js](https://img.shields.io/badge/Next.js-14.2.3-black?logo=next.js)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0.4-blue?logo=typescript)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.0-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+KrowdKraft is a Bengaluru developer community for learning, building, meeting people and discovering worthwhile events. This repository is one community website built with Next.js, strict TypeScript, Tailwind CSS, five original Hairline illustrations and Krafty, an optional duck guide. The existing community logo is preserved.
 
-> Amplifying brands to Gen Z & Millennials through authentic community experiences| Powered by our developer community 
+## Run
 
-## About KrowdKraft
-
-KrowdKraft is a community-driven organization dedicated to empowering individuals and businesses through technology, collaboration, and impactful events. We aim to amplify our partners' voices and bridge the gap between their brands and the GenZ & Millennial generations.
-
-At the heart of our mission is a vibrant and growing developer community. We believe in the power of open-source and collaborative learning. This repository is not just the codebase for our official website - it's a living project where students, professionals, and tech enthusiasts can connect, build, and grow together. By contributing, you are directly helping us enhance a platform that supports and uplifts the next generation of tech talent.
-
-We are excited to welcome you to our community and look forward to building a better future, together.
-
-## Tech Stack
-
-- **Framework**: [Next.js 14](https://nextjs.org/) - React framework with App Router
-- **Language**: [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
-- **Animations**: [Framer Motion](https://www.framer.com/motion/) - Production-ready motion library
-- **UI Components**: [Radix UI](https://www.radix-ui.com/) - Unstyled, accessible components
-- **Icons**: [Lucide React](https://lucide.dev/) - Beautiful & consistent icon toolkit
-- **State Management**: [Zustand](https://zustand-demo.pmnd.rs/) - Small, fast state management
-- **Form Handling**: [React Hook Form](https://react-hook-form.com/) - Performant forms with validation
-- **Email Service**: [Nodemailer](https://nodemailer.com/) - Email sending functionality
-- **GitHub Integration**: Live repository stats via GitHub API with intelligent caching
-
-## Getting Started
-
-Follow these steps to set up the project locally for development.
-
-### Prerequisites
-
-Before you begin, ensure you have the following installed:
-
-- **Node.js** (version 18.0 or higher)
-- **npm** (comes with Node.js)
-- **Git** for version control
-
-### Environment Variables
-
-Create a `.env.local` file in the root directory with the following variables:
-
-```bash
-# Email Configuration
-EMAIL_USER=
-EMAIL_PASS=
-
-# Google Sheets Integration
-GOOGLE_SHEETS_WEBHOOK_URL=
-GOOGLE_SHEETS_PARTNERSHIP_WEBHOOK_URL=
-
-# Medium profile username for articles
-MEDIUM_USER_PROFILE = 
-
-# Social Media & Public URLs
-NEXT_PUBLIC_LINKEDIN_URL=https://www.linkedin.com/company/krowdkraft/
-NEXT_PUBLIC_TWITTER_URL=https://x.com/KrowdKraft_
-NEXT_PUBLIC_INSTAGRAM_URL=https://www.instagram.com/krowdkraft_/
-NEXT_PUBLIC_WHATSAPP_COMMUNITY_URL=
-NEXT_PUBLIC_CALENDLY_URL=https://calendly.com/krowdkraft-official/30min
-
-# GitHub API Configuration (Optional - for higher rate limits)
-GITHUB_TOKEN=your_github_token_here
-GITHUB_REPO_OWNER=DarshanKrishna-DK
-GITHUB_REPO_NAME=KrowdKraft
-```
-
-**Note**: The GitHub stats feature will work without a token, but with rate limits. For production use, we recommend setting up a GitHub token.
-
-### Installation
-
-1. **Fork the repository**
-   
-   Click the "Fork" button at the top right of this repository to create your own copy.
-
-2. **Clone your fork**
-   
-   ```bash
-   git clone https://github.com/YOUR_USERNAME/KrowdKraft.git
-   cd KrowdKraft
-   ```
-
-3. **Install dependencies**
-   
-   ```bash
-   npm install
-   ```
-
-4. **Set up environment variables**
-   
-   Create a `.env.local` file in the root directory:
-   
-   ```bash
-   # Email Configuration (Required for contact forms)
-   EMAIL_USER=example@gmail.com
-   EMAIL_PASS=your_16_character_app_password
-   
-   # Google Sheets Integration (Required for newsletter and partnerships)
-   GOOGLE_SHEETS_WEBHOOK_URL=https://script.google.com/macros/s/EXAMPLE_ID/exec
-   GOOGLE_SHEETS_PARTNERSHIP_WEBHOOK_URL=https://script.google.com/macros/s/EXAMPLE_ID/exec
-   
-   # Social Media Links (Public URLs - keep as provided)
-   NEXT_PUBLIC_LINKEDIN_URL=https://www.linkedin.com/company/krowdkraft/
-   NEXT_PUBLIC_TWITTER_URL=https://x.com/KrowdKraft_
-   NEXT_PUBLIC_INSTAGRAM_URL=https://www.instagram.com/krowdkraft_/
-   NEXT_PUBLIC_WHATSAPP_COMMUNITY_URL=https://chat.whatsapp.com/EXAMPLE_LINK
-   NEXT_PUBLIC_CALENDLY_URL=https://calendly.com/krowdkraft-official/30min
-   ```
-
-5. **Start the development server**
-   
-   ```bash
-   npm run dev
-   ```
-
-6. **Open your browser**
-   
-   Navigate to [http://localhost:3000](http://localhost:3000) to see the website running locally.
-
-### Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint for code quality
-
-## Project Structure
+Use Node 22.19 or newer and npm 11.6.2 (the version used in CI).
 
 ```
-KrowdKraft/
-├── src/
-│   ├── app/                 # Next.js App Router pages
-│   ├── components/          # Reusable React components
-│   │   ├── sections/        # Page section components
-│   │   ├── ui/              # UI components (buttons, inputs, etc.)
-│   │   └── common/          # Shared utility components
-│   ├── data/                # Static data and content
-│   ├── lib/                 # Utility functions
-│   ├── store/               # State management
-│   ├── styles/              # Global CSS styles
-│   └── types/               # TypeScript type definitions
-├── public/                  # Static assets (images, icons)
-└── docs/                    # Documentation files
+npm ci
+npm run dev
 ```
 
+For production locally, run `npm run build`, then `npm start`. Figure modules and standalone benches are generated automatically before development, production builds and typechecking. Set `SITE_URL` to the final public origin when deploying. Vercel previews use their own origin and are marked noindex. Without a known origin, production omits the absolute social-image URL instead of publishing localhost metadata.
 
-## 📊 Community Stats
+## Content
 
-<div align="center">
+Edit stats and people in `src/data/community.ts`, partners in `src/data/partners.ts`, and events in `src/data/events.json`. Events and partners intentionally start empty. The shared Zod event schema rejects duplicate identities, invalid dates and unsafe URLs. Dates are classified in Asia/Kolkata at read time.
 
-![GitHub stars](https://img.shields.io/github/stars/DarshanKrishna-DK/KrowdKraft?style=for-the-badge&logo=github&color=yellow)
-![GitHub forks](https://img.shields.io/github/forks/DarshanKrishna-DK/KrowdKraft?style=for-the-badge&logo=github&color=blue)
-![GitHub issues](https://img.shields.io/github/issues/DarshanKrishna-DK/KrowdKraft?style=for-the-badge&logo=github&color=red)
-![GitHub closed issues](https://img.shields.io/github/issues-closed/DarshanKrishna-DK/KrowdKraft?style=for-the-badge&logo=github&color=green)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/DarshanKrishna-DK/KrowdKraft?style=for-the-badge&logo=github&color=orange)
-![GitHub contributors](https://img.shields.io/github/contributors/DarshanKrishna-DK/KrowdKraft?style=for-the-badge&logo=github&color=purple)
+The CLI previews source metadata, reviews every field and requires explicit approval before saving. Enter keeps a displayed value; `-` clears an optional field. Save prompts default to cancellation. Image downloads require separate approval and produce local WebP assets. Keeping a remote image requires typing `Keep remote URL`; that host will receive visitors' image requests.
 
-</div>
+```
+npm run event:add -- "https://example.com/event"
+npm run event:add
+npm run event:list
+npm run event:edit -- event-slug
+npm run event:remove -- event-slug
+npm run event:validate
+```
 
-### 🏆 Top Contributors
+URL imports read public HTML metadata without executing the site's scripts. Fill missing fields manually; never invent events. The downloader checks and pins public DNS addresses, bounds redirects and response sizes, and rejects credentials/private destinations. Writes use a lock and atomic replacement, refusing to overwrite concurrent edits. Removal retains image assets. After a killed organizer process, confirm no writer remains before removing a stale `src/data/events.json.lock`.
 
-<table>
-  <tr>
-<td align="center"><a href="https://github.com/DarshanKrishna-DK"><img src="https://avatars.githubusercontent.com/u/80464993?v=4" width="100px;" alt="DarshanKrishna-DK"/><br /><sub><b>DarshanKrishna-DK</b></sub></a><br />67 contributions</td>
-<td align="center"><a href="https://github.com/Udith-creates"><img src="https://avatars.githubusercontent.com/u/189503580?v=4" width="100px;" alt="Udith-creates"/><br /><sub><b>Udith-creates</b></sub></a><br />8 contributions</td>
-<td align="center"><a href="https://github.com/vansh2408"><img src="https://avatars.githubusercontent.com/u/77244334?v=4" width="100px;" alt="vansh2408"/><br /><sub><b>vansh2408</b></sub></a><br />8 contributions</td>
-<td align="center"><a href="https://github.com/Nel4Nelson"><img src="https://avatars.githubusercontent.com/u/79995989?v=4" width="100px;" alt="Nel4Nelson"/><br /><sub><b>Nel4Nelson</b></sub></a><br />4 contributions</td>
-<td align="center"><a href="https://github.com/HarjobandeepSingh"><img src="https://avatars.githubusercontent.com/u/81474463?v=4" width="100px;" alt="HarjobandeepSingh"/><br /><sub><b>HarjobandeepSingh</b></sub></a><br />4 contributions</td>
-<td align="center"><a href="https://github.com/amitkushh"><img src="https://avatars.githubusercontent.com/u/140083127?v=4" width="100px;" alt="amitkushh"/><br /><sub><b>amitkushh</b></sub></a><br />3 contributions</td>
-  </tr>
-</table>
+## Mail and join interest
 
-<div align="center">
-  <i>Stats updated daily via GitHub Actions</i>
-</div>
+Copy `.env.example` to `.env.local`. Configure `MAIL_FROM` with a sender verified by your provider (one address, optionally `KrowdKraft <hello@example.com>`) and either `RESEND_API_KEY` or `SMTP_URL`. Resend wins when both are set; the server logs that SMTP was ignored, without exposing credentials. SMTP requires authenticated TLS certificate validation. `MAIL_TO` accepts one email address and defaults to `krowdkraft.official@gmail.com`.
 
----
-## How to Contribute
+Client and server both validate submissions. A missing sender/provider gives an explicit unconfigured response and preserves the input. Provider acceptance is required for success copy; it is not a guarantee of inbox delivery. Join interest sends a note to the team, not automatic mailing-list enrollment. No addresses are stored in a database, and payloads are not logged.
 
-We welcome contributions from developers of all skill levels! Whether you are fixing bugs, adding new features, improving documentation, or enhancing the user experience, your contributions are valuable.
+The in-memory limits are five submissions per origin per hour and 100 per server process. With `TRUST_PROXY=false`, visitors share one conservative origin bucket. Only enable forwarded-IP trust behind a proxy that replaces that header. The bounded origin map fails closed if its capacity is exhausted and removes expired entries on each request. Multi-instance hosting requires infrastructure-level rate limits. No live mail delivery has been claimed from mocked tests.
 
-### Quick Start for Contributors
+## Design
 
-1. Check out our [Issues](https://github.com/DarshanKrishna-DK/KrowdKraft/issues) page for open tasks
-2. Look for issues labeled `good first issue` or `hacktoberfest` for beginner-friendly tasks
-3. Read our detailed [Contributing Guide](./CONTRIBUTING.md) for the complete workflow
-4. Join the discussion in issue comments before starting work
+The original logo has optimized WebP/AVIF, icon and social-image exports. Original figure sources and revalidation commands are in [figures/README.md](figures/README.md). The fixed Hairline engine is vendored under its MIT license; no stock drawing is used. Figures mount near the viewport, and phones show only the hero illustration.
 
-### Types of Contributions We Welcome
+Krafty uses six original SVG expressions and locally synthesized, opt-in quacks. It offers contextual section/event guidance, reacts to real form outcomes, can be hidden, and respects reduced motion. Sound starts only after an explicit sound-button gesture. It does not require an AI service, microphone, tracking or external media.
 
-- **Bug Fixes**: Help us identify and fix issues
-- **Feature Development**: Add new functionality or improve existing features
-- **UI/UX Improvements**: Enhance the visual design and user experience
-- **Performance Optimization**: Improve loading times and responsiveness
-- **Documentation**: Improve README, add code comments, or create tutorials
-- **Testing**: Add unit tests or integration tests
-- **Accessibility**: Make the website more accessible to all users
+Three.js, GSAP, smooth-scroll hijacking, authentication, CMS and database dependencies are intentionally absent. Project briefs, local agent configuration and development artifacts are kept outside Git tracking. Source tests and CI remain versioned because they verify mail, organizer data safety and browser behavior; generated test reports are ignored.
 
-For detailed contribution guidelines, please read our [CONTRIBUTING.md](./CONTRIBUTING.md) file.
+## Checks
 
-## License
+```
+npm test
+npm run lint
+npm run typecheck
+npm run event:validate
+npm run figures:validate
+npm run build
+npx playwright install chromium
+npx playwright test
+```
 
-This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
+`npm run test:events` temporarily builds fixture events, checks populated timelines and event routes, then restores the original JSON and rebuilds it. Stop the local server first. Standard unit tests use isolated temporary files. Browser tests exercise mail's unconfigured state and never send real mail. On 13 October 2026, production dependencies audited clean; the full audit reported five high dev-only findings through the unpatched braces/micromatch/fast-glob ESLint toolchain. Recheck when updating dependencies.
 
-## Code of Conduct
-
-We are committed to providing a welcoming and inclusive environment for all contributors. Please read our [Code of Conduct](./CODE_OF_CONDUCT.md) to understand the standards we expect from our community.
-
-## Support
-
-If you have questions or need help getting started:
-
-- Check existing [Issues](https://github.com/DarshanKrishna-DK/KrowdKraft/issues) for similar questions
-- Create a new issue with the `question` label
-- Review our [Contributing Guide](./CONTRIBUTING.md) for detailed information
-
-## Acknowledgments
-
-Thank you to all the contributors who help make KrowdKraft better! Your contributions, whether big or small, are greatly appreciated.
-
-## Connect With Us
-
-Stay updated with KrowdKraft and join our community:
-
-- **LinkedIn**: [KrowdKraft](https://www.linkedin.com/company/krowdkraft/)
-- **Twitter/X**: [@KrowdKraft_](https://x.com/KrowdKraft_)
-- **Instagram**: [@krowdkraft_](https://www.instagram.com/krowdkraft_/)
-- **WhatsApp Community**: [Join our community](https://chat.whatsapp.com/Ko9hqFs7hhtLJY1nePhkNO)
-- **Schedule a Meeting**: [Book a call with us](https://calendly.com/krowdkraft-official/30min)
-
----
-
-**Happy Contributing!** 🚀
+If the event browser process is interrupted, stop its remaining build/server processes before recovery. Compare `src/data/events.json` with `.artifacts/event-browser-original.json` and any work you made during the run. The backup contains the original data. Restore it only after preserving newer legitimate edits; never commit fixture records. Once the correct data is restored, remove that backup and the stale `src/data/events.json.lock`, run `npm run event:validate`, and rebuild. The harness deliberately refuses to overwrite an existing backup or concurrent edits.
