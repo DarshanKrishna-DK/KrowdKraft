@@ -1,5 +1,6 @@
 import { communityStats, heroDescription } from "@/data/community";
 import { Arrow } from "@/components/clay";
+import { Figure } from "@/components/figures/figure";
 export function Hero() {
   return (
     <section id="top" className="hero container" aria-labelledby="hero-title">
@@ -23,21 +24,7 @@ export function Hero() {
           </a>
         </div>
       </div>
-      <div
-        className="hero-art figure-placeholder clay"
-        data-figure="gather"
-        aria-hidden="true"
-      >
-        <div className="clay-orbit">
-          <i />
-          <i />
-          <i />
-          <i />
-          <i />
-          <i />
-          <i />
-        </div>
-      </div>
+      <Figure name="gather" className="hero-art clay" />
     </section>
   );
 }

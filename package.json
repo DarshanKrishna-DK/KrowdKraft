@@ -7,6 +7,11 @@
     "node": ">=22.0.0"
   },
   "scripts": {
+    "predev": "node scripts/figures/build.mjs",
+    "prebuild": "node scripts/figures/build.mjs",
+    "pretypecheck": "node scripts/figures/build.mjs",
+    "figures:build": "node scripts/figures/build.mjs",
+    "figures:validate": "npm run figures:build && node scripts/figures/validate.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

@@ -11,6 +11,7 @@ export default defineConfig([
     ".artifacts/**",
     "next-env.d.ts",
     "figures/**",
+    "src/generated/**",
     "test-results/**",
   ]),
 ]);

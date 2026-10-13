@@ -1,4 +1,5 @@
 import { CollaborationForm } from "@/components/forms/collaboration-form";
+import { Figure } from "@/components/figures/figure";
 const groups = [
   {
     title: "Companies",
@@ -64,11 +65,7 @@ export function Collaborate() {
             </a>
           ))}
         </div>
-        <div
-          data-figure="bridge"
-          className="figure-placeholder clay bridge-art"
-          aria-hidden="true"
-        />
+        <Figure name="bridge" className="clay bridge-art" />
       </div>
       <div id="collaboration-action" className="collaboration-action">
         <CollaborationForm />

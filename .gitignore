@@ -13,3 +13,6 @@ test-results/
 playwright-report/
 skills-lock.json
 next-env.d.ts
+src/generated/
+figures/hairline-*.html
+figures/hairline-*.png

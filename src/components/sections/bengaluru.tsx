@@ -1,4 +1,5 @@
 import { Arrow } from "@/components/clay";
+import { Figure } from "@/components/figures/figure";
 const topics = [
   "AI / ML",
   "Web",
@@ -39,11 +40,7 @@ export function Bengaluru() {
               Join the community <Arrow />
             </a>
           </div>
-          <div
-            data-figure="blocks"
-            className="figure-placeholder clay city-art"
-            aria-hidden="true"
-          />
+          <Figure name="blocks" className="clay city-art" />
         </div>
         <ul className="topic-chips" aria-label="Community topics">
           {topics.map((topic) => (

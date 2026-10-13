@@ -34,8 +34,10 @@ test("collaboration preserves input and reports unconfigured mail honestly", asy
   await page.goto("/");
   const trigger = page.getByRole("button", { name: "Build with the Krowd" }); await trigger.click();
   const dialog = page.getByRole("dialog");
+  await dialog.getByLabel("Your name").fill("Test person");
   await dialog.getByRole("button", { name: "Send collaboration request" }).click();
   await expect(dialog.getByText("Choose who you represent.")).toBeVisible();
+  await expect(dialog.getByLabel("Your name")).toHaveValue("Test person");
   await dialog.getByLabel("I represent a").selectOption("Community");
   await dialog.getByLabel("Organization name").fill("Browser test community");
   await dialog.getByLabel("Your name").fill("Test person");
@@ -50,6 +52,21 @@ test("collaboration preserves input and reports unconfigured mail honestly", asy
   const result = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21aa"]).analyze();
   expect(result.violations).toEqual([]);
   await page.keyboard.press("Escape"); await expect(trigger).toBeFocused();
+});
+test("figures mount nearby, settle with reduced motion, and are omitted on phones", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" }); await page.goto("/");
+  const hero = page.locator('[data-figure="gather"] svg');
+  await expect(hero).toBeVisible();
+  await expect(page.locator('[data-figure="seat"] svg')).toHaveCount(0);
+  for (const name of ["route", "blocks", "bridge", "seat"]) {
+    const plate = page.locator(`[data-figure="${name}"]`);
+    await plate.scrollIntoViewIfNeeded(); await expect(plate.locator("svg")).toBeVisible();
+  }
+  await expect(hero).toHaveCount(0);
+  await page.setViewportSize({ width: 390, height: 844 }); await page.goto("/");
+  await expect(page.locator('[data-figure="gather"] svg')).toBeVisible();
+  await page.locator("#join").scrollIntoViewIfNeeded();
+  await expect(page.locator(".desktop-figure svg")).toHaveCount(0);
 });
 test("join sends an interest note without claiming list enrollment", async ({ page }) => {
   await page.goto("/");

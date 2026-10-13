@@ -1,4 +1,5 @@
 import { JoinForm } from "@/components/forms/join-form";
+import { Figure } from "@/components/figures/figure";
 export function Join() {
   return (
     <section
@@ -19,11 +20,7 @@ export function Join() {
           </p>
           <JoinForm />
         </div>
-        <div
-          data-figure="seat"
-          className="figure-placeholder join-art"
-          aria-hidden="true"
-        />
+        <Figure name="seat" className="join-art" />
       </div>
     </section>
   );

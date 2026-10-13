@@ -1,5 +1,6 @@
 import { events, kolkataToday } from "@/data/events";
 import { Timeline } from "@/components/events/timeline";
+import { Figure } from "@/components/figures/figure";
 export function Events() {
   return (
     <section
@@ -16,11 +17,7 @@ export function Events() {
             A timeline of places where the Krowd came together.
           </p>
         </div>
-        <div
-          data-figure="route"
-          className="small-figure-placeholder"
-          aria-hidden="true"
-        />
+        <Figure name="route" className="route-art clay" />
       </div>
       <Timeline events={events} today={kolkataToday()} />
     </section>
