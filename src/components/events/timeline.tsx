@@ -6,7 +6,7 @@ import {
   isUpcoming,
   relationshipLabels,
   type KrowdEvent,
-} from "@/data/events";
+} from "@/data/event-utils";
 import { ClayNodes } from "@/components/clay";
 import { Dialog } from "@/components/dialog";
 import { EventContent } from "./event-content";

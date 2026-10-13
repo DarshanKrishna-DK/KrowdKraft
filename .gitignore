@@ -16,3 +16,5 @@ next-env.d.ts
 src/generated/
 figures/hairline-*.html
 figures/hairline-*.png
+src/data/events.json.lock
+src/data/events.json.*.tmp

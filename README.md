@@ -1,29 +1,51 @@
 # KrowdKraft
 
-The local event workflow is documented in [docs/EVENTS.md](docs/EVENTS.md). Original artwork and reproducible visual checks are in [figures/README.md](figures/README.md).
-
-Collaboration and join interest use server-validated email forms. Join interest sends a note to the team; it does not enroll an address in a list or persist it in a database. Resend takes precedence over SMTP when both are configured. SMTP requires TLS. A missing provider or `MAIL_FROM` produces an explicit unconfigured response and preserves the form. Provider failures never produce success copy.
-
-Mail is limited to five requests per origin per hour and 100 per process. With `TRUST_PROXY=false`, all visitors share the conservative origin bucket. Enable forwarded-IP trust only behind a proxy that replaces the header; multi-instance hosting also needs an infrastructure-level limit. Payloads and provider credentials are not logged. Tests mock provider responses and do not send real mail.
-
-KrowdKraft is a Bengaluru developer community for learning, building, meeting people, and discovering worthwhile events. This repository is one community website built with Next.js, TypeScript, Tailwind CSS and original Hairline illustrations.
+KrowdKraft is a Bengaluru developer community for learning, building, meeting people and discovering worthwhile events. This repository is one community website built with Next.js, strict TypeScript, Tailwind CSS, five original Hairline illustrations and Krafty, an optional duck guide. The existing community logo and the supplied product brief are preserved.
 
 ## Run
 
-Use Node 22 or newer. Run `npm ci`, then `npm run dev`. `npm run build` and `npm start` run the production site. Check with `npm run lint`, `npm run typecheck`, and `npm run event:validate`.
+Use Node 22.19 or newer and npm 11.6.2 (the version used in CI).
+
+```
+npm ci
+npm run dev
+```
+
+For production locally, run `npm run build`, then `npm start`. Figure modules and standalone benches are generated automatically before development, production builds and typechecking. Set `SITE_URL` to the final public origin when deploying. Vercel previews use their own origin and are marked noindex.
 
 ## Content
 
 Edit stats and people in `src/data/community.ts`, partners in `src/data/partners.ts`, and events in `src/data/events.json`. Events and partners intentionally start empty. The shared Zod event schema rejects duplicate identities, invalid dates and unsafe URLs. Dates are classified in Asia/Kolkata at read time.
 
+Use `event:add`, `event:list`, `event:edit`, `event:remove` and `event:validate`. For example: `npm run event:add -- "https://example.com/event"`. The CLI previews source metadata, reviews every field and requires explicit approval before saving. Image downloads require separate approval. Full instructions are in [docs/EVENTS.md](docs/EVENTS.md).
+
 ## Mail and join interest
 
-Copy `.env.example` to `.env.local`. Configure `MAIL_FROM` and either `RESEND_API_KEY` or `SMTP_URL`. Resend wins when both are set; the server logs that SMTP was ignored. The default recipient is `krowdkraft.official@gmail.com`. Without a sender and provider, forms report that mail is not configured, never success. Join interest is an email note to the team, not mailing-list enrollment. No addresses are stored in a database.
+Copy `.env.example` to `.env.local`. Configure `MAIL_FROM` with a sender verified by your provider and either `RESEND_API_KEY` or `SMTP_URL`. Resend wins when both are set; the server logs that SMTP was ignored, without exposing credentials. SMTP requires authenticated TLS certificate validation. `MAIL_TO` accepts one email address and defaults to `krowdkraft.official@gmail.com`.
 
-The form's memory rate limit is per server process. Only enable `TRUST_PROXY` behind a proxy that overwrites the forwarded IP header. Use host-level limits for a multi-instance deployment.
+Client and server both validate submissions. A missing sender/provider gives an explicit unconfigured response and preserves the input. Provider acceptance is required for success copy; it is not a guarantee of inbox delivery. Join interest sends a note to the team, not automatic mailing-list enrollment. No addresses are stored in a database, and payloads are not logged.
+
+The in-memory limits are five submissions per origin per hour and 100 per server process. With `TRUST_PROXY=false`, visitors share one conservative origin bucket. Only enable forwarded-IP trust behind a proxy that replaces that header. The bounded origin map fails closed if its capacity is exhausted and removes expired entries on each request. Multi-instance hosting requires infrastructure-level rate limits. No live mail delivery has been claimed from mocked tests.
 
 ## Design
 
-The original logo is retained, with optimized display exports. Three.js, GSAP, smooth-scroll hijacking, authentication, CMS and database dependencies are intentionally absent. See `docs/PROMPT.md` for the product contract and `docs/IMPLEMENTATION.md` for architecture, states, review sequencing and validation status.
+The original logo has optimized WebP/AVIF, icon and social-image exports. Original figure sources and revalidation commands are in [figures/README.md](figures/README.md). The fixed Hairline engine is vendored under its MIT license; no stock drawing is used. Figures mount near the viewport, and phones show only the hero illustration.
 
-Original figures and the organizer CLI are added in subsequent feature PRs.
+Krafty uses original SVG expressions and locally synthesized, opt-in quacks. See [docs/KRAFTY.md](docs/KRAFTY.md). It can be hidden, respects reduced motion and does not require an AI service, microphone, tracking or external media.
+
+Three.js, GSAP, smooth-scroll hijacking, authentication, CMS and database dependencies are intentionally absent. See [docs/PROMPT.md](docs/PROMPT.md) for the unchanged product contract and [docs/IMPLEMENTATION.md](docs/IMPLEMENTATION.md) for architecture and delivery status.
+
+## Checks
+
+```
+npm test
+npm run lint
+npm run typecheck
+npm run event:validate
+npm run figures:validate
+npm run build
+npx playwright install chromium
+npx playwright test
+```
+
+`npm run test:events` temporarily builds fixture events, checks populated timelines and event routes, then restores the original JSON and rebuilds it. Stop the local server first. Standard unit tests use isolated temporary files. Browser tests exercise mail's unconfigured state and never send real mail. Production dependencies currently audit clean; an unpatched dev-only glob dependency advisory is recorded in the implementation status.

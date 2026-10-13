@@ -23,3 +23,5 @@ jobs:
       - run: npm run build
       - run: npm run figures:validate
       - run: npm run typecheck
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test

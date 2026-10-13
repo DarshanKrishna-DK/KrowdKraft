@@ -1,6 +1,6 @@
 import { Parser } from "htmlparser2";
 import { dateSchema, httpUrl } from "../../src/data/event-schema";
-import { kolkataToday } from "../../src/data/events";
+import { kolkataToday } from "../../src/data/event-utils";
 export type ExtractedEvent = { title: string; description: string; date: string; endDate: string | null; venue: string; city: string; image: string | null; registrationUrl: string | null; organizer: string; warnings: string[] };
 const record = (value: unknown): Record<string, unknown> => value && typeof value === "object" && !Array.isArray(value) ? value as Record<string, unknown> : {};
 const string = (value: unknown) => typeof value === "string" ? value.trim() : "";

@@ -53,10 +53,12 @@ test("collaboration preserves input and reports unconfigured mail honestly", asy
   expect(result.violations).toEqual([]);
   await page.keyboard.press("Escape"); await expect(trigger).toBeFocused();
 });
-test("figures mount nearby, settle with reduced motion, and are omitted on phones", async ({ page }) => {
+test("figures mount nearby; reduced motion settles; only the hero mounts on phones", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" }); await page.goto("/");
   const hero = page.locator('[data-figure="gather"] svg');
   await expect(hero).toBeVisible();
+  await hero.hover(); await page.waitForTimeout(150);
+  const settled = await hero.innerHTML(); await page.waitForTimeout(800); expect(await hero.innerHTML()).toBe(settled);
   await expect(page.locator('[data-figure="seat"] svg')).toHaveCount(0);
   for (const name of ["route", "blocks", "bridge", "seat"]) {
     const plate = page.locator(`[data-figure="${name}"]`);
@@ -67,6 +69,36 @@ test("figures mount nearby, settle with reduced motion, and are omitted on phone
   await expect(page.locator('[data-figure="gather"] svg')).toBeVisible();
   await page.locator("#join").scrollIntoViewIfNeeded();
   await expect(page.locator(".desktop-figure svg")).toHaveCount(0);
+});
+test("Krafty guides navigation, keeps audio opt-in, and can be hidden and restored", async ({ page }) => {
+  await page.addInitScript(() => {
+    const tracked = Object.assign(window, { audioContextCount: 0 });
+    window.AudioContext = new Proxy(window.AudioContext, { construct(target, args) { tracked.audioContextCount++; return Reflect.construct(target, args); } });
+  });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+  const contexts = () => page.evaluate(() => Reflect.get(window, "audioContextCount"));
+  expect(await contexts()).toBe(0);
+  await page.getByRole("button", { name: "Open Krafty, the duck guide" }).click();
+  const guide = page.getByRole("region", { name: "Hey, I'm Krafty." }); await expect(guide).toBeVisible();
+  expect(await contexts()).toBe(0);
+  await guide.getByRole("link", { name: "Explore events", exact: true }).click();
+  await expect(page).toHaveURL(/#events$/);
+  await expect(guide.locator(".guide-message")).toContainText("Krowd Map");
+  await guide.getByRole("button", { name: "Turn duck sounds on" }).click();
+  await expect(guide.getByRole("button", { name: "Turn duck sounds off" })).toHaveAttribute("aria-pressed", "true");
+  expect(await contexts()).toBe(1);
+  await guide.getByRole("button", { name: "Turn duck sounds off" }).click();
+  await expect(guide.getByRole("button", { name: "Turn duck sounds on" })).toHaveAttribute("aria-pressed", "false");
+  expect((await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21aa"]).analyze()).violations).toEqual([]);
+  await page.keyboard.press("Escape"); await expect(guide).not.toBeVisible();
+  await expect(page.getByRole("button", { name: "Open Krafty, the duck guide" })).toBeFocused();
+  await page.getByRole("button", { name: "Open Krafty, the duck guide" }).click();
+  await guide.getByRole("button", { name: "Hide duck" }).click();
+  await expect(page.locator(".duck-avatar")).toHaveCount(0);
+  await page.getByRole("button", { name: "Show Krafty, the duck guide" }).click();
+  await expect(page.locator(".duck-avatar")).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
 test("join sends an interest note without claiming list enrollment", async ({ page }) => {
   await page.goto("/");

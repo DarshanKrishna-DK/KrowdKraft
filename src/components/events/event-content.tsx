@@ -5,7 +5,7 @@ import {
   typeLabels,
   isUpcoming,
   type KrowdEvent,
-} from "@/data/events";
+} from "@/data/event-utils";
 export function EventContent({
   event,
   today,
