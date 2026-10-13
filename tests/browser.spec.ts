@@ -30,3 +30,30 @@ test("page copy is present without JavaScript", async ({ browser }) => {
   await expect(page.getByRole("heading", { name: "People behind the Krowd." })).toBeVisible();
   await context.close();
 });
+test("collaboration preserves input and reports unconfigured mail honestly", async ({ page }) => {
+  await page.goto("/");
+  const trigger = page.getByRole("button", { name: "Build with the Krowd" }); await trigger.click();
+  const dialog = page.getByRole("dialog");
+  await dialog.getByRole("button", { name: "Send collaboration request" }).click();
+  await expect(dialog.getByText("Choose who you represent.")).toBeVisible();
+  await dialog.getByLabel("I represent a").selectOption("Community");
+  await dialog.getByLabel("Organization name").fill("Browser test community");
+  await dialog.getByLabel("Your name").fill("Test person");
+  await dialog.getByLabel("Email", { exact: false }).fill("test@example.com");
+  await dialog.getByLabel("What are you planning?").selectOption("Meetup");
+  await dialog.getByLabel("Tell us about the idea").fill("A hands-on community workshop for developers.");
+  await dialog.getByLabel("How would you like KrowdKraft involved?").fill("Help bring the community together.");
+  await dialog.getByRole("button", { name: "Send collaboration request" }).click();
+  await expect(dialog.getByRole("alert")).toContainText("mail isn't configured");
+  await expect(dialog.getByLabel("Your name")).toHaveValue("Test person");
+  await expect(dialog.getByText("Connection made.")).toHaveCount(0);
+  const result = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21aa"]).analyze();
+  expect(result.violations).toEqual([]);
+  await page.keyboard.press("Escape"); await expect(trigger).toBeFocused();
+});
+test("join sends an interest note without claiming list enrollment", async ({ page }) => {
+  await page.goto("/");
+  await page.getByLabel("Email me when something is happening.").fill("interest@example.com");
+  await page.getByRole("button", { name: "Join the Krowd", exact: true }).click();
+  await expect(page.locator("#join").getByRole("alert")).toContainText("mail isn't configured");
+});

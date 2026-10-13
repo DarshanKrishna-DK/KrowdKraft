@@ -1,4 +1,35 @@
 @import "tailwindcss";
+
+.collaboration-dialog { width: min(760px, calc(100vw - 32px)); }
+.collaboration-dialog h2 { font-size: clamp(2rem, 5vw, 3.5rem); margin: 12px 0; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 18px; margin: 28px 0; }
+.form-field { min-width: 0; }
+.form-wide { grid-column: 1 / -1; }
+.form-field label, .join-form label { display: block; font-size: .875rem; font-weight: 500; margin-bottom: 9px; }
+.optional, .form-hint { color: var(--muted); font-size: .8rem; line-height: 1.6; }
+.form-field input, .form-field select, .form-field textarea, .join-form input {
+  width: 100%; min-height: 48px; border: 1px solid var(--line); border-radius: 14px;
+  background: var(--bg); color: var(--text); padding: 12px 14px; font: inherit; font-size: 1rem;
+  box-shadow: inset 3px 3px 8px #0005, inset -2px -2px 5px #ffffff04;
+}
+.form-field textarea { resize: vertical; min-height: 120px; }
+.form-field [aria-invalid="true"], .join-form [aria-invalid="true"] { border-color: #f6a9a2; }
+.field-error { color: #f6a9a2; font-size: .8rem; line-height: 1.5; margin-top: 7px; }
+.form-submit { margin-bottom: 12px; }
+.button:disabled { opacity: .65; cursor: wait; transform: none; }
+.honeypot { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.join-form { margin-top: 30px; max-width: 440px; }
+.join-form .button { margin-top: 18px; }
+.mail-feedback { border-left: 2px solid var(--violet); padding: 16px 0 16px 20px; margin-top: 24px; font-size: .9rem; line-height: 1.7; }
+.mail-feedback a { display: inline-block; margin-top: 12px; text-decoration: underline; overflow-wrap: anywhere; }
+.mail-feedback h3 { color: var(--text); font-size: 1.6rem; margin-bottom: 12px; }
+.mail-feedback.delivered { border: 0; padding: 24px 0; }
+.connection-mark { display: flex; align-items: center; width: 160px; height: 70px; margin-bottom: 18px; }
+.connection-mark i { width: 44px; height: 44px; border-radius: 16px; background: var(--clay-2); box-shadow: var(--clay-shadow); }
+.connection-mark span { height: 4px; width: 60px; background: var(--violet); transform-origin: left; animation: connection .7s ease-out both; }
+@keyframes connection { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } .form-wide { grid-column: auto; } }
+@media (prefers-reduced-motion: reduce) { .connection-mark span { animation: none; } }
 @theme inline {
   --font-sans: var(--font-geist);
 }

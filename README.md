@@ -1,5 +1,9 @@
 # KrowdKraft
 
+Collaboration and join interest use server-validated email forms. Join interest sends a note to the team; it does not enroll an address in a list or persist it in a database. Resend takes precedence over SMTP when both are configured. SMTP requires TLS. A missing provider or `MAIL_FROM` produces an explicit unconfigured response and preserves the form. Provider failures never produce success copy.
+
+Mail is limited to five requests per origin per hour and 100 per process. With `TRUST_PROXY=false`, all visitors share the conservative origin bucket. Enable forwarded-IP trust only behind a proxy that replaces the header; multi-instance hosting also needs an infrastructure-level limit. Payloads and provider credentials are not logged. Tests mock provider responses and do not send real mail.
+
 KrowdKraft is a Bengaluru developer community for learning, building, meeting people, and discovering worthwhile events. This repository is one community website built with Next.js, TypeScript, Tailwind CSS and original Hairline illustrations.
 
 ## Run

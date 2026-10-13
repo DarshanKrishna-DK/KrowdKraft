@@ -1,4 +1,4 @@
-import { communityEmail } from "@/data/community";
+import { CollaborationForm } from "@/components/forms/collaboration-form";
 const groups = [
   {
     title: "Companies",
@@ -71,9 +71,7 @@ export function Collaborate() {
         />
       </div>
       <div id="collaboration-action" className="collaboration-action">
-        <a href={`mailto:${communityEmail}`} className="button primary">
-          Build with the Krowd <span aria-hidden="true">↗</span>
-        </a>
+        <CollaborationForm />
         <ul className="collaboration-kinds" aria-label="Ways to collaborate">
           {kinds.map((kind) => (
             <li key={kind}>{kind}</li>

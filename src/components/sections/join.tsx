@@ -1,4 +1,4 @@
-import { communityEmail } from "@/data/community";
+import { JoinForm } from "@/components/forms/join-form";
 export function Join() {
   return (
     <section
@@ -17,12 +17,7 @@ export function Join() {
             Join KrowdKraft to hear about events, collaborations and rooms where
             Bengaluru&apos;s developers actually meet.
           </p>
-          <a className="button primary" href={`mailto:${communityEmail}`}>
-            Join the Krowd <span aria-hidden="true">↗</span>
-          </a>
-          <p className="join-note">
-            Email the team. A mailing list isn&apos;t connected yet.
-          </p>
+          <JoinForm />
         </div>
         <div
           data-figure="seat"
