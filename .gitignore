@@ -16,10 +16,13 @@ coverage/
 .cursor/
 agent/
 agents/
+AGENTS.md
 docs/
 .npm-cache/
 .artifacts/
 artifacts/
+artificats/
+supabase/.temp/
 test-results/
 playwright-report/
 blob-report/

@@ -61,13 +61,26 @@ export const eventSchema = z
     image: z.union([localImage, httpUrl]).nullable(),
     sourceUrl: httpUrl.nullable(),
     registrationUrl: httpUrl.nullable(),
+    registrationDeadline: dateSchema.nullable().optional(),
+    startsAt: z.iso.datetime({ offset: true }).optional(),
+    endsAt: z.iso.datetime({ offset: true }).optional(),
+    participantUrl: httpUrl.optional(),
+    partners: z.array(z.string().trim().min(1).max(100)).max(12).optional(),
     featured: z.boolean(),
   })
   .strict()
   .refine((event) => !event.endDate || event.endDate >= event.date, {
     message: "End date must not precede start date",
     path: ["endDate"],
-  });
+  })
+  .refine(
+    (event) =>
+      !event.endsAt ||
+      Boolean(
+        event.startsAt && new Date(event.endsAt) > new Date(event.startsAt),
+      ),
+    { message: "End time must follow start time", path: ["endsAt"] },
+  );
 export const eventsSchema = z
   .array(eventSchema)
   .superRefine((events, context) => {

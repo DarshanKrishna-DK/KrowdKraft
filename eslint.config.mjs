@@ -10,7 +10,6 @@ export default defineConfig([
     ".codex/**",
     ".artifacts/**",
     "next-env.d.ts",
-    "figures/**",
     "src/generated/**",
     "test-results/**",
   ]),

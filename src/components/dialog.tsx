@@ -32,16 +32,25 @@ export function Dialog({
     document.body.style.overflow = "hidden";
     function trapFocus(event: KeyboardEvent) {
       if (event.key !== "Tab" || !dialog) return;
-      const stops = Array.from(dialog.querySelectorAll<HTMLElement>(
-        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
-      )).filter((element) => element.tabIndex >= 0 && element.getClientRects().length > 0);
-      const first = stops[0], last = stops.at(-1);
+      const stops = Array.from(
+        dialog.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ),
+      ).filter(
+        (element) =>
+          element.tabIndex >= 0 && element.getClientRects().length > 0,
+      );
+      const first = stops[0],
+        last = stops.at(-1);
       if (!stops.includes(document.activeElement as HTMLElement)) {
-        event.preventDefault(); (event.shiftKey ? last : first)?.focus();
+        event.preventDefault();
+        (event.shiftKey ? last : first)?.focus();
       } else if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault(); last?.focus();
+        event.preventDefault();
+        last?.focus();
       } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault(); first?.focus();
+        event.preventDefault();
+        first?.focus();
       }
     }
     dialog.addEventListener("keydown", trapFocus);
@@ -59,7 +68,11 @@ export function Dialog({
       className={`clay dialog ${className}`}
       onPointerDown={(event) => {
         const rect = event.currentTarget.getBoundingClientRect();
-        backdropPress.current = event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom;
+        backdropPress.current =
+          event.clientX < rect.left ||
+          event.clientX > rect.right ||
+          event.clientY < rect.top ||
+          event.clientY > rect.bottom;
       }}
       onCancel={(event) => {
         event.preventDefault();
@@ -67,8 +80,17 @@ export function Dialog({
       }}
       onClick={(event) => {
         const rect = event.currentTarget.getBoundingClientRect();
-        const outside = event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom;
-        if (backdropPress.current && outside && event.target === event.currentTarget) closeRef.current();
+        const outside =
+          event.clientX < rect.left ||
+          event.clientX > rect.right ||
+          event.clientY < rect.top ||
+          event.clientY > rect.bottom;
+        if (
+          backdropPress.current &&
+          outside &&
+          event.target === event.currentTarget
+        )
+          closeRef.current();
         backdropPress.current = false;
       }}
     >
