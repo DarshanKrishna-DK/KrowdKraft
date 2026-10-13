@@ -19,6 +19,8 @@ test("mail validates required fields, limits, honeypot, URLs and real dates", ()
 test("configuration fails closed and gives Resend precedence", async () => {
   assert.deepEqual(await unconfigured(), { delivered: false, reason: "mail_not_configured" });
   assert.equal(mailConfiguration({ RESEND_API_KEY: "test" }).adapter, "unconfigured");
+  for (const from of ["not-an-email", "one@example.com,two@example.com", "One <one@example.com>, Two <two@example.com>"]) assert.equal(mailConfiguration({ MAIL_FROM: from, RESEND_API_KEY: "test" }).adapter, "unconfigured");
+  assert.equal(mailConfiguration({ MAIL_FROM: "KrowdKraft <hello@example.com>", RESEND_API_KEY: "test" }).adapter, "resend");
   assert.equal(mailConfiguration({ MAIL_FROM: "hello@example.com", SMTP_URL: "https://example.com" }).adapter, "unconfigured");
   assert.equal(mailConfiguration({ MAIL_FROM: "hello@example.com", MAIL_TO: "one@example.com,two@example.com", RESEND_API_KEY: "test" }).adapter, "unconfigured");
   assert.equal(mailConfiguration({ MAIL_FROM: "hello@example.com", SMTP_URL: "smtp:no-host" }).adapter, "unconfigured");
