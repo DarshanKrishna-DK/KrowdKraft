@@ -34,8 +34,10 @@ test("collaboration preserves input and reports unconfigured mail honestly", asy
   await page.goto("/");
   const trigger = page.getByRole("button", { name: "Build with the Krowd" }); await trigger.click();
   const dialog = page.getByRole("dialog");
+  await dialog.getByLabel("Your name").fill("Test person");
   await dialog.getByRole("button", { name: "Send collaboration request" }).click();
   await expect(dialog.getByText("Choose who you represent.")).toBeVisible();
+  await expect(dialog.getByLabel("Your name")).toHaveValue("Test person");
   await dialog.getByLabel("I represent a").selectOption("Community");
   await dialog.getByLabel("Organization name").fill("Browser test community");
   await dialog.getByLabel("Your name").fill("Test person");
