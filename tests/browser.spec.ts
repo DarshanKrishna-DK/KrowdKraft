@@ -53,10 +53,12 @@ test("collaboration preserves input and reports unconfigured mail honestly", asy
   expect(result.violations).toEqual([]);
   await page.keyboard.press("Escape"); await expect(trigger).toBeFocused();
 });
-test("figures mount nearby, settle with reduced motion, and are omitted on phones", async ({ page }) => {
+test("figures mount nearby; reduced motion settles; only the hero mounts on phones", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" }); await page.goto("/");
   const hero = page.locator('[data-figure="gather"] svg');
   await expect(hero).toBeVisible();
+  await hero.hover(); await page.waitForTimeout(150);
+  const settled = await hero.innerHTML(); await page.waitForTimeout(800); expect(await hero.innerHTML()).toBe(settled);
   await expect(page.locator('[data-figure="seat"] svg')).toHaveCount(0);
   for (const name of ["route", "blocks", "bridge", "seat"]) {
     const plate = page.locator(`[data-figure="${name}"]`);
