@@ -1,5 +1,32 @@
-import Image from "next/image";
-import { heroDescription } from "@/data/community";
+import { Nav } from "@/components/nav";
+import { Hero } from "@/components/sections/hero";
+import { About } from "@/components/sections/about";
+import { Impact } from "@/components/sections/impact";
+import { Events } from "@/components/sections/events";
+import { Bengaluru } from "@/components/sections/bengaluru";
+import { Collaborate } from "@/components/sections/collaborate";
+import { Ecosystem } from "@/components/sections/ecosystem";
+import { People } from "@/components/sections/people";
+import { Join } from "@/components/sections/join";
+import { Footer } from "@/components/sections/footer";
+// Classify dates at request time, not at build time.
+export const dynamic = "force-dynamic";
 export default function Home() {
-  return <main className="container foundation-preview"><Image src="/brand/logo.webp" width={88} height={88} alt="KrowdKraft" priority /><p className="eyebrow">Bengaluru, India</p><h1>Where Bengaluru&apos;s<br />developers connect.</h1><p className="body-copy">{heroDescription}</p><a className="button primary" href="mailto:krowdkraft.official@gmail.com">Build with the Krowd</a></main>;
+  return (
+    <>
+      <Nav />
+      <main id="main">
+        <Hero />
+        <About />
+        <Impact />
+        <Events />
+        <Bengaluru />
+        <Collaborate />
+        <Ecosystem />
+        <People />
+        <Join />
+      </main>
+      <Footer />
+    </>
+  );
 }
