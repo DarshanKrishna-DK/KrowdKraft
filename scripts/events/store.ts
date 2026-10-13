@@ -17,7 +17,13 @@ export function eventStore(file: string | URL = dataFile) {
         if (await readFile(file, "utf8") !== expected) throw new Error("Events changed while you were reviewing. Reload and review again; nothing was overwritten.");
         await writeFile(temp, JSON.stringify(valid, null, 2) + "\n", { flag: "wx" });
         await rename(temp, path);
-      } finally { await rm(temp, { force: true }); await held.close(); await rm(lockPath, { force: true }); }
+      } finally {
+        try { await rm(temp, { force: true }); }
+        finally {
+          try { await held.close(); }
+          finally { await rm(lockPath, { force: true }); }
+        }
+      }
     },
   };
 }
