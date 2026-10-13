@@ -995,8 +995,11 @@ p {
 }
 .krafty-bubble .bubble-close {
   color: #51415d;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
   min-height: 44px;
-  width: 35px;
+  width: 44px;
   top: 0;
   right: 0;
 }
