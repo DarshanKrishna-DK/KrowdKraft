@@ -6,10 +6,17 @@ import { httpUrl } from "../../src/data/event-schema";
 export function publicAddress(address: string): boolean {
   if (isIP(address) === 4) {
     const [a,b,c] = address.split(".").map(Number);
-    return !(a === 0 || a === 10 || a === 127 || a >= 224 || (a === 169 && b === 254) || (a === 172 && b >= 16 && b <= 31) || (a === 192 && (b === 168 || (b === 0 && [0,2].includes(c)))) || (a === 100 && b >= 64 && b <= 127) || (a === 198 && ([18,19].includes(b) || (b === 51 && c === 100))) || (a === 203 && b === 0 && c === 113));
+    return !(a === 0 || a === 10 || a === 127 || a >= 224 || (a === 169 && b === 254) || (a === 172 && b >= 16 && b <= 31) || (a === 192 && (b === 168 || (b === 0 && [0,2].includes(c)) || (b === 88 && c === 99))) || (a === 100 && b >= 64 && b <= 127) || (a === 198 && ([18,19].includes(b) || (b === 51 && c === 100))) || (a === 203 && b === 0 && c === 113));
   }
-  // Permit global unicast only; mapped/private/link-local/loopback addresses fail closed.
-  return isIP(address) === 6 && /^[23][0-9a-f]{3}:/i.test(address) && !/^2001:(?:db8|0):/i.test(address);
+  if (isIP(address) !== 6) return false;
+  // Conservative public-unicast subset: reject IANA special-purpose ranges,
+  // including all 2001::/23 assignments, tunneling and documentation prefixes.
+  // https://www.iana.org/assignments/iana-ipv6-special-registry/
+  const normalized = new URL(`http://[${address}]/`).hostname.slice(1, -1);
+  const [first, second] = normalized.split(":").map(part => parseInt(part || "0", 16));
+  return first >= 0x2000 && first <= 0x3fff && first !== 0x2002 &&
+    !(first === 0x2001 && (second < 0x200 || second === 0xdb8)) &&
+    !(first === 0x3fff && second < 0x1000);
 }
 async function publicUrl(value: string) {
   httpUrl.parse(value);

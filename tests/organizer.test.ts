@@ -83,6 +83,9 @@ test("concurrent edits fail without overwriting data or leaving a lock", async (
 test("network rejects local destinations and terminal previews strip controls", async () => {
   for (const address of ["127.0.0.1", "10.0.0.1", "172.16.0.1", "169.254.169.254", "192.168.1.1", "::1", "::ffff:127.0.0.1", "fc00::1"]) assert.equal(publicAddress(address), false);
   assert.equal(publicAddress("8.8.8.8"), true); assert.equal(publicAddress("2606:4700:4700::1111"), true);
+  for (const address of ["192.0.0.8", "192.88.99.1", "2001::1", "2001:0000::1", "2001:2::1", "2001:020::1", "2001:db8::1", "2002:7f00:1::1", "3fff:0fff::1"]) assert.equal(publicAddress(address), false, address);
+  assert.equal(publicAddress("2001:4860:4860::8888"), true);
+  await assert.rejects(fetchPublic("https://user:pass@example.com/event"));
   await assert.rejects(fetchPublic("http://127.0.0.1/private"), /Private/);
   assert.ok(!terminalText("\u001b[31mtext").includes("\u001b"));
   assert.equal(uniqueSlug("!!!", []), "community-event");
