@@ -23,7 +23,7 @@ async function accessible(page: Page) {
     })),
   ).toEqual([]);
 }
-for (const width of [390, 1440])
+for (const width of [320, 390, 768, 1440])
   test(`public pages at ${width}px: accessibility, layout and browser errors`, async ({
     page,
   }) => {
@@ -49,12 +49,13 @@ for (const width of [390, 1440])
   });
 test("restored people, impact, Medium and socials", async ({ page }) => {
   await page.goto("/");
-  for (const name of ["Darshan", "Deepak", "Vihar"])
+  for (const name of ["Darshan Krishna N", "Deepak N", "Viha Shomikha"])
     await expect(
       page.locator("#people").getByText(name, { exact: true }),
     ).toBeVisible();
   await expect(page.locator("#people")).toContainText("5,000+");
   await expect(page.locator("#people")).toContainText("30+");
+  await expect(page.locator("#people")).toContainText("1,400+");
   const social = page.getByRole("navigation", { name: "Follow KrowdKraft" });
   await expect(social.getByRole("link", { name: /LinkedIn/ })).toHaveAttribute(
     "href",
@@ -64,13 +65,32 @@ test("restored people, impact, Medium and socials", async ({ page }) => {
     "href",
     "https://www.instagram.com/krowdkraft_/",
   );
-  await expect(social.getByRole("link", { name: /^X / })).toHaveAttribute(
+  await expect(
+    social.getByRole("link", { name: "X", exact: true }),
+  ).toHaveAttribute("href", "https://x.com/KrowdKraft_");
+  await expect(
+    social.getByRole("link", { name: "WhatsApp", exact: true }),
+  ).toHaveAttribute(
     "href",
-    "https://x.com/KrowdKraft_",
+    "https://whatsapp.com/channel/0029Vb9BTtuEawdmK4IivD1M",
   );
   await expect(
     page.locator('#journal a[href^="https://medium.com/@cryptech_dk/"]'),
   ).toHaveCount(3);
+  for (const cover of await page.locator("#journal .journal-cover img").all()) {
+    await cover.scrollIntoViewIfNeeded();
+    await expect(cover).toHaveAttribute(
+      "src",
+      /journal%2F(certifications|dev-vs-dsa|hidden-gems)\.webp/,
+    );
+    await expect
+      .poll(() =>
+        cover.evaluate(
+          (image: HTMLImageElement) => image.complete && image.naturalWidth > 0,
+        ),
+      )
+      .toBe(true);
+  }
 });
 test("mobile navigation traps focus, restores it and reaches the community pages", async ({
   page,
@@ -79,7 +99,7 @@ test("mobile navigation traps focus, restores it and reaches the community pages
   await page.goto("/");
   const trigger = page.getByRole("button", { name: "Open navigation" });
   await trigger.click();
-  const menu = page.getByRole("dialog", { name: "Find your corner." });
+  const menu = page.getByRole("dialog", { name: "Bengaluru events." });
   for (let i = 0; i < 10; i++) {
     await page.keyboard.press("Tab");
     expect(
@@ -90,8 +110,8 @@ test("mobile navigation traps focus, restores it and reaches the community pages
   await expect(trigger).toBeFocused();
   await trigger.click();
   await accessible(page);
-  await menu.getByRole("link", { name: "Marketplace", exact: true }).click();
-  await expect(page).toHaveURL(/\/marketplace$/);
+  await menu.getByRole("link", { name: "Events", exact: true }).click();
+  await expect(page).toHaveURL(/\/events$/);
   await expect(
     page.getByRole("button", { name: /Search the community/ }),
   ).toHaveCount(0);
@@ -104,6 +124,18 @@ test("event archive filters, registration cutoff and calendar", async ({
   await expect(page.locator(".event-archive-card")).toHaveCount(
     eventData.length,
   );
+  await page.getByLabel("Event type", { exact: true }).selectOption("meetup");
+  await expect(page.locator(".event-archive-card")).toHaveCount(1);
+  await expect(page.locator(".event-archive-card")).toContainText(
+    "Community partner",
+  );
+  await expect(page.locator(".event-archive-card")).not.toContainText(
+    "Bengaluru, Bengaluru",
+  );
+  await page.getByLabel("Event type", { exact: true }).selectOption("all");
+  await page.getByLabel("Venue", { exact: true }).selectOption("Startup Park");
+  await expect(page.locator(".event-archive-card")).toHaveCount(2);
+  await page.getByLabel("Venue", { exact: true }).selectOption("all");
   await page.getByRole("button", { name: "Past events", exact: true }).click();
   await page.getByLabel("Search events").fill("HackCulture");
   await expect(page.locator(".event-archive-card")).toHaveCount(1);
@@ -198,11 +230,18 @@ test("collaboration validates and reports unconfigured delivery", async ({
   await expect(dialog.getByLabel("Your name")).toHaveValue("Test person");
   await page.keyboard.press("Escape");
 });
-test("Krafty travels to anchors, reacts and keeps sound optional", async ({
+test("Krafty stays visible, travels and starts sound only after interaction", async ({
   page,
 }) => {
   await page.addInitScript(() => {
+    localStorage.setItem("krowd-duck", "hidden");
     Reflect.set(window, "audioCount", 0);
+    Reflect.set(window, "quackCount", 0);
+    const start = OscillatorNode.prototype.start;
+    OscillatorNode.prototype.start = function (...args) {
+      Reflect.set(window, "quackCount", Reflect.get(window, "quackCount") + 1);
+      return start.apply(this, args);
+    };
     window.AudioContext = new Proxy(window.AudioContext, {
       construct(target, args) {
         Reflect.set(
@@ -222,49 +261,53 @@ test("Krafty travels to anchors, reacts and keeps sound optional", async ({
   await expect(duck).toBeVisible();
   await expect(duck).toHaveAttribute("data-stop", "hello");
   expect(await page.evaluate(() => Reflect.get(window, "audioCount"))).toBe(0);
-  await page.locator('[data-duck-dock="products"]').scrollIntoViewIfNeeded();
-  await expect(duck).toHaveAttribute("data-stop", "products");
-  await expect(duck).toHaveAttribute("data-mood", "curious");
+  await page.locator('[data-duck-dock="event"]').scrollIntoViewIfNeeded();
+  await expect(duck).toHaveAttribute("data-stop", "event");
+  await expect(duck).toHaveAttribute("data-mood", "thinking");
   await duck.getByRole("button", { name: /Krafty is/ }).click();
   await expect(duck).toHaveAttribute("data-mood", "celebrate");
-  await page
-    .getByRole("button", { name: "Duck sounds off", exact: true })
-    .click();
-  await expect(
-    page.getByRole("button", { name: "Duck sounds on", exact: true }),
-  ).toHaveAttribute("aria-pressed", "true");
-  expect(await page.evaluate(() => Reflect.get(window, "audioCount"))).toBe(1);
-  await page.getByRole("button", { name: "Hide Krafty", exact: true }).click();
-  await expect(duck).not.toBeVisible();
-  await page.getByRole("button", { name: "Show Krafty", exact: true }).click();
-  await expect(
-    page.getByRole("button", { name: "Duck sounds off", exact: true }),
-  ).toHaveAttribute("aria-pressed", "false");
-  await page.getByRole("button", { name: "Pause animations" }).click();
-  await expect(page.locator("html")).toHaveAttribute("data-motion", "off");
-  await page.reload();
-  await expect(
-    page.getByRole("button", { name: "Resume animations" }),
-  ).toHaveAttribute("aria-pressed", "true");
+  await expect
+    .poll(() => page.evaluate(() => Reflect.get(window, "audioCount")))
+    .toBe(1);
+  await page.locator('[data-duck-dock="join"]').scrollIntoViewIfNeeded();
+  await expect
+    .poll(() => page.evaluate(() => Reflect.get(window, "quackCount")))
+    .toBeGreaterThan(0);
+  await page.evaluate(() => scrollTo(0, document.body.scrollHeight));
+  await expect
+    .poll(async () => {
+      const box = await duck.boundingBox();
+      const height = await page.evaluate(() => innerHeight);
+      return !!box && box.y >= 0 && box.y + box.height <= height;
+    })
+    .toBe(true);
+  await duck.getByRole("button", { name: /Krafty is/ }).hover();
+  await expect(duck.locator(".krafty-body-button")).toHaveCSS(
+    "transform",
+    "none",
+  );
+  await expect(page.locator(".footer-settings")).toHaveCount(0);
 });
-test("hiding Krafty cancels pending sound activation", async ({ page }) => {
-  await page.addInitScript(() => {
-    AudioContext.prototype.resume = function () {
-      return new Promise<void>((resolve) => {
-        Reflect.set(window, "finishDuckAudio", resolve);
-      });
-    };
-  });
+test("destination navigation starts at the top and section links retain their target", async ({
+  page,
+}) => {
   await page.goto("/");
+  for (const destination of ["Marketplace", "Spotlight", "Journal", "Events"]) {
+    await page
+      .locator("footer")
+      .getByRole("link", { name: destination, exact: true })
+      .click();
+    await expect.poll(() => page.evaluate(() => scrollY)).toBe(0);
+    await expect(page.locator("h1")).toBeInViewport();
+  }
   await page
-    .getByRole("button", { name: "Duck sounds off", exact: true })
+    .locator("footer")
+    .getByRole("link", { name: "Events", exact: true })
     .click();
-  await page.getByRole("button", { name: "Hide Krafty", exact: true }).click();
-  await page.evaluate(() => Reflect.get(window, "finishDuckAudio")());
-  await page.getByRole("button", { name: "Show Krafty", exact: true }).click();
-  await expect(
-    page.getByRole("button", { name: "Duck sounds off", exact: true }),
-  ).toHaveAttribute("aria-pressed", "false");
+  await expect.poll(() => page.evaluate(() => scrollY)).toBe(0);
+  await page.goto("/marketplace#submit");
+  await expect(page.locator("#submit")).toBeInViewport();
+  expect(await page.evaluate(() => scrollY)).toBeGreaterThan(0);
 });
 test("private routes fail closed; content works without JavaScript", async ({
   browser,
@@ -337,7 +380,7 @@ test("Analytics consent, one public route view, and private-data exclusion", asy
     ),
   ).toBe("[object Arguments]");
   await page
-    .getByRole("navigation", { name: "Main navigation" })
+    .locator("footer")
     .getByRole("link", { name: "Marketplace", exact: true })
     .click();
   await expect.poll(async () => (await views()).length).toBe(2);
@@ -348,6 +391,10 @@ test("Analytics consent, one public route view, and private-data exclusion", asy
     await page.evaluate(() => Reflect.get(window, "ga-disable-G-QM44WYFLFR")),
   ).toBe(true);
   expect(JSON.stringify(await views())).not.toContain("private-fixture");
+  await page
+    .locator("footer")
+    .getByRole("link", { name: "Privacy", exact: true })
+    .click();
   await page.getByRole("button", { name: "Analytics preferences" }).click();
   await page.getByRole("button", { name: "No thanks" }).click();
   expect(
@@ -362,4 +409,94 @@ test("Analytics consent, one public route view, and private-data exclusion", asy
   await page.goto("https://community.test/journal");
   expect(scriptLoads).toBe(1);
   await context.close();
+});
+
+test("nomination keeps private contact details and recovers after unavailable storage", async ({
+  page,
+}) => {
+  await page.goto("/spotlight#nominate");
+  await page
+    .getByLabel("Story or achievement")
+    .fill("Isolated test nomination");
+  await page.getByLabel("Builder or team name").fill("Test builder");
+  await page.getByLabel("Your contact email").fill("nomination@example.com");
+  await page
+    .getByLabel("Link to the work or achievement")
+    .fill("https://example.com/work");
+  await page
+    .getByLabel("Tell us why this deserves a spotlight")
+    .fill(
+      "An isolated fixture to verify nomination recovery without publishing a story.",
+    );
+  await page.getByRole("checkbox").check();
+  await page.getByRole("button", { name: "Nominate this builder" }).click();
+  await expect(
+    page.locator(".submission-form").getByRole("alert"),
+  ).toContainText("Online submissions aren’t open just yet");
+  await expect(page.getByLabel("Your contact email")).toHaveValue(
+    "nomination@example.com",
+  );
+  await expect(
+    page.getByRole("link", { name: /Open this submission/ }),
+  ).toHaveAttribute("href", /^mailto:/);
+  await accessible(page);
+});
+
+test("event sharing, calendar links, security headers and legacy redirect", async ({
+  page,
+  request,
+}) => {
+  const legacy = await request.get("/community", { maxRedirects: 0 });
+  expect(legacy.status()).toBe(308);
+  expect(legacy.headers().location).toBe("/events");
+  const response = await page.goto("/events/hacktoberfest-hack-day-2026");
+  expect(response?.headers()["content-security-policy"]).toContain(
+    "frame-ancestors 'none'",
+  );
+  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute(
+    "content",
+    "Hacktoberfest Hack Day | KrowdKraft",
+  );
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+    "content",
+    /hacktoberfest-hack-day-2026\/share$/,
+  );
+  const image = await request.get("/events/hacktoberfest-hack-day-2026/share");
+  expect(image.status()).toBe(200);
+  expect(image.headers()["content-type"]).toContain("image/png");
+  expect((await image.body()).subarray(1, 4).toString()).toBe("PNG");
+  await expect(
+    page.getByRole("link", { name: "Open venue map" }),
+  ).toHaveAttribute("href", /query_place_id=/);
+  const download = page.waitForEvent("download");
+  await page.getByRole("link", { name: "Add to calendar" }).click();
+  expect((await download).suggestedFilename()).toBe(
+    "hacktoberfest-hack-day-2026.ics",
+  );
+  await page.goto("/events/namaste-arbitrum-2025");
+  await expect(
+    page.getByRole("link", { name: "Official event page" }),
+  ).toHaveAttribute("href", "https://luma.com/9usbg8kx");
+  await expect(
+    page.getByRole("link", { name: "Add to calendar" }),
+  ).toBeVisible();
+});
+
+test("motion controls pause the rainfall and factual ribbon", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Pause code rain" }).click();
+  await expect(
+    page.getByRole("button", { name: "Play code rain" }),
+  ).toHaveAttribute("aria-pressed", "true");
+  await page.getByRole("button", { name: "Pause community ribbon" }).click();
+  await expect(page.locator(".ribbon-track")).toHaveCSS(
+    "animation-play-state",
+    "paused",
+  );
+  await expect(
+    page.locator(".ticket-barcode, .ticket-code, .ticket-kicker .live-dot"),
+  ).toHaveCount(0);
+  await expect(page.locator(".ticket-bottom")).not.toContainText("below");
 });

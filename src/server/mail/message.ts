@@ -43,12 +43,3 @@ export function collaborationMessage(input: CollaborationInput): MailMessage {
     ["KrowdKraft involvement", input.involvement],
   ]);
 }
-export function joinMessage(email: string): MailMessage {
-  return message("KrowdKraft join-interest note (not list enrollment)", email, [
-    ["Email", email],
-    [
-      "Request",
-      "Please let me know about community events and opportunities. This is an interest note, not mailing-list enrollment.",
-    ],
-  ]);
-}

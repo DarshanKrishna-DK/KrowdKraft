@@ -5,18 +5,25 @@ import { Icon } from "@/components/icon";
 import { DuckDock } from "@/components/duck/duck-dock";
 import {
   formatEventDate,
+  formatEventVenue,
+  eventMapUrl,
+  relationshipLabels,
   isUpcoming,
   registrationOpen,
   typeLabels,
   type KrowdEvent,
 } from "@/data/event-utils";
+import { partnerLinks } from "@/data/partners";
+import { DateRefresh } from "./date-refresh";
 const hackDaySchedule = [
   ["08:30", "Arrival & participant check-in"],
   ["09:00", "Welcome & Hacktoberfest orientation"],
   ["09:30", "Build time begins"],
   ["12:30–13:30", "Lunch break"],
+  ["13:30", "Building resumes"],
   ["15:30", "Project submission deadline"],
   ["15:45–17:30", "Project judging"],
+  ["17:30–18:00", "Final evaluation"],
   ["18:00", "Winners & closing ceremony"],
   ["18:30", "See you at the next one"],
 ];
@@ -31,6 +38,7 @@ export function EventDetail({
     registration = registrationOpen(event, today);
   return (
     <PageShell>
+      <DateRefresh today={today} />
       <div className="container">
         <nav className="breadcrumbs" aria-label="Breadcrumb">
           <Link href="/events">Events</Link>
@@ -39,7 +47,7 @@ export function EventDetail({
         </nav>
         <div className="page-intro">
           <p className="eyebrow">
-            {typeLabels[event.type]} · KrowdKraft · Bengaluru
+            {typeLabels[event.type]} · {relationshipLabels[event.relationship]}
           </p>
           <h1>
             {event.title}
@@ -48,44 +56,9 @@ export function EventDetail({
         </div>
         <div className="event-detail-layout">
           <div>
-            <h2 style={{ fontSize: 34, letterSpacing: "-.04em" }}>
-              {upcoming
-                ? "A whole day of possibility."
-                : "A chapter of the Krowd."}
-            </h2>
-            <p className="event-description">{event.description}</p>
-            {event.image && (
-              <figure className="event-details-image">
-                <img
-                  src={event.image}
-                  width={1200}
-                  height={800}
-                  alt={`The community gathered for ${event.title}`}
-                  referrerPolicy="no-referrer"
-                />
-                <figcaption className="page-note">
-                  {event.title} · {event.venue} · {formatEventDate(event.date)}
-                </figcaption>
-              </figure>
-            )}
-            {event.partners?.length ? (
-              <div className="subsection">
-                <h2>Good company.</h2>
-                <p className="page-note">
-                  Event collaborators, as listed by the organizers.
-                </p>
-                <div className="event-partners">
-                  {event.partners.map((partner) => (
-                    <span className="badge" key={partner}>
-                      {partner}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ) : null}
             {event.id === "hacktoberfest-2026" && (
-              <div className="subsection">
-                <h2>The day, at a glance.</h2>
+              <div className="subsection" id="schedule">
+                <h2>Schedule</h2>
                 <p className="page-note">
                   18 October 2026 · All times IST. The organizer’s schedule may
                   change.
@@ -113,8 +86,54 @@ export function EventDetail({
                 </p>
               </div>
             )}
+            <h2 style={{ fontSize: 34, letterSpacing: "-.04em" }}>
+              {upcoming ? "Before you arrive" : "Event notes"}
+            </h2>
+            <p className="event-description">{event.description}</p>
+            {event.image && (
+              <figure className="event-details-image">
+                <img
+                  src={event.image}
+                  width={1200}
+                  height={800}
+                  alt={`The community gathered for ${event.title}`}
+                  referrerPolicy="no-referrer"
+                />
+                <figcaption className="page-note">
+                  {event.title} · {event.venue} · {formatEventDate(event.date)}
+                </figcaption>
+              </figure>
+            )}
+            {event.partners?.length ? (
+              <div className="subsection">
+                <h2>With our collaborators</h2>
+                <p className="page-note">
+                  Event collaborators, as listed by the organizers.
+                </p>
+                <div className="event-partners">
+                  {event.partners.map((partner) =>
+                    partnerLinks[partner] ? (
+                      <a
+                        className="badge partner-link"
+                        href={partnerLinks[partner]}
+                        key={partner}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {partner} ↗
+                      </a>
+                    ) : (
+                      <span className="badge" key={partner}>
+                        {partner}
+                      </span>
+                    ),
+                  )}
+                </div>
+              </div>
+            ) : null}
             <DuckDock
               id="event-detail"
+              autoTip={false}
               mood={upcoming ? "curious" : "happy"}
               tip={
                 upcoming
@@ -122,7 +141,9 @@ export function EventDetail({
                   : "Proof that 'we should do something together' can become a very good day."
               }
               href={event.sourceUrl || "/events"}
-              label="Original event listing"
+              label={
+                event.sourceUrl ? "Original event listing" : "Browse events"
+              }
             />
           </div>
           <aside className="event-sidebar" aria-label="Event essentials">
@@ -163,11 +184,7 @@ export function EventDetail({
               )}
               <div>
                 <dt>Meet us at</dt>
-                <dd>
-                  {event.venue}
-                  <br />
-                  {event.city}
-                </dd>
+                <dd>{formatEventVenue(event)}</dd>
               </div>
             </dl>
             {event.registrationDeadline && upcoming && !registration && (
@@ -197,11 +214,9 @@ export function EventDetail({
                 Official event page <Icon name="diagonal" size={17} />
               </a>
             )}
-            {upcoming && (
-              <a className="button" href={`/events/${event.slug}/calendar`}>
-                Add to calendar <Icon name="calendar" size={17} />
-              </a>
-            )}
+            <a className="button" href={`/events/${event.slug}/calendar`}>
+              Add to calendar <Icon name="calendar" size={17} />
+            </a>
             {event.participantUrl && upcoming && (
               <a
                 className="button"
@@ -212,8 +227,20 @@ export function EventDetail({
                 Participant group <Icon name="diagonal" size={17} />
               </a>
             )}
+            {event.venue !== event.city && (
+              <a
+                className="button"
+                href={eventMapUrl(event)}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Open venue map <Icon name="pin" size={17} />
+              </a>
+            )}
             <p className="page-note">
-              Dates and details come from the linked organizer source.
+              {event.sourceUrl
+                ? "Dates and details come from the linked organizer source."
+                : "Restored from the community archive. An original public listing is not currently available."}
             </p>
           </aside>
         </div>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Icon } from "@/components/icon";
 export function WorkbenchScene() {
   return (
@@ -32,25 +33,6 @@ export function WorkbenchScene() {
     </div>
   );
 }
-export function OrbitScene() {
-  return (
-    <div className="orbit-scene" aria-hidden="true" data-parallax>
-      <div className="product-orbit ring-a" />
-      <div className="product-orbit ring-b" />
-      <div className="product-core">
-        <Icon name="code" size={72} />
-      </div>
-      <div className="orbit-node node-a glass">
-        <Icon name="globe" size={34} />
-      </div>
-      <div className="orbit-node node-b clay-small">
-        <Icon name="branch" size={31} />
-      </div>
-      <div className="orbit-label glass">made by the Krowd</div>
-      <span className="orbit-satellite" />
-    </div>
-  );
-}
 export function SpotlightScene() {
   return (
     <div className="spotlight-scene" aria-hidden="true" data-parallax>
@@ -70,51 +52,16 @@ export function SpotlightScene() {
     </div>
   );
 }
-export function JournalCover({ variant }: { variant: string }) {
+export function JournalCover({ src }: { src: string }) {
   return (
-    <div className={`journal-cover cover-${variant}`} aria-hidden="true">
-      {variant === "certification" ? (
-        <>
-          <div className="paper-certificate">
-            <span />
-            <span />
-            <span />
-            <i>✓</i>
-          </div>
-          <div className="certificate-seal">
-            <Icon name="star" size={25} />
-          </div>
-        </>
-      ) : variant === "code" ? (
-        <>
-          <span className="code-book">&lt;/&gt;</span>
-          <span className="dsa-orb">{`{ }`}</span>
-          <span className="cover-amp">&</span>
-        </>
-      ) : (
-        <>
-          <div className="compass-disc">
-            <Icon name="diagonal" size={80} />
-          </div>
-          <span className="compass-n">N</span>
-          <i className="compass-orbit" />
-        </>
-      )}
-    </div>
-  );
-}
-export function ContributionGarden() {
-  return (
-    <div className="contribution-garden" aria-hidden="true">
-      <div className="garden-label mono">a little progress, every day.</div>
-      <div className="garden-grid">
-        {Array.from({ length: 105 }, (_, i) => (
-          <i key={i} className={`grow-${(i * 7 + Math.floor(i / 9)) % 5}`} />
-        ))}
-      </div>
-      <div className="garden-caption">
-        Your next green square starts with an idea.
-      </div>
+    <div className="journal-cover journal-medium-cover">
+      <Image
+        src={src}
+        alt=""
+        width={1024}
+        height={1024}
+        sizes="(max-width: 767px) 92vw, (max-width: 1200px) 46vw, 660px"
+      />
     </div>
   );
 }

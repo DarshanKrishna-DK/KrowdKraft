@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-metadata";
 import { PageShell } from "@/components/page-shell";
 import { EventArchive } from "@/components/events/event-archive";
 import { DuckDock } from "@/components/duck/duck-dock";
@@ -7,11 +7,11 @@ import { DateRefresh } from "@/components/events/date-refresh";
 import { featuredEvents } from "@/data/event-utils";
 import { links } from "@/data/links";
 export const dynamic = "force-dynamic";
-export const metadata: Metadata = {
-  title: "Events & gatherings | KrowdKraft",
-  description:
-    "Hack days, workshops and good company. Explore upcoming KrowdKraft events and revisit our Bengaluru community archive.",
-};
+export const metadata = pageMetadata(
+  "Events & gatherings | KrowdKraft",
+  "Hack days, workshops and good company. Explore upcoming KrowdKraft events and revisit our Bengaluru community archive.",
+  "/events",
+);
 export default function EventsPage() {
   const today = kolkataToday(),
     { next } = featuredEvents(events, today);
@@ -21,18 +21,18 @@ export default function EventsPage() {
       <div className="container">
         <div className="events-masthead">
           <div className="page-intro">
-            <p className="eyebrow">IRL beats another group chat</p>
             <h1>
-              Good people.
+              Hack days, workshops,
               <br />
-              <span className="serif-word">Great gatherings.</span>
+              <span className="serif-word">and meetups.</span>
             </h1>
             <p>
-              Come for the workshop. Stay for the people. Every event is another
-              reason to get curious, try something new and build together.
+              In Bengaluru, with developers who learn by building. Find a date,
+              check the details, and join us.
             </p>
             <DuckDock
               id="events-page"
+              autoTip={false}
               mood="wave"
               tip="All the good reasons to close a few tabs and leave the house."
               href={links.luma}
@@ -66,9 +66,9 @@ export default function EventsPage() {
           <a href={links.luma} target="_blank" rel="noreferrer">
             Follow KrowdKraft on Luma ↗
           </a>
-          <br />
-          Historical listings are restored from our community archive. Each
-          event links to its original source.
+          <br />7 documented events from more than 30 gatherings across our
+          community’s history. Historical entries are restored from our archive;
+          original organizer links are included where available.
         </p>
       </div>
     </PageShell>

@@ -7,10 +7,6 @@ await sharp(source)
   .webp({ quality: 85 })
   .toFile("public/brand/logo.webp");
 await sharp(source)
-  .resize(192, 192)
-  .avif({ quality: 60 })
-  .toFile("public/brand/logo.avif");
-await sharp(source)
   .resize(180, 180)
   .png()
   .toFile("public/apple-touch-icon.png");
@@ -32,6 +28,4 @@ await sharp({
   .composite([{ input: logo, left: 395, top: 110 }])
   .png()
   .toFile("public/brand/og.png");
-console.log(
-  "Original mark preserved; WebP, AVIF, icons, and OG image generated.",
-);
+console.log("Original mark preserved; WebP, icons, and OG image generated.");

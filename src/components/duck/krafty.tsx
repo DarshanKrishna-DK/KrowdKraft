@@ -1,8 +1,9 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { KraftyCharacter, type DuckMood } from "./krafty-character";
 import { DuckSound } from "./sound";
+
 type Stop = {
   id: string;
   mood: DuckMood;
@@ -19,85 +20,113 @@ const moods: DuckMood[] = [
   "concerned",
 ];
 export function Krafty() {
-  const pathname = usePathname(),
-    ref = useRef<HTMLElement>(null),
-    audio = useRef<DuckSound | null>(null),
-    soundTicket = useRef({ version: 0 });
+  const pathname = usePathname();
+  const ref = useRef<HTMLElement>(null);
+  const audio = useRef<DuckSound | null>(null);
+  const stopId = useRef("");
+  const timeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [stop, setStop] = useState<Stop>({
     id: "hello",
     mood: "wave",
-    tip: "A little curiosity goes a long way.",
+    tip: "I'm Krafty. A little curiosity goes a long way.",
   });
-  const [hidden, setHidden] = useState(false),
-    [sound, setSound] = useState(false),
-    [tip, setTip] = useState(false),
-    [moving, setMoving] = useState(false),
-    [reaction, setReaction] = useState<DuckMood | null>(null);
-  const stopId = useRef(""),
-    timeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [tip, setTip] = useState(false);
+  const [moving, setMoving] = useState(false);
+  const [reaction, setReaction] = useState<DuckMood | null>(null);
+  useLayoutEffect(() => {
+    const guide = ref.current;
+    const bubble = guide?.querySelector<HTMLElement>(".krafty-bubble");
+    if (!guide || !bubble) return;
+    const resize = new ResizeObserver(() => {
+      guide.style.setProperty("--bubble-height", `${bubble.offsetHeight}px`);
+    });
+    resize.observe(bubble);
+    return () => resize.disconnect();
+  }, [tip, stop]);
   useEffect(() => {
     let frame = 0,
-      moveTimer: ReturnType<typeof setTimeout> | undefined;
+      placed = false,
+      hadTarget = false;
+    let moveTimer: ReturnType<typeof setTimeout> | undefined;
     const reduced = matchMedia("(prefers-reduced-motion: reduce)");
-    const docks = Array.from(
-      document.querySelectorAll<HTMLElement>("[data-duck-dock]"),
-    );
     function update() {
       frame = 0;
-      const candidates = docks
+      const guide = ref.current;
+      if (!guide) return;
+      const targets = Array.from(
+        document.querySelectorAll<HTMLElement>("[data-duck-dock]"),
+      )
         .map((dock) => ({ dock, bounds: dock.getBoundingClientRect() }))
         .filter(
-          ({ bounds }) => bounds.top > 100 && bounds.bottom < innerHeight + 10,
+          ({ bounds }) => bounds.top > 105 && bounds.bottom < innerHeight - 8,
         );
-      const target = candidates.sort(
+      const target = targets.sort(
         (a, b) =>
           Math.abs(a.bounds.top - innerHeight * 0.58) -
           Math.abs(b.bounds.top - innerHeight * 0.58),
       )[0];
-      if (!ref.current) return;
-      if (!target || document.querySelector("dialog[open]")) {
-        ref.current.style.visibility = "hidden";
+      const width = guide.offsetWidth,
+        height = guide.offsetHeight;
+      const x = Math.max(
+        12,
+        Math.min(
+          target?.bounds.left ?? innerWidth - width - 16,
+          innerWidth - width - 12,
+        ),
+      );
+      const y = Math.max(
+        105,
+        Math.min(
+          target?.bounds.top ?? innerHeight - height - 18,
+          innerHeight - height - 12,
+        ),
+      );
+      guide.style.transition = placed ? "" : "none";
+      guide.style.setProperty("--duck-x", `${Math.round(x)}px`);
+      guide.style.setProperty("--duck-y", `${Math.round(y)}px`);
+      guide.style.transform = `translate3d(${Math.round(x)}px,${Math.round(y)}px,0)`;
+      placed = true;
+      if (!target) {
+        if (hadTarget) setTip(false);
+        hadTarget = false;
         return;
       }
-      const { dock, bounds } = target;
-      ref.current.style.transition = stopId.current ? "" : "none";
-      ref.current.style.visibility = "visible";
-      ref.current.style.transform = `translate3d(${Math.round(bounds.left + scrollX)}px,${Math.round(bounds.top + scrollY)}px,0)`;
-      if (stopId.current !== dock.dataset.duckDock) {
-        stopId.current = dock.dataset.duckDock || "";
-        const mood = moods.includes(dock.dataset.mood as DuckMood)
-          ? (dock.dataset.mood as DuckMood)
-          : "happy";
-        setStop({
-          id: stopId.current,
-          mood,
-          tip: dock.dataset.tip || "",
-          href: dock.dataset.href,
-          label: dock.dataset.label,
-        });
-        setReaction(null);
-        setTip(dock.dataset.autoTip !== "false");
-        const animate =
-          !reduced.matches && document.documentElement.dataset.motion !== "off";
-        setMoving(animate);
-        clearTimeout(moveTimer);
-        moveTimer = setTimeout(() => setMoving(false), 850);
-        if (timeout.current) clearTimeout(timeout.current);
-        timeout.current = setTimeout(() => setTip(false), 9500);
-      }
+      hadTarget = true;
+      const { dock } = target;
+      if (stopId.current === dock.dataset.duckDock) return;
+      stopId.current = dock.dataset.duckDock || "";
+      const mood = moods.includes(dock.dataset.mood as DuckMood)
+        ? (dock.dataset.mood as DuckMood)
+        : "happy";
+      setStop({
+        id: stopId.current,
+        mood,
+        tip: dock.dataset.tip || "",
+        href: dock.dataset.href,
+        label: dock.dataset.label,
+      });
+      setReaction(null);
+      const showTip =
+        dock.dataset.autoTip !== "false" &&
+        !document.activeElement?.closest("form");
+      setTip(showTip);
+      if (showTip) audio.current?.quack(mood === "celebrate");
+      setMoving(!reduced.matches);
+      clearTimeout(moveTimer);
+      moveTimer = setTimeout(() => setMoving(false), 700);
+      if (timeout.current) clearTimeout(timeout.current);
+      timeout.current = setTimeout(() => setTip(false), 6500);
     }
     const schedule = () => {
       if (!frame) frame = requestAnimationFrame(update);
     };
+    const onFocus = (event: FocusEvent) => {
+      if (event.target instanceof Element && event.target.closest("form"))
+        setTip(false);
+    };
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", schedule);
-    window.addEventListener("krowd:motion", schedule);
-    const observer = new MutationObserver(schedule);
-    observer.observe(document.body, {
-      subtree: true,
-      attributes: true,
-      attributeFilter: ["open"],
-    });
+    document.addEventListener("focusin", onFocus);
     const resize = new ResizeObserver(schedule);
     resize.observe(document.body);
     stopId.current = "";
@@ -106,47 +135,29 @@ export function Krafty() {
       cancelAnimationFrame(frame);
       clearTimeout(moveTimer);
       if (timeout.current) clearTimeout(timeout.current);
-      observer.disconnect();
       resize.disconnect();
       window.removeEventListener("scroll", schedule);
       window.removeEventListener("resize", schedule);
-      window.removeEventListener("krowd:motion", schedule);
+      document.removeEventListener("focusin", onFocus);
     };
   }, [pathname]);
   useEffect(() => {
-    const intent = soundTicket.current;
-    const initialize = requestAnimationFrame(() => {
-      try {
-        setHidden(localStorage.getItem("krowd-duck") === "hidden");
-      } catch {}
-    });
-    async function preferences(event: Event) {
-      const command = (event as CustomEvent).detail;
-      if (command === "visibility") {
-        intent.version++;
+    let disposed = false,
+      activating = false;
+    async function activate() {
+      if (activating || audio.current?.isEnabled) return;
+      activating = true;
+      audio.current ??= new DuckSound();
+      const enabled = await audio.current.enable();
+      activating = false;
+      if (disposed) {
         audio.current?.disable();
-        setSound(false);
-        setHidden((current) => {
-          const next = !current;
-          try {
-            localStorage.setItem("krowd-duck", next ? "hidden" : "visible");
-          } catch {}
-          return next;
-        });
+        return;
       }
-      if (command === "sound") {
-        const ticket = ++intent.version;
-        if (audio.current?.isEnabled) {
-          audio.current.disable();
-          setSound(false);
-        } else {
-          audio.current ??= new DuckSound();
-          const enabled = await audio.current.enable();
-          if (ticket === intent.version) {
-            setSound(enabled);
-            if (enabled) audio.current.quack();
-          }
-        }
+      if (enabled) {
+        if (ref.current?.querySelector(".krafty-bubble")) audio.current.quack();
+        document.removeEventListener("pointerdown", activate);
+        document.removeEventListener("keydown", activate);
       }
     }
     function mail(event: Event) {
@@ -160,25 +171,21 @@ export function Krafty() {
       );
       if (status === "delivered") audio.current?.quack(true);
     }
-    window.addEventListener("krowd:duck-command", preferences);
+    document.addEventListener("pointerdown", activate, { passive: true });
+    document.addEventListener("keydown", activate);
     window.addEventListener("krowd:mail", mail);
     return () => {
-      cancelAnimationFrame(initialize);
-      intent.version++;
+      disposed = true;
       audio.current?.disable();
-      window.removeEventListener("krowd:duck-command", preferences);
+      document.removeEventListener("pointerdown", activate);
+      document.removeEventListener("keydown", activate);
       window.removeEventListener("krowd:mail", mail);
     };
   }, []);
-  useEffect(() => {
-    window.dispatchEvent(
-      new CustomEvent("krowd:duck-state", { detail: { hidden, sound } }),
-    );
-  }, [hidden, sound]);
   return (
     <aside
       ref={ref}
-      className={`krafty-traveller ${hidden ? "krafty-hidden" : ""}`}
+      className="krafty-traveller"
       aria-label="Krafty, your community companion"
       data-stop={stop.id}
       data-mood={reaction || stop.mood}

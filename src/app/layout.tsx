@@ -3,11 +3,13 @@ import { Manrope, Yatra_One } from "next/font/google";
 import { heroDescription } from "@/data/community";
 import { Krafty } from "@/components/duck/krafty";
 import { Motion } from "@/components/motion";
+import { RouteScroll } from "@/components/route-scroll";
 import { Analytics } from "@/components/analytics";
 import { analyticsId } from "@/lib/analytics";
 import { siteOrigin } from "@/lib/site";
 import "@/styles/clubhouse.css";
-import "@/styles/cream.css";
+import "@/styles/theme.css";
+import "@/styles/night-details.css";
 const manrope = Manrope({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -22,15 +24,15 @@ const yatra = Yatra_One({
 });
 const origin = siteOrigin();
 export const metadata: Metadata = {
-  metadataBase: origin ? new URL(origin) : undefined,
+  metadataBase: new URL(origin || "http://localhost:3000"),
   robots:
     process.env.VERCEL_ENV === "preview"
       ? { index: false, follow: false }
       : undefined,
-  title: "KrowdKraft — Where Bengaluru's developers connect",
+  title: "KrowdKraft | Where Bengaluru's developers connect",
   description: heroDescription,
   openGraph: {
-    title: "KrowdKraft",
+    title: "KrowdKraft | Where Bengaluru’s developers connect",
     description: heroDescription,
     images: origin
       ? [
@@ -43,6 +45,13 @@ export const metadata: Metadata = {
         ]
       : undefined,
   },
+  alternates: { canonical: "/" },
+  twitter: {
+    card: "summary_large_image",
+    title: "KrowdKraft | Where Bengaluru’s developers connect",
+    description: heroDescription,
+    images: ["/brand/og.png"],
+  },
   icons: { icon: "/favicon.ico", apple: "/apple-touch-icon.png" },
 };
 export default function RootLayout({
@@ -54,6 +63,7 @@ export default function RootLayout({
         {children}
         <Krafty />
         <Motion />
+        <RouteScroll />
         <Analytics
           id={analyticsId}
           enabled={

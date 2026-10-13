@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-metadata";
 import { PageShell } from "@/components/page-shell";
 import { WorkbenchScene } from "@/components/art/scenes";
 import { ProductSubmission } from "@/components/forms/product-submission";
@@ -7,11 +7,11 @@ import { DuckDock } from "@/components/duck/duck-dock";
 import { Icon } from "@/components/icon";
 import { getProducts } from "@/server/community";
 export const dynamic = "force-dynamic";
-export const metadata: Metadata = {
-  title: "Community marketplace | KrowdKraft",
-  description:
-    "A home for products, tools and ideas built by the KrowdKraft community. Submit your project for the community showcase.",
-};
+export const metadata = pageMetadata(
+  "Community marketplace | KrowdKraft",
+  "A home for products, tools and ideas built by the KrowdKraft community. Submit your project for the community showcase.",
+  "/marketplace",
+);
 export default async function MarketplacePage() {
   const { records, available, configured } = await getProducts();
   return (
@@ -74,7 +74,7 @@ export default async function MarketplacePage() {
           </div>
         )}
         <div className="subsection">
-          <h2>A little less launch anxiety.</h2>
+          <h2>Submit a tool the community can try.</h2>
           <div className="process-list workshop-process">
             <div>
               <span className="mono">01</span>

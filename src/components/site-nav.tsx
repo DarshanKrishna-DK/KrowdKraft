@@ -5,12 +5,11 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { Dialog } from "./dialog";
 import { Icon } from "./icon";
+import { links } from "@/data/links";
 export const destinations = [
   { label: "Events", href: "/events" },
-  { label: "Marketplace", href: "/marketplace" },
-  { label: "Spotlight", href: "/spotlight" },
-  { label: "Journal", href: "/journal" },
-  { label: "Activity", href: "/leaderboard" },
+  { label: "Calendar", href: links.luma },
+  { label: "Collaborate", href: "/#collaborate" },
 ];
 export function SiteNav() {
   const pathname = usePathname();
@@ -71,8 +70,7 @@ export function SiteNav() {
         titleId="menu-title"
         className="menu-dialog"
       >
-        <p className="eyebrow">A place for your people</p>
-        <h2 id="menu-title">Find your corner.</h2>
+        <h2 id="menu-title">Bengaluru events.</h2>
         <nav aria-label="Mobile navigation">
           {[
             ...destinations,

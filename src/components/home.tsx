@@ -3,20 +3,24 @@ import Link from "next/link";
 import { SiteNav } from "./site-nav";
 import { SiteFooter } from "./site-footer";
 import { Icon } from "./icon";
-import {
-  OrbitScene,
-  SpotlightScene,
-  JournalCover,
-  ContributionGarden,
-} from "./art/scenes";
+import { JournalCover } from "./art/scenes";
 import { DuckDock } from "./duck/duck-dock";
 import { CollaborationForm } from "./forms/collaboration-trigger";
 import { communityStats, people } from "@/data/community";
 import { events, kolkataToday } from "@/data/events";
-import { featuredEvents, formatEventDate } from "@/data/event-utils";
+import {
+  featuredEvents,
+  formatEventDate,
+  eventWeekday,
+  eventWhen,
+  eventMapUrl,
+  registrationOpen,
+  typeLabels,
+} from "@/data/event-utils";
 import { DateRefresh } from "./events/date-refresh";
 import { CommunityRibbon } from "./community-ribbon";
-import { BuilderScene } from "./art/builder-scene";
+import { CodeSculpture } from "./art/code-sculpture";
+import { CodeRain } from "./art/code-rain";
 import { journal } from "@/data/journal";
 import { links } from "@/data/links";
 import { EventTicket } from "./events/event-ticket";
@@ -30,41 +34,75 @@ export function Home() {
       <DateRefresh today={today} />
       <main id="main">
         <section className="hero-section" id="top">
+          <CodeRain />
           <div className="hero-atmosphere" aria-hidden="true" />
           <div className="container hero-layout">
             <div className="hero-copy">
               <h1>
-                Good things
-                <br />
-                happen in
-                <br />a{" "}
-                <span className="word-krowd">
-                  Krowd
-                  <svg viewBox="0 0 420 28" aria-hidden="true">
-                    <path d="M5 21C110 1 270 3 412 15" />
-                  </svg>
-                </span>
-                <span className="hero-period">.</span>
+                Where Bengaluru’s
+                <br className="hero-break" /> developers
+                <br className="hero-break" />{" "}
+                <span className="word-krowd">connect.</span>
               </h1>
               <p className="hero-description">
-                Your people. Your next big idea.
-                <br />A community for developers who learn out loud,
-                <br className="desktop-break" /> build together, and show up for
-                each other.
+                Hack days, workshops, and meetups.
+                <br />
+                {communityStats.members} members learning and building together.
               </p>
               <div className="actions">
-                <Link className="button primary" href="#join">
-                  Find your people <Icon name="diagonal" size={18} />
+                <Link
+                  className="button primary"
+                  href={next ? "/events/" + next.slug : "/events"}
+                >
+                  {next && next.date === today
+                    ? "See today’s event"
+                    : next && eventWhen(next, today).startsWith("This ")
+                      ? "See " +
+                        eventWeekday(next) +
+                        "’s " +
+                        (next.type === "hackathon" ? "hack day" : "event")
+                      : "Explore events"}{" "}
+                  <Icon name="diagonal" size={18} />
                 </Link>
-                <Link className="button quiet" href="/events">
-                  Explore events <Icon name="arrow" size={18} />
-                </Link>
+                <a
+                  className="button quiet"
+                  href={links.whatsapp}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Join the Krowd <Icon name="arrow" size={18} />
+                </a>
               </div>
+              <p className="hero-next">
+                {next ? (
+                  <>
+                    <time dateTime={next.date}>
+                      {eventWeekday(next)}, {formatEventDate(next.date)}
+                    </time>
+                    <span>
+                      {next.title} · {next.venue}
+                    </span>
+                    <strong>
+                      {registrationOpen(next, today)
+                        ? "Registration open"
+                        : next.registrationDeadline
+                          ? "Registration closed · Confirmed participants welcome"
+                          : "Details on the event page"}
+                    </strong>
+                  </>
+                ) : (
+                  <>
+                    Next event coming soon. Follow our calendar for the
+                    announcement.
+                  </>
+                )}
+              </p>
             </div>
             <div className="hero-art-zone">
-              <BuilderScene />
+              <CodeSculpture />
               <DuckDock
                 id="hello"
+                autoTip={false}
                 mood="wave"
                 tip="I'm Krafty. Rubber duck, zero debugging qualifications. Shall we?"
                 href="/events"
@@ -75,19 +113,34 @@ export function Home() {
           </div>
         </section>
 
-        <CommunityRibbon />
+        <CommunityRibbon
+          phrases={
+            next
+              ? [
+                  eventWeekday(next) + " · " + formatEventDate(next.date),
+                  next.venue,
+                  typeLabels[next.type],
+                  "Previously: MSRIT · REVA · T. John",
+                ]
+              : [
+                  "Next event coming soon",
+                  "Startup Park",
+                  "MSRIT · REVA · T. John",
+                  "Built together in Bengaluru",
+                ]
+          }
+        />
 
         <section className="section events-home" id="happening">
           <div className="container">
             <div className="section-heading" data-reveal>
               <div>
-                <p className="eyebrow">Get out. Plug in.</p>
                 <h2>
                   {next ? (
                     <>
-                      See you at
+                      Next on
                       <br />
-                      <span className="serif-word">the next one.</span>
+                      <span className="serif-word">the calendar.</span>
                     </>
                   ) : (
                     <>
@@ -99,11 +152,7 @@ export function Home() {
                 </h2>
               </div>
               <div className="heading-aside">
-                <p>
-                  A room full of builders.
-                  <br />
-                  One conversation could change everything.
-                </p>
+                <p>Dates, venues, and everything you need before you arrive.</p>
                 <Link href="/events" className="text-link">
                   The whole calendar <Icon name="diagonal" size={18} />
                 </Link>
@@ -139,12 +188,38 @@ export function Home() {
             )}
             <DuckDock
               id="event"
+              autoTip={false}
               mood="thinking"
               tip="Laptop? Check. Charger? Please, for the love of open source."
               href={next ? `/events/${next.slug}` : "/events"}
               label="Event details"
               align="end"
             />
+          </div>
+        </section>
+
+        <section className="section collaboration-home" id="collaborate">
+          <div className="container collaboration-layout">
+            <div>
+              <p className="eyebrow">For communities, colleges, and teams</p>
+              <h2>
+                Host or co-host
+                <br />
+                <span className="serif-word">with the Krowd.</span>
+              </h2>
+            </div>
+            <div className="collaboration-copy">
+              <p>
+                Co-host a hackathon, run a college session, give a technical
+                talk, or cross-post an event. Bring your idea; we’ll work out
+                the format together.
+              </p>
+              <p className="page-note">
+                We don’t charge simply to collaborate. Production needs,
+                responsibilities, and any costs are agreed before we begin.
+              </p>
+              <CollaborationForm />
+            </div>
           </div>
         </section>
 
@@ -219,33 +294,43 @@ export function Home() {
               <br />
               Different backgrounds. The same builder energy.
             </p>
-            <span className="city-coordinate mono">
-              12°58′ N<br />
-              77°35′ E
-            </span>
+            {next && (
+              <a
+                className="text-link"
+                href={eventMapUrl(next)}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Next venue: {next.venue} <Icon name="diagonal" />
+              </a>
+            )}
           </div>
         </section>
 
         <section className="people-home" id="people">
           <div className="container">
             <div className="community-impact">
-              <p className="eyebrow">
-                A few things we’ve
-                <br />
-                made happen, together.
+              <p>
+                <strong>{communityStats.members}</strong>
+                <span>community members</span>
               </p>
               <p>
                 <strong>{communityStats.events}</strong>
-                <span>events & gatherings</span>
+                <span>events hosted</span>
               </p>
               <p>
                 <strong>{communityStats.developersReached}</strong>
                 <span>developers reached</span>
               </p>
             </div>
+            <p className="archive-context">
+              {events.length} documented events on the public calendar.{" "}
+              {communityStats.events} hosted across our community’s history;
+              we’re restoring the archive.
+            </p>
             <div className="people-lineup">
               <div className="people-heading">
-                <p className="eyebrow">The humans behind the hello</p>
+                <p className="eyebrow">Organizers</p>
                 <h2>
                   People behind
                   <br />
@@ -269,7 +354,6 @@ export function Home() {
                     </div>
                     <div className="organizer-name">
                       <h3>{person.name}</h3>
-                      <span>KrowdKraft</span>
                     </div>
                   </li>
                 ))}
@@ -278,108 +362,11 @@ export function Home() {
           </div>
         </section>
 
-        <section className="section marketplace-home" id="made-here">
-          <div className="container split-layout">
-            <div data-reveal>
-              <p className="eyebrow">The community marketplace</p>
-              <h2>
-                Built here.
-                <br />
-                <span className="serif-word">Going places.</span>
-              </h2>
-              <p className="section-copy">
-                Side projects that grew legs. Tools that solve a real problem.
-                That “what if” someone actually built.
-              </p>
-              <p className="section-copy">
-                Our community showcase is coming soon. Got something people
-                should try? Give it a home here.
-              </p>
-              <div className="actions">
-                <Link href="/marketplace#submit" className="button primary">
-                  List your product <Icon name="plus" size={18} />
-                </Link>
-                <Link href="/marketplace" className="text-link">
-                  Explore the space <Icon name="diagonal" />
-                </Link>
-              </div>
-              <DuckDock
-                id="products"
-                mood="curious"
-                tip="That side project deserves more than a folder called final_v7."
-                href="/marketplace#submit"
-                label="Give it a home"
-              />
-            </div>
-            <OrbitScene />
-          </div>
-        </section>
-
-        <section className="section spotlight-home" id="builders">
-          <div className="container spotlight-layout">
-            <SpotlightScene />
-            <div data-reveal>
-              <p className="eyebrow">A little deserved attention</p>
-              <h2>
-                Big ideas.
-                <br />
-                <span className="serif-word">Brilliant humans.</span>
-              </h2>
-              <p className="section-copy">
-                The first-time contributor. The team that kept going. The
-                builder whose weekend project became everyone’s favourite tool.
-              </p>
-              <p className="section-copy">
-                Our builder spotlight is coming soon. Each edition will put a
-                different story at the centre.
-              </p>
-              <Link href="/spotlight" className="button light">
-                Meet the spotlight <Icon name="diagonal" />
-              </Link>
-              <DuckDock
-                id="spotlight"
-                mood="celebrate"
-                tip="Main character energy. But with a README."
-                href="/spotlight#nominate"
-                label="Nominate a builder"
-                align="end"
-              />
-            </div>
-          </div>
-        </section>
-
-        <section className="section activity-home" id="activity">
-          <div className="container activity-layout">
-            <div data-reveal>
-              <p className="eyebrow">Small commits. Shared momentum.</p>
-              <h2>
-                Keep showing up.
-                <br />
-                <span className="serif-word">It adds up.</span>
-              </h2>
-              <p className="section-copy">
-                Connect your GitHub, choose to share your public activity, and
-                find other people making steady progress. Contributions come in
-                many forms. This is one window into them.
-              </p>
-              <div className="actions">
-                <Link className="button primary" href="/account">
-                  <Icon name="github" size={20} /> Connect GitHub
-                </Link>
-                <Link className="text-link" href="/leaderboard">
-                  Community activity <Icon name="diagonal" />
-                </Link>
-              </div>
-            </div>
-            <ContributionGarden />
-          </div>
-        </section>
-
         <section className="section journal-home" id="journal">
           <div className="container">
             <div className="section-heading" data-reveal>
               <div>
-                <p className="eyebrow">Notes from the journey</p>
+                <p className="eyebrow">Notes from Darshan</p>
                 <h2>
                   A little food
                   <br />
@@ -400,7 +387,7 @@ export function Home() {
                   rel="noreferrer"
                   data-reveal
                 >
-                  <JournalCover variant={article.cover} />
+                  <JournalCover src={article.cover} />
                   <div className="article-meta">
                     <span>{article.topic}</span>
                     <span>
@@ -415,38 +402,14 @@ export function Home() {
           </div>
         </section>
 
-        <section className="section collaboration-home" id="collaborate">
-          <div className="container collaboration-layout">
-            <div>
-              <p className="eyebrow">Good company makes great things</p>
-              <h2>
-                Have an idea?
-                <br />
-                <span className="serif-word">Pull up a chair.</span>
-              </h2>
-            </div>
-            <div className="collaboration-copy">
-              <p>
-                Host a workshop. Support a hackathon. Bring a new perspective.
-                If it helps developers learn and build, we’d love to hear it.
-              </p>
-              <CollaborationForm />
-              <div className="collab-tags">
-                <span>Communities</span>
-                <span>Colleges</span>
-                <span>Companies</span>
-                <span>You</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
         <section className="join-home" id="join">
           <div className="container join-layout">
             <div className="join-scribble" aria-hidden="true">
               hello, you.
             </div>
-            <p className="eyebrow">No perfect portfolio required</p>
+            <p className="eyebrow">
+              WhatsApp for announcements. Luma for the calendar.
+            </p>
             <h2>
               Your kind
               <br />
@@ -463,7 +426,7 @@ export function Home() {
                 target="_blank"
                 rel="noreferrer"
               >
-                Join the community <Icon name="diagonal" />
+                Follow on WhatsApp <Icon name="diagonal" />
               </a>
               <a
                 className="button quiet"

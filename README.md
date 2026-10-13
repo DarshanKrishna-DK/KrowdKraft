@@ -1,98 +1,147 @@
 # KrowdKraft
 
-A Bengaluru developer community website built with Next.js, React and TypeScript. The site includes a researched event archive, downloadable calendars, Medium journal, community socials, product submissions, monthly builder spotlights, an optional GitHub activity board, and Krafty, an expressive travelling duck.
+[![Checks](https://github.com/DarshanKrishna-DK/KrowdKraft/actions/workflows/checks.yml/badge.svg)](https://github.com/DarshanKrishna-DK/KrowdKraft/actions/workflows/checks.yml)
+![Next.js](https://img.shields.io/badge/Next.js-16-171717?logo=nextdotjs)
+![TypeScript](https://img.shields.io/badge/TypeScript-6-3178C6?logo=typescript&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-Postgres-3ECF8E?logo=supabase&logoColor=white)
 
-## Run
+**Where Bengaluru’s developers connect.** An event-first home for hack days, workshops, community projects, and the people who build them.
 
-Use Node 22.19+ and npm 11.6.2, matching CI.
+[Visit the website](https://krowd-kraft.vercel.app) · [Event calendar](https://krowd-kraft.vercel.app/events) · [WhatsApp announcements](https://whatsapp.com/channel/0029Vb9BTtuEawdmK4IivD1M) · [Report a security issue](SECURITY.md)
+
+## What’s here
+
+- **Events:** date-aware featured event, registration deadlines, type/venue/search filters, participant information, schedules, maps, downloadable ICS, and individual social sharing cards.
+- **Marketplace and spotlight:** real submission and nomination forms, private contact emails, organizer review, and published listings. Collections remain honestly empty until approved material exists.
+- **Member accounts:** GitHub OAuth, private-by-default profiles, optional monthly public activity, and account removal.
+- **Organizer workspace:** server-authorized review, approval, rejection, and unpublishing with transactional audit records.
+- **Journal:** Darshan Krishna N’s original Medium articles and their original cover images.
+- **Krafty:** original expressive duck artwork, section-to-section movement, and brief local quacks after a user gesture. No microphone or AI service.
+
+Built with Next.js App Router, React, TypeScript, Supabase PostgreSQL/Auth, Zod, React Hook Form, and native CSS. The dark plum visual system pairs Yatra One and Manrope with a dotted canvas and glossy glass controls.
+
+## Quick start
+
+Use **Node 22.19+** and **npm 11.6.2**, matching CI.
 
 ```sh
 npm ci
 npm run dev
 ```
 
-For production locally, run `npm run build`, then `npm start`. Copy `.env.example` to `.env.local` for integrations. Never commit credentials. Set `SITE_URL` to the canonical HTTPS origin; Vercel previews are noindex and do not load Analytics.
-
-## Content and events
-
-Community facts and organizer first names live in `src/data/community.ts`; social destinations in `src/data/links.ts`; Medium article metadata in `src/data/journal.ts`. Articles link to the original publication and are not republished here.
-
-Events live in `src/data/events.json`. The 2026 Hacktoberfest Hack Day and x402 PreHack link to organizer sources; historical workshops come from this repository's previous community archive. HackCulture is attributed as the x402 innovation partner. Registration availability is separate from the event date: the 18 October Hack Day closed registration on 7 October. Calendar downloads use UTC timestamps and RFC 5545 escaping/folding. Date classification uses Asia/Kolkata and includes ongoing multi-day events. The homepage's next and most recent events derive from dates. After the last listed event ends, it shows a coming-soon invitation. Open tabs refresh at Kolkata midnight and on returning to the tab.
+Open http://localhost:3000. Public content works without provider credentials. Copy [.env.example](.env.example) to the ignored `.env.local` when enabling integrations. Never paste secrets into issues, commits, or browser code.
 
 ```sh
-npm run event:add -- "https://example.com/event"
-npm run event:list
-npm run event:edit -- event-slug
-npm run event:remove -- event-slug
-npm run event:validate
+npm run build
+npm start
 ```
 
-The CLI previews imported metadata and asks before saving. Missing information must be supplied rather than invented. Image downloads need separate confirmation. Imports pin public DNS addresses, reject private destinations, bound redirects and response size, and do not execute remote scripts. Writes are locked and atomic, with concurrent edits rejected. Images are retained when an event is removed. New optional time, participant and registration-deadline fields can also be edited directly in the validated JSON.
+## Find your way around
 
-## Supabase and GitHub sign-in
+| Path                  | Responsibility                                                        |
+| --------------------- | --------------------------------------------------------------------- |
+| `src/app`             | Public routes, member/organizer pages, server actions, OAuth callback |
+| `src/components`      | Shared navigation, forms, event UI, illustrations, Krafty             |
+| `src/data`            | Validated event records, community facts, journal, socials            |
+| `src/server`          | Fresh identity checks, authorization, database writes, mail adapters  |
+| `src/lib`             | Validation, metadata, calendars, provider-independent utilities       |
+| `src/styles`          | Shared layout, dark theme, responsive and interaction details         |
+| `supabase/migrations` | Reproducible schema, RLS, column grants, transactional RPCs           |
+| `scripts/events`      | Safe event maintenance CLI                                            |
+| `tests`               | Domain, mail, database security, and browser regression checks        |
 
-The **KrowdKraft Community** project (`qbmvzxucumzwvrizgbiy`) belongs to the KrowdKraft organization and uses the free plan in Mumbai (`ap-south-1`). Its community migration is applied, GitHub OAuth is configured, and the existing `krowd-kraft` Vercel project's production environment contains the server-side credentials. The separate CryptoKrowd project is unchanged. Other environments remain usable without credentials: GitHub connection is marked coming soon, and a failed online submission retains its draft with a user-initiated email alternative. Products and builder features start empty; no invented listings, winners or member scores are seeded.
+Public routes: `/`, `/events`, `/events/[slug]`, `/marketplace`, `/spotlight`, `/journal`, `/leaderboard`, and `/privacy`. `/community` permanently redirects to `/events`. Accounts live at `/account`; unauthorized `/admin` requests return 404. Private routes are excluded from indexing and use private, no-store responses.
 
-Setup in the selected KrowdKraft project:
+## Configuration
 
-1. The migration `supabase/migrations/20261013123935_community_clubhouse.sql` is already applied to this project. Live checks confirmed RLS on all six tables. Security and performance advisors returned no warnings or errors; informational findings concern intentionally server-only tables and indexes on the empty database. For another environment, review and apply the migration before connecting it. Isolated PGlite tests additionally verify access rules, rate limits and moderation transactions.
-2. Set server-only `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY` and `SUPABASE_SECRET_KEY` in the existing Vercel project's production environment. Use a publishable key and secret/service-role key for the same project. No key belongs in a `NEXT_PUBLIC_` variable here.
-3. The [KrowdKraft Community OAuth application](https://github.com/settings/applications/3929124) is owned by `DarshanKrishna-DK`. Its callback is `https://qbmvzxucumzwvrizgbiy.supabase.co/auth/v1/callback`. GitHub is enabled in Supabase Auth, its Site URL is `https://krowd-kraft.vercel.app`, and the sole allowed redirect is `https://krowd-kraft.vercel.app/auth/callback`. Wildcard callbacks and device flow are off. Add an exact local callback only when intentionally testing OAuth locally. The website exposes GitHub sign-in only; other Supabase provider settings are unchanged.
-4. Sign in, then configure `COMMUNITY_ADMIN_USER_IDS` with the immutable Supabase Auth UUIDs of approved organizers. Do not use email addresses, names, or editable user metadata as roles.
-5. Verify the complete live sign-in, private/public consent, activity refresh, sign-out and account deletion flows. Exercise organizer approval and rejection with an explicitly authorized real submission.
+All values below are server-side. No service credential uses a `NEXT_PUBLIC_` prefix.
 
-GitHub requests only `read:user user:email`, never repository write access. The callback verifies the handle and immutable ID directly with GitHub; it does not trust editable profile metadata. Supabase PKCE sessions use HTTP-only secure cookies in production, proxy refresh, and fresh server-side user verification. Callback destinations are fixed. Member profiles are private until explicit publication consent and can be hidden or deleted.
+| Variable                       | Purpose                                                                       |
+| ------------------------------ | ----------------------------------------------------------------------------- |
+| `SITE_URL`                     | Canonical HTTPS origin and OAuth redirects; localhost allowed for development |
+| `SUPABASE_URL`                 | Project API URL                                                               |
+| `SUPABASE_PUBLISHABLE_KEY`     | Session client; still subject to database permissions                         |
+| `SUPABASE_SECRET_KEY`          | Privileged server client, never exposed to the browser                        |
+| `COMMUNITY_ADMIN_USER_IDS`     | Comma-separated immutable Supabase user IDs, never usernames                  |
+| `SUBMISSION_HASH_SECRET`       | Optional independent salt for abuse keys; defaults to server secret           |
+| `TRUST_PROXY`                  | Enable only behind a proxy that replaces forwarded-IP headers                 |
+| `GITHUB_PUBLIC_TOKEN`          | Optional public API quota increase; private repository access unnecessary     |
+| `MAIL_FROM`, `MAIL_TO`         | Verified sender and organizer recipient                                       |
+| `RESEND_API_KEY` or `SMTP_URL` | Collaboration delivery; Resend takes precedence, SMTP requires TLS            |
+| `GOOGLE_ANALYTICS_ENABLED`     | Defaults false; activate only after GA settings are corrected                 |
 
-The board counts public push events, opened pull requests, created reviews and opened issues in the current UTC month, one point each. It is not a complete GitHub contribution graph or a measure of developer quality. GitHub's public events API provides a bounded recent window and at most 300 events; capped snapshots are labeled. Members refresh their snapshot manually, at most once per 15 minutes after a successful sync. Failed refreshes retain the previous snapshot. `GITHUB_PUBLIC_TOKEN` is optional for public API quota. Website contributors are independently fetched from this repository and cached for one hour.
+**Integration status:** GitHub sign-in and community persistence are configured in the existing production deployment. Email/password and anonymous sign-in are disabled. Collaboration mail is not configured; its form preserves the draft and offers a user-initiated email fallback. GA4 remains disabled at the owner’s request. Products and spotlight stories are awaiting real, reviewed submissions.
 
-## Submissions and organizer review
+### Database changes
 
-Marketplace listings and spotlight nominations collect a private contact **email only**, the work's public link, attribution, description, and explicit contact/publication consent. `/admin` is restricted to configured organizer UUIDs; it supports reviewing, editing public copy, approving/rejecting, scheduling monthly spotlights and unpublishing. Future spotlight editions remain hidden until their UTC month. Publication and audit entries are transactional.
+Keep the migrations even when applying changes through Supabase MCP. They document privileges and power isolated security regression tests. [Supabase notes](supabase/README.md) explain the verified local/remote timestamp mapping for the initial migration. **Do not blindly reapply it or rewrite migration history.** Apply new forward-only migrations, review grants/RLS, and run the database tests before deploying.
 
-All public database tables have RLS. Anonymous users can read only explicitly granted columns of published content or consenting profiles. They cannot read submissions, email addresses, audit entries or member identifiers, and cannot execute write RPCs. No client has write privileges. Secrets stay server-side. Approval requires a fresh organizer check; editable metadata is never an authorization source.
+Profiles are private by default. Only explicitly granted public columns of opted-in profiles and published listings can be read anonymously. Submission emails, member IDs, reviewer identities, audit records, and abuse keys are private. Browser clients have no mutation privileges or access to write RPCs. Organizer actions check the current authenticated user on every request.
 
-Submissions use durable transactional limits of six per origin, four per email, and 100 globally per UTC hour, plus duplicate detection. Abuse keys are salted hashes, not plaintext IPs. Set `SUBMISSION_HASH_SECRET` separately if desired; otherwise the server secret supplies the salt. `TRUST_PROXY=false` shares a conservative origin bucket. Enable proxy trust only where the hosting proxy replaces the forwarded-IP header. Limits are pruned after expiry; they do not replace hosting-level traffic controls.
+Submissions have durable transactional limits: six per origin, four per email, and 100 globally per UTC hour, with duplicate detection and salted identifiers. Collaboration email currently has a process-local limit; add distributed or edge limits before enabling it across multiple instances. Provider acceptance is required for success and does not guarantee inbox delivery.
 
-## Collaboration mail
+### Google Analytics
 
-Set `MAIL_FROM` to a verified sender and either `RESEND_API_KEY` or authenticated TLS `SMTP_URL`. Resend takes precedence. `MAIL_TO` defaults to `krowdkraft.official@gmail.com`. Client and server validate the form. Success requires provider acceptance, which is not a guarantee of inbox delivery. Missing configuration and failures preserve the draft and provide a user-initiated email fallback. No form payloads or credentials are logged. Mail rate limits are process-local; multi-instance deployments should add infrastructure-level limits.
+The previous measurement ID, **G-QM44WYFLFR**, is retained. Production loads the tag only after activation and visitor consent. Previews, local development, account, organizer, and auth routes do not send analytics. Public page views omit query strings, hashes, raw referrers, and private titles. Form interaction pauses collection; advertising storage and personalization remain denied.
 
-## Google Analytics
+Before activation, sign into the owning account, `krowdkraft.official@gmail.com`, and update that web stream:
 
-The previous codebase's GA4 measurement ID **`G-QM44WYFLFR`** is restored. Analytics is **disabled by default** through `GOOGLE_ANALYTICS_ENABLED=false` while the owner updates the existing property. The footer shows “Analytics off” until enabled. After activation, `src/components/analytics.tsx` loads Google's tag only after a visitor chooses “Allow analytics,” on production public pages. Local development and Vercel previews do not load it. Declining disables collection and clears matching first-party GA cookies for the current host.
+1. Disable Enhanced Measurement for this page-view-only integration, especially automatic history and form tracking. [Google’s manual page-view guidance](https://developers.google.com/analytics/devguides/collection/ga4/views).
+2. Disable user-provided data capabilities and automatic detection. [Google’s settings guide](https://support.google.com/analytics/answer/14077171?hl=en-GB).
+3. Set `GOOGLE_ANALYTICS_ENABLED=true` in production, redeploy, and verify public views in Realtime while keeping private routes and form data absent.
 
-Manual page views cover public routes and omit query strings, hashes, raw referrers and private page titles. Account, organizer and authentication routes are excluded. Collection is paused before form interaction and mailto/private-route link activation. We do not send form fields, emails, GitHub identifiers, submissions or search terms as analytics events. Advertising storage and personalization remain denied.
+Visitor consent can be changed on the Privacy page. Automated checks intercept Google requests; they never pollute the real property and are not evidence of GA Realtime delivery.
 
-The owner chose to configure Analytics settings later. Sign into Google Analytics with `krowdkraft.official@gmail.com`, select the web stream with measurement ID `G-QM44WYFLFR`, then:
+## Maintain the calendar
 
-1. In Admin → Data streams → the web stream → Enhanced measurement, turn off Enhanced measurement for this page-view-only implementation. At minimum disable browser-history page changes and automatic form interactions. Google documents that enhanced history tracking can create additional page views even with `send_page_view: false`: [manual page-view guidance](https://developers.google.com/analytics/devguides/collection/ga4/views).
-2. In the Google tag's configuration, disable **Allow user-provided data capabilities**, including automatic detection. This website does not need email matching or enhanced conversions. See [Google's user-provided data settings](https://support.google.com/analytics/answer/14077171?hl=en-GB).
-3. Set `GOOGLE_ANALYTICS_ENABLED=true` in the existing Vercel project's production environment and redeploy. On the public site, allow analytics and confirm public page views in GA Realtime. Private routes and form data must stay absent.
-
-The current public tag configuration was checked and still includes automatic history/form tracking and user-provided-data detection, so the activation flag should remain false until these settings are changed. Automated tests intercept Analytics requests and do not pollute the real property; they do not establish real Realtime delivery.
-
-## Design and assets
-
-The creamy lavender and blush clubhouse uses Yatra One display lettering and Manrope body text, self-hosted by Next.js. Font licenses are in `public/fonts`. A floating glass navbar, dotted paper, glossy physical buttons and wider responsive layouts share one light visual system. Marketplace has a sculptural product workbench, Spotlight an editorial cover, Journal a lead-story reading layout, and Events a date-led calendar. Real empty states remain distinct from published content.
-
-Krafty has six original SVG expressions and locally synthesized opt-in sound. It travels to compact anchors in existing section margins, reacts to form states and clicks, and can be hidden. No empty rows are reserved for it. It does not follow the cursor, use a microphone, call an AI service or load external audio. The reference avatar lab informed the state-based interaction concept; its AGPL code and assets were not copied.
-
-The hero's original seated developer is `figures/builder.js`, built on Lucas Marques' MIT-licensed [Hairline engine](https://github.com/lucasmarkes/hairline). The vendored kernel is unchanged and its license is included in `public/art/hairline`. `node scripts/build-illustration.mjs` regenerates the browser bundle. Its static SVG fallback remains visible without JavaScript. Pointer movement guides the hands across the keyboard; the engine sleeps when idle or offscreen and respects reduced motion. The small localized response intentionally keeps the desk and monitor still. There is no HTML text floating over the monitor.
-
-The moving community ribbon has its own pause button and respects the global motion setting and reduced motion. The site uses native scrolling, CSS animation and restrained parallax. Native dialogs manage keyboard focus; public content remains readable without JavaScript. The collaboration form loads on demand, preserves its draft when closed, and offers email if loading fails. `public/events/ai-verse-2025.webp` is an optimized photograph recovered from this repository's previous MSRIT event archive. The existing KrowdKraft logo is preserved. Stitch concepts informed the redesign; invented concept content was discarded in favor of the verified repository data.
-
-## Checks
+[Event records](src/data/events.json) are validated against [the schema](src/data/event-schema.ts). Add original organizer sources, correct relationship labels, and photos only when available. Never invent attendance, winners, venues, or event dates. The public calendar documents seven events; the historical 30+ figure is the community’s reported total, not a count of those records.
 
 ```sh
-npm test
+npm run event:list
+npm run event:validate
+npm run event:add -- --help
+npm run event:edit -- --help
+npm run event:remove -- --help
+```
+
+The CLI writes atomically, prevents accidental duplicates, and supports dry runs. Consult each command’s help before changing records. Upcoming/past classification uses Asia/Kolkata calendar dates and refreshes at local midnight or when a tab returns. Registration closes after the stated deadline; a past event moves into the archive automatically. Exact times are used only when known; undated times export as all-day ICS entries.
+
+Community facts are in [community.ts](src/data/community.ts), destinations in [links.ts](src/data/links.ts), and article metadata in [journal.ts](src/data/journal.ts). Archived events with no original public source omit the external source button. Historical provenance remains in Git history.
+
+## Check your changes
+
+```sh
 npm run lint
+npm test
 npm run event:validate
 npm run build
 npm run typecheck
 npx playwright install chromium
 npm run test:browser
+npm audit --omit=dev
 ```
 
-Tests cover validation, calendar boundaries, durable database limits, RLS/column privileges, transactional moderation, consent, mail provider acceptance and event-import safety. Browser checks use the production build with provider credentials cleared, cover desktop/mobile accessibility, navigation, form failure recovery, duck behavior and Analytics consent, and never send real mail, submissions or Analytics hits. Database tests use an isolated in-memory PostgreSQL-compatible engine, not a connected project. Live OAuth, provider delivery, moderation and GA Realtime remain separate checks.
+Browser tests run the production build with all provider credentials cleared. They cover 320, 390, 768, and 1440px layouts, accessibility, keyboard navigation, form error recovery, event filtering, route scrolling, calendar downloads, duck behavior, and isolated analytics consent. Database tests use PGlite to check RLS, column privileges, durable limits, and transactional moderation. No real submissions, email, or analytics hits are created by these tests.
 
-Project briefs, agent configuration, local artifacts, credentials, build output and generated test reports are ignored. Source tests and CI remain versioned to protect identity, privacy and real form behavior.
+Live OAuth, authenticated moderation, email inbox delivery, physical-device behavior, and GA Realtime are separate integration checks. Keep the source tests and CI versioned; generated reports are ignored.
+
+**Dependency note, 14 October 2026:** production audit has no known vulnerabilities. The development lint dependency chain includes the unpatched `braces` advisory [GHSA-vfj7-8cjw-p6xm](https://github.com/advisories/GHSA-vfj7-8cjw-p6xm). Do not force-downgrade Next’s ESLint configuration to silence it. See [SECURITY.md](SECURITY.md) for scope and follow-up.
+
+## Contribute
+
+1. Run the app and reproduce the problem before editing.
+2. Keep UI states complete: loading, empty, validation error, provider failure, and success.
+3. Check keyboard focus, 320px width, reduced motion, and no-JavaScript content.
+4. Run the relevant checks above. Describe the behavior changed and the evidence.
+
+Website contributors are listed in [GitHub’s contributor graph](https://github.com/DarshanKrishna-DK/KrowdKraft/graphs/contributors). Repository commit totals are distinct from the opt-in monthly community activity board. That board samples GitHub’s recent public event feed, not the complete contribution graph; private work and older events are excluded.
+
+## Design, assets, and next useful additions
+
+The logo and original community photograph are retained. Medium covers come from the linked articles, which open at their original publication. Font licenses are included in `public/fonts`. Krafty and the code sculpture are original; the referenced avatar lab inspired interaction ideas, and its AGPL code/assets were not copied. Stitch and the requested design skills informed hierarchy and interaction choices; generated factual claims and social links were discarded.
+
+Code rain runs at 15 fps only while visible, stops in background tabs, and has a pause control. Reduced motion produces a static frame. Krafty uses compact anchors without reserved blank rows, has no hover transform, and starts sound only after a user gesture. Navigation opens destination pages at the top; explicit section links retain their targets.
+
+Next content priorities: publish event recaps/resources, restore more original archive sources and photographs, review the first usable community tool, and publish the first verified builder story. Useful later workflows include opt-in mentor availability and requests for project collaborators; neither is presented as available today.
+
+Local briefs, agent configuration, credentials, artifacts, caches, build output, and generated reports are ignored. Source assets, database migrations, and meaningful tests remain in Git.

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 export function Motion() {
   const pathname = usePathname();
@@ -45,33 +45,4 @@ export function Motion() {
     };
   }, [pathname]);
   return null;
-}
-export function MotionToggle() {
-  const [paused, setPaused] = useState(false);
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem("krowd-motion") === "off";
-      document.documentElement.dataset.motion = saved ? "off" : "on";
-      const task = requestAnimationFrame(() => setPaused(saved));
-      return () => cancelAnimationFrame(task);
-    } catch {}
-  }, []);
-  return (
-    <button
-      type="button"
-      className="settings-button"
-      aria-pressed={paused}
-      onClick={() => {
-        const next = !paused;
-        setPaused(next);
-        document.documentElement.dataset.motion = next ? "off" : "on";
-        try {
-          localStorage.setItem("krowd-motion", next ? "off" : "on");
-        } catch {}
-        window.dispatchEvent(new Event("krowd:motion"));
-      }}
-    >
-      {paused ? "Resume animations" : "Pause animations"}
-    </button>
-  );
 }

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-metadata";
 import { PageShell } from "@/components/page-shell";
 import { SpotlightScene } from "@/components/art/scenes";
 import { ProductSubmission } from "@/components/forms/product-submission";
@@ -6,11 +6,11 @@ import { DuckDock } from "@/components/duck/duck-dock";
 import { Icon } from "@/components/icon";
 import { getSpotlights } from "@/server/community";
 export const dynamic = "force-dynamic";
-export const metadata: Metadata = {
-  title: "Builder spotlight | KrowdKraft",
-  description:
-    "The builders, teams and stories worth celebrating. Nominate someone for the KrowdKraft community spotlight.",
-};
+export const metadata = pageMetadata(
+  "Builder spotlight | KrowdKraft",
+  "The builders, teams and stories worth celebrating. Nominate someone for the KrowdKraft community spotlight.",
+  "/spotlight",
+);
 export default async function SpotlightPage() {
   const { records, available, configured } = await getSpotlights();
   return (
@@ -33,7 +33,7 @@ export default async function SpotlightPage() {
               helped everyone else get there.
             </p>
             <a className="text-link" style={{ marginTop: 20 }} href="#nominate">
-              Know someone like that? <Icon name="diagonal" />
+              Nominate a builder <Icon name="diagonal" />
             </a>
           </div>
           <SpotlightScene />
@@ -95,9 +95,7 @@ export default async function SpotlightPage() {
               </p>
             </div>
             <div className="edition-stamp">
-              <span>YOUR</span>
-              <span>STORY</span>
-              <span>NEXT?</span>
+              <Icon name="star" size={64} />
             </div>
           </div>
         )}

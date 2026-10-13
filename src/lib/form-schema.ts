@@ -49,8 +49,4 @@ export const collaborationSchema = z
     fax: z.string().max(0).optional(),
   })
   .strict();
-export const joinSchema = z
-  .object({ email: emailSchema, fax: z.string().max(0).optional() })
-  .strict();
 export type CollaborationInput = z.infer<typeof collaborationSchema>;
-export type JoinInput = z.infer<typeof joinSchema>;

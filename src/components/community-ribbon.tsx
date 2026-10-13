@@ -1,12 +1,6 @@
 "use client";
 import { useState } from "react";
-const phrases = [
-  "Make something that matters",
-  "Find your kind of curious",
-  "A little code. A lot of community.",
-  "Built together, in Bengaluru",
-];
-export function CommunityRibbon() {
+export function CommunityRibbon({ phrases }: { phrases: string[] }) {
   const [paused, setPaused] = useState(false);
   return (
     <div className={`community-ribbon ${paused ? "ribbon-paused" : ""}`}>

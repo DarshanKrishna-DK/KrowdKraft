@@ -1,21 +1,21 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-metadata";
 import { PageShell } from "@/components/page-shell";
 import { JournalCover } from "@/components/art/scenes";
 import { DuckDock } from "@/components/duck/duck-dock";
 import { Icon } from "@/components/icon";
 import { journal } from "@/data/journal";
 import { formatEventDate } from "@/data/event-utils";
-export const metadata: Metadata = {
-  title: "The journal | KrowdKraft",
-  description:
-    "Thoughts on building, learning and finding your way. Read the KrowdKraft community's original writing on Medium.",
-};
+export const metadata = pageMetadata(
+  "The journal | KrowdKraft",
+  "Thoughts on building, learning and finding your way. Read notes from Darshan Krishna N on Medium.",
+  "/journal",
+);
 export default function JournalPage() {
   return (
     <PageShell className="journal-page">
       <div className="container">
         <div className="page-intro journal-masthead">
-          <p className="eyebrow">The KrowdKraft journal</p>
+          <p className="eyebrow">Notes from Darshan</p>
           <h1>
             Open notebooks.
             <br />
@@ -23,10 +23,12 @@ export default function JournalPage() {
           </h1>
           <p>
             Career detours, developer dilemmas and ideas that deserve a little
-            more room. Original writing from the people behind the Krowd.
+            more room. Essays by Darshan Krishna N, originally published on
+            Medium.
           </p>
           <DuckDock
             id="journal-page"
+            autoTip={false}
             mood="thinking"
             tip="One good read. Then back to the 47 tabs you already have open."
           />
@@ -40,7 +42,7 @@ export default function JournalPage() {
               target="_blank"
               rel="noreferrer"
             >
-              <JournalCover variant={article.cover} />
+              <JournalCover src={article.cover} />
               <div className="article-body">
                 <div className="article-meta">
                   <span>{article.topic}</span>

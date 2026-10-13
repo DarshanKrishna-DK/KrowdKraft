@@ -1,8 +1,9 @@
-// Audio is created only after an explicit sound-button gesture. No remote media or microphone.
+// Browsers require a user gesture before audio. No remote media or microphone.
 export class DuckSound {
   private context: AudioContext | null = null;
   private enabled = false;
   private generation = 0;
+  private lastQuack = -Infinity;
   get isEnabled() {
     return this.enabled;
   }
@@ -19,7 +20,6 @@ export class DuckSound {
         this.context !== context
       )
         return false;
-      this.quack();
       return true;
     } catch {
       if (ticket === this.generation) this.disable();
@@ -37,6 +37,8 @@ export class DuckSound {
   quack(celebrate = false) {
     const context = this.context;
     if (!this.enabled || !context || context.state !== "running") return;
+    if (context.currentTime - this.lastQuack < 1.2 || document.hidden) return;
+    this.lastQuack = context.currentTime;
     for (let index = 0; index < (celebrate ? 2 : 1); index++) {
       const start = context.currentTime + index * 0.16;
       const source = context.createOscillator(),

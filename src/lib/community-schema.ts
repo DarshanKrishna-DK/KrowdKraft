@@ -17,7 +17,9 @@ export const publicUrl = z
       !url.username &&
       !url.password &&
       url.hostname.includes(".") &&
-      !/^(localhost|127\.|0\.|10\.|192\.168\.|169\.254\.|\[)/i.test(
+      !/^(?:\d+\.){3}\d+$/.test(url.hostname) &&
+      !url.hostname.startsWith("[") &&
+      !/(^|\.)(localhost|local|internal|test|invalid|example|home|lan)\.?$/i.test(
         url.hostname,
       )
     );
@@ -51,11 +53,7 @@ export type SubmissionReply =
   | {
       ok: false;
       reason:
-        | "validation"
-        | "unavailable"
-        | "rate_limited"
-        | "duplicate"
-        | "failed";
+        "validation" | "unavailable" | "rate_limited" | "duplicate" | "failed";
       errors?: Record<string, string[]>;
     };
 export const moderationSchema = z
