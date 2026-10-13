@@ -43,7 +43,7 @@ All commands are reproducible from the README. Local evidence is retained in ign
 | Clean dependency installation / lockfile | npm 11.6.2 clean CI install passes |
 | Unit suite | 15 tests pass: schema/date boundaries, provider acceptance/rejection, sender/recipient validation, rate limits, organizer consent, images, conflicts and public-address filtering |
 | ESLint / strict TypeScript / production build | Pass |
-| Main browser flows | Desktop and 390 px: navigation/dialog focus, form failure/input preservation, no-JS copy, viewport figures, reduced motion, duck navigation/audio/hide |
+| Main browser flows | 8 tests pass: desktop and 390 px navigation/dialog focus, form failure/input preservation, no-JS copy, viewport figures, reduced motion, duck navigation/audio/hide and pending-audio cancellation |
 | Populated event browser suite | 2 tests pass; 11 temporary records removed, original empty JSON rebuilt |
 | Accessibility and layout | Axe WCAG A/AA: zero violations in checked page/dialog/guide states; no horizontal page overflow; no browser exceptions |
 | Figure validation | All five static validators pass; all five eight-state contact sheets inspected; intentional local changed-ink warnings documented in `figures/README.md` |

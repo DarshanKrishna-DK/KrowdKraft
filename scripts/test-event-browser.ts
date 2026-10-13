@@ -1,4 +1,5 @@
-import { readFile, writeFile, open, rm, mkdir } from "node:fs/promises";
+import { readFile, writeFile, open, rm, mkdir, rename } from "node:fs/promises";
+import { randomUUID } from "node:crypto";
 import { spawn } from "node:child_process";
 import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
@@ -7,6 +8,7 @@ import { kolkataToday } from "../src/data/event-utils";
 const require = createRequire(import.meta.url), root = fileURLToPath(new URL("../", import.meta.url));
 const path = fileURLToPath(new URL("../src/data/events.json", import.meta.url));
 const backup = fileURLToPath(new URL("../.artifacts/event-browser-original.json", import.meta.url));
+const fixturePath = `${path}.${randomUUID()}.tmp`;
 const original = await readFile(path, "utf8"); eventsSchema.parse(JSON.parse(original));
 const records = eventsSchema.parse(Array.from({ length: 11 }, (_, index) => ({
   id: `fixture-${index+1}`, slug: `fixture-event-${index+1}`, title: `Fixture event ${index+1}`,
@@ -32,8 +34,9 @@ try {
     if ((error as NodeJS.ErrnoException).code === "EEXIST") throw new Error(`A previous test backup exists at ${backup}. Follow README.md's interrupted-test recovery instructions before retrying. No event data was changed.`);
     throw error;
   }
+  await writeFile(fixturePath, fixture, { flag: "wx" });
+  await rename(fixturePath, path);
   installed = true;
-  await writeFile(path, fixture);
   await run("next/dist/bin/next", ["build"]);
   await run("@playwright/test/cli", ["test", "--config=playwright.events.config.ts"]);
 } finally {
@@ -45,7 +48,10 @@ try {
       await run("next/dist/bin/next", ["build"]);
     }
   } finally {
-    try { await lock.close(); }
-    finally { await rm(`${path}.lock`, { force: true }); if (restored) await rm(backup, { force: true }); }
+    try { await rm(fixturePath, { force: true }); }
+    finally {
+      try { await lock.close(); }
+      finally { await rm(`${path}.lock`, { force: true }); if (restored) await rm(backup, { force: true }); }
+    }
   }
 }
