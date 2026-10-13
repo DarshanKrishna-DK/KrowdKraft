@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Manrope, Yatra_One } from "next/font/google";
 import { heroDescription } from "@/data/community";
 import { Krafty } from "@/components/duck/krafty";
 import { Motion } from "@/components/motion";
@@ -7,10 +7,17 @@ import { Analytics } from "@/components/analytics";
 import { analyticsId } from "@/lib/analytics";
 import { siteOrigin } from "@/lib/site";
 import "@/styles/clubhouse.css";
-const geist = Geist({
+import "@/styles/cream.css";
+const manrope = Manrope({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-geist",
+  variable: "--font-body",
+  display: "swap",
+});
+const yatra = Yatra_One({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-display",
   display: "swap",
 });
 const origin = siteOrigin();
@@ -42,7 +49,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={geist.variable}>
+    <html lang="en" className={`${manrope.variable} ${yatra.variable}`}>
       <body>
         {children}
         <Krafty />

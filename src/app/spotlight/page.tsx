@@ -14,10 +14,13 @@ export const metadata: Metadata = {
 export default async function SpotlightPage() {
   const { records, available, configured } = await getSpotlights();
   return (
-    <PageShell>
+    <PageShell className="spotlight-page">
       <div className="container">
-        <div className="page-intro-with-art">
+        <div className="page-intro-with-art spotlight-masthead">
           <div className="page-intro">
+            <span className="edition-label">
+              The people. The process. The possibility.
+            </span>
             <p className="eyebrow">The builder spotlight</p>
             <h1>
               Behind the work,
@@ -77,7 +80,7 @@ export default async function SpotlightPage() {
             ))}
           </div>
         ) : (
-          <div className="empty-showcase">
+          <div className="empty-showcase edition-opening">
             <div>
               <p className="eyebrow">First edition coming soon</p>
               <h2>
@@ -91,14 +94,16 @@ export default async function SpotlightPage() {
                 proud of, and what the rest of us can learn from it.
               </p>
             </div>
-            <div className="empty-orbit-mark" aria-hidden="true">
-              <Icon name="star" size={60} />
+            <div className="edition-stamp">
+              <span>YOUR</span>
+              <span>STORY</span>
+              <span>NEXT?</span>
             </div>
           </div>
         )}
         <div className="subsection">
           <h2>Good stories come in many forms.</h2>
-          <div className="process-list">
+          <div className="process-list editorial-criteria">
             <div>
               <span className="mono">The breakthrough</span>
               <h3>Something worth sharing.</h3>
@@ -125,7 +130,7 @@ export default async function SpotlightPage() {
             </div>
           </div>
         </div>
-        <div className="submission-layout" id="nominate">
+        <div className="submission-layout nomination-desk" id="nominate">
           <div>
             <p className="eyebrow">Pass the mic</p>
             <h2>Nominate a builder.</h2>
@@ -135,6 +140,7 @@ export default async function SpotlightPage() {
             </p>
             <DuckDock
               id="nominate"
+              autoTip={false}
               mood="celebrate"
               tip="Self-nominations count. Humility is nice. A working demo is nicer."
             />

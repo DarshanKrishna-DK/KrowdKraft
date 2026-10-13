@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { PageShell } from "@/components/page-shell";
-import { OrbitScene } from "@/components/art/scenes";
+import { WorkbenchScene } from "@/components/art/scenes";
 import { ProductSubmission } from "@/components/forms/product-submission";
 import { MarketplaceDirectory } from "@/components/marketplace-directory";
 import { DuckDock } from "@/components/duck/duck-dock";
@@ -15,9 +15,9 @@ export const metadata: Metadata = {
 export default async function MarketplacePage() {
   const { records, available, configured } = await getProducts();
   return (
-    <PageShell>
+    <PageShell className="marketplace-page">
       <div className="container">
-        <div className="page-intro-with-art">
+        <div className="page-intro-with-art marketplace-masthead">
           <div className="page-intro">
             <p className="eyebrow">The community marketplace</p>
             <h1>
@@ -36,7 +36,7 @@ export default async function MarketplacePage() {
               </a>
             </div>
           </div>
-          <OrbitScene />
+          <WorkbenchScene />
         </div>
         {configured && !available ? (
           <p className="notice" role="alert">
@@ -46,7 +46,7 @@ export default async function MarketplacePage() {
         ) : records.length ? (
           <MarketplaceDirectory products={records} />
         ) : (
-          <div className="empty-showcase">
+          <div className="empty-showcase collection-opening">
             <div>
               <span className="eyebrow">Coming soon</span>
               <h2>
@@ -63,14 +63,19 @@ export default async function MarketplacePage() {
                 Put your work out there <Icon name="diagonal" />
               </a>
             </div>
-            <div className="empty-orbit-mark" aria-hidden="true">
-              <Icon name="plus" size={57} />
+            <div className="collection-stamp" aria-hidden="true">
+              <Icon name="code" size={42} />
+              <span>
+                Made here.
+                <br />
+                Shared here.
+              </span>
             </div>
           </div>
         )}
         <div className="subsection">
           <h2>A little less launch anxiety.</h2>
-          <div className="process-list">
+          <div className="process-list workshop-process">
             <div>
               <span className="mono">01</span>
               <h3>Show us the thing.</h3>
@@ -97,7 +102,7 @@ export default async function MarketplacePage() {
             </div>
           </div>
         </div>
-        <div className="submission-layout" id="submit">
+        <div className="submission-layout submission-desk" id="submit">
           <div>
             <p className="eyebrow">Let’s get it out of that folder</p>
             <h2>List your product.</h2>
@@ -107,6 +112,7 @@ export default async function MarketplacePage() {
             </p>
             <DuckDock
               id="submit-product"
+              autoTip={false}
               mood="curious"
               tip="Yes, the project you keep calling 'just a little thing' counts."
             />

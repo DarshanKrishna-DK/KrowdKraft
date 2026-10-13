@@ -6,6 +6,7 @@ export function DuckDock({
   href,
   label,
   align = "start",
+  autoTip = true,
 }: {
   id: string;
   mood?: DuckMood;
@@ -13,6 +14,7 @@ export function DuckDock({
   href?: string;
   label?: string;
   align?: "start" | "end";
+  autoTip?: boolean;
 }) {
   return (
     <div
@@ -22,6 +24,7 @@ export function DuckDock({
       data-tip={tip}
       data-href={href}
       data-label={label}
+      data-auto-tip={autoTip}
       aria-hidden="true"
     >
       <span className="duck-footprints" />

@@ -72,7 +72,9 @@ test("restored people, impact, Medium and socials", async ({ page }) => {
     page.locator('#journal a[href^="https://medium.com/@cryptech_dk/"]'),
   ).toHaveCount(3);
 });
-test("mobile menu and keyboard search", async ({ page }) => {
+test("mobile navigation traps focus, restores it and reaches the community pages", async ({
+  page,
+}) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
   const trigger = page.getByRole("button", { name: "Open navigation" });
@@ -86,15 +88,13 @@ test("mobile menu and keyboard search", async ({ page }) => {
   }
   await page.keyboard.press("Escape");
   await expect(trigger).toBeFocused();
-  await page.keyboard.press("Control+k");
-  const search = page.getByRole("dialog", { name: "Find something good." });
-  await page.getByLabel("Search pages, events and articles").fill("x402");
-  await expect(
-    search.getByRole("link", { name: /x402 Global Challenge/ }),
-  ).toHaveCount(1);
+  await trigger.click();
   await accessible(page);
-  await search.getByRole("link", { name: /x402 Global Challenge/ }).click();
-  await expect(page).toHaveURL(/\/events\/x402-global-challenge-prehack$/);
+  await menu.getByRole("link", { name: "Marketplace", exact: true }).click();
+  await expect(page).toHaveURL(/\/marketplace$/);
+  await expect(
+    page.getByRole("button", { name: /Search the community/ }),
+  ).toHaveCount(0);
 });
 test("event archive filters, registration cutoff and calendar", async ({
   page,
@@ -151,9 +151,9 @@ test("email-only product form validates consent and preserves an unsaved draft",
   );
   await page.getByRole("checkbox").check();
   await page.getByRole("button", { name: "Submit for review" }).click();
-  await expect(page.locator(".submission-form").getByRole("alert")).toContainText(
-    "Online submissions aren’t open just yet",
-  );
+  await expect(
+    page.locator(".submission-form").getByRole("alert"),
+  ).toContainText("Online submissions aren’t open just yet");
   await expect(page.getByLabel("Product name", { exact: true })).toHaveValue(
     "Browser fixture",
   );
@@ -194,6 +194,9 @@ test("collaboration validates and reports unconfigured delivery", async ({
   await accessible(page);
   await page.keyboard.press("Escape");
   await expect(trigger).toBeFocused();
+  await trigger.click();
+  await expect(dialog.getByLabel("Your name")).toHaveValue("Test person");
+  await page.keyboard.press("Escape");
 });
 test("Krafty travels to anchors, reacts and keeps sound optional", async ({
   page,

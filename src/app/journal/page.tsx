@@ -14,12 +14,12 @@ export default function JournalPage() {
   return (
     <PageShell className="journal-page">
       <div className="container">
-        <div className="page-intro">
+        <div className="page-intro journal-masthead">
           <p className="eyebrow">The KrowdKraft journal</p>
           <h1>
-            Things we’re learning.
+            Open notebooks.
             <br />
-            <span className="serif-word">Things worth sharing.</span>
+            <span className="serif-word">Fresh perspectives.</span>
           </h1>
           <p>
             Career detours, developer dilemmas and ideas that deserve a little
@@ -41,29 +41,26 @@ export default function JournalPage() {
               rel="noreferrer"
             >
               <JournalCover variant={article.cover} />
-              <div className="article-meta">
-                <span>{article.topic}</span>
-                <span>
-                  Medium <Icon name="diagonal" size={14} />
+              <div className="article-body">
+                <div className="article-meta">
+                  <span>{article.topic}</span>
+                  <span>
+                    Medium <Icon name="diagonal" size={14} />
+                  </span>
+                </div>
+                <h2>{article.title}</h2>
+                <p>{article.description}</p>
+                <p className="page-note">
+                  {article.author}
+                  <br />
+                  <time dateTime={article.date}>
+                    {formatEventDate(article.date)}
+                  </time>
+                </p>
+                <span className="text-link">
+                  Read the story <Icon name="diagonal" size={18} />
                 </span>
               </div>
-              <h2
-                style={{
-                  fontSize: 28,
-                  lineHeight: 1.2,
-                  letterSpacing: "-.04em",
-                }}
-              >
-                {article.title}
-              </h2>
-              <p>{article.description}</p>
-              <p className="page-note">
-                {article.author}
-                <br />
-                <time dateTime={article.date}>
-                  {formatEventDate(article.date)}
-                </time>
-              </p>
             </a>
           ))}
         </div>

@@ -12,7 +12,6 @@ import {
 import { formResolver } from "@/lib/form-resolver";
 import { MailFeedback, notifyGuide } from "./mail-feedback";
 import type { SubmissionResult } from "@/server/mail/types";
-import { communityEmail } from "@/data/community";
 
 const fields = [
   ["organization", "Organization name", "text", true, 160, "organization"],
@@ -33,8 +32,13 @@ const fields = [
   ],
 ] as const;
 
-export function CollaborationForm() {
-  const [open, setOpen] = useState(false);
+export function CollaborationDialog({
+  open,
+  onClose,
+}: {
+  open: boolean;
+  onClose: () => void;
+}) {
   const [result, setResult] = useState<SubmissionResult | null>(null);
   const {
     register,
@@ -112,117 +116,103 @@ export function CollaborationForm() {
     );
   }
   return (
-    <>
-      <button
-        type="button"
-        className="button primary"
-        onClick={() => setOpen(true)}
-      >
-        Build with the Krowd <span aria-hidden="true">↗</span>
-      </button>
-      <noscript>
-        <a href={`mailto:${communityEmail}`}>Email the team to collaborate</a>
-      </noscript>
-      <Dialog
-        open={open}
-        onClose={() => setOpen(false)}
-        titleId="collaboration-form-title"
-        className="collaboration-dialog"
-      >
-        <p className="eyebrow">A good idea starts a conversation</p>
-        <h2 id="collaboration-form-title">Build with the Krowd.</h2>
-        {!result?.delivered && (
-          <form
-            noValidate
-            onSubmit={handleSubmit(submit)}
-            aria-busy={isSubmitting}
-          >
-            <p className="form-hint">
-              Tell us what you have in mind. Fields marked * are required.
-            </p>
-            <div className="form-grid">
-              {select("represents", "I represent a", organizations)}
-              {fields.map(
-                (
-                  [name, label, type, required, maxLength, autoComplete],
-                  index,
-                ) => (
-                  <Fragment key={name}>
-                    {index === 4 &&
-                      select("planning", "What are you planning?", plans)}
-                    <div
-                      className={
-                        type === "textarea"
-                          ? "form-field form-wide"
-                          : "form-field"
-                      }
-                    >
-                      <label htmlFor={`collab-${name}`}>
-                        {label}
-                        {required ? (
-                          <span aria-hidden="true"> *</span>
-                        ) : (
-                          <span className="optional"> (optional)</span>
-                        )}
-                      </label>
-                      {type === "textarea" ? (
-                        <textarea
-                          id={`collab-${name}`}
-                          rows={4}
-                          required
-                          maxLength={maxLength}
-                          aria-invalid={Boolean(errors[name])}
-                          aria-describedby={
-                            errors[name] ? `error-${name}` : undefined
-                          }
-                          {...register(name)}
-                        />
+    <Dialog
+      open={open}
+      onClose={onClose}
+      titleId="collaboration-form-title"
+      className="collaboration-dialog"
+    >
+      <p className="eyebrow">A good idea starts a conversation</p>
+      <h2 id="collaboration-form-title">Build with the Krowd.</h2>
+      {!result?.delivered && (
+        <form
+          noValidate
+          onSubmit={handleSubmit(submit)}
+          aria-busy={isSubmitting}
+        >
+          <p className="form-hint">
+            Tell us what you have in mind. Fields marked * are required.
+          </p>
+          <div className="form-grid">
+            {select("represents", "I represent a", organizations)}
+            {fields.map(
+              (
+                [name, label, type, required, maxLength, autoComplete],
+                index,
+              ) => (
+                <Fragment key={name}>
+                  {index === 4 &&
+                    select("planning", "What are you planning?", plans)}
+                  <div
+                    className={
+                      type === "textarea"
+                        ? "form-field form-wide"
+                        : "form-field"
+                    }
+                  >
+                    <label htmlFor={`collab-${name}`}>
+                      {label}
+                      {required ? (
+                        <span aria-hidden="true"> *</span>
                       ) : (
-                        <input
-                          id={`collab-${name}`}
-                          type={type}
-                          required={required}
-                          maxLength={maxLength}
-                          autoComplete={autoComplete}
-                          aria-invalid={Boolean(errors[name])}
-                          aria-describedby={
-                            errors[name] ? `error-${name}` : undefined
-                          }
-                          {...register(name)}
-                        />
+                        <span className="optional"> (optional)</span>
                       )}
-                      {errors[name] && (
-                        <p className="field-error" id={`error-${name}`}>
-                          {errors[name]?.message}
-                        </p>
-                      )}
-                    </div>
-                  </Fragment>
-                ),
-              )}
-            </div>
-            <div className="honeypot" aria-hidden="true">
-              <label>
-                Leave this empty
-                <input {...register("fax")} tabIndex={-1} autoComplete="off" />
-              </label>
-            </div>
-            <button
-              className="button primary form-submit"
-              type="submit"
-              disabled={isSubmitting}
-            >
-              {isSubmitting
-                ? "Sending your idea…"
-                : "Send collaboration request"}
-            </button>
-            <p className="form-hint">
-              This sends an email to the KrowdKraft team.
-            </p>
-          </form>
-        )}
-        <MailFeedback result={result} />
-      </Dialog>
-    </>
+                    </label>
+                    {type === "textarea" ? (
+                      <textarea
+                        id={`collab-${name}`}
+                        rows={4}
+                        required
+                        maxLength={maxLength}
+                        aria-invalid={Boolean(errors[name])}
+                        aria-describedby={
+                          errors[name] ? `error-${name}` : undefined
+                        }
+                        {...register(name)}
+                      />
+                    ) : (
+                      <input
+                        id={`collab-${name}`}
+                        type={type}
+                        required={required}
+                        maxLength={maxLength}
+                        autoComplete={autoComplete}
+                        aria-invalid={Boolean(errors[name])}
+                        aria-describedby={
+                          errors[name] ? `error-${name}` : undefined
+                        }
+                        {...register(name)}
+                      />
+                    )}
+                    {errors[name] && (
+                      <p className="field-error" id={`error-${name}`}>
+                        {errors[name]?.message}
+                      </p>
+                    )}
+                  </div>
+                </Fragment>
+              ),
+            )}
+          </div>
+          <div className="honeypot" aria-hidden="true">
+            <label>
+              Leave this empty
+              <input {...register("fax")} tabIndex={-1} autoComplete="off" />
+            </label>
+          </div>
+          <button
+            className="button primary form-submit"
+            type="submit"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Sending your idea…" : "Send collaboration request"}
+          </button>
+          <p className="form-hint">
+            This sends an email to the KrowdKraft team.
+          </p>
+        </form>
+      )}
+      <MailFeedback result={result} />
+    </Dialog>
   );
 }

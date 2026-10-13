@@ -47,7 +47,7 @@ export function Krafty() {
       const candidates = docks
         .map((dock) => ({ dock, bounds: dock.getBoundingClientRect() }))
         .filter(
-          ({ bounds }) => bounds.top > 90 && bounds.bottom < innerHeight + 10,
+          ({ bounds }) => bounds.top > 100 && bounds.bottom < innerHeight + 10,
         );
       const target = candidates.sort(
         (a, b) =>
@@ -60,6 +60,7 @@ export function Krafty() {
         return;
       }
       const { dock, bounds } = target;
+      ref.current.style.transition = stopId.current ? "" : "none";
       ref.current.style.visibility = "visible";
       ref.current.style.transform = `translate3d(${Math.round(bounds.left + scrollX)}px,${Math.round(bounds.top + scrollY)}px,0)`;
       if (stopId.current !== dock.dataset.duckDock) {
@@ -75,7 +76,7 @@ export function Krafty() {
           label: dock.dataset.label,
         });
         setReaction(null);
-        setTip(true);
+        setTip(dock.dataset.autoTip !== "false");
         const animate =
           !reduced.matches && document.documentElement.dataset.motion !== "off";
         setMoving(animate);

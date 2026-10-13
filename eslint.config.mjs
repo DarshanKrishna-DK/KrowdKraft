@@ -12,5 +12,7 @@ export default defineConfig([
     "next-env.d.ts",
     "src/generated/**",
     "test-results/**",
+    "public/art/hairline/**",
+    "figures/**",
   ]),
 ]);

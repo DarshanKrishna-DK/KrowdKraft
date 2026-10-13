@@ -32,14 +32,26 @@ export function kolkataToday(now = new Date()): string {
 export function isUpcoming(event: KrowdEvent, today = kolkataToday()): boolean {
   return (event.endDate || event.date) >= today;
 }
+export function featuredEvents(events: KrowdEvent[], today = kolkataToday()) {
+  return {
+    next: events
+      .filter((event) => isUpcoming(event, today))
+      .sort((a, b) => a.date.localeCompare(b.date))[0],
+    recent: events
+      .filter((event) => !isUpcoming(event, today))
+      .sort((a, b) =>
+        (b.endDate || b.date).localeCompare(a.endDate || a.date),
+      )[0],
+  };
+}
 export function registrationOpen(
   event: KrowdEvent,
   today = kolkataToday(),
 ): boolean {
   return Boolean(
     event.registrationUrl &&
-    isUpcoming(event, today) &&
-    (!event.registrationDeadline || today <= event.registrationDeadline),
+      isUpcoming(event, today) &&
+      (!event.registrationDeadline || today <= event.registrationDeadline),
   );
 }
 export function formatEventDate(date: string): string {

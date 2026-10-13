@@ -33,7 +33,7 @@ export default async function LeaderboardPage() {
     timeZone: "UTC",
   }).format(new Date(`${period}-01T00:00:00Z`));
   return (
-    <PageShell>
+    <PageShell className="activity-page">
       <div className="container">
         <div className="page-intro">
           <p className="eyebrow">The community board · {month}</p>

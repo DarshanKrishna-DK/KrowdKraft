@@ -1,66 +1,34 @@
-import Image from "next/image";
 import { Icon } from "@/components/icon";
-export function ComputerScene() {
+export function WorkbenchScene() {
   return (
-    <div className="computer-scene" aria-hidden="true" data-parallax>
-      <div className="scene-orbit orbit-one" />
-      <div className="scene-orbit orbit-two" />
-      <svg className="signal-lines" viewBox="0 0 700 650" fill="none">
-        <path
-          className="wire"
-          d="M0 470C150 470 90 240 270 240S360 80 700 80M40 570C240 570 80 380 300 380S420 580 700 520"
-        />
-        <path
-          className="signal"
-          d="M0 470C150 470 90 240 270 240S360 80 700 80"
-        />
-      </svg>
-      <div className="floating-code glass">
-        <span className="window-dots">
+    <div className="workbench-scene" aria-hidden="true">
+      <div className="workbench-halo" />
+      <div className="workbench-window">
+        <div className="workbench-chrome">
           <i />
           <i />
           <i />
-        </span>
-        <span className="mono muted">a little idea.ts</span>
-        <code>
-          <span className="code-lilac">const</span> yourPeople ={" "}
-          <span className="code-lime">await</span>
-          <br />
-          &nbsp;&nbsp;community.<span className="code-coral">find</span>
-          (&apos;you&apos;);
-          <br />
-          <br />
-          <span className="code-comment">{"// better things, together."}</span>
-        </code>
+        </div>
+        <div className="workbench-content">
+          <Icon name="code" size={60} />
+          <span>
+            made by
+            <br />
+            the Krowd.
+          </span>
+        </div>
+        <div className="workbench-rule" />
       </div>
-      <Image
-        className="computer-art"
-        src="/art/clubhouse-computer.webp"
-        width={1200}
-        height={800}
-        alt=""
-        priority
-        sizes="(max-width: 767px) 100vw, 58vw"
-      />
-      <div className="screen-copy">
-        <span className="terminal-prompt">
-          &gt; hello, bengaluru<span className="terminal-caret">_</span>
-        </span>
-        <span>
-          find your people.
-          <br />
-          build your thing.
-        </span>
+      <div className="workbench-tile">
+        <Icon name="branch" size={42} />
       </div>
-      <div className="glass-chip chip-branch">
-        <Icon name="branch" />
-        <span>ideas → pull requests</span>
+      <div className="workbench-disc">
+        <Icon name="globe" size={44} />
       </div>
-      <div className="clay-key">&lt;/&gt;</div>
-      <div className="scene-star">
-        <Icon name="spark" size={46} />
-      </div>
-      <span className="scene-coordinate mono">12.9716° N / 77.5946° E</span>
+      <div className="workbench-shelf" />
+      <span className="workbench-caption">
+        Small experiments. Real possibilities.
+      </span>
     </div>
   );
 }

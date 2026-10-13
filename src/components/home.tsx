@@ -4,37 +4,35 @@ import { SiteNav } from "./site-nav";
 import { SiteFooter } from "./site-footer";
 import { Icon } from "./icon";
 import {
-  ComputerScene,
   OrbitScene,
   SpotlightScene,
   JournalCover,
   ContributionGarden,
 } from "./art/scenes";
 import { DuckDock } from "./duck/duck-dock";
-import { CollaborationForm } from "./forms/collaboration-form";
+import { CollaborationForm } from "./forms/collaboration-trigger";
 import { communityStats, people } from "@/data/community";
-import { events, isUpcoming, kolkataToday } from "@/data/events";
+import { events, kolkataToday } from "@/data/events";
+import { featuredEvents, formatEventDate } from "@/data/event-utils";
+import { DateRefresh } from "./events/date-refresh";
+import { CommunityRibbon } from "./community-ribbon";
+import { BuilderScene } from "./art/builder-scene";
 import { journal } from "@/data/journal";
 import { links } from "@/data/links";
 import { EventTicket } from "./events/event-ticket";
 
 export function Home() {
   const today = kolkataToday(),
-    next = events
-      .filter((event) => isUpcoming(event, today))
-      .sort((a, b) => a.date.localeCompare(b.date))[0];
+    { next, recent } = featuredEvents(events, today);
   return (
     <>
       <SiteNav />
+      <DateRefresh today={today} />
       <main id="main">
         <section className="hero-section" id="top">
           <div className="hero-atmosphere" aria-hidden="true" />
           <div className="container hero-layout">
             <div className="hero-copy">
-              <p className="eyebrow location-label">
-                <span className="live-dot" /> Bengaluru, India{" "}
-                <span className="label-separator">/</span> Open minds welcome
-              </p>
               <h1>
                 Good things
                 <br />
@@ -62,52 +60,42 @@ export function Home() {
                   Explore events <Icon name="arrow" size={18} />
                 </Link>
               </div>
+            </div>
+            <div className="hero-art-zone">
+              <BuilderScene />
               <DuckDock
                 id="hello"
                 mood="wave"
                 tip="I'm Krafty. Rubber duck, zero debugging qualifications. Shall we?"
                 href="/events"
                 label="Show me around"
+                align="end"
               />
             </div>
-            <ComputerScene />
-          </div>
-          <div className="container hero-bottom">
-            <span className="mono">
-              <span className="tiny-cross">+</span> Built for the curious.
-              Rooted in Bengaluru.
-            </span>
-            <a href="#happening" className="scroll-hint">
-              Keep exploring <span aria-hidden="true">↓</span>
-            </a>
           </div>
         </section>
 
-        <div className="community-ribbon">
-          <div className="container ribbon-inner">
-            <span>
-              <strong>{communityStats.members}</strong> people, one Krowd
-            </span>
-            <span className="ribbon-star">✳</span>
-            <span>From your first commit to your next big thing</span>
-            <span className="ribbon-star">✳</span>
-            <span>
-              <strong>BLR</strong> made of possibility
-            </span>
-          </div>
-        </div>
+        <CommunityRibbon />
 
         <section className="section events-home" id="happening">
           <div className="container">
             <div className="section-heading" data-reveal>
               <div>
-                <p className="eyebrow">
-                  <span className="index-number">01 /</span> Get out. Plug in.
-                </p>
+                <p className="eyebrow">Get out. Plug in.</p>
                 <h2>
-                  See you at
-                  <br />
-                  <span className="serif-word">the next one.</span>
+                  {next ? (
+                    <>
+                      See you at
+                      <br />
+                      <span className="serif-word">the next one.</span>
+                    </>
+                  ) : (
+                    <>
+                      Good things
+                      <br />
+                      <span className="serif-word">are brewing.</span>
+                    </>
+                  )}
                 </h2>
               </div>
               <div className="heading-aside">
@@ -132,19 +120,23 @@ export function Home() {
                 </a>
               </div>
             )}
-            <div className="recent-event-strip">
-              <span className="eyebrow">Last time we got together</span>
-              <Link href="/events/x402-global-challenge-prehack">
-                <span className="event-mini-symbol">x402</span>
-                <span>
-                  <strong>x402 Global Challenge PreHack</strong>
-                  <small>
-                    23 Aug 2026 · Startup Park · With AlgoBharat & HackCulture
-                  </small>
-                </span>
-                <Icon name="diagonal" />
-              </Link>
-            </div>
+            {recent && (
+              <div className="recent-event-strip">
+                <span className="eyebrow">Last time we got together</span>
+                <Link href={`/events/${recent.slug}`}>
+                  <span className="event-mini-symbol">
+                    <Icon name="calendar" />
+                  </span>
+                  <span>
+                    <strong>{recent.title}</strong>
+                    <small>
+                      {formatEventDate(recent.date)} · {recent.venue}
+                    </small>
+                  </span>
+                  <Icon name="diagonal" />
+                </Link>
+              </div>
+            )}
             <DuckDock
               id="event"
               mood="thinking"
@@ -182,10 +174,7 @@ export function Home() {
               </div>
             </div>
             <div className="about-copy" data-reveal>
-              <p className="eyebrow">
-                <span className="index-number">02 /</span> The people make the
-                place
-              </p>
+              <p className="eyebrow">The people make the place</p>
               <h2>
                 You don’t have
                 <br />
@@ -255,25 +244,33 @@ export function Home() {
               </p>
             </div>
             <div className="people-lineup">
-              <div>
+              <div className="people-heading">
                 <p className="eyebrow">The humans behind the hello</p>
                 <h2>
                   People behind
                   <br />
-                  the <span className="serif-word">Krowd.</span>
+                  <span className="serif-word">the Krowd.</span>
                 </h2>
+                <p>
+                  The people making room for your next idea, your first event,
+                  and a few new friends.
+                </p>
               </div>
-              <ul>
+              <ul className="organizer-sheets">
                 {people.map((person, index) => (
-                  <li key={person.name}>
-                    <span
-                      className={`person-monogram person-${index}`}
-                      aria-hidden="true"
-                    >
-                      {person.name[0]}
-                      <i />
-                    </span>
-                    <span>{person.name}</span>
+                  <li
+                    key={person.name}
+                    className={`organizer-sheet organizer-${index}`}
+                  >
+                    <div className="organizer-art" aria-hidden="true">
+                      <span className="organizer-letter">{person.name[0]}</span>
+                      <span className="organizer-loop" />
+                      <span className="organizer-pin" />
+                    </div>
+                    <div className="organizer-name">
+                      <h3>{person.name}</h3>
+                      <span>KrowdKraft</span>
+                    </div>
                   </li>
                 ))}
               </ul>
@@ -284,10 +281,7 @@ export function Home() {
         <section className="section marketplace-home" id="made-here">
           <div className="container split-layout">
             <div data-reveal>
-              <p className="eyebrow">
-                <span className="index-number">03 /</span> The community
-                marketplace
-              </p>
+              <p className="eyebrow">The community marketplace</p>
               <h2>
                 Built here.
                 <br />
@@ -325,10 +319,7 @@ export function Home() {
           <div className="container spotlight-layout">
             <SpotlightScene />
             <div data-reveal>
-              <p className="eyebrow">
-                <span className="index-number">04 /</span> A little deserved
-                attention
-              </p>
+              <p className="eyebrow">A little deserved attention</p>
               <h2>
                 Big ideas.
                 <br />
@@ -360,10 +351,7 @@ export function Home() {
         <section className="section activity-home" id="activity">
           <div className="container activity-layout">
             <div data-reveal>
-              <p className="eyebrow">
-                <span className="index-number">05 /</span> Small commits. Shared
-                momentum.
-              </p>
+              <p className="eyebrow">Small commits. Shared momentum.</p>
               <h2>
                 Keep showing up.
                 <br />
@@ -391,10 +379,7 @@ export function Home() {
           <div className="container">
             <div className="section-heading" data-reveal>
               <div>
-                <p className="eyebrow">
-                  <span className="index-number">06 /</span> Notes from the
-                  journey
-                </p>
+                <p className="eyebrow">Notes from the journey</p>
                 <h2>
                   A little food
                   <br />

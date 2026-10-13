@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { eventsSchema, eventSchema } from "../src/data/event-schema";
 import { isUpcoming, kolkataToday } from "../src/data/events";
+import { featuredEvents } from "../src/data/event-utils";
 
 export const example = {
   id: "test-only",
@@ -48,4 +49,27 @@ test("classification uses the Kolkata date across UTC midnight boundaries", () =
   assert.equal(kolkataToday(new Date("2026-10-12T18:30:00Z")), "2026-10-13");
   assert.equal(isUpcoming(eventSchema.parse(example), "2026-10-13"), true);
   assert.equal(isUpcoming(eventSchema.parse(example), "2026-10-14"), false);
+});
+test("the homepage rolls to the next event or coming soon after the event date", () => {
+  const current = eventSchema.parse({ ...example, date: "2026-10-18" });
+  const future = eventSchema.parse({
+    ...example,
+    id: "next",
+    slug: "next",
+    date: "2026-11-08",
+  });
+  assert.equal(
+    featuredEvents([future, current], "2026-10-18").next?.id,
+    current.id,
+  );
+  assert.equal(
+    featuredEvents([current, future], "2026-10-19").next?.id,
+    future.id,
+  );
+  assert.equal(featuredEvents([current], "2026-10-19").next, undefined);
+  assert.equal(featuredEvents([current], "2026-10-19").recent?.id, current.id);
+  assert.deepEqual(featuredEvents([], "2026-10-19"), {
+    next: undefined,
+    recent: undefined,
+  });
 });
