@@ -19,7 +19,7 @@ export function SiteFooter() {
           <Link href="/#about">About</Link>
           <Link href="/#people">People</Link>
           <Link href="/account">Member account</Link>
-          <Link href="/marketplace">Marketplace</Link>
+          <Link href="/marketplace">Showcase</Link>
           <Link href="/spotlight">Spotlight</Link>
           <Link href="/leaderboard">Activity</Link>
           <Link href="/journal">Journal</Link>

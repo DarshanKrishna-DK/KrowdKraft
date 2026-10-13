@@ -99,7 +99,7 @@ test("mobile navigation traps focus, restores it and reaches the community pages
   await page.goto("/");
   const trigger = page.getByRole("button", { name: "Open navigation" });
   await trigger.click();
-  const menu = page.getByRole("dialog", { name: "Bengaluru events." });
+  const menu = page.getByRole("dialog", { name: "Find your corner." });
   for (let i = 0; i < 10; i++) {
     await page.keyboard.press("Tab");
     expect(
@@ -288,11 +288,49 @@ test("Krafty stays visible, travels and starts sound only after interaction", as
   );
   await expect(page.locator(".footer-settings")).toHaveCount(0);
 });
+test("showcase remains prominent and Krafty settles before giving a contextual tip", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await expect(
+    page.locator("header").getByRole("link", { name: "Showcase", exact: true }),
+  ).toBeVisible();
+  await expect(page.locator("#made-here")).toContainText("Built by the Krowd.");
+  await expect(page.locator("#spotlights")).toContainText("Good work.");
+  await page
+    .locator("#made-here")
+    .evaluate((node) => node.scrollIntoView({ block: "start" }));
+  const duck = page.getByRole("complementary", {
+    name: "Krafty, your community companion",
+  });
+  await expect(duck).toHaveAttribute("data-stop", "projects");
+  await expect(duck).toHaveAttribute("data-walking", "false");
+  await expect(duck.locator(".krafty-bubble")).toContainText(
+    "elaborate folder",
+  );
+  const before = await duck.boundingBox();
+  await page.evaluate(() => scrollBy(0, 35));
+  await expect(duck).toHaveAttribute("data-stop", "projects");
+  const after = await duck.boundingBox();
+  expect(after?.x).toBe(before?.x);
+  expect(after?.y).toBe(before?.y);
+  await page
+    .locator("#made-here")
+    .getByRole("link", { name: "Explore the showcase" })
+    .click();
+  await expect(page).toHaveURL(/\/marketplace$/);
+  await expect(
+    page
+      .getByRole("navigation", { name: "Showcase sections" })
+      .getByRole("link", { name: "Builder spotlight" }),
+  ).toBeVisible();
+  await expect(page.locator("#builders")).toContainText("Meet the people");
+});
 test("destination navigation starts at the top and section links retain their target", async ({
   page,
 }) => {
   await page.goto("/");
-  for (const destination of ["Marketplace", "Spotlight", "Journal", "Events"]) {
+  for (const destination of ["Showcase", "Spotlight", "Journal", "Events"]) {
     await page
       .locator("footer")
       .getByRole("link", { name: destination, exact: true })
@@ -381,7 +419,7 @@ test("Analytics consent, one public route view, and private-data exclusion", asy
   ).toBe("[object Arguments]");
   await page
     .locator("footer")
-    .getByRole("link", { name: "Marketplace", exact: true })
+    .getByRole("link", { name: "Showcase", exact: true })
     .click();
   await expect.poll(async () => (await views()).length).toBe(2);
   await page
@@ -428,6 +466,13 @@ test("nomination keeps private contact details and recovers after unavailable st
     .fill(
       "An isolated fixture to verify nomination recovery without publishing a story.",
     );
+  await page.getByText("Add public profile links", { exact: false }).click();
+  await page
+    .getByLabel("Public profile 1")
+    .fill("https://github.com/test-builder");
+  await page
+    .getByLabel("Public profile 2")
+    .fill("https://linkedin.com/in/test-builder");
   await page.getByRole("checkbox").check();
   await page.getByRole("button", { name: "Nominate this builder" }).click();
   await expect(
@@ -439,6 +484,12 @@ test("nomination keeps private contact details and recovers after unavailable st
   await expect(
     page.getByRole("link", { name: /Open this submission/ }),
   ).toHaveAttribute("href", /^mailto:/);
+  await expect(
+    page.getByRole("link", { name: /Open this submission/ }),
+  ).toHaveAttribute("href", /github.com%2Ftest-builder/);
+  await expect(page.getByLabel("Public profile 2")).toHaveValue(
+    "https://linkedin.com/in/test-builder",
+  );
   await accessible(page);
 });
 

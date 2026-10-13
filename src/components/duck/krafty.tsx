@@ -45,99 +45,132 @@ export function Krafty() {
   }, [tip, stop]);
   useEffect(() => {
     let frame = 0,
-      placed = false,
-      hadTarget = false;
-    let moveTimer: ReturnType<typeof setTimeout> | undefined;
+      placed = false;
+    let arrival: ReturnType<typeof setTimeout> | undefined;
+    const seen = new Set<string>();
     const reduced = matchMedia("(prefers-reduced-motion: reduce)");
     function update() {
       frame = 0;
       const guide = ref.current;
       if (!guide) return;
-      const targets = Array.from(
+      const docks = Array.from(
         document.querySelectorAll<HTMLElement>("[data-duck-dock]"),
-      )
-        .map((dock) => ({ dock, bounds: dock.getBoundingClientRect() }))
+      );
+      const candidates = docks
+        .map((dock, index) => {
+          const region =
+            dock.closest<HTMLElement>(
+              "[data-guide-section], section, .submission-layout, .page-intro, .subsection",
+            ) || dock.closest("main");
+          return {
+            dock,
+            index,
+            bounds:
+              region?.getBoundingClientRect() || dock.getBoundingClientRect(),
+          };
+        })
         .filter(
-          ({ bounds }) => bounds.top > 105 && bounds.bottom < innerHeight - 8,
+          ({ bounds }) =>
+            bounds.top < innerHeight * 0.62 &&
+            bounds.bottom > innerHeight * 0.38,
         );
-      const target = targets.sort(
+      const target = candidates.sort(
         (a, b) =>
-          Math.abs(a.bounds.top - innerHeight * 0.58) -
-          Math.abs(b.bounds.top - innerHeight * 0.58),
+          Math.abs(a.bounds.top - innerHeight * 0.2) -
+          Math.abs(b.bounds.top - innerHeight * 0.2),
       )[0];
-      const width = guide.offsetWidth,
-        height = guide.offsetHeight;
-      const x = Math.max(
-        12,
-        Math.min(
-          target?.bounds.left ?? innerWidth - width - 16,
-          innerWidth - width - 12,
-        ),
-      );
-      const y = Math.max(
-        105,
-        Math.min(
-          target?.bounds.top ?? innerHeight - height - 18,
-          innerHeight - height - 12,
-        ),
-      );
-      guide.style.transition = placed ? "" : "none";
-      guide.style.setProperty("--duck-x", `${Math.round(x)}px`);
-      guide.style.setProperty("--duck-y", `${Math.round(y)}px`);
-      guide.style.transform = `translate3d(${Math.round(x)}px,${Math.round(y)}px,0)`;
-      placed = true;
-      if (!target) {
-        if (hadTarget) setTip(false);
-        hadTarget = false;
+      const id = target?.dock.dataset.duckDock || stopId.current || "hello";
+      const changed = id !== stopId.current;
+      const left = target ? target.index % 2 === 1 : false;
+      const x = left ? 16 : innerWidth - guide.offsetWidth - 16;
+      const y = innerHeight - guide.offsetHeight - 10;
+      // A steady screen-edge route. Scroll changes the section, never the ground.
+      if (!placed || changed) {
+        guide.style.transition = placed ? "" : "none";
+        guide.style.setProperty("--duck-x", Math.round(x) + "px");
+        guide.style.setProperty("--duck-y", Math.round(y) + "px");
+        guide.style.transform =
+          "translate3d(" + Math.round(x) + "px," + Math.round(y) + "px,0)";
+      }
+      if (!changed) {
+        placed = true;
         return;
       }
-      hadTarget = true;
-      const { dock } = target;
-      if (stopId.current === dock.dataset.duckDock) return;
-      stopId.current = dock.dataset.duckDock || "";
+      stopId.current = id;
+      setTip(false);
+      setReaction(null);
+      clearTimeout(arrival);
+      if (timeout.current) clearTimeout(timeout.current);
+      if (!target) {
+        placed = true;
+        return;
+      }
+      const dock = target.dock;
       const mood = moods.includes(dock.dataset.mood as DuckMood)
         ? (dock.dataset.mood as DuckMood)
         : "happy";
       setStop({
-        id: stopId.current,
+        id,
         mood,
         tip: dock.dataset.tip || "",
         href: dock.dataset.href,
         label: dock.dataset.label,
       });
-      setReaction(null);
-      const showTip =
-        dock.dataset.autoTip !== "false" &&
-        !document.activeElement?.closest("form");
-      setTip(showTip);
-      if (showTip) audio.current?.quack(mood === "celebrate");
-      setMoving(!reduced.matches);
-      clearTimeout(moveTimer);
-      moveTimer = setTimeout(() => setMoving(false), 700);
-      if (timeout.current) clearTimeout(timeout.current);
-      timeout.current = setTimeout(() => setTip(false), 6500);
+      const walking =
+        placed &&
+        !reduced.matches &&
+        document.documentElement.dataset.motion !== "off";
+      setMoving(walking);
+      placed = true;
+      arrival = setTimeout(
+        () => {
+          setMoving(false);
+          if (
+            seen.has(id) ||
+            dock.dataset.autoTip === "false" ||
+            document.activeElement?.closest("form") ||
+            document.querySelector("dialog[open]")
+          )
+            return;
+          seen.add(id);
+          setTip(true);
+          audio.current?.quack(mood === "celebrate");
+          timeout.current = setTimeout(() => setTip(false), 8500);
+        },
+        walking ? 660 : 800,
+      );
     }
     const schedule = () => {
       if (!frame) frame = requestAnimationFrame(update);
     };
+    const resize = () => {
+      placed = false;
+      schedule();
+    };
     const onFocus = (event: FocusEvent) => {
-      if (event.target instanceof Element && event.target.closest("form"))
+      if (
+        event.target instanceof Element &&
+        event.target.closest("form, dialog")
+      ) {
         setTip(false);
+        setMoving(false);
+        clearTimeout(arrival);
+      }
     };
     window.addEventListener("scroll", schedule, { passive: true });
-    window.addEventListener("resize", schedule);
+    window.addEventListener("resize", resize);
     document.addEventListener("focusin", onFocus);
-    const resize = new ResizeObserver(schedule);
-    resize.observe(document.body);
+    const observer = new ResizeObserver(schedule);
+    observer.observe(document.body);
     stopId.current = "";
     schedule();
     return () => {
       cancelAnimationFrame(frame);
-      clearTimeout(moveTimer);
+      clearTimeout(arrival);
       if (timeout.current) clearTimeout(timeout.current);
-      resize.disconnect();
+      observer.disconnect();
       window.removeEventListener("scroll", schedule);
-      window.removeEventListener("resize", schedule);
+      window.removeEventListener("resize", resize);
       document.removeEventListener("focusin", onFocus);
     };
   }, [pathname]);
@@ -188,6 +221,7 @@ export function Krafty() {
       className="krafty-traveller"
       aria-label="Krafty, your community companion"
       data-stop={stop.id}
+      data-walking={moving}
       data-mood={reaction || stop.mood}
     >
       <button

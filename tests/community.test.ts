@@ -39,6 +39,10 @@ test("submissions require consent and private email, reject unsafe links and hon
     { url: "https://service.internal" },
     { url: "https://app.localhost" },
     { phone: "not-a-required-contact" },
+    { socials: ["javascript:alert(1)"] },
+    { socials: ["https://localhost"] },
+    { socials: ["https://user:pass@example.com"] },
+    { socials: Array(4).fill("https://github.com/example") },
   ])
     assert.equal(
       submissionSchema.safeParse({ ...submission, ...change }).success,
@@ -53,6 +57,17 @@ test("submissions require consent and private email, reject unsafe links and hon
       month: "2026-13",
     }).success,
     false,
+  );
+  assert.equal(
+    submissionSchema.safeParse({
+      ...submission,
+      socials: [
+        "https://github.com/example",
+        "",
+        "https://www.linkedin.com/in/example",
+      ],
+    }).success,
+    true,
   );
 });
 test("public activity deduplicates, bounds the UTC month and excludes private or unscored actions", () => {

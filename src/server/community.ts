@@ -9,6 +9,7 @@ export type Product = {
   url: string;
   category: string;
   published_at: string;
+  socials?: string[];
 };
 export type Spotlight = {
   id: string;
@@ -17,6 +18,7 @@ export type Spotlight = {
   description: string;
   url: string;
   month: string;
+  socials?: string[];
 };
 export type PublicMember = {
   github_login: string;
@@ -50,13 +52,13 @@ export async function communityContent<T>(
 export const getProducts = () =>
   communityContent<Product>(
     "kk_projects",
-    "id,name,builder,description,url,category,published_at",
+    "id,name,builder,description,url,category,published_at,socials",
     "published_at",
   );
 export const getSpotlights = () =>
   communityContent<Spotlight>(
     "kk_spotlights",
-    "id,name,builder,description,url,month",
+    "id,name,builder,description,url,month,socials",
     "month",
   );
 export const getPublicMembers = () =>

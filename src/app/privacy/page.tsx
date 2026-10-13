@@ -25,11 +25,13 @@ export default function PrivacyPage() {
           <h2>When you submit a project or story</h2>
           <p>
             We collect the title, builder or team name, public link,
-            description, category and contact email you provide. Organizers use
-            these to review the submission and follow up with you. Your contact
-            email is private. If approved, the project or story details appear
-            publicly. We do not ask for a phone number. You should have
-            permission to share the work and any information about other people.
+            description, category, contact email, and up to three optional
+            public profile links you provide. Organizers use these to review the
+            submission and follow up with you. Your contact email is private. If
+            approved, the project or story details appear publicly, including
+            those profile links. We do not ask for a phone number. You should
+            have permission to share the work and any information about other
+            people.
           </p>
           <h2>When you connect GitHub</h2>
           <p>

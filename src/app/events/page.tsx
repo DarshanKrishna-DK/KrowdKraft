@@ -32,7 +32,6 @@ export default function EventsPage() {
             </p>
             <DuckDock
               id="events-page"
-              autoTip={false}
               mood="wave"
               tip="All the good reasons to close a few tabs and leave the house."
               href={links.luma}

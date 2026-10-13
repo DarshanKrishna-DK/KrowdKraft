@@ -19,6 +19,15 @@ test("database enforces private submissions, moderation, profile consent, and du
         "utf8",
       ),
     );
+    await db.exec(
+      await readFile(
+        new URL(
+          "../supabase/migrations/20261013205828_showcase_social_links.sql",
+          import.meta.url,
+        ),
+        "utf8",
+      ),
+    );
     await db.exec("set role anon");
     await assert.rejects(
       db.query("select email from public.kk_submissions"),
@@ -46,6 +55,10 @@ test("database enforces private submissions, moderation, profile consent, and du
       description:
         "A real validation fixture used only in a local PostgreSQL test database.",
       category: "Open source",
+      socials: [
+        "https://github.com/example",
+        "https://www.linkedin.com/in/example",
+      ],
     };
     const submit = async (n: number) =>
       db.query<{ id: string }>(
@@ -88,6 +101,14 @@ test("database enforces private submissions, moderation, profile consent, and du
     assert.deepEqual(
       (await db.query("select name from public.kk_projects")).rows,
       [{ name: "Reviewed tool" }],
+    );
+    assert.deepEqual(
+      (await db.query("select socials from public.kk_projects")).rows,
+      [{ socials: payload.socials }],
+    );
+    await assert.rejects(
+      db.query("select socials from public.kk_submissions"),
+      /permission denied/,
     );
     assert.equal(
       (await db.query("select github_login from public.kk_members")).rows
@@ -161,12 +182,14 @@ test("database enforces private submissions, moderation, profile consent, and du
       "select public.kk_review_submission($1,'approved',$2,$3,'2999-01',$4)",
       [future, "Future spotlight", payload.description, actor],
     );
-    await assert.rejects(
-      db.query(
-        "select public.kk_review_submission($1,'approved',$2,$3,'2999-01',$4)",
-        [conflicting, "Conflicting spotlight", payload.description, actor],
-      ),
-      /duplicate key/,
+    await db.query(
+      "select public.kk_review_submission($1,'approved',$2,$3,'2999-01',$4)",
+      [
+        conflicting,
+        "Another builder in the edition",
+        payload.description,
+        actor,
+      ],
     );
     assert.deepEqual(
       (
@@ -174,7 +197,19 @@ test("database enforces private submissions, moderation, profile consent, and du
           conflicting,
         ])
       ).rows,
-      [{ status: "pending" }],
+      [{ status: "approved" }],
+    );
+    assert.equal(
+      (
+        await db.query(
+          "select id from public.kk_spotlights where month='2999-01'",
+        )
+      ).rows.length,
+      2,
+    );
+    assert.deepEqual(
+      (await db.query("select socials from public.kk_spotlights limit 1")).rows,
+      [{ socials: payload.socials }],
     );
     await db.exec("reset role; set role anon");
     assert.equal(

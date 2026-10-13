@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Suspense } from "react";
 import Link from "next/link";
 import { SiteNav } from "./site-nav";
 import { SiteFooter } from "./site-footer";
@@ -24,6 +25,23 @@ import { CodeRain } from "./art/code-rain";
 import { journal } from "@/data/journal";
 import { links } from "@/data/links";
 import { EventTicket } from "./events/event-ticket";
+import { CommunityExhibition } from "./community-exhibition";
+import { getProducts, getSpotlights } from "@/server/community";
+
+async function HomeExhibition() {
+  const [products, spotlights] = await Promise.all([
+    getProducts(),
+    getSpotlights(),
+  ]);
+  return (
+    <CommunityExhibition
+      products={products.records}
+      spotlights={spotlights.records}
+      productsUnavailable={products.configured && !products.available}
+      spotlightsUnavailable={spotlights.configured && !spotlights.available}
+    />
+  );
+}
 
 export function Home() {
   const today = kolkataToday(),
@@ -45,7 +63,7 @@ export function Home() {
                 <span className="word-krowd">connect.</span>
               </h1>
               <p className="hero-description">
-                Hack days, workshops, and meetups.
+                Hack days, workshops, and a home for what you build.
                 <br />
                 {communityStats.members} members learning and building together.
               </p>
@@ -102,7 +120,6 @@ export function Home() {
               <CodeSculpture />
               <DuckDock
                 id="hello"
-                autoTip={false}
                 mood="wave"
                 tip="I'm Krafty. Rubber duck, zero debugging qualifications. Shall we?"
                 href="/events"
@@ -188,7 +205,6 @@ export function Home() {
             )}
             <DuckDock
               id="event"
-              autoTip={false}
               mood="thinking"
               tip="Laptop? Check. Charger? Please, for the love of open source."
               href={next ? `/events/${next.slug}` : "/events"}
@@ -198,30 +214,13 @@ export function Home() {
           </div>
         </section>
 
-        <section className="section collaboration-home" id="collaborate">
-          <div className="container collaboration-layout">
-            <div>
-              <p className="eyebrow">For communities, colleges, and teams</p>
-              <h2>
-                Host or co-host
-                <br />
-                <span className="serif-word">with the Krowd.</span>
-              </h2>
-            </div>
-            <div className="collaboration-copy">
-              <p>
-                Co-host a hackathon, run a college session, give a technical
-                talk, or cross-post an event. Bring your idea; we’ll work out
-                the format together.
-              </p>
-              <p className="page-note">
-                We don’t charge simply to collaborate. Production needs,
-                responsibilities, and any costs are agreed before we begin.
-              </p>
-              <CollaborationForm />
-            </div>
-          </div>
-        </section>
+        <Suspense
+          fallback={
+            <CommunityExhibition products={[]} spotlights={[]} loading />
+          }
+        >
+          <HomeExhibition />
+        </Suspense>
 
         <section className="section about-home" id="about">
           <div className="container about-layout">
@@ -279,6 +278,13 @@ export function Home() {
               <Link href="#join" className="text-link">
                 There’s a place for you here <Icon name="diagonal" />
               </Link>
+              <DuckDock
+                id="about"
+                mood="happy"
+                tip="Networking, minus the part where everyone pretends to remember names."
+                href="#join"
+                label="Meet your people"
+              />
             </div>
           </div>
           <div className="container city-strip">
@@ -304,6 +310,38 @@ export function Home() {
                 Next venue: {next.venue} <Icon name="diagonal" />
               </a>
             )}
+          </div>
+        </section>
+
+        <section className="section collaboration-home" id="collaborate">
+          <div className="container collaboration-layout">
+            <div>
+              <p className="eyebrow">For communities, colleges, and teams</p>
+              <h2>
+                Host or co-host
+                <br />
+                <span className="serif-word">with the Krowd.</span>
+              </h2>
+            </div>
+            <div className="collaboration-copy">
+              <p>
+                Co-host a hackathon, run a college session, give a technical
+                talk, or cross-post an event. Bring your idea; we’ll work out
+                the format together.
+              </p>
+              <p className="page-note">
+                We don’t charge simply to collaborate. Production needs,
+                responsibilities, and any costs are agreed before we begin.
+              </p>
+              <CollaborationForm />
+              <DuckDock
+                id="collaborate"
+                mood="thinking"
+                tip="Bring an idea. We’ll bring people who ask surprisingly good questions."
+                href="mailto:krowdkraft.official@gmail.com"
+                label="Talk to the team"
+              />
+            </div>
           </div>
         </section>
 
@@ -358,6 +396,11 @@ export function Home() {
                   </li>
                 ))}
               </ul>
+              <DuckDock
+                id="people"
+                mood="wave"
+                tip="The humans behind the chaos. I supervise. They dispute this."
+              />
             </div>
           </div>
         </section>
@@ -399,6 +442,13 @@ export function Home() {
                 </a>
               ))}
             </div>
+            <DuckDock
+              id="journal"
+              mood="curious"
+              tip="A few good reads. Your 47 open tabs can make room for one more."
+              href="/journal"
+              label="Open the journal"
+            />
           </div>
         </section>
 

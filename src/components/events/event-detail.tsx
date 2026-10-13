@@ -133,7 +133,6 @@ export function EventDetail({
             ) : null}
             <DuckDock
               id="event-detail"
-              autoTip={false}
               mood={upcoming ? "curious" : "happy"}
               tip={
                 upcoming

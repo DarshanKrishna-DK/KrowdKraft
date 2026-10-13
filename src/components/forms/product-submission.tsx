@@ -35,6 +35,7 @@ export function ProductSubmission({
       description: "",
       category: "Other",
       website: "",
+      socials: ["", "", ""],
     },
   });
   async function submit(values: CommunitySubmission) {
@@ -74,7 +75,7 @@ export function ProductSubmission({
   ] as const;
   const emailDraft = () => {
     const v = getValues();
-    return `mailto:${communityEmail}?subject=${encodeURIComponent(`${nomination ? "Builder nomination" : "Community product"}: ${v.name || "New submission"}`)}&body=${encodeURIComponent(`Name: ${v.name}\nBuilder: ${v.builder}\nContact email: ${v.email}\nLink: ${v.url}\nCategory: ${v.category}\n\n${v.description}`)}`;
+    return `mailto:${communityEmail}?subject=${encodeURIComponent(`${nomination ? "Builder nomination" : "Community product"}: ${v.name || "New submission"}`)}&body=${encodeURIComponent(`Name: ${v.name}\nBuilder: ${v.builder}\nContact email: ${v.email}\nLink: ${v.url}\nCategory: ${v.category}\nPublic profiles: ${(v.socials || []).filter(Boolean).join(", ")}\n\n${v.description}`)}`;
   };
   return (
     <div className="submission-form">
@@ -105,7 +106,8 @@ export function ProductSubmission({
           aria-busy={isSubmitting}
         >
           <p className="form-hint" style={{ marginBottom: 22 }}>
-            All fields are required. Your email stays private.
+            Core details are required. Profile links are optional. Your email
+            stays private.
           </p>
           <div className="form-grid">
             {fields.map(([name, label, type, maxLength, placeholder]) => (
@@ -179,6 +181,44 @@ export function ProductSubmission({
               )}
             </div>
           </div>
+          <details className="submission-social-details">
+            <summary>
+              Add public profile links <span>Optional, up to three</span>
+            </summary>
+            <p className="form-hint">
+              Help people connect with the builder. These links can appear
+              publicly after review. Only share profiles you have permission to
+              publish.
+            </p>
+            {[0, 1, 2].map((index) => (
+              <div className="form-field" key={index}>
+                <label htmlFor={`submission-${kind}-social-${index}`}>
+                  Public profile {index + 1}
+                </label>
+                <input
+                  id={`submission-${kind}-social-${index}`}
+                  type="url"
+                  maxLength={2048}
+                  placeholder="https://github.com/yourname"
+                  {...register(`socials.${index}`)}
+                  aria-invalid={Boolean(errors.socials?.[index])}
+                  aria-describedby={
+                    errors.socials?.[index]
+                      ? `social-error-${kind}-${index}`
+                      : undefined
+                  }
+                />
+                {errors.socials?.[index] && (
+                  <p
+                    className="field-error"
+                    id={`social-error-${kind}-${index}`}
+                  >
+                    {errors.socials[index]?.message}
+                  </p>
+                )}
+              </div>
+            ))}
+          </details>
           <div className="honeypot" aria-hidden="true">
             <label>
               Leave this empty
@@ -201,7 +241,8 @@ export function ProductSubmission({
             <span>
               I can share this work and agree to be contacted by email about
               this submission. Approved project or story details may be
-              published. <Link href="/privacy">Privacy details</Link>.
+              published, including any public profile links I provide.{" "}
+              <Link href="/privacy">Privacy details</Link>.
             </span>
           </label>
           {errors.consent && (

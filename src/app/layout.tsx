@@ -10,6 +10,7 @@ import { siteOrigin } from "@/lib/site";
 import "@/styles/clubhouse.css";
 import "@/styles/theme.css";
 import "@/styles/night-details.css";
+import "@/styles/exhibition.css";
 const manrope = Manrope({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],

@@ -686,134 +686,8 @@ section[id] {
   gap: 80px;
   align-items: center;
 }
-.spotlight-layout > .spotlight-scene {
-  order: 0;
-}
 .spotlight-layout .button {
   margin-top: 26px;
-}
-.spotlight-scene {
-  height: 530px;
-  position: relative;
-  transform: translateY(var(--parallax, 0));
-}
-.spot-beam {
-  position: absolute;
-  inset: 0;
-  background: conic-gradient(
-    from 157deg at 50% 0%,
-    transparent 0deg,
-    #e3cfeb14 13deg,
-    #d9c3e81f 29deg,
-    transparent 46deg
-  );
-  mask-image: linear-gradient(black, transparent);
-}
-.award {
-  position: absolute;
-  width: 195px;
-  height: 195px;
-  left: 50%;
-  top: 46%;
-  transform: translate(-50%, -50%) rotate(-12deg);
-  background: linear-gradient(140deg, #e4d3a0, #b79f5e);
-  clip-path: polygon(
-    50% 0,
-    59% 6%,
-    70% 4%,
-    77% 13%,
-    89% 15%,
-    91% 26%,
-    100% 34%,
-    96% 45%,
-    100% 56%,
-    91% 65%,
-    89% 77%,
-    78% 81%,
-    70% 93%,
-    59% 92%,
-    50% 100%,
-    39% 93%,
-    28% 96%,
-    22% 85%,
-    10% 82%,
-    8% 71%,
-    0 63%,
-    4% 51%,
-    0 40%,
-    9% 30%,
-    11% 19%,
-    23% 15%,
-    30% 5%,
-    41% 7%
-  );
-  display: grid;
-  place-items: center;
-  filter: drop-shadow(0 10px 20px #0004);
-}
-.award-inner {
-  width: 150px;
-  height: 150px;
-  border: 2px solid #eddfb761;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  box-shadow:
-    inset -4px -5px 14px #8a6d3896,
-    inset 5px 6px 10px #fff2caa1;
-  background: linear-gradient(140deg, #e1cf9c, #b99d5f);
-  color: #8b6b3c;
-}
-.award-inner svg {
-  fill: #ad8849;
-  filter: drop-shadow(0 2px 1px #f1e3b7);
-}
-.award-ribbon {
-  position: absolute;
-  top: 55%;
-  left: 36%;
-  width: 73px;
-  height: 125px;
-  background: linear-gradient(90deg, #826696, #bea4cd, #8c6b9e);
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 76%, 0 100%);
-  transform: rotate(22deg);
-}
-.ribbon-right {
-  left: 50%;
-  transform: rotate(-19deg);
-}
-.award-caption {
-  position: absolute;
-  left: 10%;
-  bottom: 87px;
-  border-radius: 14px;
-  padding: 16px 20px;
-  font:
-    10px ui-monospace,
-    monospace;
-  transform: rotate(-5deg);
-  color: #e8dbf0;
-}
-.mini-star {
-  color: var(--muted);
-  font-size: 19px;
-  margin-right: 9px;
-}
-.award-spark {
-  position: absolute;
-  color: #c7a4e9;
-  font-size: 48px;
-}
-.spark-a {
-  left: 15%;
-  top: 29%;
-  transform: rotate(-15deg);
-}
-.spark-b {
-  right: 10%;
-  top: 38%;
-  font-size: 30px;
-  color: var(--muted);
 }
 .activity-layout {
   grid-template-columns: 1fr 0.9fr;
@@ -1014,9 +888,6 @@ section[id] {
   grid-template-columns: 1.15fr 1fr;
   gap: 65px;
   align-items: center;
-}
-.page-intro-with-art .spotlight-scene {
-  height: 410px;
 }
 .info-strip {
   display: flex;
@@ -2196,14 +2067,6 @@ section[id] {
   .spotlight-layout {
     gap: 30px;
   }
-  .spotlight-layout .spotlight-scene {
-    height: 440px;
-  }
-  .award-caption {
-    left: 0;
-    font-size: 8px;
-    padding: 14px;
-  }
   .spotlight-layout h2 {
     font-size: 48px;
   }
@@ -2531,53 +2394,8 @@ section[id] {
   .spotlight-layout {
     gap: 0;
   }
-  .spotlight-layout > .spotlight-scene {
-    order: 2;
-    height: 345px;
-    margin-top: -15px;
-  }
   .spotlight-layout > div:last-child {
     padding-top: 47px;
-  }
-  .spotlight-scene .award {
-    top: 43%;
-    width: 170px;
-    height: 170px;
-  }
-  .award-inner {
-    width: 134px;
-    height: 134px;
-  }
-  .award-inner svg {
-    width: 70px;
-  }
-  .award-ribbon {
-    top: 49%;
-    left: 36%;
-    height: 100px;
-    width: 60px;
-  }
-  .ribbon-right {
-    left: 52%;
-  }
-  .award-caption {
-    bottom: 30px;
-    left: 8%;
-    font-size: 9px;
-    padding: 13px 18px;
-  }
-  .spark-a {
-    font-size: 35px;
-    left: 13%;
-    top: 20%;
-  }
-  .spark-b {
-    top: 39%;
-    right: 8%;
-    font-size: 28px;
-  }
-  .spot-beam {
-    inset: -20px 0 0;
   }
   .activity-layout {
     gap: 38px;
@@ -2677,14 +2495,6 @@ section[id] {
   }
   .page-intro-with-art {
     display: block;
-  }
-  .page-intro-with-art .spotlight-scene {
-    height: 300px;
-    margin-bottom: 28px;
-  }
-  .page-intro-with-art .spotlight-scene .award-caption {
-    bottom: 15px;
-    left: 4%;
   }
   .page-intro-with-art .page-intro {
     margin-bottom: 0;

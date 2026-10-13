@@ -28,7 +28,6 @@ export default function JournalPage() {
           </p>
           <DuckDock
             id="journal-page"
-            autoTip={false}
             mood="thinking"
             tip="One good read. Then back to the 47 tabs you already have open."
           />

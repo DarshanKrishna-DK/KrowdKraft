@@ -8,7 +8,8 @@ import { Icon } from "./icon";
 import { links } from "@/data/links";
 export const destinations = [
   { label: "Events", href: "/events" },
-  { label: "Calendar", href: links.luma },
+  { label: "Showcase", href: "/marketplace" },
+  { label: "Journal", href: "/journal" },
   { label: "Collaborate", href: "/#collaborate" },
 ];
 export function SiteNav() {
@@ -41,7 +42,10 @@ export function SiteNav() {
                 key={item.href}
                 href={item.href}
                 aria-current={
-                  pathname.startsWith(item.href) ? "page" : undefined
+                  pathname.startsWith(item.href) ||
+                  (item.href === "/marketplace" && pathname === "/spotlight")
+                    ? "page"
+                    : undefined
                 }
               >
                 {item.label}
@@ -70,10 +74,12 @@ export function SiteNav() {
         titleId="menu-title"
         className="menu-dialog"
       >
-        <h2 id="menu-title">Bengaluru events.</h2>
+        <h2 id="menu-title">Find your corner.</h2>
         <nav aria-label="Mobile navigation">
           {[
             ...destinations,
+            { label: "Builder spotlight", href: "/marketplace#builders" },
+            { label: "Calendar on Luma", href: links.luma },
             { label: "Connect GitHub", href: "/account" },
             { label: "Join the Krowd", href: "/#join" },
           ].map((item) => (

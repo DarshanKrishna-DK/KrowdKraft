@@ -8,6 +8,7 @@ import {
 } from "@/server/supabase";
 import { monthWindow } from "@/lib/community-schema";
 import { reviewSubmission, unpublishContent } from "@/app/actions/moderation";
+import { SocialLinks } from "@/components/social-links";
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Organizer desk | KrowdKraft",
@@ -19,8 +20,8 @@ const messages: Record<string, string> = {
   invalid: "Please check the form fields.",
   failed: "That change could not be saved. It may have been reviewed already.",
   unavailable: "The database is unavailable.",
-  "edition-taken":
-    "That spotlight month already has a story. Choose another month.",
+  conflict:
+    "This submission already has a published entry. Refresh the organizer desk before trying again.",
   unpublished: "The entry is no longer public.",
 };
 export default async function AdminPage({
@@ -39,7 +40,9 @@ export default async function AdminPage({
   ] = await Promise.all([
     database
       .from("kk_submissions")
-      .select("id,kind,name,builder,email,url,description,category,created_at")
+      .select(
+        "id,kind,name,builder,email,url,description,category,created_at,socials",
+      )
       .eq("status", "pending")
       .order("created_at")
       .limit(100),
@@ -101,6 +104,7 @@ export default async function AdminPage({
                     View submitted work ↗
                   </a>
                 </p>
+                <SocialLinks urls={item.socials || []} />
                 <form action={reviewSubmission}>
                   <input type="hidden" name="id" value={item.id} />
                   <div className="form-grid">
@@ -157,9 +161,9 @@ export default async function AdminPage({
                       required
                     />
                     <span>
-                      I have reviewed the link and attribution. For a spotlight,
-                      I have verified the story and confirmed publication with
-                      the builder.
+                      I have reviewed the work, profile links, and attribution.
+                      For a spotlight, I have verified the story and confirmed
+                      publication with the builder.
                     </span>
                   </label>
                   <div className="actions">

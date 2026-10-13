@@ -5,20 +5,21 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-6-3178C6?logo=typescript&logoColor=white)
 ![Supabase](https://img.shields.io/badge/Supabase-Postgres-3ECF8E?logo=supabase&logoColor=white)
 
-**Where Bengaluru’s developers connect.** An event-first home for hack days, workshops, community projects, and the people who build them.
+**Where Bengaluru’s developers connect.** A home for hack days, workshops, community projects, and the people who build them.
 
 [Visit the website](https://krowd-kraft.vercel.app) · [Event calendar](https://krowd-kraft.vercel.app/events) · [WhatsApp announcements](https://whatsapp.com/channel/0029Vb9BTtuEawdmK4IivD1M) · [Report a security issue](SECURITY.md)
 
 ## What’s here
 
 - **Events:** date-aware featured event, registration deadlines, type/venue/search filters, participant information, schedules, maps, downloadable ICS, and individual social sharing cards.
-- **Marketplace and spotlight:** real submission and nomination forms, private contact emails, organizer review, and published listings. Collections remain honestly empty until approved material exists.
+- **Community showcase:** projects and builder spotlights together at `/marketplace`, with both featured on the homepage. Members can submit working projects or nominate achievements with up to three public profile links. Contact emails remain private; organizers review every publication. Collections stay honestly empty until approved material exists.
+- **Builder stage:** illuminated cards with achievement links and optional socials. Multiple approved builders can share an edition. Cards rotate every eight seconds while visible, pause on hover or keyboard focus, and offer previous, next, and pause controls. Reduced motion disables automatic rotation.
 - **Member accounts:** GitHub OAuth, private-by-default profiles, optional monthly public activity, and account removal.
 - **Organizer workspace:** server-authorized review, approval, rejection, and unpublishing with transactional audit records.
 - **Journal:** Darshan Krishna N’s original Medium articles and their original cover images.
-- **Krafty:** original expressive duck artwork, section-to-section movement, and brief local quacks after a user gesture. No microphone or AI service.
+- **Krafty:** original expressive duck artwork, grounded section-to-section walking, contextual dialogue, expressive reactions, and brief local quacks after a user gesture. No microphone or AI service.
 
-Built with Next.js App Router, React, TypeScript, Supabase PostgreSQL/Auth, Zod, React Hook Form, and native CSS. The dark plum visual system pairs Yatra One and Manrope with a dotted canvas and glossy glass controls.
+Built with Next.js App Router, React, TypeScript, Supabase PostgreSQL/Auth, Zod, React Hook Form, and native CSS. The charcoal and ivory visual system pairs Manrope with Yatra One accents, a white event ticket, glass navigation, and CSS-built exhibit and spotlight stages. No WebGL or new animation dependency is required.
 
 ## Quick start
 
@@ -74,7 +75,7 @@ All values below are server-side. No service credential uses a `NEXT_PUBLIC_` pr
 
 ### Database changes
 
-Keep the migrations even when applying changes through Supabase MCP. They document privileges and power isolated security regression tests. [Supabase notes](supabase/README.md) explain the verified local/remote timestamp mapping for the initial migration. **Do not blindly reapply it or rewrite migration history.** Apply new forward-only migrations, review grants/RLS, and run the database tests before deploying.
+Keep the migrations even when applying changes through Supabase MCP. They document privileges and power isolated security regression tests. [Supabase notes](supabase/README.md) explain the verified local/remote timestamp mappings for the migrations. **Do not blindly reapply it or rewrite migration history.** Apply new forward-only migrations, review grants/RLS, and run the database tests before deploying.
 
 Profiles are private by default. Only explicitly granted public columns of opted-in profiles and published listings can be read anonymously. Submission emails, member IDs, reviewer identities, audit records, and abuse keys are private. Browser clients have no mutation privileges or access to write RPCs. Organizer actions check the current authenticated user on every request.
 
@@ -140,7 +141,7 @@ Website contributors are listed in [GitHub’s contributor graph](https://github
 
 The logo and original community photograph are retained. Medium covers come from the linked articles, which open at their original publication. Font licenses are included in `public/fonts`. Krafty and the code sculpture are original; the referenced avatar lab inspired interaction ideas, and its AGPL code/assets were not copied. Stitch and the requested design skills informed hierarchy and interaction choices; generated factual claims and social links were discarded.
 
-Code rain runs at 15 fps only while visible, stops in background tabs, and has a pause control. Reduced motion produces a static frame. Krafty uses compact anchors without reserved blank rows, has no hover transform, and starts sound only after a user gesture. Navigation opens destination pages at the top; explicit section links retain their targets.
+Code rain runs at 15 fps only while visible, stops in background tabs, and has a pause control. Reduced motion produces a static frame. Krafty walks only when the active section changes, arrives at stable edge positions, and shares a short contextual tip once per section. It stays quiet before the first user gesture, suppresses tips while a form or dialog has focus, and does not reserve blank rows. The homepage streams community collections separately so database latency does not delay the hero and event information. Navigation opens destination pages at the top; explicit section links retain their targets.
 
 Next content priorities: publish event recaps/resources, restore more original archive sources and photographs, review the first usable community tool, and publish the first verified builder story. Useful later workflows include opt-in mentor availability and requests for project collaborators; neither is presented as available today.
 
