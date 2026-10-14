@@ -16,12 +16,10 @@ import {
   eventWhen,
   eventMapUrl,
   registrationOpen,
-  typeLabels,
 } from "@/data/event-utils";
 import { DateRefresh } from "./events/date-refresh";
 import { CommunityRibbon } from "./community-ribbon";
 import { CodeSculpture } from "./art/code-sculpture";
-import { CodeRain } from "./art/code-rain";
 import { journal } from "@/data/journal";
 import { links } from "@/data/links";
 import { EventTicket } from "./events/event-ticket";
@@ -52,20 +50,20 @@ export function Home() {
       <DateRefresh today={today} />
       <main id="main">
         <section className="hero-section" id="top">
-          <CodeRain />
           <div className="hero-atmosphere" aria-hidden="true" />
           <div className="container hero-layout">
             <div className="hero-copy">
               <h1>
-                Where Bengaluru’s
-                <br className="hero-break" /> developers
-                <br className="hero-break" />{" "}
-                <span className="word-krowd">connect.</span>
+                Good things
+                <br />
+                happen in
+                <br />a <span className="word-krowd">Krowd.</span>
               </h1>
               <p className="hero-description">
-                Hack days, workshops, and a home for what you build.
+                Your people. Your next big idea.
                 <br />
-                {communityStats.members} members learning and building together.
+                Hack days, workshops, and a community of Bengaluru’s developers
+                learning and building together.
               </p>
               <div className="actions">
                 <Link
@@ -131,21 +129,12 @@ export function Home() {
         </section>
 
         <CommunityRibbon
-          phrases={
-            next
-              ? [
-                  eventWeekday(next) + " · " + formatEventDate(next.date),
-                  next.venue,
-                  typeLabels[next.type],
-                  "Previously: MSRIT · REVA · T. John",
-                ]
-              : [
-                  "Next event coming soon",
-                  "Startup Park",
-                  "MSRIT · REVA · T. John",
-                  "Built together in Bengaluru",
-                ]
-          }
+          phrases={[
+            `${communityStats.members} community members`,
+            `${communityStats.events} events hosted`,
+            `${communityStats.developersReached} developers reached`,
+            `${events.length} events on the public calendar`,
+          ]}
         />
 
         <section className="section events-home" id="happening">
@@ -155,9 +144,9 @@ export function Home() {
                 <h2>
                   {next ? (
                     <>
-                      Next on
+                      See you at
                       <br />
-                      <span className="serif-word">the calendar.</span>
+                      <span className="serif-word">the next one.</span>
                     </>
                   ) : (
                     <>
@@ -224,7 +213,7 @@ export function Home() {
 
         <section className="section about-home" id="about">
           <div className="container about-layout">
-            <div className="photo-story" data-reveal>
+            <div className="photo-story" data-reveal="photo" data-parallax>
               <div className="photo-tape" aria-hidden="true" />
               <figure className="community-photo">
                 <Image
@@ -247,7 +236,7 @@ export function Home() {
                 </svg>
               </div>
             </div>
-            <div className="about-copy" data-reveal>
+            <div className="about-copy" data-reveal="slide">
               <p className="eyebrow">The people make the place</p>
               <h2>
                 You don’t have
@@ -315,7 +304,7 @@ export function Home() {
 
         <section className="section collaboration-home" id="collaborate">
           <div className="container collaboration-layout">
-            <div>
+            <div data-reveal="rise">
               <p className="eyebrow">For communities, colleges, and teams</p>
               <h2>
                 Host or co-host
@@ -367,7 +356,7 @@ export function Home() {
               we’re restoring the archive.
             </p>
             <div className="people-lineup">
-              <div className="people-heading">
+              <div className="people-heading" data-reveal="slide">
                 <p className="eyebrow">Organizers</p>
                 <h2>
                   People behind
@@ -384,6 +373,8 @@ export function Home() {
                   <li
                     key={person.name}
                     className={`organizer-sheet organizer-${index}`}
+                    data-reveal="card"
+                    data-reveal-delay={index * 90}
                   >
                     <div className="organizer-art" aria-hidden="true">
                       <span className="organizer-letter">{person.name[0]}</span>
@@ -421,14 +412,15 @@ export function Home() {
               </Link>
             </div>
             <div className="journal-grid">
-              {journal.map((article) => (
+              {journal.map((article, index) => (
                 <a
                   key={article.slug}
                   className="article-card"
                   href={article.href}
                   target="_blank"
                   rel="noreferrer"
-                  data-reveal
+                  data-reveal="rise"
+                  data-reveal-delay={index * 90}
                 >
                   <JournalCover src={article.cover} />
                   <div className="article-meta">
@@ -460,7 +452,7 @@ export function Home() {
             <p className="eyebrow">
               WhatsApp for announcements. Luma for the calendar.
             </p>
-            <h2>
+            <h2 data-reveal="scale">
               Your kind
               <br />
               of <span className="serif-word">people.</span>

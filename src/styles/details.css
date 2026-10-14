@@ -1,31 +1,6 @@
-/* Hero: a glass code sculpture over a quiet, visible code rainfall. */
+/* Retained article covers, compact footer, event details and accessible interactions. */
 .hero-section {
   overflow: clip;
-}
-.code-rain {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: -1;
-  opacity: 0.85;
-  mask-image: linear-gradient(90deg, #0007, #000b 55%, #000);
-}
-.rain-control {
-  position: absolute;
-  bottom: 16px;
-  left: 3%;
-  z-index: 3;
-  width: 44px;
-  height: 44px;
-  display: grid;
-  place-items: center;
-  border: 1px solid #ad8dcc3d;
-  border-radius: 50%;
-  background: #241b30a8;
-  color: #bdaaca;
-  font-size: 14px;
 }
 .code-sculpture {
   position: relative;
@@ -44,16 +19,16 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  background: linear-gradient(130deg, #3d2e4cce, #1b1526cc);
-  border: 1px solid #cfafe738;
+  background: linear-gradient(130deg, #fffcf6e6, #eee1f3cc);
+  border: 1px solid #fff;
   backdrop-filter: blur(12px);
   box-shadow:
     inset 0 1px 0 #ffffff14,
-    0 4px 0 #0d0813,
+    0 4px 0 #c9b5d2,
     0 12px 24px #0003;
   padding: 14px 20px;
   border-radius: 17px;
-  color: #d3c4df;
+  color: #60476e;
   font-size: 12px;
 }
 .note-idea {
@@ -77,12 +52,12 @@
   gap: 4px;
 }
 .note-build code {
-  color: #c7a7e7;
+  color: #754a88;
   font-size: 17px;
 }
 .note-build span {
   font-size: 11px;
-  color: #bcb0c8;
+  color: #6d5b73;
 }
 .code-sculpture-caption {
   position: absolute;
@@ -104,7 +79,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #17131e;
+  background: #f6eee7;
   border: 1px solid var(--line);
   overflow: hidden;
 }
@@ -168,11 +143,11 @@
 .form-field input::placeholder,
 .form-field textarea::placeholder,
 .filter-search input::placeholder {
-  color: #a99bb7;
+  color: #75657d;
   opacity: 1;
 }
 .form-field select option {
-  background: #211929;
+  background: #fffcf8;
   color: var(--text);
 }
 .krafty-body-button {
@@ -203,7 +178,7 @@
 
 /* A compact footer keeps destinations and socials, without a settings bar. */
 .site-footer {
-  background: #0c0a11;
+  background: #eee5ef;
   border-top: 1px solid var(--line);
   padding: 30px 0 22px;
 }
@@ -246,7 +221,7 @@
   align-items: center;
   min-height: 40px;
   font-size: 13px;
-  color: #d0bedf;
+  color: #62496d;
 }
 .footer-bottom {
   display: flex;
@@ -256,7 +231,7 @@
   gap: 8px 24px;
   padding-top: 10px;
   font-size: 12px;
-  color: #b4a5c2;
+  color: #6d5b73;
 }
 .footer-bottom p {
   font-size: 12px;
@@ -271,7 +246,7 @@
   align-items: center;
 }
 .site-footer a:hover {
-  color: #e7d2f8;
+  color: #553264;
 }
 .privacy-content > .settings-button {
   margin-top: 18px;
@@ -285,10 +260,6 @@
   }
 }
 @media (max-width: 767px) {
-  .code-rain {
-    opacity: 0.6;
-    mask-image: linear-gradient(#0009, #0004 40%, #000);
-  }
   .code-sculpture {
     max-width: 400px;
     margin-top: 15px;
@@ -317,10 +288,6 @@
   }
   .code-sculpture-caption span {
     font-size: 19px;
-  }
-  .rain-control {
-    bottom: 9px;
-    left: 12px;
   }
   .krafty-bubble {
     --bubble-width: min(224px, calc(100vw - 100px));
@@ -394,7 +361,7 @@
   .nav-shell,
   .text-link {
     backdrop-filter: none;
-    background-color: #211a2b;
+    background-color: #f8f0f7;
   }
 }
 
@@ -403,7 +370,7 @@
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
 html {
-  scrollbar-color: #756083 #100e18;
+  scrollbar-color: #756083 #fbf6ee;
 }
 input,
 textarea {
@@ -433,7 +400,7 @@ a {
 .hero-next strong {
   font-size: 12px;
   font-weight: 500;
-  color: #d6c2e6;
+  color: #654272;
 }
 .hero-description {
   font-size: clamp(16px, 1.3vw, 19px);
@@ -537,7 +504,7 @@ a {
   width: 100%;
   min-height: 48px;
   color: var(--text);
-  background: #211929;
+  background: #fffcf8;
   border: 1px solid var(--line);
   border-radius: 12px;
   padding: 10px 34px 10px 14px;
@@ -547,7 +514,7 @@ a {
   margin: 0 0 12px auto;
 }
 .event-poster {
-  background: #211a2d;
+  background: linear-gradient(135deg, #eee1f4, #e0d2e9);
   isolation: isolate;
 }
 .event-poster:before {
@@ -572,7 +539,7 @@ a {
 .poster-lettering strong {
   font-family: var(--font-display);
   font-weight: 400;
-  color: #dfc5f4;
+  color: #654272;
   font-size: clamp(29px, 3vw, 45px);
   line-height: 1.1;
 }
@@ -583,7 +550,19 @@ a {
 }
 .poster-date,
 .poster-type {
-  color: #e4d2f2;
+  color: #60476e;
+}
+.poster-date {
+  background: #fffaf7e8;
+  border-color: #fff;
+  font-size: 12px;
+}
+.event-poster:has(img) .poster-date {
+  background: #30233fe8;
+}
+.event-poster:has(img) .poster-type,
+.event-poster:has(img) .poster-date {
+  color: #fffaf9;
 }
 .poster-type {
   font-size: 11px;

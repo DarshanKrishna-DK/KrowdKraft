@@ -19,7 +19,7 @@
 - **Journal:** Darshan Krishna N’s original Medium articles and their original cover images.
 - **Krafty:** original expressive duck artwork, grounded section-to-section walking, contextual dialogue, expressive reactions, and brief local quacks after a user gesture. No microphone or AI service.
 
-Built with Next.js App Router, React, TypeScript, Supabase PostgreSQL/Auth, Zod, React Hook Form, and native CSS. The charcoal and ivory visual system pairs Manrope with Yatra One accents, a white event ticket, glass navigation, and CSS-built exhibit and spotlight stages. No WebGL or new animation dependency is required.
+Built with Next.js App Router, React, TypeScript, Supabase PostgreSQL/Auth, Zod, React Hook Form, and native CSS. The cream and lilac visual system pairs DM Sans with Fraunces accents, an ivory event ticket, a single glass navbar, and the illuminated builder stage. The moving ribbon shows real community statistics. Viewport-scale desktop sections use varied, one-time scroll entrances and gentle parallax, with natural mobile height and reduced-motion support. No WebGL or animation dependency is required.
 
 ## Quick start
 
@@ -46,7 +46,7 @@ npm start
 | `src/data`            | Validated event records, community facts, journal, socials            |
 | `src/server`          | Fresh identity checks, authorization, database writes, mail adapters  |
 | `src/lib`             | Validation, metadata, calendars, provider-independent utilities       |
-| `src/styles`          | Shared layout, dark theme, responsive and interaction details         |
+| `src/styles`          | Shared layout, cream theme, responsive and interaction details        |
 | `supabase/migrations` | Reproducible schema, RLS, column grants, transactional RPCs           |
 | `scripts/events`      | Safe event maintenance CLI                                            |
 | `tests`               | Domain, mail, database security, and browser regression checks        |

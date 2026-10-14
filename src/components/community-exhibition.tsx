@@ -6,7 +6,7 @@ import { SpotlightStage } from "./spotlight-stage";
 
 export function ExhibitionObject() {
   return (
-    <div className="exhibition-object" aria-hidden="true">
+    <div className="exhibition-object" aria-hidden="true" data-reveal="card">
       <div className="exhibit-halo" />
       <div className="exhibit-folder">
         <span className="folder-tab" />
@@ -70,7 +70,7 @@ export function CommunityExhibition({
     <>
       <section className="section exhibition-home" id="made-here">
         <div className="container">
-          <div className="section-heading">
+          <div className="section-heading" data-reveal="rise">
             <div>
               <h2>
                 Built by the Krowd.
@@ -130,7 +130,7 @@ export function CommunityExhibition({
       </section>
       <section className="section spotlight-home" id="spotlights">
         <div className="container spotlight-home-layout">
-          <div className="spotlight-home-copy">
+          <div className="spotlight-home-copy" data-reveal="slide">
             <h2>
               Good work.
               <br />

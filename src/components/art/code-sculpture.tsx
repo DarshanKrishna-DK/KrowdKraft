@@ -56,8 +56,8 @@ export function CodeSculpture() {
           cy="426"
           rx="151"
           ry="19"
-          fill="#08060f"
-          opacity=".65"
+          fill="#775587"
+          opacity=".13"
         />
         <g className="code-brackets" strokeLinejoin="round">
           <path

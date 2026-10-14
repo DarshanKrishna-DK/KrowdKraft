@@ -3,19 +3,19 @@
   --font-sans: var(--font-body);
 }
 :root {
-  color-scheme: dark;
-  --bg: #100e18;
-  --surface: #1c1728;
-  --text: #f4edf7;
-  --muted: #bcb0c8;
-  --faint: #a99bb7;
-  --line: #c4a5dd24;
-  --lime: #cfb0ef;
-  --lilac: #cfb0ef;
+  color-scheme: light;
+  --bg: #fbf6ee;
+  --surface: #fffcf8;
+  --text: #30233f;
+  --muted: #6d5b73;
+  --faint: #74667b;
+  --line: #75538629;
+  --lime: #754a88;
+  --lilac: #754a88;
   --coral: #ffa28b;
-  --clay: #201d29;
+  --clay: #eee4f1;
   --violet: #bea4ff;
-  --clay-2: #2b2637;
+  --clay-2: #e4d7e9;
 }
 * {
   box-sizing: border-box;
@@ -1953,21 +1953,6 @@ section[id] {
   to {
     opacity: 1;
     transform: none;
-  }
-}
-@supports (animation-timeline: view()) {
-  [data-reveal] {
-    animation: section-reveal linear both;
-    animation-timeline: view();
-    animation-range: entry 0% entry 25%;
-  }
-  @keyframes section-reveal {
-    from {
-      transform: translateY(24px);
-    }
-    to {
-      transform: translateY(0);
-    }
   }
 }
 @media (max-width: 1150px) {

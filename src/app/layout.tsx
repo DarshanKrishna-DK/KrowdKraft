@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Manrope, Yatra_One } from "next/font/google";
+import { DM_Sans, Fraunces } from "next/font/google";
 import { heroDescription } from "@/data/community";
 import { Krafty } from "@/components/duck/krafty";
 import { Motion } from "@/components/motion";
@@ -9,17 +9,17 @@ import { analyticsId } from "@/lib/analytics";
 import { siteOrigin } from "@/lib/site";
 import "@/styles/clubhouse.css";
 import "@/styles/theme.css";
-import "@/styles/night-details.css";
+import "@/styles/details.css";
 import "@/styles/exhibition.css";
-const manrope = Manrope({
+const bodyFont = DM_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-body",
   display: "swap",
 });
-const yatra = Yatra_One({
+const displayFont = Fraunces({
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "500", "600"],
   variable: "--font-display",
   display: "swap",
 });
@@ -59,7 +59,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${manrope.variable} ${yatra.variable}`}>
+    <html lang="en" className={`${bodyFont.variable} ${displayFont.variable}`}>
       <body>
         {children}
         <Krafty />

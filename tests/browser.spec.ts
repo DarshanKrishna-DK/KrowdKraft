@@ -295,10 +295,14 @@ test("showcase remains prominent and Krafty settles before giving a contextual t
   await expect(
     page.locator("header").getByRole("link", { name: "Showcase", exact: true }),
   ).toBeVisible();
-  await expect(page.locator("#made-here")).toContainText("Built by the Krowd.");
-  await expect(page.locator("#spotlights")).toContainText("Good work.");
+  // React can temporarily hold the streamed replacement outside main.
+  // Exercise the visible page, not that hidden staging fragment.
+  await expect(page.locator("#main #made-here")).toContainText(
+    "Built by the Krowd.",
+  );
+  await expect(page.locator("#main #spotlights")).toContainText("Good work.");
   await page
-    .locator("#made-here")
+    .locator("#main #made-here")
     .evaluate((node) => node.scrollIntoView({ block: "start" }));
   const duck = page.getByRole("complementary", {
     name: "Krafty, your community companion",
@@ -315,7 +319,7 @@ test("showcase remains prominent and Krafty settles before giving a contextual t
   expect(after?.x).toBe(before?.x);
   expect(after?.y).toBe(before?.y);
   await page
-    .locator("#made-here")
+    .locator("#main #made-here")
     .getByRole("link", { name: "Explore the showcase" })
     .click();
   await expect(page).toHaveURL(/\/marketplace$/);
@@ -346,6 +350,38 @@ test("destination navigation starts at the top and section links retain their ta
   await page.goto("/marketplace#submit");
   await expect(page.locator("#submit")).toBeInViewport();
   expect(await page.evaluate(() => scrollY)).toBeGreaterThan(0);
+  await page
+    .locator("header")
+    .getByRole("link", { name: "Collaborate", exact: true })
+    .click();
+  await expect(page).toHaveURL(/\/#collaborate$/);
+  const collaborate = page.getByRole("button", {
+    name: "Build with the Krowd",
+  });
+  await expect(collaborate).toBeInViewport();
+  await collaborate.click();
+  await expect(page.getByRole("dialog")).toBeVisible();
+  await page.keyboard.press("Escape");
+  await page
+    .locator("header")
+    .getByRole("link", { name: "Join the Krowd", exact: true })
+    .click();
+  await expect(page.locator("#join")).toBeInViewport();
+  await page
+    .locator("header")
+    .getByRole("link", { name: "Showcase", exact: true })
+    .click();
+  await page
+    .getByRole("navigation", { name: "Showcase sections" })
+    .getByRole("link", { name: "Submit your work" })
+    .click();
+  await expect(page.locator("#submit")).toBeInViewport();
+  await page
+    .getByLabel("Product name", { exact: true })
+    .fill("Navigation check");
+  await expect(page.getByLabel("Product name", { exact: true })).toHaveValue(
+    "Navigation check",
+  );
 });
 test("private routes fail closed; content works without JavaScript", async ({
   browser,
@@ -533,14 +569,15 @@ test("event sharing, calendar links, security headers and legacy redirect", asyn
   ).toBeVisible();
 });
 
-test("motion controls pause the rainfall and factual ribbon", async ({
+test("community statistics ribbon can be paused and respects reduced motion", async ({
   page,
 }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: "Pause code rain" }).click();
-  await expect(
-    page.getByRole("button", { name: "Play code rain" }),
-  ).toHaveAttribute("aria-pressed", "true");
+  const ribbon = page.locator(".ribbon-lap").first();
+  await expect(ribbon).toContainText("1,400+ community members");
+  await expect(ribbon).toContainText("30+ events hosted");
+  await expect(ribbon).toContainText("5,000+ developers reached");
+  await expect(ribbon).not.toContainText("REVA");
   await page.getByRole("button", { name: "Pause community ribbon" }).click();
   await expect(page.locator(".ribbon-track")).toHaveCSS(
     "animation-play-state",
@@ -550,4 +587,15 @@ test("motion controls pause the rainfall and factual ribbon", async ({
     page.locator(".ticket-barcode, .ticket-code, .ticket-kicker .live-dot"),
   ).toHaveCount(0);
   await expect(page.locator(".ticket-bottom")).not.toContainText("below");
+  await page.getByRole("button", { name: "Play community ribbon" }).click();
+  await page.mouse.move(0, 0);
+  await expect(page.locator(".ribbon-track")).toHaveCSS(
+    "animation-play-state",
+    "running",
+  );
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(page.locator(".ribbon-track")).toHaveCSS(
+    "animation-name",
+    "none",
+  );
 });
