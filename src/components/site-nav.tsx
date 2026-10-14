@@ -5,12 +5,12 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { Dialog } from "./dialog";
 import { Icon } from "./icon";
-import { links } from "@/data/links";
 export const destinations = [
   { label: "Events", href: "/events" },
-  { label: "Showcase", href: "/marketplace" },
+  { label: "Marketplace", href: "/marketplace" },
+  { label: "Spotlight", href: "/spotlight" },
   { label: "Journal", href: "/journal" },
-  { label: "Collaborate", href: "/#collaborate" },
+  { label: "Activity", href: "/leaderboard" },
 ];
 export function SiteNav() {
   const pathname = usePathname();
@@ -42,10 +42,7 @@ export function SiteNav() {
                 key={item.href}
                 href={item.href}
                 aria-current={
-                  pathname.startsWith(item.href) ||
-                  (item.href === "/marketplace" && pathname === "/spotlight")
-                    ? "page"
-                    : undefined
+                  pathname.startsWith(item.href) ? "page" : undefined
                 }
               >
                 {item.label}
@@ -74,12 +71,11 @@ export function SiteNav() {
         titleId="menu-title"
         className="menu-dialog"
       >
+        <p className="eyebrow">A place for your people</p>
         <h2 id="menu-title">Find your corner.</h2>
         <nav aria-label="Mobile navigation">
           {[
             ...destinations,
-            { label: "Builder spotlight", href: "/marketplace#builders" },
-            { label: "Calendar on Luma", href: links.luma },
             { label: "Connect GitHub", href: "/account" },
             { label: "Join the Krowd", href: "/#join" },
           ].map((item) => (

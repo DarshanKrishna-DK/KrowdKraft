@@ -50,8 +50,8 @@ export function registrationOpen(
 ): boolean {
   return Boolean(
     event.registrationUrl &&
-    isUpcoming(event, today) &&
-    (!event.registrationDeadline || today <= event.registrationDeadline),
+      isUpcoming(event, today) &&
+      (!event.registrationDeadline || today <= event.registrationDeadline),
   );
 }
 export function formatEventDate(date: string): string {
@@ -71,29 +71,4 @@ export function formatEventTime(event: KrowdEvent): string | null {
     timeZone: "Asia/Kolkata",
   });
   return `${format.format(new Date(event.startsAt))}${event.endsAt ? ` – ${format.format(new Date(event.endsAt))}` : ""} IST`;
-}
-export function formatEventVenue(event: KrowdEvent): string {
-  return event.venue.toLowerCase() === event.city.toLowerCase()
-    ? event.city
-    : `${event.venue}, ${event.city}`;
-}
-export function eventWeekday(event: KrowdEvent): string {
-  return new Intl.DateTimeFormat("en-IN", {
-    weekday: "long",
-    timeZone: "Asia/Kolkata",
-  }).format(new Date(`${event.date}T12:00:00+05:30`));
-}
-export function eventWhen(event: KrowdEvent, today: string): string {
-  const days = Math.round(
-    (Date.parse(event.date) - Date.parse(today)) / 86_400_000,
-  );
-  if (days === 0) return "Today";
-  if (days === 1) return "Tomorrow";
-  if (days > 1 && days < 7) return `This ${eventWeekday(event)}`;
-  return formatEventDate(event.date);
-}
-export function eventMapUrl(event: KrowdEvent): string {
-  if (event.venue === "Startup Park")
-    return "https://www.google.com/maps/search/?api=1&query=12.9218575%2C77.6201801&query_place_id=ChIJAV-3WAAVrjsRImMeww6Vt9M";
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(formatEventVenue(event))}`;
 }

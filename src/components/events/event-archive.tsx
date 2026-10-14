@@ -1,20 +1,25 @@
 "use client";
-/* eslint-disable @next/next/no-img-element -- Organizer-approved local event covers. */
+/* eslint-disable @next/next/no-img-element -- Archived images retain organizer-approved source URLs. */
 import Link from "next/link";
 import { useState } from "react";
 import {
   type KrowdEvent,
   isUpcoming,
   formatEventDate,
-  formatEventVenue,
   typeLabels,
-  relationshipLabels,
-  registrationOpen,
 } from "@/data/event-utils";
 import { Icon } from "@/components/icon";
+const symbols: Record<string, string> = {
+  "hacktoberfest-2026": "</>",
+  "x402-prehack-2026": "x402",
+  "namaste-arbitrum-2025": "arb.",
+  "preptember-2025": "{ pr }",
+  "blockchain-101-2025": "0x01",
+  "github-linkedin-2025": "git+",
+};
 export function EventPoster({ event }: { event: KrowdEvent }) {
   return (
-    <div className={"event-poster poster-" + event.id}>
+    <div className={`event-poster poster-${event.id}`}>
       <span className="poster-date">{formatEventDate(event.date)}</span>
       {event.image ? (
         <img
@@ -26,12 +31,11 @@ export function EventPoster({ event }: { event: KrowdEvent }) {
           referrerPolicy="no-referrer"
         />
       ) : (
-        <div className="poster-lettering" aria-hidden="true">
-          <strong>{typeLabels[event.type]}</strong>
-          <span>{event.venue}</span>
-        </div>
+        <span className="poster-symbol" aria-hidden="true">
+          {symbols[event.id] || "&lt;/&gt;"}
+        </span>
       )}
-      <span className="poster-type">{event.city}</span>
+      <span className="poster-type">{typeLabels[event.type]} / Bengaluru</span>
     </div>
   );
 }
@@ -43,35 +47,15 @@ export function EventArchive({
   today: string;
 }) {
   const [filter, setFilter] = useState("all"),
-    [query, setQuery] = useState(""),
-    [type, setType] = useState("all"),
-    [venue, setVenue] = useState("all");
-  const upcoming = events.filter((e) => isUpcoming(e, today)).length;
-  const types = [...new Set(events.map((e) => e.type))];
-  const venues = [...new Set(events.map((e) => e.venue))];
-  const reset = () => {
-    setFilter("all");
-    setQuery("");
-    setType("all");
-    setVenue("all");
-  };
+    [query, setQuery] = useState("");
   const matches = events
     .filter(
-      (e) =>
+      (event) =>
         (filter === "all" ||
           (filter === "upcoming"
-            ? isUpcoming(e, today)
-            : !isUpcoming(e, today))) &&
-        (type === "all" || e.type === type) &&
-        (venue === "all" || e.venue === venue) &&
-        [
-          e.title,
-          e.venue,
-          e.description,
-          typeLabels[e.type],
-          ...(e.partners ?? []),
-        ]
-          .join(" ")
+            ? isUpcoming(event, today)
+            : !isUpcoming(event, today))) &&
+        `${event.title} ${event.venue} ${event.description}`
           .toLowerCase()
           .includes(query.trim().toLowerCase()),
     )
@@ -100,79 +84,39 @@ export function EventArchive({
           <span className="sr-only">Search events</span>
           <input
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search title, topic or collaborator"
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Find your kind of gathering…"
           />
         </label>
       </div>
-      <div className="event-refinements">
-        <label>
-          <span id="event-type-label">Event type</span>
-          <select
-            aria-labelledby="event-type-label"
-            value={type}
-            onChange={(e) => setType(e.target.value)}
-          >
-            <option value="all">All types</option>
-            {types.map((t) => (
-              <option value={t} key={t}>
-                {typeLabels[t]}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          <span id="event-venue-label">Venue</span>
-          <select
-            aria-labelledby="event-venue-label"
-            value={venue}
-            onChange={(e) => setVenue(e.target.value)}
-          >
-            <option value="all">All venues</option>
-            {venues.map((v) => (
-              <option value={v} key={v}>
-                {v}
-              </option>
-            ))}
-          </select>
-        </label>
-        <p className="page-note">
-          {events.length} documented events · {upcoming} upcoming ·{" "}
-          {events.length - upcoming} past
-        </p>
-      </div>
       <p className="form-hint" role="status" style={{ marginBottom: 20 }}>
-        {matches.length} {matches.length === 1 ? "event" : "events"} shown
+        {matches.length} {matches.length === 1 ? "event" : "events"}
+        {filter !== "all" &&
+          ` · ${filter === "past" ? "From the archive" : "On the calendar"}`}
       </p>
       <div className="event-archive">
         {matches.map((event) => (
           <Link
-            href={"/events/" + event.slug}
+            href={`/events/${event.slug}`}
             key={event.id}
             className="event-archive-card"
           >
             <EventPoster event={event} />
             <div className="event-archive-content">
-              <span className="badge">
-                {isUpcoming(event, today)
-                  ? registrationOpen(event, today)
-                    ? "Registration open"
-                    : event.registrationDeadline
-                      ? "Registration closed"
-                      : "Coming up"
-                  : "Past event"}
+              <span
+                className={`badge ${isUpcoming(event, today) ? "lime" : ""}`}
+              >
+                {isUpcoming(event, today) ? "Coming up" : "From the archive"}
               </span>
               <h2>{event.title}</h2>
-              <p>{formatEventVenue(event)}</p>
-              <p className="event-role">
-                {typeLabels[event.type]} ·{" "}
-                {relationshipLabels[event.relationship]}
+              <p>
+                {event.venue}, {event.city}
               </p>
               <div className="archive-card-bottom">
                 <span>
                   {isUpcoming(event, today)
                     ? "Event details"
-                    : "Read event notes"}
+                    : "Revisit the gathering"}
                 </span>
                 <Icon name="diagonal" size={19} />
               </div>
@@ -181,13 +125,15 @@ export function EventArchive({
         ))}
         {!matches.length && (
           <div className="archive-empty">
-            <h2>No events match these filters.</h2>
-            <p>Try another topic or venue.</p>
+            <h2>No gatherings in this corner.</h2>
+            <p>Try a different search, or browse all events.</p>
             <button
-              type="button"
               className="button"
               style={{ marginTop: 22 }}
-              onClick={reset}
+              onClick={() => {
+                setQuery("");
+                setFilter("all");
+              }}
             >
               Show all events
             </button>

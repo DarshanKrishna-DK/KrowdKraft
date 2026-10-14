@@ -8,7 +8,7 @@ export const journal = [
     date: "2025-05-14",
     topic: "Career notes",
     author: "Darshan Krishna N",
-    cover: "/journal/certifications.webp",
+    cover: "certification",
     href: "https://medium.com/@cryptech_dk/are-online-certifications-worth-it-heres-what-every-student-should-know-5b94af688c0b",
   },
   {
@@ -20,7 +20,7 @@ export const journal = [
     date: "2025-05-06",
     topic: "Developer life",
     author: "Darshan Krishna N",
-    cover: "/journal/dev-vs-dsa.webp",
+    cover: "code",
     href: "https://medium.com/@cryptech_dk/dev-vs-dsa-understanding-the-balance-not-the-battle-741d900a4e97",
   },
   {
@@ -32,7 +32,7 @@ export const journal = [
     date: "2025-04-27",
     topic: "Opportunities",
     author: "Darshan Krishna N",
-    cover: "/journal/hidden-gems.webp",
+    cover: "compass",
     href: "https://medium.com/@cryptech_dk/hidden-gems-for-internships-and-jobs-underrated-platforms-you-shouldnt-ignore-ff7c83cef26c",
   },
 ] as const;

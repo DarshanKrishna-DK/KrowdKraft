@@ -5,5 +5,5 @@ export const links = {
   instagram: "https://www.instagram.com/krowdkraft_/",
   x: "https://x.com/KrowdKraft_",
   medium: "https://medium.com/@cryptech_dk",
-  whatsapp: "https://whatsapp.com/channel/0029Vb9BTtuEawdmK4IivD1M",
+  whatsapp: "https://chat.whatsapp.com/Ko9hqFs7hhtLJY1nePhkNO",
 } as const;

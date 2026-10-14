@@ -19,18 +19,9 @@ export async function submitCommunity(
   if (!client) return { ok: false, reason: "unavailable" };
   const key = clientKey(await headers(), process.env.TRUST_PROXY === "true");
   if (!processLimiter(key)) return { ok: false, reason: "rate_limited" };
-  const { kind, name, builder, email, url, description, category, socials } =
+  const { kind, name, builder, email, url, description, category } =
     parsed.data;
-  const submission = {
-    kind,
-    name,
-    builder,
-    email,
-    url,
-    description,
-    category,
-    socials: [...new Set((socials || []).filter(Boolean))],
-  };
+  const submission = { kind, name, builder, email, url, description, category };
   const salt =
     process.env.SUBMISSION_HASH_SECRET || process.env.SUPABASE_SECRET_KEY!;
   const hash = (value: string) =>

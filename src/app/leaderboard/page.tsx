@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element -- Public GitHub avatars do not need a server image proxy. */
-import { pageMetadata } from "@/lib/page-metadata";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "@/components/page-shell";
 import { DuckDock } from "@/components/duck/duck-dock";
@@ -9,11 +9,11 @@ import { siteContributors } from "@/server/github";
 import { monthWindow } from "@/lib/community-schema";
 import { links } from "@/data/links";
 export const dynamic = "force-dynamic";
-export const metadata = pageMetadata(
-  "Community activity & contributors | KrowdKraft",
-  "Meet the people building in public. Opt-in GitHub activity and the contributors behind the KrowdKraft website.",
-  "/leaderboard",
-);
+export const metadata: Metadata = {
+  title: "Community activity & contributors | KrowdKraft",
+  description:
+    "Meet the people building in public. Opt-in GitHub activity and the contributors behind the KrowdKraft website.",
+};
 export default async function LeaderboardPage() {
   const [{ records, available, configured }, contributors] = await Promise.all([
     getPublicMembers(),
@@ -43,8 +43,9 @@ export default async function LeaderboardPage() {
             <span className="serif-word">building.</span>
           </h1>
           <p>
-            Opt in to share your public GitHub activity for this month. Private
-            work stays private.
+            A little shared momentum, one public contribution at a time. An
+            opt-in view of activity across the Krowd, with room for every kind
+            of builder.
           </p>
           <div className="actions">
             <Link className="button primary" href="/account">
@@ -149,8 +150,8 @@ export default async function LeaderboardPage() {
             a fresh zero.
           </p>
         )}
-        <details className="subsection activity-explainer" id="how-it-works">
-          <summary>How public activity is counted</summary>
+        <div className="subsection" id="how-it-works">
+          <h2>Momentum, with context.</h2>
           <div className="process-list">
             <div>
               <span className="mono">What we count</span>
@@ -191,7 +192,7 @@ export default async function LeaderboardPage() {
               About GitHub’s events feed ↗
             </a>
           </p>
-        </details>
+        </div>
         <div className="subsection" id="contributors">
           <div className="subsection-heading">
             <div>

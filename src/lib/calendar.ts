@@ -1,6 +1,4 @@
 import type { KrowdEvent } from "@/data/event-schema";
-import { formatEventVenue } from "@/data/event-utils";
-import { siteOrigin } from "./site";
 const escape = (value: string) =>
   value
     .replace(/\\/g, "\\\\")
@@ -55,12 +53,8 @@ export function eventCalendar(event: KrowdEvent, now = new Date()): string {
       ...endLine,
       `SUMMARY:${escape(event.title)}`,
       `DESCRIPTION:${escape(event.description)}`,
-      `LOCATION:${escape(formatEventVenue(event))}`,
-      ...(siteOrigin()
-        ? [`URL:${escape(`${siteOrigin()}/events/${event.slug}`)}`]
-        : event.sourceUrl
-          ? [`URL:${escape(event.sourceUrl)}`]
-          : []),
+      `LOCATION:${escape(`${event.venue}, ${event.city}`)}`,
+      ...(event.sourceUrl ? [`URL:${escape(event.sourceUrl)}`] : []),
       "END:VEVENT",
       "END:VCALENDAR",
     ]

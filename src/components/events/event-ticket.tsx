@@ -4,11 +4,6 @@ import {
   registrationOpen,
   formatEventDate,
   formatEventTime,
-  formatEventVenue,
-  eventWeekday,
-  eventWhen,
-  typeLabels,
-  relationshipLabels,
 } from "@/data/event-utils";
 import { Icon } from "@/components/icon";
 export function EventTicket({
@@ -18,79 +13,58 @@ export function EventTicket({
   event: KrowdEvent;
   today: string;
 }) {
-  const open = registrationOpen(event, today);
-  const month = new Intl.DateTimeFormat("en", {
+  const [year, month, day] = event.date.split("-");
+  const monthName = new Intl.DateTimeFormat("en", {
     month: "short",
     timeZone: "UTC",
-  }).format(new Date(event.date));
+  }).format(new Date(`${year}-${month}-01T00:00:00Z`));
   return (
     <article className="event-ticket" data-reveal>
       <div className="ticket-main">
         <div className="ticket-top">
           <span className="ticket-kicker">
-            {eventWhen(event, today)} · {event.venue}
+            <span className="live-dot" /> Up next in Bengaluru
           </span>
-          <span className="badge">
-            {open
-              ? "Registration open"
-              : event.registrationDeadline
-                ? "Registration closed"
-                : "Event information"}
-          </span>
+          <span className="mono ticket-edition">KK / {year}</span>
         </div>
         <div className="ticket-content">
           <div className="ticket-title">
-            <span className="ticket-format">
-              {typeLabels[event.type]} ·{" "}
-              {relationshipLabels[event.relationship]}
-            </span>
+            <span className="ticket-format">OPEN SOURCE · OPEN MINDS</span>
             <h3>{event.title}</h3>
             <p>
-              <Icon name="pin" size={17} /> {formatEventVenue(event)}
+              <Icon name="pin" size={17} /> {event.venue}, {event.city}
             </p>
             <p>
-              <Icon name="calendar" size={17} /> {eventWeekday(event)},{" "}
-              {formatEventDate(event.date)}
+              <Icon name="calendar" size={17} /> {formatEventDate(event.date)}
+              {event.startsAt && ` · ${formatEventTime(event)}`}
             </p>
-            {event.startsAt && (
-              <p className="ticket-time">{formatEventTime(event)}</p>
-            )}
+          </div>
+          <div className="ticket-code" aria-hidden="true">
+            <span>&lt;</span>
+            <i>/</i>
+            <span>&gt;</span>
+            <div className="ticket-code-shadow" />
           </div>
         </div>
         <div className="ticket-bottom">
-          <p>
-            {open
-              ? "Registration is open. Check the event page for entry requirements."
-              : event.participantUrl
-                ? "Registration closed. Confirmed participants: open the event page for check-in and the participant group."
-                : "Open the event page for the latest details."}
-          </p>
-          <Link href={"/events/" + event.slug} className="button primary">
+          <span>
+            {registrationOpen(event, today)
+              ? "Registration open"
+              : "Registration closed · Details for participants below"}
+          </span>
+          <Link href={`/events/${event.slug}`} className="button dark">
             Event details <Icon name="diagonal" size={18} />
           </Link>
         </div>
       </div>
       <div className="ticket-stub">
-        <span>{eventWeekday(event)}</span>
-        <strong>{event.date.slice(-2)}</strong>
+        <span className="mono">SAVE THE DATE</span>
+        <strong>{day}</strong>
         <span className="stub-month">
-          {month} {event.date.slice(0, 4)}
+          {monthName.toUpperCase()} ’{year.slice(2)}
         </span>
-        {event.id === "hacktoberfest-2026" ? (
-          <Link
-            href={"/events/" + event.slug + "#schedule"}
-            className="button quiet"
-          >
-            View schedule <Icon name="arrow" size={16} />
-          </Link>
-        ) : (
-          <a
-            className="button quiet"
-            href={"/events/" + event.slug + "/calendar"}
-          >
-            Add to calendar <Icon name="calendar" size={16} />
-          </a>
-        )}
+        <div className="ticket-barcode" aria-hidden="true" />
+        <span className="mono">BENGALURU / IN PERSON</span>
       </div>
     </article>
   );

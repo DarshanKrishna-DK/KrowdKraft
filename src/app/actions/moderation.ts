@@ -27,8 +27,9 @@ export async function reviewSubmission(form: FormData) {
     actor_id: user.id,
   });
   if (error)
-    redirect(`/admin?notice=${error.code === "23505" ? "conflict" : "failed"}`);
-  revalidatePath("/");
+    redirect(
+      `/admin?notice=${error.code === "23505" ? "edition-taken" : "failed"}`,
+    );
   revalidatePath("/marketplace");
   revalidatePath("/spotlight");
   revalidatePath("/admin");
@@ -52,7 +53,6 @@ export async function unpublishContent(form: FormData) {
     actor_id: user.id,
   });
   if (error) redirect("/admin?notice=failed");
-  revalidatePath("/");
   revalidatePath("/marketplace");
   revalidatePath("/spotlight");
   revalidatePath("/admin");

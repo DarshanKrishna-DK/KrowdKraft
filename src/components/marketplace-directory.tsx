@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Icon } from "./icon";
 import { projectCategories } from "@/lib/community-schema";
 import type { Product } from "@/server/community";
-import { SocialLinks } from "./social-links";
 export function MarketplaceDirectory({ products }: { products: Product[] }) {
   const [category, setCategory] = useState("All"),
     [query, setQuery] = useState("");
@@ -49,7 +48,6 @@ export function MarketplaceDirectory({ products }: { products: Product[] }) {
             <h2>{product.name}</h2>
             <p>{product.description}</p>
             <div className="product-byline">By {product.builder}</div>
-            <SocialLinks urls={product.socials || []} />
             <a
               className="text-link"
               href={product.url}

@@ -1,19 +1,14 @@
-import { pageMetadata } from "@/lib/page-metadata";
+import type { Metadata } from "next";
 import { PageShell } from "@/components/page-shell";
 import { communityEmail } from "@/data/community";
-import { AnalyticsPreferences } from "@/components/analytics";
-export const metadata = pageMetadata(
-  "Privacy & your data | KrowdKraft",
-  "How KrowdKraft handles member profiles, private submission emails, optional analytics, and your choices.",
-  "/privacy",
-);
+export const metadata: Metadata = { title: "Privacy & your data | KrowdKraft" };
 export default function PrivacyPage() {
   return (
     <PageShell>
       <div className="container">
         <div className="page-intro">
           <p className="eyebrow">
-            Your data, in plain language · Updated 14 October 2026
+            Your data, in plain language · Updated 13 October 2026
           </p>
           <h1>
             A little clarity.
@@ -25,13 +20,11 @@ export default function PrivacyPage() {
           <h2>When you submit a project or story</h2>
           <p>
             We collect the title, builder or team name, public link,
-            description, category, contact email, and up to three optional
-            public profile links you provide. Organizers use these to review the
-            submission and follow up with you. Your contact email is private. If
-            approved, the project or story details appear publicly, including
-            those profile links. We do not ask for a phone number. You should
-            have permission to share the work and any information about other
-            people.
+            description, category and contact email you provide. Organizers use
+            these to review the submission and follow up with you. Your contact
+            email is private. If approved, the project or story details appear
+            publicly. We do not ask for a phone number. You should have
+            permission to share the work and any information about other people.
           </p>
           <h2>When you connect GitHub</h2>
           <p>
@@ -51,20 +44,19 @@ export default function PrivacyPage() {
           </p>
           <h2>Cookies and local preferences</h2>
           <p>
-            Essential cookies keep a signed-in session working. Krafty uses
-            short, locally generated sounds after your first click, tap or key
-            press. Animations respect your device’s reduced-motion setting. With
+            Essential cookies keep a signed-in session working. Your browser
+            also stores preferences for animations and whether Krafty is
+            visible. Duck sounds start off and require a click to enable. With
             your permission, Google Analytics measures visits to public pages.
             Its measurement ID is G-QM44WYFLFR. Query strings, account pages and
             authentication callbacks are excluded from our page-view events.
             Analytics pauses before form interaction; we do not send form
             contents or emails as analytics events. Advertising personalization
             is disabled. You can decline or change your choice using Analytics
-            preferences below when Analytics is enabled. “Analytics off” means
-            collection is disabled for this website. We do not record your
+            preferences in the footer when Analytics is enabled. “Analytics off”
+            means collection is disabled for this website. We do not record your
             microphone or track your pointer with the mascot.
           </p>
-          <AnalyticsPreferences />
           <h2>Where information goes</h2>
           <p>
             The site is hosted on Vercel. Member profiles and submissions use

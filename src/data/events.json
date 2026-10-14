@@ -17,10 +17,7 @@
     "startsAt": "2026-10-18T08:30:00+05:30",
     "endsAt": "2026-10-18T18:30:00+05:30",
     "participantUrl": "https://chat.whatsapp.com/FXmyMCczXwFIqxySjp2OTl",
-    "partners": [
-      "Major League Hacking",
-      "Startup Park"
-    ],
+    "partners": ["Major League Hacking", "Startup Park"],
     "featured": true
   },
   {
@@ -37,27 +34,22 @@
     "image": null,
     "sourceUrl": "https://luma.com/tudxpgxi",
     "registrationUrl": null,
-    "partners": [
-      "AlgoBharat",
-      "HackCulture",
-      "Algorand",
-      "Startup Park"
-    ],
+    "partners": ["AlgoBharat", "HackCulture", "Algorand", "Startup Park"],
     "featured": true
   },
   {
     "id": "namaste-arbitrum-2025",
     "slug": "namaste-arbitrum-2025",
     "title": "Namaste Arbitrum",
-    "description": "A Bengaluru meetup hosted by Namaste Arbitrum, with KrowdKraft as a community partner. Builders explored the Arbitrum ecosystem and exchanged ideas about Ethereum layer two. The original listing keeps the exact venue private.",
+    "description": "An in-person gathering to explore the Arbitrum ecosystem, meet fellow builders and exchange ideas about building on Ethereum layer two. From the KrowdKraft community archive.",
     "date": "2025-10-12",
     "endDate": null,
     "venue": "Bengaluru",
     "city": "Bengaluru",
     "type": "meetup",
-    "relationship": "community-partner",
+    "relationship": "hosted",
     "image": null,
-    "sourceUrl": "https://luma.com/9usbg8kx",
+    "sourceUrl": "https://github.com/DarshanKrishna-DK/KrowdKraft/blob/086620e/src/data/past-events.ts",
     "registrationUrl": null,
     "featured": false
   },
@@ -73,12 +65,9 @@
     "type": "workshop",
     "relationship": "hosted",
     "image": null,
-    "sourceUrl": null,
+    "sourceUrl": "https://github.com/DarshanKrishna-DK/KrowdKraft/blob/086620e/src/data/past-events.ts",
     "registrationUrl": null,
-    "partners": [
-      "Keploy",
-      "MSRIT"
-    ],
+    "partners": ["Keploy", "MSRIT"],
     "featured": false
   },
   {
@@ -93,12 +82,9 @@
     "type": "technical-session",
     "relationship": "hosted",
     "image": null,
-    "sourceUrl": null,
+    "sourceUrl": "https://github.com/DarshanKrishna-DK/KrowdKraft/blob/086620e/src/data/past-events.ts",
     "registrationUrl": null,
-    "featured": false,
-    "partners": [
-      "T. John Institute of Technology"
-    ]
+    "featured": false
   },
   {
     "id": "ai-verse-2025",
@@ -112,7 +98,7 @@
     "type": "workshop",
     "relationship": "hosted",
     "image": "/events/ai-verse-2025.webp",
-    "sourceUrl": null,
+    "sourceUrl": "https://github.com/DarshanKrishna-DK/KrowdKraft/blob/086620e/src/data/past-events.ts",
     "registrationUrl": null,
     "featured": true
   },
@@ -128,11 +114,8 @@
     "type": "workshop",
     "relationship": "hosted",
     "image": null,
-    "sourceUrl": null,
+    "sourceUrl": "https://github.com/DarshanKrishna-DK/KrowdKraft/blob/086620e/src/data/past-events.ts",
     "registrationUrl": null,
-    "featured": false,
-    "partners": [
-      "REVA University"
-    ]
+    "featured": false
   }
 ]

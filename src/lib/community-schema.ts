@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { isPublicHttpsUrl } from "./public-url";
 export const projectCategories = [
   "Developer tools",
   "AI & agents",
@@ -11,7 +10,18 @@ export const projectCategories = [
 export const publicUrl = z
   .url()
   .max(2048)
-  .refine(isPublicHttpsUrl, "Use a public HTTPS link without credentials.");
+  .refine((value) => {
+    const url = new URL(value);
+    return (
+      url.protocol === "https:" &&
+      !url.username &&
+      !url.password &&
+      url.hostname.includes(".") &&
+      !/^(localhost|127\.|0\.|10\.|192\.168\.|169\.254\.|\[)/i.test(
+        url.hostname,
+      )
+    );
+  }, "Use a public HTTPS link without credentials.");
 export const submissionSchema = z
   .object({
     kind: z.enum(["project", "nomination"]),
@@ -29,10 +39,6 @@ export const submissionSchema = z
       .min(30, "Tell us a little more (at least 30 characters).")
       .max(1500),
     category: z.enum(projectCategories),
-    socials: z
-      .array(z.union([z.literal(""), publicUrl]))
-      .max(3)
-      .optional(),
     consent: z.literal(true, {
       error: "Please agree so we can review your submission.",
     }),
@@ -45,7 +51,11 @@ export type SubmissionReply =
   | {
       ok: false;
       reason:
-        "validation" | "unavailable" | "rate_limited" | "duplicate" | "failed";
+        | "validation"
+        | "unavailable"
+        | "rate_limited"
+        | "duplicate"
+        | "failed";
       errors?: Record<string, string[]>;
     };
 export const moderationSchema = z

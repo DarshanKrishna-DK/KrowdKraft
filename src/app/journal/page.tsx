@@ -1,21 +1,21 @@
-import { pageMetadata } from "@/lib/page-metadata";
+import type { Metadata } from "next";
 import { PageShell } from "@/components/page-shell";
 import { JournalCover } from "@/components/art/scenes";
 import { DuckDock } from "@/components/duck/duck-dock";
 import { Icon } from "@/components/icon";
 import { journal } from "@/data/journal";
 import { formatEventDate } from "@/data/event-utils";
-export const metadata = pageMetadata(
-  "The journal | KrowdKraft",
-  "Thoughts on building, learning and finding your way. Read notes from Darshan Krishna N on Medium.",
-  "/journal",
-);
+export const metadata: Metadata = {
+  title: "The journal | KrowdKraft",
+  description:
+    "Thoughts on building, learning and finding your way. Read the KrowdKraft community's original writing on Medium.",
+};
 export default function JournalPage() {
   return (
     <PageShell className="journal-page">
       <div className="container">
         <div className="page-intro journal-masthead">
-          <p className="eyebrow">Notes from Darshan</p>
+          <p className="eyebrow">The KrowdKraft journal</p>
           <h1>
             Open notebooks.
             <br />
@@ -23,8 +23,7 @@ export default function JournalPage() {
           </h1>
           <p>
             Career detours, developer dilemmas and ideas that deserve a little
-            more room. Essays by Darshan Krishna N, originally published on
-            Medium.
+            more room. Original writing from the people behind the Krowd.
           </p>
           <DuckDock
             id="journal-page"
@@ -41,7 +40,7 @@ export default function JournalPage() {
               target="_blank"
               rel="noreferrer"
             >
-              <JournalCover src={article.cover} />
+              <JournalCover variant={article.cover} />
               <div className="article-body">
                 <div className="article-meta">
                   <span>{article.topic}</span>
