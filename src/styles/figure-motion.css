@@ -1,0 +1,47 @@
+/* Pale Anatomy artwork with motion confined to the machine's moving parts. */
+.arcade-animated .iso {
+  --anatomy-hi: #fff0f5;
+  --anatomy-mid: #9b6e86;
+  --anatomy-lo: #734f68;
+  --anatomy-paper: #f2dbe4;
+  --anatomy-face: #e7bfce;
+  --anatomy-top: #fae8ed;
+  --anatomy-shade-0: #a77e96;
+  --anatomy-shade-1: #c299b0;
+  --anatomy-shade-2: #e2bace;
+  --anatomy-shade-3: #f4d9e4;
+  --anatomy-lit: #fff5ee;
+  --anatomy-lit-top: #fff2ed;
+  --anatomy-lit-shade: #dec1cc;
+  --anatomy-halo: #08050d;
+}
+.arcade-animated .ac-glass,
+.arcade-animated .ac-glass[data-on] {
+  fill: #332338;
+}
+.arcade-animated [data-part='stick-upper'] {
+  transform-origin: 340px 392px;
+}
+.arcade-animated [data-part='fan'] {
+  transform-origin: 0 0;
+}
+.arcade-animated [data-part='shot'] {
+  display: inline !important;
+  opacity: 0;
+}
+.arcade-animated [data-frame='b'] {
+  display: inline !important;
+  opacity: 0;
+}
+.arcade-animated [data-part='insert'],
+.arcade-animated [data-part='start'],
+.arcade-animated [data-part='credit'] {
+  display: none;
+}
+.arcade-animated [data-part='tray'],
+.arcade-animated .it[data-name^='door'] {
+  cursor: inherit;
+}
+.printer-figure [data-printer-paper] {
+  transform-origin: 0 0;
+}

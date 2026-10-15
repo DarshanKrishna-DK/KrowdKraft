@@ -1,70 +1,67 @@
-import type { Metadata } from "next";
-import { Manrope, Yatra_One } from "next/font/google";
-import { heroDescription } from "@/data/community";
-import { Krafty } from "@/components/duck/krafty";
-import { Motion } from "@/components/motion";
-import { Analytics } from "@/components/analytics";
-import { analyticsId } from "@/lib/analytics";
-import { siteOrigin } from "@/lib/site";
-import "@/styles/clubhouse.css";
-import "@/styles/cream.css";
-const manrope = Manrope({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-body",
-  display: "swap",
+import type { Metadata, Viewport } from 'next';
+import { Header, Footer } from '@/components/shell';
+import { getCommunity } from '@/lib/data';
+import { BackToTop } from '@/components/back-to-top';
+import localFont from 'next/font/local';
+import '@/styles/anatomy.css';
+import '@/styles/arcade.css';
+import '@/styles/globals.css';
+import '@/styles/forms.css';
+import '@/styles/atelier.css';
+import '@/styles/refinement.css';
+import '@/styles/figure-motion.css';
+import '@/styles/directories.css';
+import '@/styles/project-dialog.css';
+const displayFont = localFont({
+  src: '../../public/fonts/jaini-latin.woff2',
+  variable: '--font-display',
+  weight: '400',
+  style: 'normal',
+  display: 'swap',
 });
-const yatra = Yatra_One({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-display",
-  display: "swap",
-});
-const origin = siteOrigin();
-export const metadata: Metadata = {
-  metadataBase: origin ? new URL(origin) : undefined,
-  robots:
-    process.env.VERCEL_ENV === "preview"
-      ? { index: false, follow: false }
-      : undefined,
-  title: "KrowdKraft — Where Bengaluru's developers connect",
-  description: heroDescription,
+const baseMetadata: Metadata = {
+  metadataBase: new URL(process.env.SITE_URL || 'http://localhost:3000'),
+  title: { default: 'KrowdKraft | A place for curious builders', template: '%s | KrowdKraft' },
+  description:
+    'A Bengaluru developer community for curious people who learn together, build useful things, and share what they make.',
   openGraph: {
-    title: "KrowdKraft",
-    description: heroDescription,
-    images: origin
-      ? [
-          {
-            url: "/brand/og.png",
-            width: 1200,
-            height: 630,
-            alt: "KrowdKraft, Bengaluru developer community",
-          },
-        ]
-      : undefined,
+    title: 'KrowdKraft | A place for curious builders',
+    description: 'Where what is becomes look what I made.',
+    type: 'website',
   },
-  icons: { icon: "/favicon.ico", apple: "/apple-touch-icon.png" },
+  icons: { icon: '/favicon.ico', apple: '/apple-touch-icon.png' },
 };
+export const viewport: Viewport = { themeColor: '#131017', width: 'device-width', initialScale: 1 };
+export async function generateMetadata(): Promise<Metadata> {
+  const community = await getCommunity();
+  return {
+    ...baseMetadata,
+    description: community.description,
+    title: {
+      default: `${community.name} | A place for curious builders`,
+      template: `%s | ${community.name}`,
+    },
+  };
+}
+export const dynamic = 'force-dynamic';
 export default function RootLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+  modal,
+}: {
+  children: React.ReactNode;
+  modal: React.ReactNode;
+}) {
   return (
-    <html lang="en" className={`${manrope.variable} ${yatra.variable}`}>
-      <body>
-        {children}
-        <Krafty />
-        <Motion />
-        <Analytics
-          id={analyticsId}
-          enabled={
-            process.env.NODE_ENV === "production" &&
-            process.env.GOOGLE_ANALYTICS_ENABLED === "true" &&
-            process.env.VERCEL_ENV !== "preview"
-          }
-        />
-        <noscript>
-          <style>{".krafty-traveller { display: none; }"}</style>
-        </noscript>
+    <html lang="en" className={displayFont.variable} data-scroll-behavior="smooth">
+      <body id="top">
+        <a className="skip-link" href="#main">
+          Skip to content
+        </a>
+        <Header />
+        <main id="main">{children}</main>
+        {modal}
+        <Footer />
+        <BackToTop />
       </body>
     </html>
   );

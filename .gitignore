@@ -1,40 +1,38 @@
-node_modules/
-.next/
-out/
-dist/
-coverage/
-.cache/
+﻿# Private local data and existing project linkage
+.local-data/
 .vercel/
 .env
 .env.*
-!.env.example
-*.tsbuildinfo
+*.pem
+*.key
+
+# Archived screenshots and visual experiments
+assets/references/
+details/research/2026-10-14-design-study/cyera/
+details/research/2026-10-14-design-study/dwayne/
+
+# Local agent tools and instructions
 .agents/
 .agent/
 .codex/
 .claude/
 .cursor/
-agent/
-agents/
 AGENTS.md
-docs/
-.npm-cache/
-.artifacts/
-artifacts/
-artificats/
-supabase/.temp/
-test-results/
-playwright-report/
-blob-report/
-*.log
+skills-lock.json
+
+# Operating system files
 .DS_Store
 Thumbs.db
-skills-lock.json
-next-env.d.ts
-src/generated/
-figures/hairline-*.html
-figures/hairline-*.png
-hairline-*.html
-hairline-*.png
-src/data/events.json.lock
-src/data/events.json.*.tmp
+
+# Remaining locked dependency binaries, pending cleanup
+node_modules/
+.next/
+out/
+test-results/
+playwright-report/
+*.tsbuildinfo
+.npm-cache/
+!/.env.example
+supabase/.temp/
+artifacts/
+public/figures/qa-anatomy.html

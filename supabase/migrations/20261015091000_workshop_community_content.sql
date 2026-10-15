@@ -1,0 +1,1 @@
+alter table public.workshop_settings add column stats jsonb not null default '[]'::jsonb check (jsonb_typeof(stats)='array' and jsonb_array_length(stats)<=12); alter table public.workshop_settings add column partners jsonb not null default '[]'::jsonb check (jsonb_typeof(partners)='array' and jsonb_array_length(partners)<=100);

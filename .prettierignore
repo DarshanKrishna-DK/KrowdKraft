@@ -1,0 +1,9 @@
+src/components/figures/pin-field.generated.mjs
+src/components/figures/computer-meta.json
+skills-lock.json
+next-env.d.ts
+.agents/
+.local-data/
+public/figures/
+scripts/hairline/
+scripts/anatomy/

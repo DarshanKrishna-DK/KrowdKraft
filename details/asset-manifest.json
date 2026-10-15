@@ -1,0 +1,2022 @@
+[
+  {
+    "original": "public/apple-touch-icon.png",
+    "preserved": "assets/apple-touch-icon.png",
+    "sha256": "40da65167a2fc23e1579c1d0ff4eb7da34c667bb3952768661c5e532977d9bb9"
+  },
+  {
+    "original": "public/art/courtyard.webp",
+    "preserved": "assets/art/courtyard.webp",
+    "sha256": "b8293188b9ae21960d3ef0333d596d898892a358a127b113688fcae4e2d71d5f"
+  },
+  {
+    "original": "public/art/hairline/builder-rest.svg",
+    "preserved": "assets/art/hairline/builder-rest.svg",
+    "sha256": "4190ae241b5eaed71c68d06d5445e468533f3e9f91ed2160c9f60b12a0c98fa2"
+  },
+  {
+    "original": "public/art/hairline/LICENSE",
+    "preserved": "assets/art/hairline/LICENSE",
+    "sha256": "fa1e7b1ada7cac48ce85dbef0313be21f5be921e08c754538ba23fd521574451"
+  },
+  {
+    "original": "public/brand/logo.avif",
+    "preserved": "assets/brand/logo.avif",
+    "sha256": "83ceeeec4d0eb032b0a720c0802ede7d34def67cbf584c96566e3cd2273cde7c"
+  },
+  {
+    "original": "public/brand/logo.webp",
+    "preserved": "assets/brand/logo.webp",
+    "sha256": "b36bacaf3369a347e3bebc1aaabf2b8f7db51d73b67d4a4d9c27b075be49ecad"
+  },
+  {
+    "original": "public/brand/og.png",
+    "preserved": "assets/brand/og.png",
+    "sha256": "5be558c143fb0468c49cb4b8e5b7256d654a14a6192dd87f8d9e967c1d001a5a"
+  },
+  {
+    "original": "public/events/ai-verse-2025.webp",
+    "preserved": "assets/events/ai-verse-2025.webp",
+    "sha256": "eb665dcc9bcd0cb3515f91495d39bba190fb4e5c8a6fe078f5f516a573d95a84"
+  },
+  {
+    "original": "public/events/hacktoberfest-2026.webp",
+    "preserved": "assets/events/hacktoberfest-2026.webp",
+    "sha256": "54f5813a2ef6052bf2fd7752a07d9897d1bf456900a1536f0f95476887698d5a"
+  },
+  {
+    "original": "public/events/x402-prehack-2026.webp",
+    "preserved": "assets/events/x402-prehack-2026.webp",
+    "sha256": "9fc7d6411c80b6843874a16ccc368197fb970522d411b084b203f2d4fa8d865b"
+  },
+  {
+    "original": "public/favicon.ico",
+    "preserved": "assets/favicon.ico",
+    "sha256": "05148ea7ae9121db619ac11ff286159b3705de4fee6d171dc6498a925782f9bb"
+  },
+  {
+    "original": "public/fonts/manrope-latin.woff2",
+    "preserved": "assets/fonts/manrope-latin.woff2",
+    "sha256": "e310b55a7fd9677f5e3555e6c6c4d064fa1f1d24393f0ddbe217cea12a8c432f"
+  },
+  {
+    "original": "public/fonts/MANROPE-OFL.txt",
+    "preserved": "assets/fonts/MANROPE-OFL.txt",
+    "sha256": "d6a309fcfb963d329a93baf9df66fa5f3c23a4be2b5f67edf24d6cafecde12ac"
+  },
+  {
+    "original": "public/fonts/yatra-latin.woff2",
+    "preserved": "assets/fonts/yatra-latin.woff2",
+    "sha256": "e095af3fd97a28ae1d7cc06d492ba66d3c1b0a726cfef611695a1adb65205f87"
+  },
+  {
+    "original": "public/fonts/YATRA-OFL.txt",
+    "preserved": "assets/fonts/YATRA-OFL.txt",
+    "sha256": "942d3ca0ed0582db74a824c67c1b0e4a0ae7d84f9d8f8ffbc1ebc39fd4d89f37"
+  },
+  {
+    "original": "public/KrowdKraft_Logo.png",
+    "preserved": "assets/KrowdKraft_Logo.png",
+    "sha256": "cca4e51fa7a04938390d0a4dd102b980651f45a8fbdea0b1ff8d660840538011"
+  },
+  {
+    "original": "public/logo.png",
+    "preserved": "assets/logo.png",
+    "sha256": "2326d3d622f64dd9b7367cfbcc85546eaf7c27ee737576cbc1bc8435eb267875"
+  },
+  {
+    "original": ".artifacts/cream/1440-.png",
+    "preserved": "assets/references/artifacts/cream/1440-.png",
+    "sha256": "22203f1e33f4a394cefaefde15c6d5d38b7276b116d32736de968052c8bc4cf3"
+  },
+  {
+    "original": ".artifacts/cream/1440-account.png",
+    "preserved": "assets/references/artifacts/cream/1440-account.png",
+    "sha256": "ebf2b7148f2d65dd6bd3db1f75eaf12026ffa552a95fa127439bc2829b128e6d"
+  },
+  {
+    "original": ".artifacts/cream/1440-events-hacktoberfest-hack-day-2026.png",
+    "preserved": "assets/references/artifacts/cream/1440-events-hacktoberfest-hack-day-2026.png",
+    "sha256": "627de27836aceb9a29f0c23e394af4d1c7282edf8292ff42b8175e9ebbe3c778"
+  },
+  {
+    "original": ".artifacts/cream/1440-events.png",
+    "preserved": "assets/references/artifacts/cream/1440-events.png",
+    "sha256": "067d8c9157cc45f4a04225ae642e6e164bc492c0c856a0654a7eb1f8de419403"
+  },
+  {
+    "original": ".artifacts/cream/1440-journal.png",
+    "preserved": "assets/references/artifacts/cream/1440-journal.png",
+    "sha256": "0c6d51619b6c47b8915282be1dee8408778b05f80e030994369fc695b5607e9a"
+  },
+  {
+    "original": ".artifacts/cream/1440-leaderboard.png",
+    "preserved": "assets/references/artifacts/cream/1440-leaderboard.png",
+    "sha256": "901fe1a9cdd5ccd367d0e6baa73450865d82be4b5ca621eb806ba8e5f13a789c"
+  },
+  {
+    "original": ".artifacts/cream/1440-marketplace.png",
+    "preserved": "assets/references/artifacts/cream/1440-marketplace.png",
+    "sha256": "51c9d9a5cacc2b22a9022e6caf61cff8b16508675594d33d9ef29a22248806d6"
+  },
+  {
+    "original": ".artifacts/cream/1440-privacy.png",
+    "preserved": "assets/references/artifacts/cream/1440-privacy.png",
+    "sha256": "495a740389637b148c65caeff68e73aa65d6f6fada920a48f524241271dc86c6"
+  },
+  {
+    "original": ".artifacts/cream/1440-spotlight.png",
+    "preserved": "assets/references/artifacts/cream/1440-spotlight.png",
+    "sha256": "8eb3f47a76547e59a6e69c462a30561b8cd5980aaaa26316c3baa28d74b14c5c"
+  },
+  {
+    "original": ".artifacts/cream/390-.png",
+    "preserved": "assets/references/artifacts/cream/390-.png",
+    "sha256": "2eaf3db3e72f2a2ba7de35f483c7aed841d36779bdf06845e68165148ea2f679"
+  },
+  {
+    "original": ".artifacts/cream/390-account.png",
+    "preserved": "assets/references/artifacts/cream/390-account.png",
+    "sha256": "e333fc518b44e35a689ca9783593a48e57e907b6a8dc494d20e8386a27510f7c"
+  },
+  {
+    "original": ".artifacts/cream/390-events-hacktoberfest-hack-day-2026.png",
+    "preserved": "assets/references/artifacts/cream/390-events-hacktoberfest-hack-day-2026.png",
+    "sha256": "f75025fe10e08f353bb98a172079ce5a48bd098b368efecdd78613be8e03bf96"
+  },
+  {
+    "original": ".artifacts/cream/390-events.png",
+    "preserved": "assets/references/artifacts/cream/390-events.png",
+    "sha256": "d4d3ba8474db242b294b4c6cb9b6cf68fe41e17032ef5405eba75c9d88498c57"
+  },
+  {
+    "original": ".artifacts/cream/390-journal.png",
+    "preserved": "assets/references/artifacts/cream/390-journal.png",
+    "sha256": "737ab52d7f8af2315e2b91012e4b95be7535c341434a07590df2ad154b4f71bb"
+  },
+  {
+    "original": ".artifacts/cream/390-leaderboard.png",
+    "preserved": "assets/references/artifacts/cream/390-leaderboard.png",
+    "sha256": "e942f80fc2775bfe217907261b7c11a4826e290961282c5a06ecec3250f778fa"
+  },
+  {
+    "original": ".artifacts/cream/390-marketplace.png",
+    "preserved": "assets/references/artifacts/cream/390-marketplace.png",
+    "sha256": "792c58db213ef394809851ac30f5741106fd3f43ceef1a70d6d4ef4e0cbc94c9"
+  },
+  {
+    "original": ".artifacts/cream/390-privacy.png",
+    "preserved": "assets/references/artifacts/cream/390-privacy.png",
+    "sha256": "b497d431d6acd67cf637ed039c4b35e526f256f6673e16e0d0243f27b376bea8"
+  },
+  {
+    "original": ".artifacts/cream/390-spotlight.png",
+    "preserved": "assets/references/artifacts/cream/390-spotlight.png",
+    "sha256": "545e6fa1a7b2541e38b76b4377882e4eb9e2f1ee15f400da13c4924176301bc8"
+  },
+  {
+    "original": ".artifacts/cream/detail-account-top.png",
+    "preserved": "assets/references/artifacts/cream/detail-account-top.png",
+    "sha256": "120e7322034d4e007002fd9dcb541801517570de422f36873f62c43448f06e92"
+  },
+  {
+    "original": ".artifacts/cream/detail-dialog.png",
+    "preserved": "assets/references/artifacts/cream/detail-dialog.png",
+    "sha256": "f33257147c501076cc48d5ada878b95dab9522e646de888c0a4b82cfd4660c6c"
+  },
+  {
+    "original": ".artifacts/cream/detail-events-top.png",
+    "preserved": "assets/references/artifacts/cream/detail-events-top.png",
+    "sha256": "75c4701ea08ad1d10a4823b1e4e9a62a80f813d2e95fface66cd45779a86c3f3"
+  },
+  {
+    "original": ".artifacts/cream/detail-happening.png",
+    "preserved": "assets/references/artifacts/cream/detail-happening.png",
+    "sha256": "acd7d4c2026c615f5b917b9896a53f06e939ebf454b62fd9a4846e3a6bf4099a"
+  },
+  {
+    "original": ".artifacts/cream/detail-journal-top.png",
+    "preserved": "assets/references/artifacts/cream/detail-journal-top.png",
+    "sha256": "d68db2e17954eb126d657bcc39a24ca6e88a0f9c9755f263af1cc24fa45be88b"
+  },
+  {
+    "original": ".artifacts/cream/detail-journal.png",
+    "preserved": "assets/references/artifacts/cream/detail-journal.png",
+    "sha256": "4b9ebf42529dfb096efac85b467df2393257ddb1bc534fbd20e9c05873058c41"
+  },
+  {
+    "original": ".artifacts/cream/detail-leaderboard-top.png",
+    "preserved": "assets/references/artifacts/cream/detail-leaderboard-top.png",
+    "sha256": "00d3128f0b292e13d3e6ca7ae98daafedec52fad4aa08daa5faa00e75e50ee12"
+  },
+  {
+    "original": ".artifacts/cream/detail-marketplace-form.png",
+    "preserved": "assets/references/artifacts/cream/detail-marketplace-form.png",
+    "sha256": "84b5e1761fcde4da3b76b4f340ae852918168df9d93774c9fdedab847ba78531"
+  },
+  {
+    "original": ".artifacts/cream/detail-marketplace-top.png",
+    "preserved": "assets/references/artifacts/cream/detail-marketplace-top.png",
+    "sha256": "9ff0ffe897a73f63315fff816f9420657b01ed86844b5211628777944852156a"
+  },
+  {
+    "original": ".artifacts/cream/detail-people.png",
+    "preserved": "assets/references/artifacts/cream/detail-people.png",
+    "sha256": "3c3d521362ea434f46b00b06e1e7abb8a1c72c0c17e532dbffedcfcaa087e514"
+  },
+  {
+    "original": ".artifacts/cream/detail-privacy-top.png",
+    "preserved": "assets/references/artifacts/cream/detail-privacy-top.png",
+    "sha256": "618ff17f77552e49b76c9db95b119d444634b3f6ac0c1ff33ab3da9f9952733c"
+  },
+  {
+    "original": ".artifacts/cream/detail-spotlight-form.png",
+    "preserved": "assets/references/artifacts/cream/detail-spotlight-form.png",
+    "sha256": "fb848d0e133492667dd31c0293c4d218173f1f1e84580a3decf2ee258c22a12d"
+  },
+  {
+    "original": ".artifacts/cream/detail-spotlight-top.png",
+    "preserved": "assets/references/artifacts/cream/detail-spotlight-top.png",
+    "sha256": "5315aca1ec49b6ca6b229d449439d7c7f5f19eb6cbd571b4b76281b0df20a029"
+  },
+  {
+    "original": ".artifacts/cream/detail-top.png",
+    "preserved": "assets/references/artifacts/cream/detail-top.png",
+    "sha256": "f8889421a3dcc45d555fa7a3433e36f8eb4650a500abc07e4404741b310308dc"
+  },
+  {
+    "original": ".artifacts/cream/final-dialog-1440.png",
+    "preserved": "assets/references/artifacts/cream/final-dialog-1440.png",
+    "sha256": "eca2fb32f6a7eb110a9eb00c81215b3197802bfeed9ac6b28a57ae2df879c827"
+  },
+  {
+    "original": ".artifacts/cream/final-dialog-320.png",
+    "preserved": "assets/references/artifacts/cream/final-dialog-320.png",
+    "sha256": "ffcf898c40273e1e6fa89ca1d79f0baefe82449ffc42b3b5c19431c469177b7b"
+  },
+  {
+    "original": ".artifacts/cream/final-dialog-390.png",
+    "preserved": "assets/references/artifacts/cream/final-dialog-390.png",
+    "sha256": "68dbe86d3abdd12b35b16de7c46e70c7d04f100e4ddca28b3a2724f0662bf161"
+  },
+  {
+    "original": ".artifacts/cream/final-dialog-768.png",
+    "preserved": "assets/references/artifacts/cream/final-dialog-768.png",
+    "sha256": "14447a116fa325d917c1e4ef013dc7e6746e7defbfcc08e409868a31c8c8bbb7"
+  },
+  {
+    "original": ".artifacts/cream/final-home-1440.png",
+    "preserved": "assets/references/artifacts/cream/final-home-1440.png",
+    "sha256": "9c8ad05d6a91eeb755cab994b543a670ad7cd0122ae0110b2ca0ae1c8b3f945b"
+  },
+  {
+    "original": ".artifacts/cream/final-home-320.png",
+    "preserved": "assets/references/artifacts/cream/final-home-320.png",
+    "sha256": "f876b6343b5d170a3ce41f5292f4389f5fd9eaaca48947051086eb6134483eee"
+  },
+  {
+    "original": ".artifacts/cream/final-home-390.png",
+    "preserved": "assets/references/artifacts/cream/final-home-390.png",
+    "sha256": "b54b523e6cbe70e0a9cb2be3ede7335752169f8e758e8088f5dad4676a9ba36b"
+  },
+  {
+    "original": ".artifacts/cream/final-home-768.png",
+    "preserved": "assets/references/artifacts/cream/final-home-768.png",
+    "sha256": "6119ba101a7557a420ba8cee8b08fec0aa5d8f60c8ccd19a6ed9532cf790b927"
+  },
+  {
+    "original": ".artifacts/cream/final-marketplace-form-1440.png",
+    "preserved": "assets/references/artifacts/cream/final-marketplace-form-1440.png",
+    "sha256": "92c3923947e8a40549e5f37326044fe5c42830ac4eef50350288eb927b429a2c"
+  },
+  {
+    "original": ".artifacts/cream/final-marketplace-form-320.png",
+    "preserved": "assets/references/artifacts/cream/final-marketplace-form-320.png",
+    "sha256": "d0f8079485f2c383fe436b5d9c5cce048825494df61c0d4827f49df487247a66"
+  },
+  {
+    "original": ".artifacts/cream/final-marketplace-form-390.png",
+    "preserved": "assets/references/artifacts/cream/final-marketplace-form-390.png",
+    "sha256": "282c6eefa228a2dd398c452bc884c733e84fd545b4fe298c1bff711546ef258c"
+  },
+  {
+    "original": ".artifacts/cream/final-marketplace-form-768.png",
+    "preserved": "assets/references/artifacts/cream/final-marketplace-form-768.png",
+    "sha256": "8a179ab7c96316f694eedfb22cf02d35b931366983b0be2d01bbc93d132214b5"
+  },
+  {
+    "original": ".artifacts/cream/final-menu-320.png",
+    "preserved": "assets/references/artifacts/cream/final-menu-320.png",
+    "sha256": "fa730ec5c7b05222cc31a8ca65dbec53caa88cfa5dd843d27ed36bcd5f475a9f"
+  },
+  {
+    "original": ".artifacts/cream/final-menu-390.png",
+    "preserved": "assets/references/artifacts/cream/final-menu-390.png",
+    "sha256": "18f3fc1826b34f7b35f2786eddb0c542f7cee9e19c180dbec040e8dbf2e362cd"
+  },
+  {
+    "original": ".artifacts/cream/final-menu-768.png",
+    "preserved": "assets/references/artifacts/cream/final-menu-768.png",
+    "sha256": "44a23fb85fbb4caca00b7112b8063daa17e5a88323f08a35f8208f8fb1c0cdb1"
+  },
+  {
+    "original": ".artifacts/cream/final-spotlight-form-1440.png",
+    "preserved": "assets/references/artifacts/cream/final-spotlight-form-1440.png",
+    "sha256": "980e9d37a9a0042fc883a4fbd03cc21dc89834daba1973696c1561ca0e2a3349"
+  },
+  {
+    "original": ".artifacts/cream/final-spotlight-form-320.png",
+    "preserved": "assets/references/artifacts/cream/final-spotlight-form-320.png",
+    "sha256": "53df927b4310e3ba53d8a0d5cf6377b23c768ec8f0ac187fef9b2b08b07bb52e"
+  },
+  {
+    "original": ".artifacts/cream/final-spotlight-form-390.png",
+    "preserved": "assets/references/artifacts/cream/final-spotlight-form-390.png",
+    "sha256": "9c504c5afc367e1d6caecff1af8f7808e1eab216ad8f44fa9d181f12e63ab3bc"
+  },
+  {
+    "original": ".artifacts/cream/final-spotlight-form-768.png",
+    "preserved": "assets/references/artifacts/cream/final-spotlight-form-768.png",
+    "sha256": "9838a7ff852f8114726fe3f555fb6b192b3d0e4b219e3846ba8257a95cc56306"
+  },
+  {
+    "original": ".artifacts/cream/live-dialog-1440.png",
+    "preserved": "assets/references/artifacts/cream/final-dialog-1440.png",
+    "sha256": "eca2fb32f6a7eb110a9eb00c81215b3197802bfeed9ac6b28a57ae2df879c827"
+  },
+  {
+    "original": ".artifacts/cream/live-dialog-320.png",
+    "preserved": "assets/references/artifacts/cream/final-dialog-320.png",
+    "sha256": "ffcf898c40273e1e6fa89ca1d79f0baefe82449ffc42b3b5c19431c469177b7b"
+  },
+  {
+    "original": ".artifacts/cream/live-dialog-390.png",
+    "preserved": "assets/references/artifacts/cream/live-dialog-390.png",
+    "sha256": "1cabcc72004d5b2f64ec98ea5dc2b83becb60c4136caf97a27c8697a63d1c7e4"
+  },
+  {
+    "original": ".artifacts/cream/live-dialog-768.png",
+    "preserved": "assets/references/artifacts/cream/final-dialog-768.png",
+    "sha256": "14447a116fa325d917c1e4ef013dc7e6746e7defbfcc08e409868a31c8c8bbb7"
+  },
+  {
+    "original": ".artifacts/cream/live-home-1440.png",
+    "preserved": "assets/references/artifacts/cream/live-home-1440.png",
+    "sha256": "919904be0727481064d01ee40b555d49fa61d8694e6a83f4291a02017b956a09"
+  },
+  {
+    "original": ".artifacts/cream/live-home-320.png",
+    "preserved": "assets/references/artifacts/cream/live-home-320.png",
+    "sha256": "d92fc575689f5002cc990fd03367d4bc30e8bf38dc29a379d5d17d9575280761"
+  },
+  {
+    "original": ".artifacts/cream/live-home-390.png",
+    "preserved": "assets/references/artifacts/cream/final-home-390.png",
+    "sha256": "b54b523e6cbe70e0a9cb2be3ede7335752169f8e758e8088f5dad4676a9ba36b"
+  },
+  {
+    "original": ".artifacts/cream/live-home-768.png",
+    "preserved": "assets/references/artifacts/cream/live-home-768.png",
+    "sha256": "6450b0f2871d3ca81a1194d24e100570ee1722fabd7c76abe554dd824948ad1f"
+  },
+  {
+    "original": ".artifacts/cream/live-marketplace-form-1440.png",
+    "preserved": "assets/references/artifacts/cream/final-marketplace-form-1440.png",
+    "sha256": "92c3923947e8a40549e5f37326044fe5c42830ac4eef50350288eb927b429a2c"
+  },
+  {
+    "original": ".artifacts/cream/live-marketplace-form-320.png",
+    "preserved": "assets/references/artifacts/cream/final-marketplace-form-320.png",
+    "sha256": "d0f8079485f2c383fe436b5d9c5cce048825494df61c0d4827f49df487247a66"
+  },
+  {
+    "original": ".artifacts/cream/live-marketplace-form-390.png",
+    "preserved": "assets/references/artifacts/cream/final-marketplace-form-390.png",
+    "sha256": "282c6eefa228a2dd398c452bc884c733e84fd545b4fe298c1bff711546ef258c"
+  },
+  {
+    "original": ".artifacts/cream/live-marketplace-form-768.png",
+    "preserved": "assets/references/artifacts/cream/final-marketplace-form-768.png",
+    "sha256": "8a179ab7c96316f694eedfb22cf02d35b931366983b0be2d01bbc93d132214b5"
+  },
+  {
+    "original": ".artifacts/cream/live-menu-320.png",
+    "preserved": "assets/references/artifacts/cream/final-menu-320.png",
+    "sha256": "fa730ec5c7b05222cc31a8ca65dbec53caa88cfa5dd843d27ed36bcd5f475a9f"
+  },
+  {
+    "original": ".artifacts/cream/live-menu-390.png",
+    "preserved": "assets/references/artifacts/cream/final-menu-390.png",
+    "sha256": "18f3fc1826b34f7b35f2786eddb0c542f7cee9e19c180dbec040e8dbf2e362cd"
+  },
+  {
+    "original": ".artifacts/cream/live-menu-768.png",
+    "preserved": "assets/references/artifacts/cream/final-menu-768.png",
+    "sha256": "44a23fb85fbb4caca00b7112b8063daa17e5a88323f08a35f8208f8fb1c0cdb1"
+  },
+  {
+    "original": ".artifacts/cream/live-spotlight-form-1440.png",
+    "preserved": "assets/references/artifacts/cream/final-spotlight-form-1440.png",
+    "sha256": "980e9d37a9a0042fc883a4fbd03cc21dc89834daba1973696c1561ca0e2a3349"
+  },
+  {
+    "original": ".artifacts/cream/live-spotlight-form-320.png",
+    "preserved": "assets/references/artifacts/cream/final-spotlight-form-320.png",
+    "sha256": "53df927b4310e3ba53d8a0d5cf6377b23c768ec8f0ac187fef9b2b08b07bb52e"
+  },
+  {
+    "original": ".artifacts/cream/live-spotlight-form-390.png",
+    "preserved": "assets/references/artifacts/cream/final-spotlight-form-390.png",
+    "sha256": "9c504c5afc367e1d6caecff1af8f7808e1eab216ad8f44fa9d181f12e63ab3bc"
+  },
+  {
+    "original": ".artifacts/cream/live-spotlight-form-768.png",
+    "preserved": "assets/references/artifacts/cream/final-spotlight-form-768.png",
+    "sha256": "9838a7ff852f8114726fe3f555fb6b192b3d0e4b219e3846ba8257a95cc56306"
+  },
+  {
+    "original": ".artifacts/cream/stitch-home.png",
+    "preserved": "assets/references/artifacts/cream/stitch-home.png",
+    "sha256": "a49bb96b9180213b5d38ce91ff1034c3d7884778f45ba52e3dc7e2eb0534fcc2"
+  },
+  {
+    "original": ".artifacts/cream/viewport-1024-.png",
+    "preserved": "assets/references/artifacts/cream/viewport-1024-.png",
+    "sha256": "0d5a81382c3b738717c2466252245f34ec7dbf17e4817dcef4cb4df01a1b15be"
+  },
+  {
+    "original": ".artifacts/cream/viewport-1024-journal.png",
+    "preserved": "assets/references/artifacts/cream/viewport-1024-journal.png",
+    "sha256": "31a0888a13bec89b419063f93618550cffe28776006c017176de6a83e5607270"
+  },
+  {
+    "original": ".artifacts/cream/viewport-1024-marketplace.png",
+    "preserved": "assets/references/artifacts/cream/viewport-1024-marketplace.png",
+    "sha256": "2f94f79741eb2d8e0ce929ed848fbd33c8049ab4b1a1db5f396e1cab35e7cf52"
+  },
+  {
+    "original": ".artifacts/cream/viewport-1024-spotlight.png",
+    "preserved": "assets/references/artifacts/cream/viewport-1024-spotlight.png",
+    "sha256": "d34e343fc7283180bbc9e2e406e17c2cbd79973ceb7cef84cdb8dfc157c4b2f4"
+  },
+  {
+    "original": ".artifacts/cream/viewport-1366-.png",
+    "preserved": "assets/references/artifacts/cream/viewport-1366-.png",
+    "sha256": "93916c9744ffdd32d8eb22f1449777136b83a925a3a463fde35edb8d8f078810"
+  },
+  {
+    "original": ".artifacts/cream/viewport-1366-journal.png",
+    "preserved": "assets/references/artifacts/cream/viewport-1366-journal.png",
+    "sha256": "22e2d37df53e7f9e5a9e338490cd3b3684d32ccbcf041a7c2450df8ae6c57ba4"
+  },
+  {
+    "original": ".artifacts/cream/viewport-1366-marketplace.png",
+    "preserved": "assets/references/artifacts/cream/viewport-1366-marketplace.png",
+    "sha256": "4ae75131c65c1509de9a0e230aa11cca187eef64244ca6e7d0b2325af4c3f4c7"
+  },
+  {
+    "original": ".artifacts/cream/viewport-1366-spotlight.png",
+    "preserved": "assets/references/artifacts/cream/viewport-1366-spotlight.png",
+    "sha256": "413ac995fb493adfd08e9de230beb3cd5f7f345ca8b87a0990b3dc611dff96d5"
+  },
+  {
+    "original": ".artifacts/cream/viewport-1920-.png",
+    "preserved": "assets/references/artifacts/cream/viewport-1920-.png",
+    "sha256": "f429bbc0a5d9f703679b6e24cd903ab656ae91c325e9c6a8c2e8788d683ff5a6"
+  },
+  {
+    "original": ".artifacts/cream/viewport-1920-journal.png",
+    "preserved": "assets/references/artifacts/cream/viewport-1920-journal.png",
+    "sha256": "5463f057f95a489a0c0b0e6321509f629336894d8babc6bea8c6e4df5a6565f2"
+  },
+  {
+    "original": ".artifacts/cream/viewport-1920-marketplace.png",
+    "preserved": "assets/references/artifacts/cream/viewport-1920-marketplace.png",
+    "sha256": "bbb0ba911e775a49bb76dcf23a6e91498708ad7c6a72af4673e98555abf71053"
+  },
+  {
+    "original": ".artifacts/cream/viewport-1920-spotlight.png",
+    "preserved": "assets/references/artifacts/cream/viewport-1920-spotlight.png",
+    "sha256": "6b2788ed1f41124a5e7bff3c2fcec2afb8e5a7164afee14e412f0ac07bb39f26"
+  },
+  {
+    "original": ".artifacts/cream/viewport-320-.png",
+    "preserved": "assets/references/artifacts/cream/viewport-320-.png",
+    "sha256": "5a38fefb4e960998a06f6cc7980896d713a6abac2be9f73396fdad2a1c22372e"
+  },
+  {
+    "original": ".artifacts/cream/viewport-320-journal.png",
+    "preserved": "assets/references/artifacts/cream/viewport-320-journal.png",
+    "sha256": "20e857d5de99754acf96452ebde0f9e26ba09ec16b8e33cb6789bc1af43c3909"
+  },
+  {
+    "original": ".artifacts/cream/viewport-320-marketplace.png",
+    "preserved": "assets/references/artifacts/cream/viewport-320-marketplace.png",
+    "sha256": "53d0d2672af8fed1b2ec3de03b4f37b710d120e3e4a13bbd921812420ecdf38a"
+  },
+  {
+    "original": ".artifacts/cream/viewport-320-spotlight.png",
+    "preserved": "assets/references/artifacts/cream/viewport-320-spotlight.png",
+    "sha256": "e36fd3a83838cc62149adcc602b434c5828e0fa116e66fc19214f4ffebcf997a"
+  },
+  {
+    "original": ".artifacts/cream/viewport-768-.png",
+    "preserved": "assets/references/artifacts/cream/viewport-768-.png",
+    "sha256": "06171fa451292d8aae435ee58f89c93d9a54d7e655d621b107f88777fc13ba5e"
+  },
+  {
+    "original": ".artifacts/cream/viewport-768-journal.png",
+    "preserved": "assets/references/artifacts/cream/viewport-768-journal.png",
+    "sha256": "90de5cbd96cdfa3de9c1099a6876aad262a69a08258e14c91814b66773a43b75"
+  },
+  {
+    "original": ".artifacts/cream/viewport-768-marketplace.png",
+    "preserved": "assets/references/artifacts/cream/viewport-768-marketplace.png",
+    "sha256": "166da14e921c0d8f7871da7f5ac7a3ed13d1fcc92e6886f1e0063d67bfdf1cab"
+  },
+  {
+    "original": ".artifacts/cream/viewport-768-spotlight.png",
+    "preserved": "assets/references/artifacts/cream/viewport-768-spotlight.png",
+    "sha256": "3a2dcfaaa03e5cbb7996a2ff1ad97b575108701ef919f1b358d4b7046b9a2c0a"
+  },
+  {
+    "original": ".artifacts/exhibition/1440-.png",
+    "preserved": "assets/references/artifacts/exhibition/1440-.png",
+    "sha256": "fd530ecb63d89de185390baeaaee6b4e28421516b8a9214fb8727f8a78c281b6"
+  },
+  {
+    "original": ".artifacts/exhibition/1440-account.png",
+    "preserved": "assets/references/artifacts/exhibition/1440-account.png",
+    "sha256": "0a08553a2aa71d84203f7be1e65b9afb73cff5931142a6c304d826c2787df878"
+  },
+  {
+    "original": ".artifacts/exhibition/1440-events-hacktoberfest-hack-day-2026.png",
+    "preserved": "assets/references/artifacts/exhibition/1440-events-hacktoberfest-hack-day-2026.png",
+    "sha256": "bbe3b0db95a02d5a6f7f9009658affebf96b94b42eb21a2574be373990412819"
+  },
+  {
+    "original": ".artifacts/exhibition/1440-events.png",
+    "preserved": "assets/references/artifacts/exhibition/1440-events.png",
+    "sha256": "245d9c9431844f04cc836a87e9567a96e4f06343ac36aea29075824b7247d93c"
+  },
+  {
+    "original": ".artifacts/exhibition/1440-journal.png",
+    "preserved": "assets/references/artifacts/exhibition/1440-journal.png",
+    "sha256": "98ba20391fc3ec6eb329c200e6a49abeb984565c98d522ec73bed6b4efa130ac"
+  },
+  {
+    "original": ".artifacts/exhibition/1440-leaderboard.png",
+    "preserved": "assets/references/artifacts/exhibition/1440-leaderboard.png",
+    "sha256": "2170ffa0d6dfafed4b21773a9475132753c4182be519428348abdcdfe923e75c"
+  },
+  {
+    "original": ".artifacts/exhibition/1440-marketplace.png",
+    "preserved": "assets/references/artifacts/exhibition/1440-marketplace.png",
+    "sha256": "fbc573e00fe526b5cbf1f9b3063b563d250c21878e1f9b9285c7ddc5c6696636"
+  },
+  {
+    "original": ".artifacts/exhibition/1440-privacy.png",
+    "preserved": "assets/references/artifacts/exhibition/1440-privacy.png",
+    "sha256": "92ac6901fe5e2daf909d70cef1fa0b5d4724f4b39315c746ce2202570c9de1c2"
+  },
+  {
+    "original": ".artifacts/exhibition/1440-spotlight.png",
+    "preserved": "assets/references/artifacts/exhibition/1440-spotlight.png",
+    "sha256": "19c21b5d78232f42a371fc29de0828cad5ac842e1803ab5e1ddd6cc5783cc5cd"
+  },
+  {
+    "original": ".artifacts/exhibition/390-.png",
+    "preserved": "assets/references/artifacts/exhibition/390-.png",
+    "sha256": "ffc192b58477971d1d47a38ae3119d4b27b8828187b41889c54a19247bb47021"
+  },
+  {
+    "original": ".artifacts/exhibition/390-account.png",
+    "preserved": "assets/references/artifacts/exhibition/390-account.png",
+    "sha256": "d3d232b613af1b4f890c28230544483b22fbf10900d4182db9921539812aac30"
+  },
+  {
+    "original": ".artifacts/exhibition/390-events-hacktoberfest-hack-day-2026.png",
+    "preserved": "assets/references/artifacts/exhibition/390-events-hacktoberfest-hack-day-2026.png",
+    "sha256": "044e65b795135fe96c15c46fce58a45ef3838fc76533d0b266a523a57419d015"
+  },
+  {
+    "original": ".artifacts/exhibition/390-events.png",
+    "preserved": "assets/references/artifacts/exhibition/390-events.png",
+    "sha256": "a3586f302ea32fb8478a2c838a9b910f4f513ba6d415cde85e679c0fbf90b511"
+  },
+  {
+    "original": ".artifacts/exhibition/390-journal.png",
+    "preserved": "assets/references/artifacts/exhibition/390-journal.png",
+    "sha256": "6928f500ace4785abe8373748ea90771032ad10808b0645fc03cc87eeed797be"
+  },
+  {
+    "original": ".artifacts/exhibition/390-leaderboard.png",
+    "preserved": "assets/references/artifacts/exhibition/390-leaderboard.png",
+    "sha256": "d4c764f5f7c070cecc8fb62bc20ff1ccb61a5e59e147d0707ea7b16718000e1b"
+  },
+  {
+    "original": ".artifacts/exhibition/390-marketplace.png",
+    "preserved": "assets/references/artifacts/exhibition/390-marketplace.png",
+    "sha256": "fed7b6846ff39cab9a24e35a07ddcccc9c32c1acafce7bc341fadd49ad641d15"
+  },
+  {
+    "original": ".artifacts/exhibition/390-privacy.png",
+    "preserved": "assets/references/artifacts/exhibition/390-privacy.png",
+    "sha256": "cfc934be555cc03e9c80d885f4c0b7cdc663c3d8b7b511fa395c8bd4f647696f"
+  },
+  {
+    "original": ".artifacts/exhibition/390-spotlight.png",
+    "preserved": "assets/references/artifacts/exhibition/390-spotlight.png",
+    "sha256": "d01d3e237e7b7913c1fb90b6160921ffd126c5ee7de7aaf74a582bde79c4825f"
+  },
+  {
+    "original": ".artifacts/exhibition/carousel-mobile-debug.png",
+    "preserved": "assets/references/artifacts/exhibition/carousel-mobile-debug.png",
+    "sha256": "7855daa55bef84b0d1512e62f6a2ab099685252e22b1f1ba7d93cb492e67b9bd"
+  },
+  {
+    "original": ".artifacts/exhibition/carousel-no-preference-320.png",
+    "preserved": "assets/references/artifacts/exhibition/carousel-no-preference-320.png",
+    "sha256": "d6ec8272be79411fe009f3ebdf4c625de7313ef01e0ff4deb5d7fd0e8fd71c5a"
+  },
+  {
+    "original": ".artifacts/exhibition/carousel-no-preference-390.png",
+    "preserved": "assets/references/artifacts/exhibition/carousel-no-preference-390.png",
+    "sha256": "f3de0de7ee82e806905c74b245240797b0c2c3ecacd319bc779d4a1dd03bdf76"
+  },
+  {
+    "original": ".artifacts/exhibition/carousel-no-preference.png",
+    "preserved": "assets/references/artifacts/exhibition/carousel-no-preference.png",
+    "sha256": "a4c0bcfe9fe06bad19901872d01804b661266a9a4d60f7a773ddab097e54e3d1"
+  },
+  {
+    "original": ".artifacts/exhibition/carousel-reduce-320.png",
+    "preserved": "assets/references/artifacts/exhibition/carousel-reduce-320.png",
+    "sha256": "ba3e49d2343c19678d95720b4c987ec586e1b407c67bc7fd2af62cfadc0cfd3c"
+  },
+  {
+    "original": ".artifacts/exhibition/carousel-reduce-390.png",
+    "preserved": "assets/references/artifacts/exhibition/carousel-mobile-debug.png",
+    "sha256": "7855daa55bef84b0d1512e62f6a2ab099685252e22b1f1ba7d93cb492e67b9bd"
+  },
+  {
+    "original": ".artifacts/exhibition/carousel-reduce.png",
+    "preserved": "assets/references/artifacts/exhibition/carousel-reduce.png",
+    "sha256": "d25569c7ef5ef1669a96a44a9fcf8606fc5f5cee760293c5615552b5abd63a7f"
+  },
+  {
+    "original": ".artifacts/exhibition/duck-dismiss-final.png",
+    "preserved": "assets/references/artifacts/exhibition/duck-dismiss-final.png",
+    "sha256": "18ada095a26d77e5333505d63d251d08717517fac809e2928f4fa6127db57de1"
+  },
+  {
+    "original": ".artifacts/exhibition/happening-1440.png",
+    "preserved": "assets/references/artifacts/exhibition/happening-1440.png",
+    "sha256": "d4fba902647578b23b96217c54867dba3564f80bdae91749d87377b8f24be880"
+  },
+  {
+    "original": ".artifacts/exhibition/happening-320.png",
+    "preserved": "assets/references/artifacts/exhibition/happening-320.png",
+    "sha256": "c06458144953751092bd41510ddfee67e765caf34cad37e5b5ac80514e82ba20"
+  },
+  {
+    "original": ".artifacts/exhibition/happening-390.png",
+    "preserved": "assets/references/artifacts/exhibition/happening-390.png",
+    "sha256": "1a5d455d293d5e12848359b44520305c7185adbeaf051ba5228b02fe331d8754"
+  },
+  {
+    "original": ".artifacts/exhibition/happening-768.png",
+    "preserved": "assets/references/artifacts/exhibition/happening-768.png",
+    "sha256": "137ea93b935a5b166262875d8a7785bce4d714d9959aa263405d27152fb05669"
+  },
+  {
+    "original": ".artifacts/exhibition/hero-1440.png",
+    "preserved": "assets/references/artifacts/exhibition/hero-1440.png",
+    "sha256": "a0c7564a6ce00abe84b5e9d1047e22657e947a7c1f079e95988fe9642b5c6a03"
+  },
+  {
+    "original": ".artifacts/exhibition/hero-320.png",
+    "preserved": "assets/references/artifacts/exhibition/hero-320.png",
+    "sha256": "22e5a32fd1399325a72efac0ec544d1174425bf6b83db91cb28f9f353aa2afe1"
+  },
+  {
+    "original": ".artifacts/exhibition/hero-390.png",
+    "preserved": "assets/references/artifacts/exhibition/hero-390.png",
+    "sha256": "bbb47b8ccae1199a28edd0f9190856e19780682edad08f9ff8195912b0c3e3e0"
+  },
+  {
+    "original": ".artifacts/exhibition/hero-768.png",
+    "preserved": "assets/references/artifacts/exhibition/hero-768.png",
+    "sha256": "75a94e44f327fbc1311a6647965935f75f5315d621f578628b86a7e9741a34ba"
+  },
+  {
+    "original": ".artifacts/exhibition/journal-1440.png",
+    "preserved": "assets/references/artifacts/exhibition/journal-1440.png",
+    "sha256": "6c0af09522e860264daf041866758e024b6a5524d3ea508da44634547d82c95d"
+  },
+  {
+    "original": ".artifacts/exhibition/journal-320.png",
+    "preserved": "assets/references/artifacts/exhibition/journal-320.png",
+    "sha256": "de6f9cc1a3c3aa3f6d763bb8bc298c6158fe697576d83d3241606aede9cdd406"
+  },
+  {
+    "original": ".artifacts/exhibition/journal-390.png",
+    "preserved": "assets/references/artifacts/exhibition/journal-390.png",
+    "sha256": "77431b0871360601818ae9dba1cc18bc9f123cdfe996715e0d295486b03659a6"
+  },
+  {
+    "original": ".artifacts/exhibition/journal-768.png",
+    "preserved": "assets/references/artifacts/exhibition/journal-768.png",
+    "sha256": "25a60deda1ec1eae6375f127820db8bd4702f47f89e738b3141e533ef35ec8b5"
+  },
+  {
+    "original": ".artifacts/exhibition/live-1440--.png",
+    "preserved": "assets/references/artifacts/exhibition/live-1440--.png",
+    "sha256": "27b898b30e5a7465f0027d4ec1022a3f85a8fdbb423158df0f728728cb5183e0"
+  },
+  {
+    "original": ".artifacts/exhibition/live-1440--events-hacktoberfest-hack-day-2026.png",
+    "preserved": "assets/references/artifacts/exhibition/live-1440--events-hacktoberfest-hack-day-2026.png",
+    "sha256": "09940f8b9911525849b26ef4959783bf0d56ad103cf6f78acf383def4bfc6ba8"
+  },
+  {
+    "original": ".artifacts/exhibition/live-1440--events.png",
+    "preserved": "assets/references/artifacts/exhibition/live-1440--events.png",
+    "sha256": "80cdbd26c4d6f9c493374c12e93951cce3bf6d325751257a2ca28a4bbdb64d79"
+  },
+  {
+    "original": ".artifacts/exhibition/live-1440--journal.png",
+    "preserved": "assets/references/artifacts/exhibition/live-1440--journal.png",
+    "sha256": "24a5eb164d9c048825ec4a9dc959df2d2ceb93dd99110f3fc63514afed6d62f6"
+  },
+  {
+    "original": ".artifacts/exhibition/live-1440--marketplace.png",
+    "preserved": "assets/references/artifacts/exhibition/live-1440--marketplace.png",
+    "sha256": "0b1ed866149e5ae4f7a372c43d6db5fa54816e54f132cfce66d0d447a377225f"
+  },
+  {
+    "original": ".artifacts/exhibition/live-1440--spotlight.png",
+    "preserved": "assets/references/artifacts/exhibition/live-1440--spotlight.png",
+    "sha256": "9b13340adbac880388a5b38949b5499eb6277c7ff8817f1c342b5166f2ace630"
+  },
+  {
+    "original": ".artifacts/exhibition/live-390--.png",
+    "preserved": "assets/references/artifacts/exhibition/live-390--.png",
+    "sha256": "b5ffd1af95d92d6aa3cca5c03719763c447b16c325638ddc7f0093786fc96e53"
+  },
+  {
+    "original": ".artifacts/exhibition/live-390--events-hacktoberfest-hack-day-2026.png",
+    "preserved": "assets/references/artifacts/exhibition/live-390--events-hacktoberfest-hack-day-2026.png",
+    "sha256": "a99fd9f2c13db3fb84cbce77315c016ec8b0c4b4f48f88f798f0b904a0e84f7e"
+  },
+  {
+    "original": ".artifacts/exhibition/live-390--events.png",
+    "preserved": "assets/references/artifacts/exhibition/live-390--events.png",
+    "sha256": "7d7bb8f8584b2df60a28c5aa308ac5342be9c704a4c248cc6e939707feeda77d"
+  },
+  {
+    "original": ".artifacts/exhibition/live-390--journal.png",
+    "preserved": "assets/references/artifacts/exhibition/live-390--journal.png",
+    "sha256": "d77baa95310c9138aa31e74297c810a35da437b67ef0b318ca00c4b378ff325e"
+  },
+  {
+    "original": ".artifacts/exhibition/live-390--marketplace.png",
+    "preserved": "assets/references/artifacts/exhibition/live-390--marketplace.png",
+    "sha256": "e68ac8f2b1bfa8c0d3ab2c9d17d870a8965ce5f1e9a9321b8106d93e3f666d8b"
+  },
+  {
+    "original": ".artifacts/exhibition/live-390--spotlight.png",
+    "preserved": "assets/references/artifacts/exhibition/live-390--spotlight.png",
+    "sha256": "7b2c58a0827f48a28cd5ad0dd45989337d6ad60f8e8535eef6b44656e05e464f"
+  },
+  {
+    "original": ".artifacts/exhibition/made-here-1440.png",
+    "preserved": "assets/references/artifacts/exhibition/made-here-1440.png",
+    "sha256": "de647a02ee8b988d2547fbfd592e3bf99f8622b19e53fe32c2d97b592b3bb6b0"
+  },
+  {
+    "original": ".artifacts/exhibition/made-here-320.png",
+    "preserved": "assets/references/artifacts/exhibition/made-here-320.png",
+    "sha256": "bc54905424d808236cd652ee4878b1656efa012a5423fea4bf0d0ceea9e2b209"
+  },
+  {
+    "original": ".artifacts/exhibition/made-here-390.png",
+    "preserved": "assets/references/artifacts/exhibition/made-here-390.png",
+    "sha256": "5211dd439743dbf5ddc1ca6580453f0406d216b0aab9359ef3eeca04249fe95f"
+  },
+  {
+    "original": ".artifacts/exhibition/made-here-768.png",
+    "preserved": "assets/references/artifacts/exhibition/made-here-768.png",
+    "sha256": "8680847c1082683d2b7b1dd4a4d0fdc6d24a520cf4262ba055ff81753d8bbbf9"
+  },
+  {
+    "original": ".artifacts/exhibition/spotlights-1440.png",
+    "preserved": "assets/references/artifacts/exhibition/spotlights-1440.png",
+    "sha256": "6b44d56dd763df622e32188434fcb4b0d3b08de853a035c560becef32f428d06"
+  },
+  {
+    "original": ".artifacts/exhibition/spotlights-320.png",
+    "preserved": "assets/references/artifacts/exhibition/spotlights-320.png",
+    "sha256": "8fa51a0c0d18ef45e22f703c30b7195b8164e427be9a8a6d463540edbeec4a76"
+  },
+  {
+    "original": ".artifacts/exhibition/spotlights-390.png",
+    "preserved": "assets/references/artifacts/exhibition/spotlights-390.png",
+    "sha256": "8839286b06bbbc55b560926fad78fe89a48026e9bc420a2dcd50a257ff0312e5"
+  },
+  {
+    "original": ".artifacts/exhibition/spotlights-768.png",
+    "preserved": "assets/references/artifacts/exhibition/spotlights-768.png",
+    "sha256": "e630e1b60eb37a33faf263c0d896afebba8feab14035830a1a786f1514620d78"
+  },
+  {
+    "original": ".artifacts/experience-review/docs/ShipWright Hack Day Guide.pdf",
+    "preserved": "assets/references/artifacts/experience-review/docs/ShipWright Hack Day Guide.pdf",
+    "sha256": "8e6d64d06746177c60a73614b6aabed0e4a59115e9c107ed83d19588127e3e0c"
+  },
+  {
+    "original": ".artifacts/experience-review/public/apple-touch-icon.png",
+    "preserved": "assets/apple-touch-icon.png",
+    "sha256": "40da65167a2fc23e1579c1d0ff4eb7da34c667bb3952768661c5e532977d9bb9"
+  },
+  {
+    "original": ".artifacts/experience-review/public/brand/logo.avif",
+    "preserved": "assets/brand/logo.avif",
+    "sha256": "83ceeeec4d0eb032b0a720c0802ede7d34def67cbf584c96566e3cd2273cde7c"
+  },
+  {
+    "original": ".artifacts/experience-review/public/brand/logo.webp",
+    "preserved": "assets/brand/logo.webp",
+    "sha256": "b36bacaf3369a347e3bebc1aaabf2b8f7db51d73b67d4a4d9c27b075be49ecad"
+  },
+  {
+    "original": ".artifacts/experience-review/public/brand/og.png",
+    "preserved": "assets/brand/og.png",
+    "sha256": "5be558c143fb0468c49cb4b8e5b7256d654a14a6192dd87f8d9e967c1d001a5a"
+  },
+  {
+    "original": ".artifacts/experience-review/public/favicon.ico",
+    "preserved": "assets/favicon.ico",
+    "sha256": "05148ea7ae9121db619ac11ff286159b3705de4fee6d171dc6498a925782f9bb"
+  },
+  {
+    "original": ".artifacts/experience-review/public/KrowdKraft_Logo.png",
+    "preserved": "assets/KrowdKraft_Logo.png",
+    "sha256": "cca4e51fa7a04938390d0a4dd102b980651f45a8fbdea0b1ff8d660840538011"
+  },
+  {
+    "original": ".artifacts/experience-review/public/logo.png",
+    "preserved": "assets/logo.png",
+    "sha256": "2326d3d622f64dd9b7367cfbcc85546eaf7c27ee737576cbc1bc8435eb267875"
+  },
+  {
+    "original": ".artifacts/figures-review/docs/ShipWright Hack Day Guide.pdf",
+    "preserved": "assets/references/artifacts/experience-review/docs/ShipWright Hack Day Guide.pdf",
+    "sha256": "8e6d64d06746177c60a73614b6aabed0e4a59115e9c107ed83d19588127e3e0c"
+  },
+  {
+    "original": ".artifacts/figures-review/public/apple-touch-icon.png",
+    "preserved": "assets/apple-touch-icon.png",
+    "sha256": "40da65167a2fc23e1579c1d0ff4eb7da34c667bb3952768661c5e532977d9bb9"
+  },
+  {
+    "original": ".artifacts/figures-review/public/brand/logo.avif",
+    "preserved": "assets/brand/logo.avif",
+    "sha256": "83ceeeec4d0eb032b0a720c0802ede7d34def67cbf584c96566e3cd2273cde7c"
+  },
+  {
+    "original": ".artifacts/figures-review/public/brand/logo.webp",
+    "preserved": "assets/brand/logo.webp",
+    "sha256": "b36bacaf3369a347e3bebc1aaabf2b8f7db51d73b67d4a4d9c27b075be49ecad"
+  },
+  {
+    "original": ".artifacts/figures-review/public/brand/og.png",
+    "preserved": "assets/brand/og.png",
+    "sha256": "5be558c143fb0468c49cb4b8e5b7256d654a14a6192dd87f8d9e967c1d001a5a"
+  },
+  {
+    "original": ".artifacts/figures-review/public/favicon.ico",
+    "preserved": "assets/favicon.ico",
+    "sha256": "05148ea7ae9121db619ac11ff286159b3705de4fee6d171dc6498a925782f9bb"
+  },
+  {
+    "original": ".artifacts/figures-review/public/KrowdKraft_Logo.png",
+    "preserved": "assets/KrowdKraft_Logo.png",
+    "sha256": "cca4e51fa7a04938390d0a4dd102b980651f45a8fbdea0b1ff8d660840538011"
+  },
+  {
+    "original": ".artifacts/figures-review/public/logo.png",
+    "preserved": "assets/logo.png",
+    "sha256": "2326d3d622f64dd9b7367cfbcc85546eaf7c27ee737576cbc1bc8435eb267875"
+  },
+  {
+    "original": ".artifacts/first-view.png",
+    "preserved": "assets/references/artifacts/first-view.png",
+    "sha256": "efc35fcca0822552e1c5e9b1b430543d445195842c60690340faef32d8b7060c"
+  },
+  {
+    "original": ".artifacts/foundation-review/docs/ShipWright Hack Day Guide.pdf",
+    "preserved": "assets/references/artifacts/experience-review/docs/ShipWright Hack Day Guide.pdf",
+    "sha256": "8e6d64d06746177c60a73614b6aabed0e4a59115e9c107ed83d19588127e3e0c"
+  },
+  {
+    "original": ".artifacts/foundation-review/public/apple-touch-icon.png",
+    "preserved": "assets/apple-touch-icon.png",
+    "sha256": "40da65167a2fc23e1579c1d0ff4eb7da34c667bb3952768661c5e532977d9bb9"
+  },
+  {
+    "original": ".artifacts/foundation-review/public/brand/logo.avif",
+    "preserved": "assets/brand/logo.avif",
+    "sha256": "83ceeeec4d0eb032b0a720c0802ede7d34def67cbf584c96566e3cd2273cde7c"
+  },
+  {
+    "original": ".artifacts/foundation-review/public/brand/logo.webp",
+    "preserved": "assets/brand/logo.webp",
+    "sha256": "b36bacaf3369a347e3bebc1aaabf2b8f7db51d73b67d4a4d9c27b075be49ecad"
+  },
+  {
+    "original": ".artifacts/foundation-review/public/brand/og.png",
+    "preserved": "assets/brand/og.png",
+    "sha256": "5be558c143fb0468c49cb4b8e5b7256d654a14a6192dd87f8d9e967c1d001a5a"
+  },
+  {
+    "original": ".artifacts/foundation-review/public/favicon.ico",
+    "preserved": "assets/favicon.ico",
+    "sha256": "05148ea7ae9121db619ac11ff286159b3705de4fee6d171dc6498a925782f9bb"
+  },
+  {
+    "original": ".artifacts/foundation-review/public/KrowdKraft_Logo.png",
+    "preserved": "assets/KrowdKraft_Logo.png",
+    "sha256": "cca4e51fa7a04938390d0a4dd102b980651f45a8fbdea0b1ff8d660840538011"
+  },
+  {
+    "original": ".artifacts/foundation-review/public/logo.png",
+    "preserved": "assets/logo.png",
+    "sha256": "2326d3d622f64dd9b7367cfbcc85546eaf7c27ee737576cbc1bc8435eb267875"
+  },
+  {
+    "original": ".artifacts/home-1440.png",
+    "preserved": "assets/references/artifacts/home-1440.png",
+    "sha256": "513219a440ed1a1f22d2a9a1e86ac07d38b3d762d59436faa34c7dea17cfe7d5"
+  },
+  {
+    "original": ".artifacts/home-390.png",
+    "preserved": "assets/references/artifacts/home-390.png",
+    "sha256": "0086abae7748717f52b51e0bbc7cc4399c76177e42c5a595e7114682f563766a"
+  },
+  {
+    "original": ".artifacts/krafty-expressions.png",
+    "preserved": "assets/references/artifacts/krafty-expressions.png",
+    "sha256": "9e184dfb9682cfd6d8ebf3df25cbb38abf8526951c635df20ab43fde60aa7e49"
+  },
+  {
+    "original": ".artifacts/krafty-guide-1440.png",
+    "preserved": "assets/references/artifacts/krafty-guide-1440.png",
+    "sha256": "bf17de0101637e7869c362bf08107d0d1a680a49cbc7de72cb5935f383e8ea74"
+  },
+  {
+    "original": ".artifacts/krafty-guide-390.png",
+    "preserved": "assets/references/artifacts/krafty-guide-390.png",
+    "sha256": "7337b8d0943fb07d27d09c918e4f809da8286c012f6e4cb9208c43c4615ffdc9"
+  },
+  {
+    "original": ".artifacts/krafty-home-1440.png",
+    "preserved": "assets/references/artifacts/krafty-home-1440.png",
+    "sha256": "52637dee138b325635713dc86e9cdaf26c3b48e68f5a2ed0b12f0c5a4fbe14d7"
+  },
+  {
+    "original": ".artifacts/krafty-home-390.png",
+    "preserved": "assets/references/artifacts/krafty-home-390.png",
+    "sha256": "598c719cc3dd038c792f8e59eccb3ba897140713860d4f2e3fdb188684143934"
+  },
+  {
+    "original": ".artifacts/light-restoration/1440-.png",
+    "preserved": "assets/references/artifacts/light-restoration/1440-.png",
+    "sha256": "2bde71eece90693410b477c7268830c612e56b5558269b013b5a21f764999022"
+  },
+  {
+    "original": ".artifacts/light-restoration/1440-account.png",
+    "preserved": "assets/references/artifacts/light-restoration/1440-account.png",
+    "sha256": "66eafafe7bc8460d0ad80620b76b4f1c4184216a798d83d9372844974d28e2fb"
+  },
+  {
+    "original": ".artifacts/light-restoration/1440-events-hacktoberfest-hack-day-2026.png",
+    "preserved": "assets/references/artifacts/light-restoration/1440-events-hacktoberfest-hack-day-2026.png",
+    "sha256": "6a3eca2c46ca2f10b920226f5320011179dd3645b12563cea2dc45d55e4cfae0"
+  },
+  {
+    "original": ".artifacts/light-restoration/1440-events.png",
+    "preserved": "assets/references/artifacts/light-restoration/1440-events.png",
+    "sha256": "acb3c427828f2aed143a9510fec41c904af82a54ab73143611b35155e626cc45"
+  },
+  {
+    "original": ".artifacts/light-restoration/1440-journal.png",
+    "preserved": "assets/references/artifacts/light-restoration/1440-journal.png",
+    "sha256": "689718bb7d96d40b50df4caa232724a91566e6d96f656217b835b5b55baffe95"
+  },
+  {
+    "original": ".artifacts/light-restoration/1440-leaderboard.png",
+    "preserved": "assets/references/artifacts/light-restoration/1440-leaderboard.png",
+    "sha256": "0ebffbbf5ce910329907e7d1e9ce152714adccdd89b626ac539f017da2e47652"
+  },
+  {
+    "original": ".artifacts/light-restoration/1440-marketplace.png",
+    "preserved": "assets/references/artifacts/light-restoration/1440-marketplace.png",
+    "sha256": "b91913550649f39ee03d3bfd87464cd0f24712f32b5067bc2c8ae7718c2a9462"
+  },
+  {
+    "original": ".artifacts/light-restoration/1440-privacy.png",
+    "preserved": "assets/references/artifacts/light-restoration/1440-privacy.png",
+    "sha256": "6008e3953f675ff9d90bf5c12e02c361bf2a967ba2f9ce87f52e72d455e2053f"
+  },
+  {
+    "original": ".artifacts/light-restoration/1440-spotlight.png",
+    "preserved": "assets/references/artifacts/light-restoration/1440-spotlight.png",
+    "sha256": "112fc607aeebd3ab8df4925540316b42dfc6d05bd8d766782472e30c271e3efa"
+  },
+  {
+    "original": ".artifacts/light-restoration/390-.png",
+    "preserved": "assets/references/artifacts/light-restoration/390-.png",
+    "sha256": "5f9f7812c599398f9e7e93d72be601c992bcf65764fa2e4e732d35b97be0ac0a"
+  },
+  {
+    "original": ".artifacts/light-restoration/390-account.png",
+    "preserved": "assets/references/artifacts/light-restoration/390-account.png",
+    "sha256": "e9cddffc30df9ce4366c2bc5a2961f9e772dfc395244e1b10e76692a9eb763a0"
+  },
+  {
+    "original": ".artifacts/light-restoration/390-events-hacktoberfest-hack-day-2026.png",
+    "preserved": "assets/references/artifacts/light-restoration/390-events-hacktoberfest-hack-day-2026.png",
+    "sha256": "af68f16767f7fadccfaf53bb7551ce87b78b3c902f97700f26b10159abe82525"
+  },
+  {
+    "original": ".artifacts/light-restoration/390-events.png",
+    "preserved": "assets/references/artifacts/light-restoration/390-events.png",
+    "sha256": "17ccc5aafaea742c96e8562bd1b175a898d5ca4b7e62493a72d0616470577bba"
+  },
+  {
+    "original": ".artifacts/light-restoration/390-journal.png",
+    "preserved": "assets/references/artifacts/light-restoration/390-journal.png",
+    "sha256": "0c0f62cdd7e2fba2b9032ec31b5d5df70206596dbeb3ca0b8256f36251017924"
+  },
+  {
+    "original": ".artifacts/light-restoration/390-leaderboard.png",
+    "preserved": "assets/references/artifacts/light-restoration/390-leaderboard.png",
+    "sha256": "966fc050d4987ff8a372f021702be17bbff690a137e910fe978bc054f2bc3008"
+  },
+  {
+    "original": ".artifacts/light-restoration/390-marketplace.png",
+    "preserved": "assets/references/artifacts/light-restoration/390-marketplace.png",
+    "sha256": "37a725e8c958364cf03478bbed5e0441a86b4974f91727887f0ce2685f7a9ec3"
+  },
+  {
+    "original": ".artifacts/light-restoration/390-privacy.png",
+    "preserved": "assets/references/artifacts/light-restoration/390-privacy.png",
+    "sha256": "0bd532662507e53e796cb09864a4fcecc3bc52d3b8110a806ce6dd774f05f2e0"
+  },
+  {
+    "original": ".artifacts/light-restoration/390-spotlight.png",
+    "preserved": "assets/references/artifacts/light-restoration/390-spotlight.png",
+    "sha256": "488491cb071787cba7001be3762ac337dc37b52c9374c30f58ea07702f083a09"
+  },
+  {
+    "original": ".artifacts/light-restoration/about-1440.png",
+    "preserved": "assets/references/artifacts/light-restoration/about-1440.png",
+    "sha256": "eb1e8f1c4f8b757d0d41cd7c5c80c39d28093e6d4e41f500f19fdd0e8c0a98b8"
+  },
+  {
+    "original": ".artifacts/light-restoration/about-320.png",
+    "preserved": "assets/references/artifacts/light-restoration/about-320.png",
+    "sha256": "0ad7899141cea08d1f4219e85eb6e66b4fe04f048f3f467263437441bb6c6b04"
+  },
+  {
+    "original": ".artifacts/light-restoration/about-390.png",
+    "preserved": "assets/references/artifacts/light-restoration/about-390.png",
+    "sha256": "2e73270a7b385a2643ccc4f58fafebfdd42db3084ee86624c61ce5ff1a1621ce"
+  },
+  {
+    "original": ".artifacts/light-restoration/about-768.png",
+    "preserved": "assets/references/artifacts/light-restoration/about-768.png",
+    "sha256": "4738ccd5c9bad52f25a4abacdbae973a49246e8e56a6e1c74cf679b6e5ed947b"
+  },
+  {
+    "original": ".artifacts/light-restoration/event-dates-final-390.png",
+    "preserved": "assets/references/artifacts/light-restoration/event-dates-final-390.png",
+    "sha256": "7d57b5797824a4b999a84cc01bab4e44eb6472676f31fa5554e464c72205cb77"
+  },
+  {
+    "original": ".artifacts/light-restoration/happening-1440.png",
+    "preserved": "assets/references/artifacts/light-restoration/happening-1440.png",
+    "sha256": "74c3e60e1be4ae181e06cc9eca40f408a088cd56623f48f1fe385b6a0de544dc"
+  },
+  {
+    "original": ".artifacts/light-restoration/happening-320.png",
+    "preserved": "assets/references/artifacts/light-restoration/happening-320.png",
+    "sha256": "185912773d5747458912a6c7891f71e71e3f85ab013f4c0583accc90558e060c"
+  },
+  {
+    "original": ".artifacts/light-restoration/happening-390.png",
+    "preserved": "assets/references/artifacts/light-restoration/happening-390.png",
+    "sha256": "4e1c4176d37607f6e073ec452d95e9d36d0d075e8c90621eb533b63f41e45ca3"
+  },
+  {
+    "original": ".artifacts/light-restoration/happening-768.png",
+    "preserved": "assets/references/artifacts/light-restoration/happening-768.png",
+    "sha256": "be3ab6bfffa7253ad06732d33450fb7bedfb096c27650f1e8acb6c1ed8368ceb"
+  },
+  {
+    "original": ".artifacts/light-restoration/hero-1440.png",
+    "preserved": "assets/references/artifacts/light-restoration/hero-1440.png",
+    "sha256": "99c5feea758d23491ed34ec350e3cdd5c61dff60fdfde1e980dfbeaeca0e276a"
+  },
+  {
+    "original": ".artifacts/light-restoration/hero-320.png",
+    "preserved": "assets/references/artifacts/light-restoration/hero-320.png",
+    "sha256": "072d7b2a0ff9c655f793f9dccf35992012259787ef7234e1ee253ca229508538"
+  },
+  {
+    "original": ".artifacts/light-restoration/hero-390.png",
+    "preserved": "assets/references/artifacts/light-restoration/hero-390.png",
+    "sha256": "8eb80a6d6e3616a59c6684569fce12a89b9c5709f80ad483cda448f15888ddfd"
+  },
+  {
+    "original": ".artifacts/light-restoration/hero-768.png",
+    "preserved": "assets/references/artifacts/light-restoration/hero-768.png",
+    "sha256": "dcf9203cccee7ed2d309db075c5e16f207ae2f5a42d9234bdd30a2ac38617c2c"
+  },
+  {
+    "original": ".artifacts/light-restoration/hero-final-390.png",
+    "preserved": "assets/references/artifacts/light-restoration/hero-final-390.png",
+    "sha256": "d268d16032c1b6b6ef4f3a4dd6777a54a12053fc0ec42c75b75dc60769ff511f"
+  },
+  {
+    "original": ".artifacts/light-restoration/journal-1440.png",
+    "preserved": "assets/references/artifacts/light-restoration/journal-1440.png",
+    "sha256": "96e6db2feec5138e0cd36403d249d325c0995551d50964282ce4cd8a3dd8290f"
+  },
+  {
+    "original": ".artifacts/light-restoration/journal-320.png",
+    "preserved": "assets/references/artifacts/light-restoration/journal-320.png",
+    "sha256": "2bd58fc2c6c6daf19973d590a61aded84e79c409187119c63328a1d28cef4933"
+  },
+  {
+    "original": ".artifacts/light-restoration/journal-390.png",
+    "preserved": "assets/references/artifacts/light-restoration/journal-390.png",
+    "sha256": "68c0ee3c2018b2a22810703932dc697be53e819279f5a477631b10fa53e6c908"
+  },
+  {
+    "original": ".artifacts/light-restoration/journal-768.png",
+    "preserved": "assets/references/artifacts/light-restoration/journal-768.png",
+    "sha256": "58e642985885267b83938eea5302a1b9eb56ab94ce5fc9ab4aebaba29a390769"
+  },
+  {
+    "original": ".artifacts/light-restoration/live-1440--.png",
+    "preserved": "assets/references/artifacts/light-restoration/live-1440--.png",
+    "sha256": "0e37d38f912423d3f967e2d058b60ddeb0bf114c98b234b03797eadfc6f39ff6"
+  },
+  {
+    "original": ".artifacts/light-restoration/live-1440--events-hacktoberfest-hack-day-2026.png",
+    "preserved": "assets/references/artifacts/light-restoration/live-1440--events-hacktoberfest-hack-day-2026.png",
+    "sha256": "ce75caf5b9426a619924242896a33f7b6eb4e7beda0b605cb2c68f405ef6b02b"
+  },
+  {
+    "original": ".artifacts/light-restoration/live-1440--events.png",
+    "preserved": "assets/references/artifacts/light-restoration/live-1440--events.png",
+    "sha256": "7d68b15d2356c059831fa9598655f6f569a55b3999dedc1911cc1d90a9cb86a3"
+  },
+  {
+    "original": ".artifacts/light-restoration/live-1440--journal.png",
+    "preserved": "assets/references/artifacts/light-restoration/live-1440--journal.png",
+    "sha256": "2d5542c8b713233cca90cf515ec0faa28fc1937b7fd69fba25758a3e030879ff"
+  },
+  {
+    "original": ".artifacts/light-restoration/live-1440--marketplace.png",
+    "preserved": "assets/references/artifacts/light-restoration/live-1440--marketplace.png",
+    "sha256": "02130577c5e6114fa0ef9b3914f5268dcc7009445fd81f26acc671fb33834eb6"
+  },
+  {
+    "original": ".artifacts/light-restoration/live-1440--spotlight.png",
+    "preserved": "assets/references/artifacts/light-restoration/live-1440--spotlight.png",
+    "sha256": "5333a5b57bf1e0391aadca5dc1f4d962e20a822f060d45c2b19ae6e6e10502e1"
+  },
+  {
+    "original": ".artifacts/light-restoration/live-390--.png",
+    "preserved": "assets/references/artifacts/light-restoration/live-390--.png",
+    "sha256": "f6a771ffb6ad3363407845fa21217d009816e68049fa951c69cc08ea5db79c74"
+  },
+  {
+    "original": ".artifacts/light-restoration/live-390--events-hacktoberfest-hack-day-2026.png",
+    "preserved": "assets/references/artifacts/light-restoration/live-390--events-hacktoberfest-hack-day-2026.png",
+    "sha256": "f15e6b8f012625e287761984567e0e0808a4319e8bb5a4249ca54094aaf62504"
+  },
+  {
+    "original": ".artifacts/light-restoration/live-390--events.png",
+    "preserved": "assets/references/artifacts/light-restoration/live-390--events.png",
+    "sha256": "553f10a8b48330fb9cf9bcd9098d15c4e6502ec4da07fd0ac4244007f11a330c"
+  },
+  {
+    "original": ".artifacts/light-restoration/live-390--journal.png",
+    "preserved": "assets/references/artifacts/light-restoration/live-390--journal.png",
+    "sha256": "0e56187c81abdc53fcd4143615f6414480f8aa24ed0f8536939e0dc350fe5f48"
+  },
+  {
+    "original": ".artifacts/light-restoration/live-390--marketplace.png",
+    "preserved": "assets/references/artifacts/light-restoration/live-390--marketplace.png",
+    "sha256": "75944e241b682c0b770bd62d387c3389e9c659427913b02490b43298c8a1ca4a"
+  },
+  {
+    "original": ".artifacts/light-restoration/live-390--spotlight.png",
+    "preserved": "assets/references/artifacts/light-restoration/live-390--spotlight.png",
+    "sha256": "ea0ea6aaaadd8b67a4809bb4f65544c770ef077a225b272fccf73d9051bb9b48"
+  },
+  {
+    "original": ".artifacts/light-restoration/spotlights-1440.png",
+    "preserved": "assets/references/artifacts/light-restoration/spotlights-1440.png",
+    "sha256": "ecad602a3edf047edac47ecaeee398a1f2b7030350c68f307ecb0a99c134cc33"
+  },
+  {
+    "original": ".artifacts/light-restoration/spotlights-320.png",
+    "preserved": "assets/references/artifacts/light-restoration/spotlights-320.png",
+    "sha256": "a8812b6c1c4cc4c4cde29e00f594982a97fa4fb74a7bf7c1bb03f6d12445bdaa"
+  },
+  {
+    "original": ".artifacts/light-restoration/spotlights-390.png",
+    "preserved": "assets/references/artifacts/light-restoration/spotlights-390.png",
+    "sha256": "121435418a281a1821cee5f2565a0a507ec815cc68bd4f525cfb233f18b82fef"
+  },
+  {
+    "original": ".artifacts/light-restoration/spotlights-768.png",
+    "preserved": "assets/references/artifacts/light-restoration/spotlights-768.png",
+    "sha256": "2206d91fb3e186ddcdbf15525e78d29f1ae767ea9cdf15a9e2f9fec77496b9a9"
+  },
+  {
+    "original": ".artifacts/live-390.png",
+    "preserved": "assets/references/artifacts/live-390.png",
+    "sha256": "942ac43166825a9e2104e3f8e19e293f166e4bee8d5459b007c4051cbdeee89e"
+  },
+  {
+    "original": ".artifacts/mail-review/docs/ShipWright Hack Day Guide.pdf",
+    "preserved": "assets/references/artifacts/experience-review/docs/ShipWright Hack Day Guide.pdf",
+    "sha256": "8e6d64d06746177c60a73614b6aabed0e4a59115e9c107ed83d19588127e3e0c"
+  },
+  {
+    "original": ".artifacts/mail-review/public/apple-touch-icon.png",
+    "preserved": "assets/apple-touch-icon.png",
+    "sha256": "40da65167a2fc23e1579c1d0ff4eb7da34c667bb3952768661c5e532977d9bb9"
+  },
+  {
+    "original": ".artifacts/mail-review/public/brand/logo.avif",
+    "preserved": "assets/brand/logo.avif",
+    "sha256": "83ceeeec4d0eb032b0a720c0802ede7d34def67cbf584c96566e3cd2273cde7c"
+  },
+  {
+    "original": ".artifacts/mail-review/public/brand/logo.webp",
+    "preserved": "assets/brand/logo.webp",
+    "sha256": "b36bacaf3369a347e3bebc1aaabf2b8f7db51d73b67d4a4d9c27b075be49ecad"
+  },
+  {
+    "original": ".artifacts/mail-review/public/brand/og.png",
+    "preserved": "assets/brand/og.png",
+    "sha256": "5be558c143fb0468c49cb4b8e5b7256d654a14a6192dd87f8d9e967c1d001a5a"
+  },
+  {
+    "original": ".artifacts/mail-review/public/favicon.ico",
+    "preserved": "assets/favicon.ico",
+    "sha256": "05148ea7ae9121db619ac11ff286159b3705de4fee6d171dc6498a925782f9bb"
+  },
+  {
+    "original": ".artifacts/mail-review/public/KrowdKraft_Logo.png",
+    "preserved": "assets/KrowdKraft_Logo.png",
+    "sha256": "cca4e51fa7a04938390d0a4dd102b980651f45a8fbdea0b1ff8d660840538011"
+  },
+  {
+    "original": ".artifacts/mail-review/public/logo.png",
+    "preserved": "assets/logo.png",
+    "sha256": "2326d3d622f64dd9b7367cfbcc85546eaf7c27ee737576cbc1bc8435eb267875"
+  },
+  {
+    "original": ".artifacts/night/1440-.png",
+    "preserved": "assets/references/artifacts/night/1440-.png",
+    "sha256": "6c0d9f37b4898625b0efbf49b45c2eadd07578aae788f4048df53d9c7f0656b9"
+  },
+  {
+    "original": ".artifacts/night/1440-account.png",
+    "preserved": "assets/references/artifacts/night/1440-account.png",
+    "sha256": "bf4e59a25054cf30791619fca8bae3d82fe2ff7108816e1418f1fbcf841249f7"
+  },
+  {
+    "original": ".artifacts/night/1440-events-hacktoberfest-hack-day-2026.png",
+    "preserved": "assets/references/artifacts/night/1440-events-hacktoberfest-hack-day-2026.png",
+    "sha256": "894f54b848f1614f851b9393054ab0ac030f78f361b4161c878de68107f3053d"
+  },
+  {
+    "original": ".artifacts/night/1440-events.png",
+    "preserved": "assets/references/artifacts/night/1440-events.png",
+    "sha256": "9b7723d25e301fc8af0a49e3c16602fef3a6783decca96357415c2f7481828a2"
+  },
+  {
+    "original": ".artifacts/night/1440-journal.png",
+    "preserved": "assets/references/artifacts/night/1440-journal.png",
+    "sha256": "225ed30da16dcbd0d0594cf8f0be04ceacf8830f6aeac1f68ba341f525505a3c"
+  },
+  {
+    "original": ".artifacts/night/1440-leaderboard.png",
+    "preserved": "assets/references/artifacts/night/1440-leaderboard.png",
+    "sha256": "800f3666b155d80d1dd40aa024e3a3324cdafa1c23908662e71d585d1dc6c4c2"
+  },
+  {
+    "original": ".artifacts/night/1440-marketplace.png",
+    "preserved": "assets/references/artifacts/night/1440-marketplace.png",
+    "sha256": "b853b7057d1c20b3eb2ffa379a88c5ba76a411ebf194a83198e546346a92cd37"
+  },
+  {
+    "original": ".artifacts/night/1440-privacy.png",
+    "preserved": "assets/references/artifacts/night/1440-privacy.png",
+    "sha256": "0f81599e40d6a3ccba4476449d24af8626dca7cbaaefd0e7cb0cae75936a874a"
+  },
+  {
+    "original": ".artifacts/night/1440-spotlight.png",
+    "preserved": "assets/references/artifacts/night/1440-spotlight.png",
+    "sha256": "f39b8bb05b7ac061eba195812581a542e98e5e6c4f23c65131fdc13cdb29ed36"
+  },
+  {
+    "original": ".artifacts/night/390-.png",
+    "preserved": "assets/references/artifacts/night/390-.png",
+    "sha256": "f0b25d14a7992f90e81e4532be240bd297069a01951d8a3b8095bb39186a4ff3"
+  },
+  {
+    "original": ".artifacts/night/390-account.png",
+    "preserved": "assets/references/artifacts/night/390-account.png",
+    "sha256": "800bff8a54eef758ba64abf77d73ea4281c52b50a1d8b3b767709cc761e9b0df"
+  },
+  {
+    "original": ".artifacts/night/390-events-hacktoberfest-hack-day-2026.png",
+    "preserved": "assets/references/artifacts/night/390-events-hacktoberfest-hack-day-2026.png",
+    "sha256": "c80e09d5f4f7e2c74a8f5957deb047b198c70f9121083d36224d78e13a250546"
+  },
+  {
+    "original": ".artifacts/night/390-events.png",
+    "preserved": "assets/references/artifacts/night/390-events.png",
+    "sha256": "2952b85e3c294570246761d3bb230ae1e8abcc43efdecf970b0211a8ed069b22"
+  },
+  {
+    "original": ".artifacts/night/390-journal.png",
+    "preserved": "assets/references/artifacts/night/390-journal.png",
+    "sha256": "872ee2296a00b1b1e292b7814391f9a1c44c513b0856aad2f5726ed819590f9a"
+  },
+  {
+    "original": ".artifacts/night/390-leaderboard.png",
+    "preserved": "assets/references/artifacts/night/390-leaderboard.png",
+    "sha256": "7fc7da8eac5e4e6b04ae787e506051eb8d97c6a63da8359c4b71d19b0125f826"
+  },
+  {
+    "original": ".artifacts/night/390-marketplace.png",
+    "preserved": "assets/references/artifacts/night/390-marketplace.png",
+    "sha256": "9c1cad81fbd38cd02f7101d6fd0a79cea4923e8e6cc67521222e21b1775b5e33"
+  },
+  {
+    "original": ".artifacts/night/390-privacy.png",
+    "preserved": "assets/references/artifacts/night/390-privacy.png",
+    "sha256": "6fe0c8de9fbe7d726ce2c9262498488628ce77c58c5b8586de245146be187903"
+  },
+  {
+    "original": ".artifacts/night/390-spotlight.png",
+    "preserved": "assets/references/artifacts/night/390-spotlight.png",
+    "sha256": "3f4a903e388d93a205a56cf5a1d7d2c6717e6f329acf491b6001d8758560310f"
+  },
+  {
+    "original": ".artifacts/night/footer-1440.png",
+    "preserved": "assets/references/artifacts/night/footer-1440.png",
+    "sha256": "dd1044dc2f54a43f8515eadc612db646c273d789dc329d09523e23ed45789625"
+  },
+  {
+    "original": ".artifacts/night/footer-320.png",
+    "preserved": "assets/references/artifacts/night/footer-320.png",
+    "sha256": "d2eff598cf94640266595fb0e900dfc65c7d08098dec73132ce5095cd88c2cbc"
+  },
+  {
+    "original": ".artifacts/night/footer-390.png",
+    "preserved": "assets/references/artifacts/night/footer-390.png",
+    "sha256": "acb3f6821e132ecf0c9f8262cf692d7d3327d7c398ab68b06f89457240ffef8b"
+  },
+  {
+    "original": ".artifacts/night/footer-768.png",
+    "preserved": "assets/references/artifacts/night/footer-768.png",
+    "sha256": "158635c4e77fa34f768c834918293eedc19691f2d966318f00961f3f1aa5f78a"
+  },
+  {
+    "original": ".artifacts/night/happening-1440.png",
+    "preserved": "assets/references/artifacts/night/happening-1440.png",
+    "sha256": "60a554c14896ed2bedddf0c9b49505cd3b8b8a4bd9531511de7a68bc21acd274"
+  },
+  {
+    "original": ".artifacts/night/happening-320.png",
+    "preserved": "assets/references/artifacts/night/happening-320.png",
+    "sha256": "91fc4c4032ebfe7aae5c67bef759c76856d747da18a0358628a6afeb035b94fe"
+  },
+  {
+    "original": ".artifacts/night/happening-390.png",
+    "preserved": "assets/references/artifacts/night/happening-390.png",
+    "sha256": "2b46891c4d2ebabb078a09b54bfa1c64766c9b4b2cbfd8673feeb09ed70844c3"
+  },
+  {
+    "original": ".artifacts/night/happening-768.png",
+    "preserved": "assets/references/artifacts/night/happening-768.png",
+    "sha256": "e2f47aad42d09b494183a2f82f719c80dcdec9e79ca6af9b5d81c8d175b37a36"
+  },
+  {
+    "original": ".artifacts/night/hero-1440.png",
+    "preserved": "assets/references/artifacts/night/hero-1440.png",
+    "sha256": "1708c2ca5daf3d867f7d8b7b96e8541930c260d52ff312ad3c0674e1f8feb7e4"
+  },
+  {
+    "original": ".artifacts/night/hero-320.png",
+    "preserved": "assets/references/artifacts/night/hero-320.png",
+    "sha256": "3be3e53943f88bf8ee37b94e7a44255945b6b730232f0b3144f99762308f2136"
+  },
+  {
+    "original": ".artifacts/night/hero-390.png",
+    "preserved": "assets/references/artifacts/night/hero-390.png",
+    "sha256": "75c419d646691757a1eec106a7136b899d2cc9fc061d55be8ad09845ff7114ce"
+  },
+  {
+    "original": ".artifacts/night/hero-768.png",
+    "preserved": "assets/references/artifacts/night/hero-768.png",
+    "sha256": "99421048e6ad80495569deef40116c354840c9796df8bbd1b7a461fb8b08e578"
+  },
+  {
+    "original": ".artifacts/night/hero-rain.png",
+    "preserved": "assets/references/artifacts/night/hero-rain.png",
+    "sha256": "a61747021d04533186795caf0272c3a39251f3012e8ac621deb7ed7090661559"
+  },
+  {
+    "original": ".artifacts/night/journal-1440.png",
+    "preserved": "assets/references/artifacts/night/journal-1440.png",
+    "sha256": "45873b1ec510095ca671ef0a7a016237f1307f5833191cdc35219bd540299be5"
+  },
+  {
+    "original": ".artifacts/night/journal-320.png",
+    "preserved": "assets/references/artifacts/night/journal-320.png",
+    "sha256": "a14667b2666653da6464c106188197130c43f7625fa10589e4c9c105fb5424ca"
+  },
+  {
+    "original": ".artifacts/night/journal-390.png",
+    "preserved": "assets/references/artifacts/night/journal-390.png",
+    "sha256": "eb8cfe112ae301c87ecfd924641abd94a36d7f3b20aa20e26189fd66af4eaaad"
+  },
+  {
+    "original": ".artifacts/night/journal-768.png",
+    "preserved": "assets/references/artifacts/night/journal-768.png",
+    "sha256": "9ce27af65d0d662125ced1178cd078de40364fc3dc48da58959e8e55d8d0fa6e"
+  },
+  {
+    "original": ".artifacts/night/live-1440--.png",
+    "preserved": "assets/references/artifacts/night/live-1440--.png",
+    "sha256": "751cc78135ad2480d613d6e2a698098ad017d34580c2e8e54bbb3f20c7545706"
+  },
+  {
+    "original": ".artifacts/night/live-1440--events-hacktoberfest-hack-day-2026.png",
+    "preserved": "assets/references/artifacts/night/live-1440--events-hacktoberfest-hack-day-2026.png",
+    "sha256": "77d5cb4a98d659f6ed191a47bd88abcd6c09a1e08b6d86879e4433b86c47c633"
+  },
+  {
+    "original": ".artifacts/night/live-1440--events.png",
+    "preserved": "assets/references/artifacts/night/live-1440--events.png",
+    "sha256": "09eb5ac22d776dd905c536cb1098fdad463673dba4e70de134616a99f249e3b9"
+  },
+  {
+    "original": ".artifacts/night/live-1440--journal.png",
+    "preserved": "assets/references/artifacts/night/live-1440--journal.png",
+    "sha256": "971bd3aee6a510eee430a6a7ce88963bb26a397359a882b64f70bf6d03c619c3"
+  },
+  {
+    "original": ".artifacts/night/live-1440--marketplace.png",
+    "preserved": "assets/references/artifacts/night/live-1440--marketplace.png",
+    "sha256": "06ec9c15f4ca01abd6842876981fb2463f94752559aa760d29d5c92e1d247f30"
+  },
+  {
+    "original": ".artifacts/night/live-1440--spotlight.png",
+    "preserved": "assets/references/artifacts/night/live-1440--spotlight.png",
+    "sha256": "26e047b8458e1a88551dee62e020112eab38caa94c5db38ce212d45a34964bce"
+  },
+  {
+    "original": ".artifacts/night/live-390--.png",
+    "preserved": "assets/references/artifacts/night/live-390--.png",
+    "sha256": "966b1544613f8c90ddc9dfe046e138baf60881d743233ef150c4f6cb1c6c60b3"
+  },
+  {
+    "original": ".artifacts/night/live-390--events-hacktoberfest-hack-day-2026.png",
+    "preserved": "assets/references/artifacts/night/live-390--events-hacktoberfest-hack-day-2026.png",
+    "sha256": "22fb504715427e983f584f0ce2e2e2a247d1f9d1dac6a821b4cd6787c2feb782"
+  },
+  {
+    "original": ".artifacts/night/live-390--events.png",
+    "preserved": "assets/references/artifacts/night/live-390--events.png",
+    "sha256": "5092acb4af8dfa9d589528f08d871a0877760d64567ae1297a958b85c8629fb3"
+  },
+  {
+    "original": ".artifacts/night/live-390--journal.png",
+    "preserved": "assets/references/artifacts/night/live-390--journal.png",
+    "sha256": "2d1aba906e3f2d13b79fb52850157b9be93844dda556a7425065a73259998059"
+  },
+  {
+    "original": ".artifacts/night/live-390--marketplace.png",
+    "preserved": "assets/references/artifacts/night/live-390--marketplace.png",
+    "sha256": "83ccbae488b595f55dd8b659bf5a0c25d29871a7599076e3d2aec0db002ec1cd"
+  },
+  {
+    "original": ".artifacts/night/live-390--spotlight.png",
+    "preserved": "assets/references/artifacts/night/live-390--spotlight.png",
+    "sha256": "7644db777c9eecf94b2ab3a67937cc5987a68dba33cba834dc246321faaa1835"
+  },
+  {
+    "original": ".artifacts/night/local-dialog-1440.png",
+    "preserved": "assets/references/artifacts/night/local-dialog-1440.png",
+    "sha256": "30aa349f8c886f72c929277106e2c11ded0675ad3d25c5d4c02075754091d779"
+  },
+  {
+    "original": ".artifacts/night/local-dialog-320.png",
+    "preserved": "assets/references/artifacts/night/local-dialog-320.png",
+    "sha256": "829dc568ac30ac7396b919be562f3ef69b9155360c8d86d56997ee8668c0fd75"
+  },
+  {
+    "original": ".artifacts/night/local-dialog-390.png",
+    "preserved": "assets/references/artifacts/night/local-dialog-390.png",
+    "sha256": "4d6648657a05d5ebae2d318cd0254dc6d3f3c3805b195b0e2bc9ec20dd4fedb2"
+  },
+  {
+    "original": ".artifacts/night/local-dialog-768.png",
+    "preserved": "assets/references/artifacts/night/local-dialog-768.png",
+    "sha256": "4d7eb9ab8f7b5131feef3c09dd8b60d9dfa607bec5dd4cafe63a98b5cc814e15"
+  },
+  {
+    "original": ".artifacts/night/local-home-1440.png",
+    "preserved": "assets/references/artifacts/night/local-home-1440.png",
+    "sha256": "522348d8ce0b04a4317d9ea993f2e2cd89d8c1e244c43e7656a35c7801c74b06"
+  },
+  {
+    "original": ".artifacts/night/local-home-320.png",
+    "preserved": "assets/references/artifacts/night/local-home-320.png",
+    "sha256": "99b7cad324212a4eb417d4ac96da50ec902fef120f965051cb1f174a1c55007c"
+  },
+  {
+    "original": ".artifacts/night/local-home-390.png",
+    "preserved": "assets/references/artifacts/night/local-home-390.png",
+    "sha256": "008402765cad3100beafbb09baef88ada1ed39ce7130eb272996fe8305f28b44"
+  },
+  {
+    "original": ".artifacts/night/local-home-768.png",
+    "preserved": "assets/references/artifacts/night/local-home-768.png",
+    "sha256": "1e40fb56c297e657be393a2c106fa79609064bb31ca6ca208a0fa9c8019f97aa"
+  },
+  {
+    "original": ".artifacts/night/local-marketplace-form-1440.png",
+    "preserved": "assets/references/artifacts/night/local-marketplace-form-1440.png",
+    "sha256": "4fb3b086ed378540cbedadb76920daa2d3104d8f54ec258dd802f804af713777"
+  },
+  {
+    "original": ".artifacts/night/local-marketplace-form-320.png",
+    "preserved": "assets/references/artifacts/night/local-marketplace-form-320.png",
+    "sha256": "c7d2661388d5d819d9f504a8987f0b0751582f524ae147836ae0363d06b1ce73"
+  },
+  {
+    "original": ".artifacts/night/local-marketplace-form-390.png",
+    "preserved": "assets/references/artifacts/night/local-marketplace-form-390.png",
+    "sha256": "1908b61771ad1e0cf0c2d32c53073ccb50ae844bb6cca1a8e8e6eb03da81996c"
+  },
+  {
+    "original": ".artifacts/night/local-marketplace-form-768.png",
+    "preserved": "assets/references/artifacts/night/local-marketplace-form-768.png",
+    "sha256": "569f1327e7d10a351ed0304d1bd627ab27cb7385ce96b1246faec08e7efa90d7"
+  },
+  {
+    "original": ".artifacts/night/local-menu-320.png",
+    "preserved": "assets/references/artifacts/night/local-menu-320.png",
+    "sha256": "c4988ccbb4af76165b45c2ffcfa6ac338bcae09ce9dcd987212b89fd27ddcb5b"
+  },
+  {
+    "original": ".artifacts/night/local-menu-390.png",
+    "preserved": "assets/references/artifacts/night/local-menu-390.png",
+    "sha256": "a2c376095cefc3405c2dcd4d2a3b90e651b3b92851d19025c3f298dd1c2d5e43"
+  },
+  {
+    "original": ".artifacts/night/local-menu-768.png",
+    "preserved": "assets/references/artifacts/night/local-menu-768.png",
+    "sha256": "695f3a2f882f5d0740f13c3ba6720fb3b10576c8b0a43863bd2e8fccd1400820"
+  },
+  {
+    "original": ".artifacts/night/local-spotlight-form-1440.png",
+    "preserved": "assets/references/artifacts/night/local-spotlight-form-1440.png",
+    "sha256": "5707c87db734b48a8a583711683fc8ba7977a7e28026ceb1005b63518419d13a"
+  },
+  {
+    "original": ".artifacts/night/local-spotlight-form-320.png",
+    "preserved": "assets/references/artifacts/night/local-spotlight-form-320.png",
+    "sha256": "1b5a5622c0574b59d4a25d7272313e9d246b4ad78fd6409ba1897b02fbf61175"
+  },
+  {
+    "original": ".artifacts/night/local-spotlight-form-390.png",
+    "preserved": "assets/references/artifacts/night/local-spotlight-form-390.png",
+    "sha256": "ca64216cab395c7ae93d4a1a117a819b4a87abf870d748e249957e426c03252f"
+  },
+  {
+    "original": ".artifacts/night/local-spotlight-form-768.png",
+    "preserved": "assets/references/artifacts/night/local-spotlight-form-768.png",
+    "sha256": "7d220e1a18f634fc5f3a027f35d6a7076e39d237dddf03fb0d46430a26648bcf"
+  },
+  {
+    "original": ".artifacts/night/people-1440.png",
+    "preserved": "assets/references/artifacts/night/people-1440.png",
+    "sha256": "aa50dd80ddb73ef520af5beacb04d799a01ad8af0eb2ceb8a5db7ea0c2bf55a0"
+  },
+  {
+    "original": ".artifacts/night/people-320.png",
+    "preserved": "assets/references/artifacts/night/people-320.png",
+    "sha256": "cb7f7cf2d0b44ff99ce49a0450e2bf6ca9c7ab76940f7a23dd0ee9409a72f956"
+  },
+  {
+    "original": ".artifacts/night/people-390.png",
+    "preserved": "assets/references/artifacts/night/people-390.png",
+    "sha256": "c42e92ff843b828ddb89cfdaac78c8adb7aaa86e0a7cc268e6366e0dd3bc4fb2"
+  },
+  {
+    "original": ".artifacts/night/people-768.png",
+    "preserved": "assets/references/artifacts/night/people-768.png",
+    "sha256": "af176d5ff6ed91c2648e05bcd6436f9dabd955616835a573e3e0e8f7afecd12b"
+  },
+  {
+    "original": ".artifacts/night/stitch-exhibition.png",
+    "preserved": "assets/references/artifacts/night/stitch-exhibition.png",
+    "sha256": "476ddbe16f680a7be3252f0d6f2b90a283bf59ff4c3161f638e3e7cf62e880e0"
+  },
+  {
+    "original": ".artifacts/night/stitch-mobile.png",
+    "preserved": "assets/references/artifacts/night/stitch-mobile.png",
+    "sha256": "4266e336481576bd786f898abdb4b38976ae136332ed2d21efe28db13ff82938"
+  },
+  {
+    "original": ".artifacts/night/strip-1440.png",
+    "preserved": "assets/references/artifacts/night/strip-1440.png",
+    "sha256": "d2d3a51bf4d17b4ab59d3c696e6b6233c5fa23b9da42c06c9494cdedd0c88ccf"
+  },
+  {
+    "original": ".artifacts/night/strip-320.png",
+    "preserved": "assets/references/artifacts/night/strip-320.png",
+    "sha256": "6b5096cbe8f103fba800a12bb2a3f81e527efb811d0572447aa267d2b88bbc71"
+  },
+  {
+    "original": ".artifacts/night/strip-390.png",
+    "preserved": "assets/references/artifacts/night/strip-390.png",
+    "sha256": "1f199052692d6d853f4fa9d573e107749707dcb2133b066d72131153f53a5e17"
+  },
+  {
+    "original": ".artifacts/night/strip-768.png",
+    "preserved": "assets/references/artifacts/night/strip-768.png",
+    "sha256": "b0895e06483f40bc821556868ba427cc75950e4780379b28e07f00aa97102022"
+  },
+  {
+    "original": ".artifacts/organizer-review/docs/ShipWright Hack Day Guide.pdf",
+    "preserved": "assets/references/artifacts/experience-review/docs/ShipWright Hack Day Guide.pdf",
+    "sha256": "8e6d64d06746177c60a73614b6aabed0e4a59115e9c107ed83d19588127e3e0c"
+  },
+  {
+    "original": ".artifacts/organizer-review/public/apple-touch-icon.png",
+    "preserved": "assets/apple-touch-icon.png",
+    "sha256": "40da65167a2fc23e1579c1d0ff4eb7da34c667bb3952768661c5e532977d9bb9"
+  },
+  {
+    "original": ".artifacts/organizer-review/public/brand/logo.avif",
+    "preserved": "assets/brand/logo.avif",
+    "sha256": "83ceeeec4d0eb032b0a720c0802ede7d34def67cbf584c96566e3cd2273cde7c"
+  },
+  {
+    "original": ".artifacts/organizer-review/public/brand/logo.webp",
+    "preserved": "assets/brand/logo.webp",
+    "sha256": "b36bacaf3369a347e3bebc1aaabf2b8f7db51d73b67d4a4d9c27b075be49ecad"
+  },
+  {
+    "original": ".artifacts/organizer-review/public/brand/og.png",
+    "preserved": "assets/brand/og.png",
+    "sha256": "5be558c143fb0468c49cb4b8e5b7256d654a14a6192dd87f8d9e967c1d001a5a"
+  },
+  {
+    "original": ".artifacts/organizer-review/public/favicon.ico",
+    "preserved": "assets/favicon.ico",
+    "sha256": "05148ea7ae9121db619ac11ff286159b3705de4fee6d171dc6498a925782f9bb"
+  },
+  {
+    "original": ".artifacts/organizer-review/public/KrowdKraft_Logo.png",
+    "preserved": "assets/KrowdKraft_Logo.png",
+    "sha256": "cca4e51fa7a04938390d0a4dd102b980651f45a8fbdea0b1ff8d660840538011"
+  },
+  {
+    "original": ".artifacts/organizer-review/public/logo.png",
+    "preserved": "assets/logo.png",
+    "sha256": "2326d3d622f64dd9b7367cfbcc85546eaf7c27ee737576cbc1bc8435eb267875"
+  },
+  {
+    "original": ".artifacts/redesign/about-desktop.png",
+    "preserved": "assets/references/artifacts/redesign/about-desktop.png",
+    "sha256": "653a60582cda37ca5523ddaed1ba6007c90c9ae9c703a05ed85809763c941b79"
+  },
+  {
+    "original": ".artifacts/redesign/events-desktop.png",
+    "preserved": "assets/references/artifacts/redesign/events-desktop.png",
+    "sha256": "33f470a93260af3ae737771aabff85f1aa671784fd85ec5dc71604ddd8c9f7ea"
+  },
+  {
+    "original": ".artifacts/redesign/full-desktop.png",
+    "preserved": "assets/references/artifacts/redesign/full-desktop.png",
+    "sha256": "5a22f506e0d008f9b4413d2db38429dc3d87ddd754f77f9a6e05d0d2218c72a6"
+  },
+  {
+    "original": ".artifacts/redesign/full-mobile.png",
+    "preserved": "assets/references/artifacts/redesign/full-mobile.png",
+    "sha256": "f4599e0f832c3550fc22e7cdaf60d0f625b50753165347df60e9fc0fa0aa7f83"
+  },
+  {
+    "original": ".artifacts/redesign/hero-desktop.png",
+    "preserved": "assets/references/artifacts/redesign/hero-desktop.png",
+    "sha256": "b72b8791e81c1c5f15332f6e835ce4cd0496a0a69ede74c4d27dbed5dfe83736"
+  },
+  {
+    "original": ".artifacts/redesign/hero-mobile.png",
+    "preserved": "assets/references/artifacts/redesign/hero-mobile.png",
+    "sha256": "cd117e0e17f9c0f01a9fd21c82244cd84032350756728bdf99cb13758826b51c"
+  },
+  {
+    "original": ".artifacts/redesign/home-320.png",
+    "preserved": "assets/references/artifacts/redesign/home-320.png",
+    "sha256": "32812f20720bf8f744752ed2fdaf005c46cb952bbd5ccd8c4bca944cb85b2ab3"
+  },
+  {
+    "original": ".artifacts/redesign/home-768.png",
+    "preserved": "assets/references/artifacts/redesign/home-768.png",
+    "sha256": "6f2f358d488f6e3049b2a273b3eb1c3920ee6d0e70679e3c891662e8bea3778d"
+  },
+  {
+    "original": ".artifacts/redesign/page--account.png",
+    "preserved": "assets/references/artifacts/redesign/page--account.png",
+    "sha256": "61bc462ce6bb92c3c9dfbd76bae2768a4d52937fe4f01989e09ffa69fe8f3098"
+  },
+  {
+    "original": ".artifacts/redesign/page--events-hacktoberfest-hack-day-2026.png",
+    "preserved": "assets/references/artifacts/redesign/page--events-hacktoberfest-hack-day-2026.png",
+    "sha256": "be72897e9942f959a4c56c10f309533d9bba0411b49e54dce4110c783b6cbbc5"
+  },
+  {
+    "original": ".artifacts/redesign/page--events-hacktoberfest-hack-day-bengaluru.png",
+    "preserved": "assets/references/artifacts/redesign/page--events-hacktoberfest-hack-day-bengaluru.png",
+    "sha256": "87f9659421ad8b58bf4e14b6130839527a4bbf0d124a44de788db27f80dff19e"
+  },
+  {
+    "original": ".artifacts/redesign/page--events.png",
+    "preserved": "assets/references/artifacts/redesign/page--events.png",
+    "sha256": "30e2ba4e06a21f8f8bd385173760d77a410c09dbc13ee35991c2ef3bc068ba53"
+  },
+  {
+    "original": ".artifacts/redesign/page--journal.png",
+    "preserved": "assets/references/artifacts/redesign/page--journal.png",
+    "sha256": "76d5f9ecd23936b3d07413220a6ea1684af89fe7faeb38e4d958ca1ff8edf47e"
+  },
+  {
+    "original": ".artifacts/redesign/page--leaderboard.png",
+    "preserved": "assets/references/artifacts/redesign/page--leaderboard.png",
+    "sha256": "f1cca7a9d591b8d8fd5f9d07152dcc93935e461b7fafd63952d3f316ff2ef1ad"
+  },
+  {
+    "original": ".artifacts/redesign/page--marketplace.png",
+    "preserved": "assets/references/artifacts/redesign/page--marketplace.png",
+    "sha256": "279ddaab7f5cb013929bc09b0e79e956d3218ec0c48b5ddd47dd4fe84fcb1f15"
+  },
+  {
+    "original": ".artifacts/redesign/page--not-a-real-page.png",
+    "preserved": "assets/references/artifacts/redesign/page--not-a-real-page.png",
+    "sha256": "8de67ca276a9a293b700ce4dd62982d32fccfed489c592c869974081c4ee0a72"
+  },
+  {
+    "original": ".artifacts/redesign/page--privacy.png",
+    "preserved": "assets/references/artifacts/redesign/page--privacy.png",
+    "sha256": "c06d06936c2e1d3ba6eee845793c0d7aeee5d8d8c13724f95b737a61b4c0761b"
+  },
+  {
+    "original": ".artifacts/redesign/page--spotlight.png",
+    "preserved": "assets/references/artifacts/redesign/page--spotlight.png",
+    "sha256": "2ab124d299ca39597095b66a0b90f7dffbb10631666569d45918222cc6a71395"
+  },
+  {
+    "original": ".artifacts/redesign/page-home.png",
+    "preserved": "assets/references/artifacts/redesign/page-home.png",
+    "sha256": "1746d3428d96dd44a751b8a9a65e2c194a1f7f385ab44f93b04a4ef5b41e995d"
+  },
+  {
+    "original": ".artifacts/research/linear.png",
+    "preserved": "assets/references/artifacts/research/linear.png",
+    "sha256": "c21a07db6cc6be43380c60196d88a0b71e22ceeb6af76190d873f571d0528bea"
+  },
+  {
+    "original": ".artifacts/research/raycast.png",
+    "preserved": "assets/references/artifacts/research/raycast.png",
+    "sha256": "f19ea938d5412d0b5b5ee72fa1418a1ce79c3bf7b1eafc5b6a924eb6ddf21624"
+  },
+  {
+    "original": ".artifacts/research/stripe.png",
+    "preserved": "assets/references/artifacts/research/stripe.png",
+    "sha256": "a7eafd2a58e6028713fb4bbe32c30c55c5385f4214ccee0b79fbf073edbc673b"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/courtyard-concept.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/courtyard-concept.png",
+    "sha256": "389957219f25cbcb05bbe00686fab83d9b0f06af795670d45cb98a260cd96348"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/discover-mobile-final.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/discover-mobile-final.png",
+    "sha256": "ec0b91989c99d78f15200bf8ea1c0d3a011c95673597431dc61a9c360f188242"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/discover-mobile-top.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/discover-mobile-top.png",
+    "sha256": "86efed403bc109edf115d465b5fd9e2ebf49e5731e82405137734ac5912fa72a"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/discover-mobile.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/discover-mobile.png",
+    "sha256": "f93e71f4c21a98e48fd0bb6872cb708c6b9753f679df2fb3712584ee3fb5e5fa"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/discover-overview.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/discover-overview.png",
+    "sha256": "79818c4499ddfdcf833eccba2a0e1fcfb23f10a3b96425dffd8e9dee2149a983"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/discover-revised-overview.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/discover-revised-overview.png",
+    "sha256": "d3129d52b033a212be68b8d5898b9aa7d68f9c5ccb28693bd97ac3345ee6c328"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/discover-revised-top.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/discover-revised-top.png",
+    "sha256": "25ebab051ef097c1315e2167888d8d7bd4ff3a4f24aadf894dc087b72ae3968e"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/discover-revised.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/discover-revised.png",
+    "sha256": "bd378cacb81a742d27ff49a636d00c6daf2f8b84c79ec747092ec31adb55bc41"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/discover-stitch.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/discover-stitch.png",
+    "sha256": "ec1fce8c384f0105fd5f7457dc02da53edeb2ced35fab18973fd277cea6fa6d2"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/discover-top.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/discover-top.png",
+    "sha256": "2283fb5050ff9a29b37c72ef0b08d7a3291868efea828d078c022cc24738d654"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/events-desktop-final.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/events-desktop-final.png",
+    "sha256": "6c3028ba4ea4c8bd168da67cd2d5df327acd06e6a8176e733b7f18340bbba87c"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/events-mobile-top.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/events-mobile-top.png",
+    "sha256": "66a71ebf59f3899c38b500f2d609dd296372ba5fa504d032c601cc9ecfa578c5"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/events-mobile.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/events-mobile.png",
+    "sha256": "a5a5d0bbc771ec488d9788dbf050654f8f47245ca4555d1a1d91c41a427c5553"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/events-overview.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/events-overview.png",
+    "sha256": "162f6f4523a3e6954893c8867ad19d36c3cda20aa6c4dc6f8ff083c928d7c65e"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/events-revised-overview.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/events-revised-overview.png",
+    "sha256": "5db78ee1f72c276c3327489355ba5817086010a503522d04183d3dc82af11875"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/events-revised-top.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/events-revised-top.png",
+    "sha256": "5ad642c9f1176d362d20d142fa3bd83912e3bcf5e6eb8a2305b9000e29337743"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/events-revised.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/events-revised.png",
+    "sha256": "8ff919f7018c2672f544eeb8631273640f00f9043505164657b9634ba4895ba5"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/events-stitch.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/events-stitch.png",
+    "sha256": "404fc31b4d8795b69cf59283634619ca632b08001c5f5052066b197d78b44959"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/events-top.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/events-top.png",
+    "sha256": "c68ab85a7dacbd0547022d7e9fbd90c738a1fd8c084e93bf45ca0457a900e66d"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/home-desktop-final.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/home-desktop-final.png",
+    "sha256": "2124b026fc81b51224884c7e9e219bfb1d28ea934ad2980aa3d732dada27a7fa"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/home-desktop-live.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/home-desktop-live.png",
+    "sha256": "0759c9d11c15e18fc762a43b9a9d25960d4d59f5f31e5a7f34a6ff8bb25bfca6"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/home-mobile-live.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/home-mobile-live.png",
+    "sha256": "671bd7a4b3226d17c00d80bde03b13285013ba0123d0f2e1e0150aee9c92ed63"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/home-mobile-top.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/home-mobile-top.png",
+    "sha256": "b7e86c6aaac8732dc5429340683410a397814d5d169bfa1cabc694c774ff4d60"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/home-mobile.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/home-mobile.png",
+    "sha256": "65e3170d962f09f6427e9942461fffda71ee7e032967cc65eeebd240773769ea"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/home-overview.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/home-overview.png",
+    "sha256": "e29795d89177ea20d8a86fb55f87c1aef4c1cf91e12de56a6252b16884f87db7"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/home-revised-overview.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/home-revised-overview.png",
+    "sha256": "08dce82349871a3b37347136a0b4b14795db91052d378a6a153a0cea8e52336e"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/home-revised-top.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/home-revised-top.png",
+    "sha256": "12d0a41d06ee8f7a619dd081a385dd8043721d620436dd6e8df21442009b00cc"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/home-revised.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/home-revised.png",
+    "sha256": "8d0e7eaaa41b11802d76725dad8dd5d71eb9c7f7b1a6a34012a951caa1e79650"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/home-stitch.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/home-stitch.png",
+    "sha256": "6b28c172caf471d6140334ba98955f859c789c58f1f1825f67136130e7f8cfdd"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/home-top.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/home-top.png",
+    "sha256": "8e9353678c9ab8665b357dee5040554bbf328131896ed82c3c42d36c157e2a6a"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/journal-mobile-live.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/journal-mobile-live.png",
+    "sha256": "30ad43009787b0f4f90b8e61cd4cece311bc5f05307fc6ae09b762e93041a872"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/journal-mobile-top.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/journal-mobile-top.png",
+    "sha256": "a465b7cff573948c990dbc0a424da57f9d1e5a9e4b0f7386d7a061a7d6c54799"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/journal-mobile.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/journal-mobile.png",
+    "sha256": "880b0f640efa22c07bbca543acbb19bc022b0f5665d3ab051af9d9fd22812f29"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/mobile-contact-sheet.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/mobile-contact-sheet.png",
+    "sha256": "c2efcbcc56ea6e6deffb7e7dc6830ca7c4c46dbde1e0b0ebb1e0e509196a90ac"
+  },
+  {
+    "original": "docs/redesign-2026-10-14/stitch-courtyard.png",
+    "preserved": "assets/references/docs/redesign-2026-10-14/stitch-courtyard.png",
+    "sha256": "0f3785591d83e7088556fa3c3573b1013f2c464cc853b23fd5e734118dfe9bd6"
+  },
+  {
+    "original": "docs/ShipWright Hack Day Guide.pdf",
+    "preserved": "assets/references/artifacts/experience-review/docs/ShipWright Hack Day Guide.pdf",
+    "sha256": "8e6d64d06746177c60a73614b6aabed0e4a59115e9c107ed83d19588127e3e0c"
+  },
+  {
+    "original": "hairline-courtyard-blind.png",
+    "preserved": "assets/references/hairline-courtyard-blind.png",
+    "sha256": "391273055109a441991c1aeb324361851be1476fe58285201da0e136c6950c82"
+  },
+  {
+    "original": "hairline-courtyard-look.png",
+    "preserved": "assets/references/hairline-courtyard-look.png",
+    "sha256": "3cb52b5c0a5c335f01f86d20905ecfe3896e74ce5b342057a7abb617651e9e55"
+  },
+  {
+    "original": "hairline-courtyard-motion.png",
+    "preserved": "assets/references/hairline-courtyard-motion.png",
+    "sha256": "51a252698ddedac48fc16edfd60a0587bb1002f6fb493963cefbb0793717ca4d"
+  }
+]

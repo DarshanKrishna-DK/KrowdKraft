@@ -1,15 +1,13 @@
-import type { MetadataRoute } from "next";
-import { siteOrigin } from "@/lib/site";
+import type { MetadataRoute } from 'next';
+import { siteUrl } from '@/lib/supabase';
 export default function robots(): MetadataRoute.Robots {
-  if (process.env.VERCEL_ENV === "preview")
-    return { rules: { userAgent: "*", disallow: "/" } };
-  const origin = siteOrigin();
+  const live = siteUrl().startsWith('https:');
   return {
     rules: {
-      userAgent: "*",
-      allow: "/",
-      disallow: ["/account", "/admin", "/auth/"],
+      userAgent: '*',
+      allow: live ? '/' : undefined,
+      disallow: live ? ['/account', '/connect', '/share', '/collaborate', '/admin', '/auth', '/api'] : ['/'],
     },
-    ...(origin ? { sitemap: `${origin}/sitemap.xml` } : {}),
+    ...(live ? { sitemap: `${siteUrl()}/sitemap.xml` } : {}),
   };
 }
