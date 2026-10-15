@@ -1,75 +1,70 @@
-import assert from "node:assert/strict";
-import test from "node:test";
-import { eventsSchema, eventSchema } from "../src/data/event-schema";
-import { isUpcoming, kolkataToday } from "../src/data/events";
-import { featuredEvents } from "../src/data/event-utils";
-
-export const example = {
-  id: "test-only",
-  slug: "test-only",
-  title: "Test fixture, never published",
-  description: "A temporary fixture.",
-  date: "2026-10-13",
-  endDate: null,
-  venue: "Test venue",
-  city: "Bengaluru",
-  type: "meetup",
-  relationship: "hosted",
-  image: null,
-  sourceUrl: null,
-  registrationUrl: null,
-  featured: false,
-} as const;
-test("event data permits an intentional empty list and rejects impossible dates", () => {
-  assert.deepEqual(eventsSchema.parse([]), []);
-  assert.equal(
-    eventSchema.safeParse({ ...example, date: "2026-02-30" }).success,
-    false,
-  );
-  assert.equal(
-    eventSchema.safeParse({ ...example, endDate: "2026-10-12" }).success,
-    false,
-  );
-});
-test("duplicate identities and executable URLs are rejected", () => {
-  assert.equal(eventsSchema.safeParse([example, example]).success, false);
-  assert.equal(
-    eventSchema.safeParse({ ...example, sourceUrl: "javascript:alert(1)" })
-      .success,
-    false,
-  );
-  assert.equal(
-    eventSchema.safeParse({ ...example, image: "/events/../../secret.png" })
-      .success,
-    false,
-  );
-});
-test("classification uses the Kolkata date across UTC midnight boundaries", () => {
-  assert.equal(kolkataToday(new Date("2026-10-12T18:29:59Z")), "2026-10-12");
-  assert.equal(kolkataToday(new Date("2026-10-12T18:30:00Z")), "2026-10-13");
-  assert.equal(isUpcoming(eventSchema.parse(example), "2026-10-13"), true);
-  assert.equal(isUpcoming(eventSchema.parse(example), "2026-10-14"), false);
-});
-test("the homepage rolls to the next event or coming soon after the event date", () => {
-  const current = eventSchema.parse({ ...example, date: "2026-10-18" });
-  const future = eventSchema.parse({
-    ...example,
-    id: "next",
-    slug: "next",
-    date: "2026-11-08",
+import { describe, it, expect } from 'vitest';
+import {
+  eventState,
+  registrationState,
+  indiaDate,
+  calendar,
+  googleCalendarUrl,
+  officialEventUrl,
+} from '../src/lib/events';
+import type { EventRecord } from '../src/lib/types';
+const event = {
+  slug: 'hack-day',
+  title: 'Hack day',
+  description: 'Build things, share ideas; learn together.',
+  date: '2026-10-18',
+  starts_at: '2026-10-18T03:00:00Z',
+  ends_at: '2026-10-18T13:00:00Z',
+  venue: 'Startup Park',
+  city: 'Bengaluru',
+  lifecycle: 'scheduled',
+  registration_status: 'open',
+  registration_deadline: '2026-10-07',
+  source_url: 'https://example.org/hack',
+} as EventRecord;
+describe('event lifecycle and calendar', () => {
+  it('opens the official source and preserves timed or all-day calendar boundaries', () => {
+    expect(officialEventUrl(event)).toBe(event.source_url);
+    expect(
+      officialEventUrl({
+        ...event,
+        source_url: 'https://github.com/example/community/blob/main/events.ts',
+        registration_url: null,
+      }),
+    ).toBe('https://luma.com/krowdkraft_community?period=past');
+    expect(new URL(googleCalendarUrl(event)).searchParams.get('dates')).toBe(
+      '20261018T030000Z/20261018T130000Z',
+    );
+    const allDay = { ...event, starts_at: null, ends_at: null };
+    expect(new URL(googleCalendarUrl(allDay)).searchParams.get('dates')).toBe('20261018/20261019');
+    expect(new URL(googleCalendarUrl(event)).searchParams.get('text')).toBe(event.title);
   });
-  assert.equal(
-    featuredEvents([future, current], "2026-10-18").next?.id,
-    current.id,
-  );
-  assert.equal(
-    featuredEvents([current, future], "2026-10-19").next?.id,
-    future.id,
-  );
-  assert.equal(featuredEvents([current], "2026-10-19").next, undefined);
-  assert.equal(featuredEvents([current], "2026-10-19").recent?.id, current.id);
-  assert.deepEqual(featuredEvents([], "2026-10-19"), {
-    next: undefined,
-    recent: undefined,
+  it('keeps an upcoming event with expired registration upcoming', () => {
+    const now = new Date('2026-10-15T12:00:00Z');
+    expect(eventState(event, now)).toBe('Upcoming');
+    expect(registrationState(event, now)).toBe('Registration closed');
+  });
+  it('uses Indian midnight for deadline and untimed event boundaries', () => {
+    expect(indiaDate(new Date('2026-10-07T18:30:00Z'))).toBe('2026-10-08');
+    expect(registrationState(event, new Date('2026-10-07T18:29:00Z'))).toBe('Registration open');
+    expect(registrationState(event, new Date('2026-10-07T18:30:00Z'))).toBe('Registration closed');
+  });
+  it('prioritizes cancellation and transitions at actual end time', () => {
+    expect(eventState({ ...event, lifecycle: 'cancelled' }, new Date('2026-10-15'))).toBe('Cancelled');
+    expect(eventState(event, new Date('2026-10-18T10:00:00Z'))).toBe('Happening now');
+    expect(eventState(event, new Date('2026-10-18T13:00:00Z'))).toBe('Past event');
+  });
+  it('writes escaped standards-compatible calendar records', () => {
+    const value = calendar(event);
+    expect(value).toContain('DTSTART:20261018T030000Z');
+    expect(value).toContain('DTEND:20261018T130000Z');
+    expect(value).toContain('DESCRIPTION:Build things\\, share ideas\\; learn together.');
+    expect(value.endsWith('\r\n')).toBe(true);
+  });
+  it('folds long lines without splitting Unicode characters', () => {
+    const value = calendar({ ...event, description: 'ಕನ್ನಡ '.repeat(40) });
+    for (const line of value.split('\r\n'))
+      expect(new TextEncoder().encode(line).length).toBeLessThanOrEqual(75);
+    expect(value.replace(/\r\n /g, '')).toContain('ಕನ್ನಡ '.repeat(40));
   });
 });

@@ -1,0 +1,237 @@
+{
+  "name": "KrowdKraft",
+  "members": "Krafters",
+  "city": "Bengaluru",
+  "country": "India",
+  "description": "KrowdKraft is a Bengaluru developer community for curious people who learn together, build useful things and share what they make.",
+  "email": "krowdkraft.official@gmail.com",
+  "organizers": [
+    {
+      "name": "Darshan Krishna N",
+      "initial": "DK",
+      "role": "Community organizer",
+      "linkedin": "https://www.linkedin.com/in/darshan-krishna-dk/",
+      "x": "https://x.com/CrypTech_DK"
+    },
+    {
+      "name": "Deepak N",
+      "initial": "DN",
+      "role": "Community organizer",
+      "linkedin": "https://www.linkedin.com/in/deepak--n/"
+    },
+    {
+      "name": "Viha Shomikha",
+      "initial": "VS",
+      "role": "Community organizer",
+      "linkedin": "https://www.linkedin.com/in/vihashomikhaas/",
+      "x": "https://x.com/BunnyYaps_"
+    }
+  ],
+  "stats": [
+    {
+      "value": "1.5k+",
+      "label": "Developers"
+    },
+    {
+      "value": "20+",
+      "label": "Events hosted"
+    },
+    {
+      "value": "3",
+      "label": "Hackathons"
+    },
+    {
+      "value": "5+",
+      "label": "Event partnerships"
+    }
+  ],
+  "partners": [
+    {
+      "id": "mlh",
+      "name": "Major League Hacking",
+      "alt": "Major League Hacking",
+      "group": "organizations",
+      "href": "https://www.mlh.com/",
+      "image": "/partners/mlh-white.svg",
+      "light": false,
+      "width": 343,
+      "height": 145
+    },
+    {
+      "id": "dev",
+      "name": "DEV",
+      "alt": "DEV Community",
+      "group": "organizations",
+      "href": "https://dev.to/",
+      "image": "/partners/dev-badge.svg",
+      "light": true,
+      "width": 448,
+      "height": 512
+    },
+    {
+      "id": "digitalocean",
+      "name": "DigitalOcean",
+      "alt": "DigitalOcean",
+      "group": "organizations",
+      "href": "https://www.digitalocean.com/",
+      "image": "/partners/digitalocean-white.svg",
+      "light": false,
+      "width": 600,
+      "height": 101
+    },
+    {
+      "id": "startup-park",
+      "name": "Startup Park",
+      "alt": "iQue Startup Park Bengaluru",
+      "group": "organizations",
+      "href": "https://www.thestartuppark.com/",
+      "image": "/partners/startup-park.png",
+      "light": false,
+      "width": 3398,
+      "height": 887
+    },
+    {
+      "id": "shipwright",
+      "name": "ShipWright",
+      "alt": "ShipWright",
+      "group": "organizations",
+      "href": null,
+      "image": "/partners/shipwright-poster.png",
+      "light": false,
+      "width": 190,
+      "height": 58
+    },
+    {
+      "id": "where-u-elevate",
+      "name": "Where U Elevate",
+      "alt": "Where U Elevate",
+      "group": "organizations",
+      "href": "https://whereuelevate.com/",
+      "image": "/partners/where-u-elevate-white.webp",
+      "light": false,
+      "width": 1039,
+      "height": 1034
+    },
+    {
+      "id": "algobharat",
+      "name": "AlgoBharat",
+      "alt": "AlgoBharat",
+      "group": "organizations",
+      "href": "https://algorand.co/algobharat",
+      "image": "/partners/algobharat.jpg",
+      "light": true,
+      "width": 200,
+      "height": 200
+    },
+    {
+      "id": "hackculture",
+      "name": "HackCulture",
+      "alt": "HackCulture",
+      "group": "organizations",
+      "href": "https://hackculture.io/",
+      "image": "/partners/hackculture-black.png",
+      "light": true,
+      "width": 6302,
+      "height": 1200
+    },
+    {
+      "id": "keploy",
+      "name": "Keploy",
+      "alt": "Keploy",
+      "group": "organizations",
+      "href": "https://keploy.io/",
+      "image": "/partners/keploy.svg",
+      "light": true,
+      "width": 560,
+      "height": 185
+    },
+    {
+      "id": "reva",
+      "name": "REVA University",
+      "alt": "REVA University",
+      "group": "institutions",
+      "href": "https://www.reva.edu.in/",
+      "image": "/partners/reva.svg",
+      "light": false,
+      "width": 390,
+      "height": 80
+    },
+    {
+      "id": "dsu",
+      "name": "Dayananda Sagar University",
+      "alt": "Dayananda Sagar University",
+      "group": "institutions",
+      "href": "https://www.dsu.edu.in/",
+      "image": "/partners/dsu-white.png",
+      "light": false,
+      "width": 2579,
+      "height": 828
+    },
+    {
+      "id": "msrit",
+      "name": "Ramaiah Institute of Technology",
+      "alt": "Ramaiah Institute of Technology",
+      "group": "institutions",
+      "href": "https://www.msrit.edu/",
+      "image": "/partners/msrit.png",
+      "light": false,
+      "width": 2323,
+      "height": 786
+    },
+    {
+      "id": "tjohn",
+      "name": "T. John Institute of Technology",
+      "alt": "T. John Group of Institutions",
+      "group": "institutions",
+      "href": "https://www.tjohncollege.com/page/30/T%20John%20Institute%20of%20Technology",
+      "image": "/partners/tjohn.jpg",
+      "light": true,
+      "width": 210,
+      "height": 77
+    },
+    {
+      "id": "hkbk",
+      "name": "HKBK College of Engineering",
+      "alt": "HKBK Group of Institutions",
+      "group": "institutions",
+      "href": "https://www.hkbk.edu.in/",
+      "image": "/partners/hkbk.webp",
+      "light": true,
+      "width": 316,
+      "height": 96
+    },
+    {
+      "id": "sairam",
+      "name": "Sri Sairam College of Engineering, Bengaluru",
+      "alt": "Sri Sairam College of Engineering Bengaluru",
+      "group": "institutions",
+      "href": "https://sairamce.edu.in/",
+      "image": "/partners/sairam-seal.png",
+      "light": true,
+      "width": 192,
+      "height": 192
+    },
+    {
+      "id": "women-in-product-india",
+      "name": "Women in Product India",
+      "alt": "Women in Product India",
+      "group": "organizations",
+      "href": "https://womeninproductindia.com/",
+      "image": "/partners/women-in-product-india.svg",
+      "width": 200,
+      "height": 200,
+      "light": false
+    },
+    {
+      "id": "ai-dev-circle",
+      "name": "AI Dev Circle",
+      "alt": "AI Dev Circle",
+      "group": "organizations",
+      "href": "https://aidevcircle.com/",
+      "image": "/partners/ai-dev-circle.png",
+      "width": 927,
+      "height": 277,
+      "light": true
+    }
+  ]
+}

@@ -1,74 +1,33 @@
-import type { Metadata } from "next";
-import { PageShell } from "@/components/page-shell";
-import { JournalCover } from "@/components/art/scenes";
-import { DuckDock } from "@/components/duck/duck-dock";
-import { Icon } from "@/components/icon";
-import { journal } from "@/data/journal";
-import { formatEventDate } from "@/data/event-utils";
+import type { Metadata } from 'next';
+import { getArticles } from '@/lib/data';
+import { PageIntro } from '@/components/shell';
+import { ArticleList } from '@/components/content-cards';
 export const metadata: Metadata = {
-  title: "The journal | KrowdKraft",
-  description:
-    "Thoughts on building, learning and finding your way. Read the KrowdKraft community's original writing on Medium.",
+  title: 'Blogs to read',
+  description: 'Practical notes on learning, building, and finding your next opportunity.',
 };
-export default function JournalPage() {
+export default async function Journal() {
+  const articles = await getArticles();
   return (
-    <PageShell className="journal-page">
-      <div className="container">
-        <div className="page-intro journal-masthead">
-          <p className="eyebrow">The KrowdKraft journal</p>
-          <h1>
-            Open notebooks.
-            <br />
-            <span className="serif-word">Fresh perspectives.</span>
-          </h1>
-          <p>
-            Career detours, developer dilemmas and ideas that deserve a little
-            more room. Original writing from the people behind the Krowd.
-          </p>
-          <DuckDock
-            id="journal-page"
-            mood="thinking"
-            tip="One good read. Then back to the 47 tabs you already have open."
-          />
-        </div>
-        <div className="journal-grid">
-          {journal.map((article) => (
-            <a
-              className="article-card"
-              key={article.slug}
-              href={article.href}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <JournalCover variant={article.cover} />
-              <div className="article-body">
-                <div className="article-meta">
-                  <span>{article.topic}</span>
-                  <span>
-                    Medium <Icon name="diagonal" size={14} />
-                  </span>
-                </div>
-                <h2>{article.title}</h2>
-                <p>{article.description}</p>
-                <p className="page-note">
-                  {article.author}
-                  <br />
-                  <time dateTime={article.date}>
-                    {formatEventDate(article.date)}
-                  </time>
-                </p>
-                <span className="text-link">
-                  Read the story <Icon name="diagonal" size={18} />
-                </span>
-              </div>
-            </a>
-          ))}
-        </div>
-        <p className="page-note" style={{ marginTop: 35 }}>
-          These articles open on Medium, where you can read the full piece and
-          follow the author.
+    <>
+      <PageIntro
+        eyebrow="From Darshan's Medium"
+        title="Blogs to read."
+        description="Writing on development, learning, and opportunities for builders. New posts appear here automatically."
+      />
+      <section className="wrap page-body">
+        {articles.length ? (
+          <ArticleList articles={articles} />
+        ) : (
+          <div className="empty-state">
+            <h2>New writing is on the way.</h2>
+            <p>Published articles appear here after the next feed update.</p>
+          </div>
+        )}
+        <p className="fine-print">
+          Articles open at their original publication. Dates refer to the original publication date.
         </p>
-      </div>
-    </PageShell>
+      </section>
+    </>
   );
 }

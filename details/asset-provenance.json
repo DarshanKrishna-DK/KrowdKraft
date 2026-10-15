@@ -1,0 +1,19 @@
+{
+  "computer": {
+    "tool": "built-in image_gen",
+    "created": "2026-10-13",
+    "original": "~/.codex/generated_images/01a13488-969e-7be3-b290-c89281093bd4/exec-e1c24fda-2452-4105-b409-99694e797fe0.png"
+  },
+  "photo": {
+    "gitCommit": "086620e",
+    "path": "public/images/events/MSRIT_EXHostz_16052025_16.jpg",
+    "event": "Into the AI-Verse, 16 May 2025"
+  },
+  "namasteArbitrum": {
+    "page": "https://luma.com/9usbg8kx",
+    "source": "https://images.lumacdn.com/event-covers/ds/ddd30102-2a58-4fd4-9d1d-fbc4c3ff606e.png",
+    "local": "public/events/namaste-arbitrum-2025.webp",
+    "retrieved": "2026-10-15",
+    "treatment": "Original aspect ratio retained; resized to at most 1000px and encoded as WebP."
+  }
+}

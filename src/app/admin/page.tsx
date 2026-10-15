@@ -1,225 +1,218 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { PageShell } from "@/components/page-shell";
-import {
-  adminDatabase,
-  currentMember,
-  organizerAllowed,
-} from "@/server/supabase";
-import { monthWindow } from "@/lib/community-schema";
-import { reviewSubmission, unpublishContent } from "@/app/actions/moderation";
-export const dynamic = "force-dynamic";
-export const metadata: Metadata = {
-  title: "Organizer desk | KrowdKraft",
-  robots: { index: false, follow: false },
-};
-const messages: Record<string, string> = {
-  saved:
-    "Review saved. Approved content is now published, or scheduled for its edition month.",
-  invalid: "Please check the form fields.",
-  failed: "That change could not be saved. It may have been reviewed already.",
-  unavailable: "The database is unavailable.",
-  "edition-taken":
-    "That spotlight month already has a story. Choose another month.",
-  unpublished: "The entry is no longer public.",
-};
-export default async function AdminPage({
+import Link from 'next/link';
+import { organizerPageContext } from '@/lib/organizer-page';
+import { PageIntro } from '@/components/shell';
+import { Icon } from '@/components/icon';
+import { dateLabel } from '@/lib/events';
+import { ReviewForm, ProposalStatusForm } from '@/components/forms/organizer-forms';
+import type { Project, Proposal } from '@/lib/types';
+const tabs = [
+  ['events', 'Events'],
+  ['articles', 'Journal'],
+  ['projects', 'Project reviews'],
+  ['proposals', 'Collaborations'],
+  ['audit', 'Activity'],
+] as const;
+export default async function Admin({
   searchParams,
 }: {
-  searchParams: Promise<{ notice?: string }>;
+  searchParams: Promise<{ tab?: string; page?: string; status?: string }>;
 }) {
-  const user = await currentMember();
-  if (!user || !organizerAllowed(user.id)) notFound();
-  const database = adminDatabase();
-  if (!database) notFound();
-  const [
-    { data: submissions, error },
-    { data: projects },
-    { data: spotlights },
-  ] = await Promise.all([
-    database
-      .from("kk_submissions")
-      .select("id,kind,name,builder,email,url,description,category,created_at")
-      .eq("status", "pending")
-      .order("created_at")
-      .limit(100),
-    database
-      .from("kk_projects")
-      .select("id,name,is_published")
-      .eq("is_published", true)
-      .order("published_at", { ascending: false })
-      .limit(100),
-    database
-      .from("kk_spotlights")
-      .select("id,name,month,is_published")
-      .eq("is_published", true)
-      .order("month", { ascending: false })
-      .limit(100),
-  ]);
-  const { notice } = await searchParams;
+  const params = await searchParams;
+  const tab = tabs.some((t) => t[0] === params.tab) ? params.tab! : 'events';
+  const page = Math.max(1, Math.floor(Math.min(1000, Number(params.page) || 1)));
+  const status = ['pending', 'approved', 'rejected', 'withdrawn'].includes(params.status || '')
+    ? params.status!
+    : 'pending';
+  const { db } = await organizerPageContext();
+  const table = {
+    events: 'workshop_events',
+    articles: 'workshop_articles',
+    projects: 'workshop_projects',
+    proposals: 'workshop_proposals',
+    audit: 'workshop_audit_log',
+  }[tab]!;
+  const order = ['events', 'articles'].includes(tab) ? 'date' : 'created_at';
+  let query = db.from(table).select('*', { count: 'exact' }).order(order, { ascending: false });
+  if (tab === 'projects') query = query.eq('status', status);
+  const { data, error, count } = await query.range((page - 1) * 25, page * 25 - 1);
+  if (error) throw new Error('Organizer records are temporarily unavailable.');
+  const projects =
+    tab === 'projects'
+      ? await Promise.all(
+          ((data || []) as Project[]).map(async (p) => {
+            if (!p.image_path) return p;
+            const { data: image } = await db.storage
+              .from('workshop-project-images')
+              .createSignedUrl(p.image_path, 300);
+            return { ...p, image_url: image?.signedUrl };
+          }),
+        )
+      : [];
   return (
-    <PageShell>
-      <div className="container">
-        <div className="page-intro">
-          <p className="eyebrow">Private · Organizers only</p>
-          <h1>
-            The organizer <span className="serif-word">desk.</span>
-          </h1>
-          <p>
-            Review submissions, check the original work and edit the public copy
-            before publishing. Contact emails stay in this private view.
-          </p>
-        </div>
-        {notice && messages[notice] && (
-          <p role="status" className="notice">
-            {messages[notice]}
-          </p>
-        )}
-        {error ? (
-          <p role="alert" className="notice">
-            The submission queue couldn’t be loaded. Please try again.
-          </p>
-        ) : !submissions?.length ? (
-          <div className="notice">No submissions are waiting for review.</div>
-        ) : (
-          <div className="moderation-list">
-            {submissions.map((item) => (
-              <article className="moderation-card" key={item.id}>
-                <span className="badge">
-                  {item.kind === "project"
-                    ? "Product submission"
-                    : "Builder nomination"}{" "}
-                  · {item.created_at.slice(0, 10)}
-                </span>
-                <h2>{item.name}</h2>
-                <p>
-                  By {item.builder} · {item.category}
-                </p>
-                <p>
-                  <a href={`mailto:${item.email}`}>{item.email}</a> ·{" "}
-                  <a href={item.url} target="_blank" rel="noreferrer">
-                    View submitted work ↗
-                  </a>
-                </p>
-                <form action={reviewSubmission}>
-                  <input type="hidden" name="id" value={item.id} />
-                  <div className="form-grid">
-                    <div className="form-field form-wide">
-                      <label htmlFor={`title-${item.id}`}>Public title</label>
-                      <input
-                        id={`title-${item.id}`}
-                        name="title"
-                        defaultValue={item.name}
-                        minLength={2}
-                        maxLength={100}
-                        required
-                      />
-                    </div>
-                    <div className="form-field form-wide">
-                      <label htmlFor={`summary-${item.id}`}>
-                        Public description
-                      </label>
-                      <textarea
-                        id={`summary-${item.id}`}
-                        name="summary"
-                        defaultValue={item.description}
-                        minLength={30}
-                        maxLength={1500}
-                        rows={4}
-                        required
-                      />
-                    </div>
-                    {item.kind === "nomination" ? (
-                      <div className="form-field">
-                        <label htmlFor={`month-${item.id}`}>
-                          Spotlight edition
-                        </label>
-                        <input
-                          type="month"
-                          id={`month-${item.id}`}
-                          name="month"
-                          defaultValue={monthWindow().period}
-                          required
-                        />
-                      </div>
-                    ) : (
-                      <input
-                        type="hidden"
-                        name="month"
-                        value={monthWindow().period}
-                      />
-                    )}
-                  </div>
-                  <label className="checkbox-field">
-                    <input
-                      type="checkbox"
-                      name="review-confirmation"
-                      required
-                    />
-                    <span>
-                      I have reviewed the link and attribution. For a spotlight,
-                      I have verified the story and confirmed publication with
-                      the builder.
-                    </span>
-                  </label>
-                  <div className="actions">
-                    <button
-                      className="button primary"
-                      type="submit"
-                      name="decision"
-                      value="approved"
-                    >
-                      Approve & publish
-                    </button>
-                    <button
-                      className="button"
-                      type="submit"
-                      name="decision"
-                      value="rejected"
-                      formNoValidate
-                    >
-                      Reject submission
-                    </button>
-                  </div>
-                </form>
+    <>
+      <PageIntro
+        eyebrow="The organizer desk"
+        title="Good gatherings take a little care."
+        description="Keep the community’s events, stories, and shared projects up to date."
+      />
+      <section className="wrap page-body">
+        <nav className="admin-tabs" aria-label="Organizer sections">
+          {tabs.map(([key, label]) => (
+            <Link key={key} href={`/admin?tab=${key}`} aria-current={tab === key ? 'page' : undefined}>
+              {label}
+            </Link>
+          ))}
+          <Link href="/admin/settings">Community settings</Link>
+          <Link href="/connect">GitHub connection</Link>
+        </nav>
+        <div className="form-panel">
+          <div className="admin-heading">
+            <h2>
+              {tabs.find((t) => t[0] === tab)![1]} <span className="count-label">{count || 0}</span>
+            </h2>
+            {['events', 'articles'].includes(tab) && (
+              <Link className="button button-silver" href={`/admin/${tab}/new`}>
+                Create {tab === 'events' ? 'event' : 'article'}
+                <Icon name="plus" size={16} />
+              </Link>
+            )}
+          </div>
+          {tab === 'projects' && (
+            <nav className="admin-tabs" aria-label="Project status">
+              {['pending', 'approved', 'rejected', 'withdrawn'].map((s) => (
+                <Link
+                  key={s}
+                  href={`/admin?tab=projects&status=${s}`}
+                  aria-current={s === status ? 'page' : undefined}
+                >
+                  {s === 'pending' ? 'Awaiting review' : s.charAt(0).toUpperCase() + s.slice(1)}
+                </Link>
+              ))}
+            </nav>
+          )}
+          {!data?.length && (
+            <p>
+              {tab === 'projects'
+                ? status === 'pending'
+                  ? 'The review queue is clear. New member projects will appear here.'
+                  : 'There are no projects in this state.'
+                : tab === 'proposals'
+                  ? 'New collaboration proposals will appear here.'
+                  : 'No records here yet.'}
+            </p>
+          )}
+          {['events', 'articles'].includes(tab) &&
+            data?.map((row) => (
+              <article className="admin-row" key={row.slug}>
+                <div>
+                  <h3>{row.title}</h3>
+                  <p>
+                    {dateLabel(row.date)} · {row.published ? 'Published' : 'Draft'}
+                    {row.registration_status ? ` · Registration: ${row.registration_status}` : ''}
+                  </p>
+                </div>
+                <Link className="button button-quiet" href={`/admin/${tab}/${row.slug}`}>
+                  Edit
+                  <Icon name="arrow" size={15} />
+                </Link>
               </article>
             ))}
-          </div>
-        )}
-        <div className="subsection">
-          <h2>Published & scheduled</h2>
-          <p className="page-note">
-            Unpublishing removes the entry from the public directory while
-            retaining the private review record.
-          </p>
-          <div className="moderation-list">
-            {[
-              ...(projects || []).map((item) => ({
-                ...item,
-                kind: "project",
-                month: "",
-              })),
-              ...(spotlights || []).map((item) => ({
-                ...item,
-                kind: "spotlight",
-              })),
-            ].map((item) => (
-              <div className="published-row" key={item.id}>
-                <span>
-                  {item.name} {item.month && `· ${item.month}`}
-                </span>
-                <form action={unpublishContent}>
-                  <input type="hidden" name="kind" value={item.kind} />
-                  <input type="hidden" name="id" value={item.id} />
-                  <button className="button" type="submit">
-                    Unpublish
-                  </button>
-                </form>
+          {projects.map((p) => (
+            <article className="submission-row review-project" key={p.id}>
+              <h3>{p.title}</h3>
+              <p>{p.summary}</p>
+              {p.image_url && (
+                <img src={p.image_url} alt={`${p.title} submitted screenshot`} width={800} height={500} />
+              )}
+              <p className="proposal-text">{p.description}</p>
+              <div className="tag-row">
+                {p.tags.map((t) => (
+                  <span key={t}>{t}</span>
+                ))}
               </div>
+              <div className="button-row">
+                <a className="text-link" href={p.repository_url} target="_blank" rel="noreferrer ugc">
+                  Review repository <Icon name="diagonal" size={16} />
+                </a>
+                {p.demo_url && (
+                  <a className="text-link" href={p.demo_url} target="_blank" rel="noreferrer ugc">
+                    View demo <Icon name="diagonal" size={16} />
+                  </a>
+                )}
+              </div>
+              {['pending', 'approved'].includes(p.status) && (
+                <ReviewForm id={p.id} published={p.status === 'approved'} />
+              )}
+            </article>
+          ))}
+          {tab === 'proposals' &&
+            ((data as Proposal[]) || []).map((p) => (
+              <article className="submission-row" key={p.id}>
+                <div className="submission-header">
+                  <h3>{p.subject}</h3>
+                  <span className="pill">{p.status}</span>
+                </div>
+                <p className="proposal-text">{p.message}</p>
+                <p>{dateLabel(p.created_at.slice(0, 10))}</p>
+                <ProposalStatusForm proposal={p} />
+              </article>
             ))}
-          </div>
+          {tab === 'audit' && !!data?.length && (
+            <div className="table-scroll">
+              <table className="audit-table">
+                <caption className="sr-only">Community content changes, newest first</caption>
+                <thead>
+                  <tr>
+                    <th>Date (IST)</th>
+                    <th>Action</th>
+                    <th>Record</th>
+                    <th>Account</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data.map((row) => (
+                    <tr key={row.id}>
+                      <td>
+                        {new Date(row.created_at).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}
+                      </td>
+                      <td>{row.action}</td>
+                      <td>
+                        {row.entity.replace('workshop_', '')}
+                        <br />
+                        {row.entity_id}
+                      </td>
+                      <td>{row.actor_id ? row.actor_id.slice(0, 8) : 'System setup'}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
-      </div>
-    </PageShell>
+        {(count || 0) > 25 && (
+          <nav className="pagination" aria-label="Organizer record pages">
+            {page > 1 && (
+              <Link
+                className="button button-quiet"
+                href={`/admin?tab=${tab}&status=${status}&page=${page - 1}`}
+              >
+                <Icon name="back" size={16} /> Previous
+              </Link>
+            )}
+            <span>
+              Page {page} of {Math.ceil((count || 0) / 25)}
+            </span>
+            {page * 25 < (count || 0) && (
+              <Link
+                className="button button-quiet"
+                href={`/admin?tab=${tab}&status=${status}&page=${page + 1}`}
+              >
+                Next <Icon name="arrow" size={16} />
+              </Link>
+            )}
+          </nav>
+        )}
+      </section>
+    </>
   );
 }

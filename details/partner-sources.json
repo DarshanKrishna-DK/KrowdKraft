@@ -1,0 +1,391 @@
+{
+  "verifiedAt": "2026-10-15T02:52:27.912Z",
+  "scope": "Public source and logo research only; no application, database, content record, or deployment changes.",
+  "currentHacktoberfestPartners": [
+    "mlh",
+    "dev",
+    "digitalocean",
+    "startup-park",
+    "shipwright",
+    "where-u-elevate"
+  ],
+  "historicOrganizations": ["algobharat", "hackculture", "keploy"],
+  "institutionRoster": ["reva", "dsu", "msrit", "tjohn", "hkbk", "sairam"],
+  "exclusions": [
+    {
+      "name": "Algorand",
+      "reason": "Owner explicitly requested removal of the generic Algorand mark."
+    },
+    {
+      "name": "Google / Gemma",
+      "reason": "MLH event has a Gemma prize track; insufficient evidence to assert a general event sponsor relationship."
+    },
+    {
+      "name": "AWS Student Builder Groups / IEEE / OLake",
+      "reason": "Search results refer to other Bengaluru Hacktoberfest events, not this 18 October KrowdKraft event."
+    }
+  ],
+  "unresolved": [
+    {
+      "name": "ShipWright",
+      "issue": "Official website and transparent logo file unresolved. Exact official poster mark available without a hyperlink."
+    }
+  ],
+  "recommendation": "Use two logo-only strips. Label second strip Colleges & universities or Campus community; not all entries are universities. Use originals or official white variants on suitable contrast plaques, preserve aspect ratios, pause ticker on hover/focus, and respect reduced motion.",
+  "entries": [
+    {
+      "id": "mlh",
+      "name": "Major League Hacking",
+      "alt": "Major League Hacking",
+      "group": "organizations",
+      "href": "https://www.mlh.com/",
+      "file": "logos/mlh-white.svg",
+      "sourcePage": "https://www.mlh.com/brand-guidelines",
+      "assetUrl": "https://assets.mlh.io/cms/mlh_logo_white_4_ec761e4484.svg",
+      "variant": "Official white transparent SVG",
+      "alternatives": ["logos/mlh-color.svg"],
+      "relationship": "Powered by partner on current Hacktoberfest poster",
+      "relationshipSource": "https://events.mlh.com/events/15112-hacktoberfest-hack-day-bengaluru-krowdkraft",
+      "asset": {
+        "relativePath": "artifacts/research-partners/logos/mlh-white.svg",
+        "format": "svg",
+        "width": 343,
+        "height": 145,
+        "hasAlpha": true,
+        "bytes": 15959,
+        "sha256": "74b961d7540a7dd1bf09fff5d3a69b444bdc7638fc2e646a1edac2700e0c7d60"
+      }
+    },
+    {
+      "id": "dev",
+      "name": "DEV",
+      "alt": "DEV Community",
+      "group": "organizations",
+      "href": "https://dev.to/",
+      "file": "logos/dev-badge.svg",
+      "sourcePage": "https://dev.to/brand",
+      "assetUrl": "https://d2fltix0v2e0sb.cloudfront.net/dev-badge.svg",
+      "variant": "Official black square badge SVG with white lettering",
+      "relationship": "Powered by partner on current Hacktoberfest poster",
+      "relationshipSource": "https://events.mlh.com/events/15112-hacktoberfest-hack-day-bengaluru-krowdkraft",
+      "notes": "Use the square badge; the rectangular header logo is only for space-constrained contexts. This is partner identification, not a DEV application identity.",
+      "asset": {
+        "relativePath": "artifacts/research-partners/logos/dev-badge.svg",
+        "format": "svg",
+        "width": 448,
+        "height": 512,
+        "hasAlpha": true,
+        "bytes": 798,
+        "sha256": "787fc3c6537ce48dad1d20c60ed1bdcb68d05970d0115700e37db51f168630bd"
+      }
+    },
+    {
+      "id": "digitalocean",
+      "name": "DigitalOcean",
+      "alt": "DigitalOcean",
+      "group": "organizations",
+      "href": "https://www.digitalocean.com/",
+      "file": "logos/digitalocean-white.svg",
+      "sourcePage": "https://www.digitalocean.com/press",
+      "assetUrl": "https://web-platforms.sfo2.cdn.digitaloceanspaces.com/DO%20Logo%20Assets.zip",
+      "archiveEntry": "DO Logo Assets/SVG/DO_Logo_horizontal_white.svg",
+      "variant": "Official white horizontal SVG",
+      "alternatives": ["logos/digitalocean-blue.svg"],
+      "relationship": "Presenting partner on current Hacktoberfest poster",
+      "relationshipSource": "https://events.mlh.com/events/15112-hacktoberfest-hack-day-bengaluru-krowdkraft",
+      "asset": {
+        "relativePath": "artifacts/research-partners/logos/digitalocean-white.svg",
+        "format": "svg",
+        "width": 600,
+        "height": 101,
+        "hasAlpha": true,
+        "bytes": 5884,
+        "sha256": "681518370aa71a3f5b508eda00c8409ec07f689a1c5c7cd275e56508830c8711"
+      }
+    },
+    {
+      "id": "startup-park",
+      "name": "Startup Park",
+      "alt": "iQue Startup Park Bengaluru",
+      "group": "organizations",
+      "href": "https://www.thestartuppark.com/",
+      "file": "logos/startup-park.png",
+      "sourcePage": "https://www.thestartuppark.com/",
+      "assetUrl": "https://www.thestartuppark.com/logo.png",
+      "variant": "Official transparent white wordmark PNG",
+      "relationship": "Venue partner on current Hacktoberfest poster and MLH venue listing",
+      "relationshipSource": "https://events.mlh.com/events/15112-hacktoberfest-hack-day-bengaluru-krowdkraft",
+      "notes": "White logo looks blank on a white preview; render on dark glass. Original has large dimensions and can be optimized without changing its appearance.",
+      "asset": {
+        "relativePath": "artifacts/research-partners/logos/startup-park.png",
+        "format": "png",
+        "width": 3398,
+        "height": 887,
+        "hasAlpha": true,
+        "bytes": 61427,
+        "sha256": "8909fa61fafab3140e60a8ab49d5e9a5d346a05c1b140c8fa8d50c1cac5471f3"
+      }
+    },
+    {
+      "id": "shipwright",
+      "name": "ShipWright",
+      "alt": "ShipWright",
+      "group": "organizations",
+      "href": null,
+      "file": "logos/shipwright-poster.png",
+      "sourcePage": "https://events.mlh.com/events/15112-hacktoberfest-hack-day-bengaluru-krowdkraft",
+      "assetUrl": null,
+      "variant": "Exact unchanged source-pixel region from the current official event poster; dark poster background retained",
+      "relationship": "Technology partner on current Hacktoberfest poster",
+      "relationshipSource": "https://events.mlh.com/events/15112-hacktoberfest-hack-day-bengaluru-krowdkraft",
+      "sourceImage": "hacktoberfest-current.png",
+      "sourceRegion": {
+        "left": 33,
+        "top": 452,
+        "width": 190,
+        "height": 58
+      },
+      "notes": "Identity confirmed by poster. Canonical website unresolved: do not guess a Shipwright domain. Preserve this exact mark; do not substitute the unrelated CNCF project or AI SaaS brands. Prefer owner-supplied transparent source later.",
+      "asset": {
+        "relativePath": "artifacts/research-partners/logos/shipwright-poster.png",
+        "format": "png",
+        "width": 190,
+        "height": 58,
+        "hasAlpha": true,
+        "bytes": 9866,
+        "sha256": "93caf55c7c57188312dd8c061f291dad5416d14cc2cc2f1f003d510cd3576adf"
+      }
+    },
+    {
+      "id": "where-u-elevate",
+      "name": "Where U Elevate",
+      "alt": "Where U Elevate",
+      "group": "organizations",
+      "href": "https://whereuelevate.com/",
+      "file": "logos/where-u-elevate-white.webp",
+      "sourcePage": "https://whereuelevate.com/brand-guidelines",
+      "assetUrl": "https://dfxy74dfhcx53.cloudfront.net/brand/secondary_logo.webp",
+      "variant": "Official white secondary transparent logo for dark backgrounds",
+      "alternatives": ["logos/where-u-elevate-primary.webp"],
+      "relationship": "Innovation partner on current Hacktoberfest poster",
+      "relationshipSource": "https://events.mlh.com/events/15112-hacktoberfest-hack-day-bengaluru-krowdkraft",
+      "notes": "Brand guidelines require at least 10 percent clearspace, original proportions, and no recoloring, rotation, or gradients on the logo.",
+      "asset": {
+        "relativePath": "artifacts/research-partners/logos/where-u-elevate-white.webp",
+        "format": "webp",
+        "width": 1039,
+        "height": 1034,
+        "hasAlpha": true,
+        "bytes": 21156,
+        "sha256": "7e00b42cba37eb1c4a58dfccca80f1e2e201bd97904db27fc013bab9c702298a"
+      }
+    },
+    {
+      "id": "algobharat",
+      "name": "AlgoBharat",
+      "alt": "AlgoBharat",
+      "group": "organizations",
+      "href": "https://algorand.co/algobharat",
+      "file": "logos/algobharat.jpg",
+      "sourcePage": "https://in.linkedin.com/company/algorandbharat",
+      "assetUrl": "https://media.licdn.com/dms/image/v2/D4D0BAQFFiGAhSNDmhw/company-logo_200_200/B4DZ0uTf.hGgAI-/0/1774598357360/algorandbharat_logo?e=2147483647&v=beta&t=b2bHzFjLCjeDO_w2m7MGrXhb7FYvU5joC_E9ASq98E8",
+      "variant": "Current official AlgoBharat company profile square JPEG",
+      "relationship": "Co-host of x402 Global Challenge PreHack with KrowdKraft on 23 August 2026",
+      "relationshipSource": "https://in.linkedin.com/company/algorandbharat",
+      "notes": "Distinct BHARAT mark, not the generic Algorand mark removed at the owner request. Official algobharat.in redirects to algorand.co/algobharat.",
+      "asset": {
+        "relativePath": "artifacts/research-partners/logos/algobharat.jpg",
+        "format": "jpeg",
+        "width": 200,
+        "height": 200,
+        "hasAlpha": false,
+        "bytes": 6016,
+        "sha256": "7e0d550936b0771acfd3b05f08e78b54403a0bd0f741886a638cf02de0b81934"
+      }
+    },
+    {
+      "id": "hackculture",
+      "name": "HackCulture",
+      "alt": "HackCulture",
+      "group": "organizations",
+      "href": "https://hackculture.io/",
+      "file": "logos/hackculture-black.png",
+      "sourcePage": "https://hackculture.io/",
+      "assetUrl": "https://hackculture.io/logos/Black%20Full%20Logo.png",
+      "variant": "Official black full transparent logo",
+      "relationship": "Innovation partner of x402 Global Challenge PreHack",
+      "relationshipSource": "https://hackculture.io/hackathons/x402-global-challenge-prehack",
+      "notes": "Black mark needs a light cream glass plaque. Do not recolor it with CSS filters; no official white file was verified.",
+      "asset": {
+        "relativePath": "artifacts/research-partners/logos/hackculture-black.png",
+        "format": "png",
+        "width": 6302,
+        "height": 1200,
+        "hasAlpha": true,
+        "bytes": 94390,
+        "sha256": "6b17ba6df24e111b02d3feb27dafa6defb4c349e2621ed6857fd14b1397bcef9"
+      }
+    },
+    {
+      "id": "keploy",
+      "name": "Keploy",
+      "alt": "Keploy",
+      "group": "organizations",
+      "href": "https://keploy.io/",
+      "file": "logos/keploy.svg",
+      "sourcePage": "https://keploy.io/",
+      "assetUrl": "https://keploy.io/images/keploy-logo-full.svg",
+      "variant": "Official full color transparent SVG",
+      "relationship": "Retained Preptember event records name Keploy; not a Hacktoberfest 2026 sponsor claim",
+      "relationshipSource": "details/events.json",
+      "notes": "Optional historic partner. Keep it outside the list labeled specifically as Hacktoberfest 2026 partners unless further evidence confirms that relationship.",
+      "asset": {
+        "relativePath": "artifacts/research-partners/logos/keploy.svg",
+        "format": "svg",
+        "width": 560,
+        "height": 185,
+        "hasAlpha": true,
+        "bytes": 10047,
+        "sha256": "0bbcebddc1307b589b86ff49cbf084f9b435195722633641aed1c8f5c8618d38"
+      }
+    },
+    {
+      "id": "reva",
+      "name": "REVA University",
+      "alt": "REVA University",
+      "group": "institutions",
+      "href": "https://www.reva.edu.in/",
+      "file": "logos/reva.svg",
+      "sourcePage": "https://www.reva.edu.in/",
+      "assetUrl": "https://files.reva.ac.in/uploads/logo/1637126493_30dc6528e6d454555baf.svg",
+      "variant": "Official university transparent SVG from Organization structured data",
+      "relationship": "Owner-requested campus roster; retained GitHub and LinkedIn Mastery venue",
+      "relationshipSource": "Owner request and details/events.json",
+      "asset": {
+        "relativePath": "artifacts/research-partners/logos/reva.svg",
+        "format": "svg",
+        "width": 390,
+        "height": 80,
+        "hasAlpha": true,
+        "bytes": 6194,
+        "sha256": "24904f94028b92f0879fea4735dd0e40defa1ff2ffc74fe2a93f909c6508b37a"
+      }
+    },
+    {
+      "id": "dsu",
+      "name": "Dayananda Sagar University",
+      "alt": "Dayananda Sagar University",
+      "group": "institutions",
+      "href": "https://www.dsu.edu.in/",
+      "file": "logos/dsu-white.png",
+      "sourcePage": "https://www.dsu.edu.in/",
+      "assetUrl": "https://www.dsu.edu.in/images/logo_white.png",
+      "variant": "Official white transparent footer wordmark PNG",
+      "alternatives": ["logos/dsu-color.png"],
+      "relationship": "Owner-requested campus roster",
+      "relationshipSource": "Owner request",
+      "notes": "Correct Bengaluru university, not Dayananda Sagar College of Engineering.",
+      "asset": {
+        "relativePath": "artifacts/research-partners/logos/dsu-white.png",
+        "format": "png",
+        "width": 2579,
+        "height": 828,
+        "hasAlpha": true,
+        "bytes": 88160,
+        "sha256": "b7e7254cb8464c03fad6c40e0a62ab88d9525e1f8ba2a521b7c7daa082182b3d"
+      }
+    },
+    {
+      "id": "msrit",
+      "name": "Ramaiah Institute of Technology",
+      "alt": "Ramaiah Institute of Technology",
+      "group": "institutions",
+      "href": "https://www.msrit.edu/",
+      "file": "logos/msrit.png",
+      "sourcePage": "https://www.msrit.edu/",
+      "assetUrl": "https://d2e9h3gjmozu47.cloudfront.net/brand.png",
+      "variant": "Official transparent header wordmark PNG",
+      "relationship": "Owner-requested campus roster; retained Preptember and AI-Verse venue",
+      "relationshipSource": "Owner request and details/events.json",
+      "notes": "Use current Ramaiah Institute of Technology identity; MSRIT remains the familiar abbreviation.",
+      "asset": {
+        "relativePath": "artifacts/research-partners/logos/msrit.png",
+        "format": "png",
+        "width": 2323,
+        "height": 786,
+        "hasAlpha": true,
+        "bytes": 68055,
+        "sha256": "5bf51d7fbdace8f893f5c9786147469159aa34cedf513855f3bc34066a6bddaa"
+      }
+    },
+    {
+      "id": "tjohn",
+      "name": "T. John Institute of Technology",
+      "alt": "T. John Group of Institutions",
+      "group": "institutions",
+      "href": "https://www.tjohncollege.com/page/30/T%20John%20Institute%20of%20Technology",
+      "file": "logos/tjohn.jpg",
+      "sourcePage": "https://www.tjohncollege.com/page/30/T%20John%20Institute%20of%20Technology",
+      "assetUrl": "https://www.tjohncollege.com/assets/tlogo.jpg",
+      "variant": "Official Group of Institutions header JPEG",
+      "relationship": "Owner-requested campus roster; retained Blockchain 101 venue",
+      "relationshipSource": "Owner request and details/events.json",
+      "notes": "Actual source mark is the group logo. Do not label it as a separate institute-specific mark. tjit.edu.in is an unrelated Chennai institution.",
+      "asset": {
+        "relativePath": "artifacts/research-partners/logos/tjohn.jpg",
+        "format": "jpeg",
+        "width": 210,
+        "height": 77,
+        "hasAlpha": false,
+        "bytes": 18520,
+        "sha256": "1d1f30c0bd8fab0ad4d82dd198df4e97e79e8974dfc47aae990ecc9587137a4e"
+      }
+    },
+    {
+      "id": "hkbk",
+      "name": "HKBK College of Engineering",
+      "alt": "HKBK Group of Institutions",
+      "group": "institutions",
+      "href": "https://www.hkbk.edu.in/",
+      "file": "logos/hkbk.webp",
+      "sourcePage": "https://admissions.hkbk.edu.in/",
+      "assetUrl": "https://admissions.hkbk.edu.in/wp-content/uploads/2026/03/Link-%E2%86%92-Amber-Valley-Residential-School.webp",
+      "variant": "Official admissions header transparent Group of Institutions wordmark",
+      "relationship": "Owner-requested campus roster",
+      "relationshipSource": "Owner request",
+      "notes": "Odd filename is the actual official header asset. Visually verified as HKBK Group of Institutions, not Amber Valley.",
+      "asset": {
+        "relativePath": "artifacts/research-partners/logos/hkbk.webp",
+        "format": "webp",
+        "width": 316,
+        "height": 96,
+        "hasAlpha": true,
+        "bytes": 13200,
+        "sha256": "deb4ece8a894ada53a0cd5bc1dbb477b3bffa30fc63ca217eac693be2e26d05b"
+      }
+    },
+    {
+      "id": "sairam",
+      "name": "Sri Sairam College of Engineering, Bengaluru",
+      "alt": "Sri Sairam College of Engineering Bengaluru",
+      "group": "institutions",
+      "href": "https://sairamce.edu.in/",
+      "file": "logos/sairam-seal.png",
+      "sourcePage": "https://sairamce.edu.in/",
+      "assetUrl": "https://sairamce.edu.in/wp-content/uploads/2020/05/cropped-sai_logo_final-192x192.png",
+      "variant": "Official transparent 192px college seal",
+      "relationship": "Owner-requested campus roster",
+      "relationshipSource": "Owner request",
+      "notes": "Bengaluru/Anekal college, formerly Shirdi Sai Engineering College. Do not use Sri Sairam Engineering College Chennai at sairam.edu.in. The official header uses CSS text beside this seal; the separate site header image URL is a commented stale 404.",
+      "asset": {
+        "relativePath": "artifacts/research-partners/logos/sairam-seal.png",
+        "format": "png",
+        "width": 192,
+        "height": 192,
+        "hasAlpha": true,
+        "bytes": 55180,
+        "sha256": "391b2d3fdaaacdf76730a27dac2636cb2eb5799f21d9e718785b1875ed1a5ac4"
+      }
+    }
+  ]
+}

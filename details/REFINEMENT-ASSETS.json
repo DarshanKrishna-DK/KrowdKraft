@@ -1,0 +1,85 @@
+{
+  "verifiedAt": "2026-10-15T04:29:36.189Z",
+  "font": {
+    "family": "Jaini",
+    "style": "normal",
+    "weight": 400,
+    "file": "/fonts/jaini-latin.woff2",
+    "bytes": 24016,
+    "license": "/licenses/jaini-ofl.txt",
+    "licenseName": "SIL Open Font License 1.1",
+    "licenseSource": "https://raw.githubusercontent.com/google/fonts/main/ofl/jaini/OFL.txt",
+    "sourcePage": "https://github.com/EkType/Jaini",
+    "assetUrl": "https://fonts.gstatic.com/s/jaini/v1/fC1vPYJMbGHQzHmJIec.woff2",
+    "rationale": "Original Devanagari-influenced Latin letterforms by Ek Type, informed by Indian hand lettering and the Devanagari pen angle; public web embedding permitted under OFL.",
+    "rejectedReferences": [
+      {
+        "name": "Shivaraja",
+        "url": "https://www.1001fonts.com/shivaraja-font.html",
+        "reason": "Free for personal use; not free for commercial use."
+      },
+      {
+        "name": "Ananda Neptouch 2",
+        "url": "https://www.1001fonts.com/ananda-neptouch-2-font.html",
+        "reason": "Free for personal use; not free for commercial use."
+      }
+    ]
+  },
+  "partners": [
+    {
+      "id": "women-in-product-india",
+      "name": "Women in Product India",
+      "alt": "Women in Product India",
+      "group": "organizations",
+      "href": "https://womeninproductindia.com/",
+      "image": "/partners/women-in-product-india.svg",
+      "width": 200,
+      "height": 200,
+      "light": false,
+      "sourcePage": "https://womeninproductindia.com/",
+      "assetUrl": "https://womeninproductindia.com/wp-content/uploads/2025/04/WIP-Logo-2-1.svg",
+      "identityConfidence": "Confirmed: exact official identity linked in KrowdKraft community partner announcement.",
+      "relationship": "Hacktoberfest Hack Day Bengaluru 2026 community partner",
+      "relationshipSource": "https://www.linkedin.com/company/krowdkraft",
+      "variant": "Unmodified official purple circular mark with white lettering",
+      "bytes": 61097,
+      "sha256": "7bd4618b310a8ad1284921f92a3e5175449f896a78e3fd995ce2b936ac395f04"
+    },
+    {
+      "id": "ai-dev-circle",
+      "name": "AI Dev Circle",
+      "alt": "AI Dev Circle",
+      "group": "organizations",
+      "href": "https://aidevcircle.com/",
+      "image": "/partners/ai-dev-circle.png",
+      "width": 927,
+      "height": 277,
+      "light": true,
+      "sourcePage": "https://aidevcircle.com/",
+      "assetUrl": "https://aidevcircle.com/brand/adc-black.png",
+      "identityConfidence": "Confirmed: official Luma calendar links this website; KrowdKraft announcement confirms former ReactPlay identity.",
+      "relationship": "Hacktoberfest Hack Day Bengaluru 2026 community partner",
+      "relationshipSource": "https://www.linkedin.com/company/krowdkraft",
+      "variant": "Unmodified official black transparent ADC wordmark",
+      "supportingSource": "https://luma.com/ai-dev-circle",
+      "bytes": 41544,
+      "sha256": "198ca339953479366718ee8309874a781327fe5c529ba40721a5e96ef0eaec2e"
+    }
+  ],
+  "arcadeBranding": {
+    "asset": "public/figures/arcade.svg",
+    "generator": "scripts/arcade-branding.mjs",
+    "label": "KROWDKRAFT",
+    "marqueeWindow": {
+      "width": 112,
+      "height": 27.2
+    },
+    "letteringBounds": {
+      "width": 98.425,
+      "height": 10.85
+    },
+    "preserved": "Original Anatomy plane matrix, frame, cabinet geometry, painter order, cream palette and license.",
+    "verification": "Compared SVG with marquee path stripped: exact equality before/after. Idempotence passed. Chrome preview visually verified.",
+    "screenshot": "artifacts/revision-assets/arcade-marquee-browser.png"
+  }
+}

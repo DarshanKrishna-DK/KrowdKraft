@@ -1,55 +1,42 @@
 {
-  "name": "krowdkraft",
+  "name": "krowdkraft-workshop",
   "version": "1.0.0",
   "private": true,
-  "type": "module",
   "engines": {
-    "node": ">=22.19.0"
+    "node": ">=22.14.0"
   },
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint .",
+    "dev": "next dev --hostname 127.0.0.1",
+    "build": "npm run figures && next build",
+    "start": "next start --hostname 127.0.0.1",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test tests/*.test.ts",
-    "test:events": "playwright test --grep \"event archive\"",
-    "event:validate": "tsx scripts/events/validate.ts",
-    "event:add": "tsx scripts/events/cli.ts add",
-    "event:list": "tsx scripts/events/cli.ts list",
-    "event:edit": "tsx scripts/events/cli.ts edit",
-    "event:remove": "tsx scripts/events/cli.ts remove",
-    "test:browser": "playwright test"
+    "test": "vitest run",
+    "format:check": "prettier --check src tests scripts/*.mjs *.json *.ts *.mts",
+    "check:http": "node scripts/check-http.mjs",
+    "db:prepare": "node scripts/prepare-seed.mjs",
+    "figures": "node scripts/build-computer.mjs && node scripts/build-printer.mjs && node scripts/build-hairline.mjs && node scripts/hairline/validate.mjs public/figures/hairline-pin-field.html",
+    "db:seed": "node --env-file=.env.local scripts/seed.mjs",
+    "check:connections": "node --env-file=.env.local scripts/check-connections.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "0.12.7",
     "@supabase/supabase-js": "2.117.3",
-    "next": "^16.4.0",
-    "nodemailer": "^10.1.0",
-    "react": "^19.3.0",
-    "react-dom": "^19.3.0",
-    "react-hook-form": "^7.90.0",
-    "server-only": "^0.0.1",
-    "zod": "^4.6.7"
+    "next": "16.4.1",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "server-only": "0.0.1",
+    "three": "^0.186.1",
+    "zod": "4.6.7"
   },
   "devDependencies": {
-    "@axe-core/playwright": "^4.13.0",
-    "@electric-sql/pglite": "0.5.9",
-    "@playwright/test": "^1.64.0",
-    "@tailwindcss/postcss": "^4.3.3",
-    "@types/node": "^22.20.5",
-    "@types/nodemailer": "^8.0.2",
-    "@types/react": "^19.3.0",
-    "@types/react-dom": "^19.3.0",
-    "enhanced-resolve": "^5.24.1",
-    "eslint": "^9.39.5",
-    "eslint-config-next": "^16.4.0",
-    "htmlparser2": "^12.0.0",
-    "lighthouse": "^13.5.0",
-    "sharp": "^0.35.5",
-    "tailwindcss": "^4.3.3",
-    "tsx": "^4.23.15",
-    "typescript": "~6.0.3",
-    "undici": "^7.30.0"
+    "@electric-sql/pglite": "0.3.14",
+    "@types/node": "22.15.30",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
+    "@types/three": "^0.186.0",
+    "prettier": "3.9.10",
+    "supabase": "2.121.0",
+    "typescript": "5.9.3",
+    "vitest": "5.0.4"
   }
 }
