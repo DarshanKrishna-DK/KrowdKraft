@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Header, Footer } from '@/components/shell';
 import { getCommunity } from '@/lib/data';
 import { BackToTop } from '@/components/back-to-top';
+import { ComingSoon } from '@/components/coming-soon';
 import localFont from 'next/font/local';
 import '@/styles/anatomy.css';
 import '@/styles/arcade.css';
@@ -62,6 +63,7 @@ export default function RootLayout({
         {modal}
         <Footer />
         <BackToTop />
+        <ComingSoon />
       </body>
     </html>
   );

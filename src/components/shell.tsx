@@ -13,7 +13,6 @@ export async function Header() {
         </Link>
         <Navigation />
         <a className="button header-join" href={community.links.whatsapp} target="_blank" rel="noreferrer">
-          <Icon name="whatsapp" size={18} />
           Be a Krafter
         </a>
       </div>
