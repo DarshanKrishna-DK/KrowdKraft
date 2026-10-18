@@ -602,13 +602,8 @@ main > section[id]:focus {
     padding-inline: 12px;
   }
   .header-join {
-    gap: 7px;
     padding-inline: 10px;
     font-size: 10px;
-  }
-  .header-join svg {
-    width: 15px;
-    height: 15px;
   }
   .community-stats {
     grid-template-columns: repeat(2, minmax(0, 1fr));
