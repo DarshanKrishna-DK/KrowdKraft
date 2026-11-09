@@ -1,4 +1,16 @@
-# KrowdKraft
+<p align="center">
+  <img src="assets/KrowdKraft_Logo.png" width="220" alt="KrowdKraft logo" />
+</p>
+
+<h1 align="center">KrowdKraft</h1>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js-3178C6?style=for-the-badge" alt="Next.js" />
+  <img src="https://img.shields.io/badge/React-7C3AED?style=for-the-badge" alt="React" />
+  <img src="https://img.shields.io/badge/TypeScript-0F766E?style=for-the-badge" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Supabase-334155?style=for-the-badge" alt="Supabase" />
+  <img src="https://img.shields.io/badge/Three.js-A16207?style=for-the-badge" alt="Three.js" />
+</p>
 
 A community workshop for curious builders. The replacement uses Next.js, React, TypeScript, Three.js, and Supabase Postgres, Auth, and Storage. The current [design direction](DESIGN.md) is a still dark plum surface with visible rose dots, raised glass components, Devanagari-influenced Jaini headings, an expanded section navigation bar, and cream pink isometric figures. See the [build contract](details/BUILD-CONTRACT.md) for product and authorization boundaries. The original reference analysis is retained as historical research.
 
