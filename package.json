@@ -29,13 +29,11 @@
     "zod": "4.6.7"
   },
   "devDependencies": {
-    "@electric-sql/pglite": "0.3.14",
     "@types/node": "22.15.30",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
     "@types/three": "^0.186.0",
     "prettier": "3.9.10",
-    "supabase": "2.121.0",
     "typescript": "5.9.3",
     "vitest": "5.0.4"
   }

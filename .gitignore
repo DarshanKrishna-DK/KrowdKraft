@@ -6,11 +6,6 @@
 *.pem
 *.key
 
-# Archived screenshots and visual experiments
-assets/references/
-details/research/2026-10-14-design-study/cyera/
-details/research/2026-10-14-design-study/dwayne/
-
 # Local agent tools and instructions
 .agents/
 .agent/
@@ -34,5 +29,3 @@ playwright-report/
 .npm-cache/
 !/.env.example
 supabase/.temp/
-artifacts/
-public/figures/qa-anatomy.html

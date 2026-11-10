@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Navigation } from './navigation';
 import { Icon } from './icon';
+import { JoinCommunity } from './join-community';
 import { getCommunity } from '@/lib/data';
 export async function Header() {
   const community = await getCommunity();
@@ -12,9 +13,7 @@ export async function Header() {
           <span>{community.name}</span>
         </Link>
         <Navigation />
-        <a className="button header-join" href={community.links.whatsapp} target="_blank" rel="noreferrer">
-          Be a Krafter
-        </a>
+        <JoinCommunity whatsapp={community.links.whatsapp} />
       </div>
     </header>
   );
