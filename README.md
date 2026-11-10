@@ -1,6 +1,6 @@
 # KrowdKraft
 
-A community workshop for curious builders. The replacement uses Next.js, React, TypeScript, Three.js, and Supabase Postgres, Auth, and Storage. The current [design direction](DESIGN.md) is a still dark plum surface with visible rose dots, raised glass components, Devanagari-influenced Jaini headings, an expanded section navigation bar, and cream pink isometric figures. See the [build contract](details/BUILD-CONTRACT.md) for product and authorization boundaries. The original reference analysis is retained as historical research.
+A community workshop for curious builders. The site uses Next.js, React, TypeScript, Three.js, and Supabase Postgres, Auth, and Storage.
 
 ## Run locally
 
@@ -73,13 +73,12 @@ Tests run the policy migrations and adversarial RLS scenarios in isolated PGlite
 - `src/lib/`: database access, server actions, validation, dates, and shared types.
 - `supabase/`: additive migrations and idempotent content seed.
 - `scripts/`: figure generation, setup, and connection/HTTP verification.
-- `tests/`: isolated database and application tests.
+- `tests/`: application tests.
 - `public/`: runtime fonts, branding, posters, and generated illustrations.
-- `assets/` and `details/`: retained assets, source content, research, and provenance.
-- Raw reference-site captures and downloaded bundles under `details/research/2026-10-14-design-study/cyera/` and `dwayne/` stay local and are ignored. Links to these captures in historical analysis require the original local research folder.
+- `details/`: community, event, and journal records used to seed the database.
 - `.local-data/`: preserved private databases and files, ignored by Git.
 - `.vercel/`: preserved historical project link, ignored by Git.
 
-The computer adapts the MIT-licensed Anatomy drawing kit; the printer is an original KrowdKraft construction using that kit. The arcade cabinet adapts an existing Anatomy example. The retained pin field is an original Hairline figure, available as a standalone artifact. Unmodified Hairline kernel and bench tooling are vendored under `scripts/hairline/` so builds do not depend on a local skill installation. Attribution is in `public/licenses/`. Figure checks and reproduction commands are in [ART-VERIFICATION.md](details/ART-VERIFICATION.md). Original branding and event assets are retained with provenance. Reference websites informed composition; their application bundles are not used by the runtime.
+The computer adapts the MIT-licensed Anatomy drawing kit; the printer is an original KrowdKraft construction using that kit. The arcade cabinet adapts an existing Anatomy example. The pin field is an original Hairline figure. Unmodified Hairline kernel and bench tooling are vendored under `scripts/hairline/` so builds do not depend on a local skill installation. Attribution is in `public/licenses/`.
 
-See [To-do.md](To-do.md) for deployment and operational checks that require the owner's chosen production destination. Never include `.env*` recovery files, credentials, `.local-data/`, or signed image URLs in a commit.
+Never include `.env*` files, credentials, `.local-data/`, or signed image URLs in a commit.

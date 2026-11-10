@@ -321,10 +321,115 @@
   }
 }
 
+.membership-dialog {
+  width: min(640px, calc(100vw - 40px));
+  max-height: calc(100svh - 48px);
+  margin: auto;
+  padding: 28px 28px 24px;
+  overflow: auto;
+  color: var(--text, #f9e9e7);
+  background:
+    radial-gradient(ellipse at 0 0, #e7b4cb14, transparent 60%), linear-gradient(135deg, #312733f5, #1c1821fc);
+  border: 1px solid #efd6df55;
+  border-radius: 24px;
+  box-shadow:
+    inset 0 1px 0 #fff1ed30,
+    inset 0 -3px 0 #09060c,
+    0 32px 120px #050306aa;
+}
+
+.membership-dialog[open] {
+  animation: project-dialog-enter 220ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.membership-dialog::backdrop {
+  background: #08060cd1;
+  backdrop-filter: blur(12px);
+}
+
+.membership-dialog h2 {
+  margin: 0 0 16px;
+  font-size: clamp(32px, 5vw, 44px);
+  line-height: 1.05;
+  outline: none;
+}
+
+.membership-dialog p {
+  margin: 0 0 18px;
+  color: #f6e4ea;
+}
+
+.membership-paths {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 18px;
+  padding: 4px;
+  border: 1px solid #ecd1e238;
+  border-radius: 16px;
+  background: #120e1480;
+}
+
+.membership-paths button {
+  min-height: 40px;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 12px;
+  color: #ebc0d3;
+  background: transparent;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.membership-paths button[aria-selected='true'] {
+  color: #fff2f3;
+  background: linear-gradient(165deg, #fae1eb18, #fff4f408 50%, #1b131c60);
+  box-shadow:
+    inset 0 1px 1px #fff3,
+    0 2px 0 #07050a;
+}
+
+.membership-dialog .form-grid {
+  margin-bottom: 8px;
+}
+
+.membership-dialog .membership-span {
+  grid-column: 1 / -1;
+}
+
+.membership-dialog .checkbox-stack {
+  margin: 8px 0 4px;
+}
+
+.membership-dialog .checkbox-label {
+  align-items: flex-start;
+  color: #f6e4ea;
+  line-height: 1.4;
+}
+
+.membership-dialog .button {
+  margin-top: 8px;
+}
+
+@media (max-width: 760px) {
+  .membership-dialog {
+    width: calc(100vw - 20px);
+    padding: 22px 18px 18px;
+    border-radius: 20px;
+  }
+
+  .membership-paths {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .project-dialog[open],
   .project-dialog-loader,
-  .coming-soon-dialog[open] {
+  .coming-soon-dialog[open],
+  .membership-dialog[open] {
     animation: none;
   }
 }

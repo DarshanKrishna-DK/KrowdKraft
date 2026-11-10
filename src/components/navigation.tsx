@@ -6,8 +6,8 @@ import { usePathname } from 'next/navigation';
 const links = [
   { name: 'About', id: 'community' },
   { name: 'Events', id: 'past-events', route: '/events' },
-  { name: 'Builds', id: 'builds', route: '/builds' },
   { name: 'Leaderboard', id: 'leaderboard', route: '/leaderboard' },
+  { name: 'Builds', id: 'builds', route: '/builds' },
   { name: 'Blogs', id: 'blogs' },
   { name: 'People', id: 'people' },
 ];
