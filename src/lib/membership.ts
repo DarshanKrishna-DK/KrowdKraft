@@ -53,7 +53,8 @@ function httpUrl(value: string) {
 export function membershipError(path: MembershipPath, values: MembershipValues) {
   if (values.fullName.trim().length < 2) return 'Enter your full name.';
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) return 'Enter a valid email address.';
-  if (!occupations.includes(values.occupation as (typeof occupations)[number])) return 'Choose an occupation.';
+  if (!occupations.includes(values.occupation as (typeof occupations)[number]))
+    return 'Choose an occupation.';
   if (values.organization.trim().length < 2) return 'Enter your university or company.';
   if (path === 'general') return null;
   if (!httpUrl(values.linkedin.trim())) return 'Enter a public LinkedIn link.';

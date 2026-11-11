@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useId, useRef, useState, type FormEvent } from 'react';
+import { useEffect, useId, useLayoutEffect, useRef, useState, type FormEvent } from 'react';
 import {
   emptyMembership,
   membershipPaths,
@@ -30,16 +30,12 @@ const copy: Record<MembershipPath, { label: string; description: string; submit:
   },
 };
 
-function OccupationField({
-  value,
-  onChange,
-}: {
-  value: string;
-  onChange: (value: string) => void;
-}) {
+function OccupationField({ value, onChange }: { value: string; onChange: (value: string) => void }) {
   const listId = useId();
   const labelId = useId();
   const root = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLUListElement>(null);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(0);
   const selected = occupations.findIndex((occupation) => occupation === value);
@@ -51,6 +47,38 @@ function OccupationField({
     }
     document.addEventListener('pointerdown', closeOnOutside);
     return () => document.removeEventListener('pointerdown', closeOnOutside);
+  }, [open]);
+
+  useLayoutEffect(() => {
+    if (!open) return;
+    const dialog = root.current?.closest('dialog');
+    const trigger = triggerRef.current;
+    const menu = menuRef.current;
+    if (!dialog || !trigger || !menu) return;
+
+    function place() {
+      const currentTrigger = triggerRef.current;
+      const currentMenu = menuRef.current;
+      if (!currentTrigger || !currentMenu) return;
+      const box = currentTrigger.getBoundingClientRect();
+      const available = Math.max(0, window.innerHeight - box.bottom - 16);
+      currentMenu.style.left = `${box.left}px`;
+      currentMenu.style.width = `${box.width}px`;
+      currentMenu.style.top = `${box.bottom + 8}px`;
+      currentMenu.style.maxHeight = `${available}px`;
+    }
+
+    const box = trigger.getBoundingClientRect();
+    const needed = Math.min(menu.scrollHeight, 240);
+    const space = window.innerHeight - box.bottom - 16;
+    if (space < needed) dialog.scrollTop += needed - space;
+    place();
+    dialog.addEventListener('scroll', place);
+    window.addEventListener('resize', place);
+    return () => {
+      dialog.removeEventListener('scroll', place);
+      window.removeEventListener('resize', place);
+    };
   }, [open]);
 
   function choose(index: number) {
@@ -73,64 +101,70 @@ function OccupationField({
     <div className="form-field membership-occupation" ref={root}>
       <span id={labelId}>Occupation</span>
       <div className="membership-occupation-control">
-      <button
-        type="button"
-        className={value ? 'membership-occupation-trigger' : 'membership-occupation-trigger is-empty'}
-        role="combobox"
-        aria-haspopup="listbox"
-        aria-expanded={open}
-        aria-controls={listId}
-        aria-labelledby={labelId}
-        onClick={() => {
-          setActive(selected >= 0 ? selected : 0);
-          setOpen((current) => !current);
-        }}
-        onKeyDown={(event) => {
-          if (event.key === 'Escape') {
-            event.preventDefault();
-            setOpen(false);
-            return;
-          }
-          if (event.key === 'ArrowDown' || event.key === 'ArrowUp' || event.key === 'Home' || event.key === 'End') {
-            event.preventDefault();
-            move(event.key);
-            return;
-          }
-          if ((event.key === 'Enter' || event.key === ' ') && open) {
-            event.preventDefault();
-            choose(active);
-          }
-        }}
-      >
-        <span>{value || 'Choose one'}</span>
-        <svg viewBox="0 0 20 20" width="16" height="16" fill="none" aria-hidden="true">
-          <path
-            d="m5 7.5 5 5 5-5"
-            stroke="currentColor"
-            strokeWidth="1.6"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </button>
-      {open && (
-        <ul id={listId} className="membership-occupation-menu" role="listbox">
-          {occupations.map((occupation, index) => (
-            <li key={occupation} role="presentation">
-              <button
-                type="button"
-                role="option"
-                aria-selected={occupation === value}
-                className={index === active ? 'is-active' : undefined}
-                onMouseEnter={() => setActive(index)}
-                onClick={() => choose(index)}
-              >
-                {occupation}
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
+        <button
+          type="button"
+          ref={triggerRef}
+          className={value ? 'membership-occupation-trigger' : 'membership-occupation-trigger is-empty'}
+          role="combobox"
+          aria-haspopup="listbox"
+          aria-expanded={open}
+          aria-controls={listId}
+          aria-labelledby={labelId}
+          onClick={() => {
+            setActive(selected >= 0 ? selected : 0);
+            setOpen((current) => !current);
+          }}
+          onKeyDown={(event) => {
+            if (event.key === 'Escape') {
+              event.preventDefault();
+              setOpen(false);
+              return;
+            }
+            if (
+              event.key === 'ArrowDown' ||
+              event.key === 'ArrowUp' ||
+              event.key === 'Home' ||
+              event.key === 'End'
+            ) {
+              event.preventDefault();
+              move(event.key);
+              return;
+            }
+            if ((event.key === 'Enter' || event.key === ' ') && open) {
+              event.preventDefault();
+              choose(active);
+            }
+          }}
+        >
+          <span>{value || 'Choose one'}</span>
+          <svg viewBox="0 0 20 20" width="16" height="16" fill="none" aria-hidden="true">
+            <path
+              d="m5 7.5 5 5 5-5"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
+        {open && (
+          <ul ref={menuRef} id={listId} className="membership-occupation-menu" role="listbox">
+            {occupations.map((occupation, index) => (
+              <li key={occupation} role="presentation">
+                <button
+                  type="button"
+                  role="option"
+                  aria-selected={occupation === value}
+                  className={index === active ? 'is-active' : undefined}
+                  onMouseEnter={() => setActive(index)}
+                  onClick={() => choose(index)}
+                >
+                  {occupation}
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );
@@ -243,7 +277,10 @@ export function JoinCommunity({ whatsapp }: { whatsapp: string }) {
                   onChange={(event) => update('email', event.target.value)}
                 />
               </label>
-              <OccupationField value={values.occupation} onChange={(occupation) => update('occupation', occupation)} />
+              <OccupationField
+                value={values.occupation}
+                onChange={(occupation) => update('occupation', occupation)}
+              />
               <label className="form-field">
                 University or company
                 <input
