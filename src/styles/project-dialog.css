@@ -413,6 +413,107 @@
   margin-top: 8px;
 }
 
+.membership-occupation {
+  position: relative;
+  z-index: 2;
+}
+
+.membership-occupation-trigger {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 46px;
+  padding: 12px 44px 12px 14px;
+  border: 1px solid #d5adc336;
+  border-radius: 9px;
+  color: var(--text, #f9e9e7);
+  background: #17101fd9;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.35;
+  text-align: left;
+  cursor: pointer;
+}
+
+.membership-occupation-trigger.is-empty {
+  color: #9c869b;
+}
+
+.membership-occupation-trigger svg {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  color: #ebc0d3;
+  transform: translateY(-50%);
+  transition: transform 0.16s ease;
+}
+
+.membership-occupation-trigger[aria-expanded='true'] {
+  border-color: var(--rose, #e0adc3);
+}
+
+.membership-occupation-trigger[aria-expanded='true'] svg {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.membership-occupation-control {
+  position: relative;
+}
+
+.membership-occupation:has(.membership-occupation-menu) {
+  padding-bottom: 228px;
+}
+
+.membership-occupation-menu {
+  position: absolute;
+  z-index: 5;
+  top: calc(100% + 8px);
+  right: 0;
+  left: 0;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  border: 1px solid #efd6df44;
+  border-radius: 12px;
+  background: #2a2230;
+  box-shadow:
+    inset 0 1px 0 #fff2,
+    0 16px 36px #050306cc;
+}
+
+.membership-occupation-menu li + li {
+  margin-top: 2px;
+}
+
+.membership-occupation-menu button {
+  display: block;
+  width: 100%;
+  min-height: 40px;
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 8px;
+  color: #f6e4ea;
+  background: transparent;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.35;
+  text-align: left;
+  cursor: pointer;
+}
+
+.membership-occupation-menu button.is-active,
+.membership-occupation-menu button:hover {
+  color: #fff7f4;
+  background: #f2c5de18;
+}
+
+.membership-occupation-menu button[aria-selected='true'] {
+  color: #ffe7f2;
+  background: #f2c5de28;
+}
+
 @media (max-width: 760px) {
   .membership-dialog {
     width: calc(100vw - 20px);
@@ -429,7 +530,9 @@
   .project-dialog[open],
   .project-dialog-loader,
   .coming-soon-dialog[open],
-  .membership-dialog[open] {
+  .membership-dialog[open],
+  .membership-occupation-trigger svg {
     animation: none;
+    transition: none;
   }
 }

@@ -30,6 +30,112 @@ const copy: Record<MembershipPath, { label: string; description: string; submit:
   },
 };
 
+function OccupationField({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (value: string) => void;
+}) {
+  const listId = useId();
+  const labelId = useId();
+  const root = useRef<HTMLDivElement>(null);
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState(0);
+  const selected = occupations.findIndex((occupation) => occupation === value);
+
+  useEffect(() => {
+    if (!open) return;
+    function closeOnOutside(event: PointerEvent) {
+      if (!root.current?.contains(event.target as Node)) setOpen(false);
+    }
+    document.addEventListener('pointerdown', closeOnOutside);
+    return () => document.removeEventListener('pointerdown', closeOnOutside);
+  }, [open]);
+
+  function choose(index: number) {
+    onChange(occupations[index]);
+    setOpen(false);
+  }
+
+  function move(key: string) {
+    setOpen(true);
+    setActive((current) => {
+      const start = open ? current : Math.max(selected, 0);
+      if (key === 'Home') return 0;
+      if (key === 'End') return occupations.length - 1;
+      const step = key === 'ArrowDown' ? 1 : -1;
+      return (start + step + occupations.length) % occupations.length;
+    });
+  }
+
+  return (
+    <div className="form-field membership-occupation" ref={root}>
+      <span id={labelId}>Occupation</span>
+      <div className="membership-occupation-control">
+      <button
+        type="button"
+        className={value ? 'membership-occupation-trigger' : 'membership-occupation-trigger is-empty'}
+        role="combobox"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-controls={listId}
+        aria-labelledby={labelId}
+        onClick={() => {
+          setActive(selected >= 0 ? selected : 0);
+          setOpen((current) => !current);
+        }}
+        onKeyDown={(event) => {
+          if (event.key === 'Escape') {
+            event.preventDefault();
+            setOpen(false);
+            return;
+          }
+          if (event.key === 'ArrowDown' || event.key === 'ArrowUp' || event.key === 'Home' || event.key === 'End') {
+            event.preventDefault();
+            move(event.key);
+            return;
+          }
+          if ((event.key === 'Enter' || event.key === ' ') && open) {
+            event.preventDefault();
+            choose(active);
+          }
+        }}
+      >
+        <span>{value || 'Choose one'}</span>
+        <svg viewBox="0 0 20 20" width="16" height="16" fill="none" aria-hidden="true">
+          <path
+            d="m5 7.5 5 5 5-5"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
+      {open && (
+        <ul id={listId} className="membership-occupation-menu" role="listbox">
+          {occupations.map((occupation, index) => (
+            <li key={occupation} role="presentation">
+              <button
+                type="button"
+                role="option"
+                aria-selected={occupation === value}
+                className={index === active ? 'is-active' : undefined}
+                onMouseEnter={() => setActive(index)}
+                onClick={() => choose(index)}
+              >
+                {occupation}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+      </div>
+    </div>
+  );
+}
+
 export function JoinCommunity({ whatsapp }: { whatsapp: string }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const titleId = useId();
@@ -137,20 +243,7 @@ export function JoinCommunity({ whatsapp }: { whatsapp: string }) {
                   onChange={(event) => update('email', event.target.value)}
                 />
               </label>
-              <label className="form-field">
-                Occupation
-                <select
-                  name="occupation"
-                  required
-                  value={values.occupation}
-                  onChange={(event) => update('occupation', event.target.value)}
-                >
-                  <option value="">Choose one</option>
-                  {occupations.map((occupation) => (
-                    <option key={occupation}>{occupation}</option>
-                  ))}
-                </select>
-              </label>
+              <OccupationField value={values.occupation} onChange={(occupation) => update('occupation', occupation)} />
               <label className="form-field">
                 University or company
                 <input
