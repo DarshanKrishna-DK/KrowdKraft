@@ -1,11 +1,19 @@
+import { connection } from 'next/server';
 import { getEvents } from '@/lib/data';
 import { dateLabel, eventState, timeLabel } from '@/lib/events';
 import { ogCard, ogSize } from '@/lib/og-card';
 export const alt = 'KrowdKraft events';
 export const size = ogSize;
 export const contentType = 'image/png';
+export const dynamic = 'force-dynamic';
 export default async function Image() {
-  const events = await getEvents();
+  await connection();
+  let events: Awaited<ReturnType<typeof getEvents>> = [];
+  try {
+    events = await getEvents();
+  } catch {
+    events = [];
+  }
   const upcoming = events
     .filter((e) => ['Upcoming', 'Happening now'].includes(eventState(e)))
     .sort((a, b) => a.date.localeCompare(b.date))[0];

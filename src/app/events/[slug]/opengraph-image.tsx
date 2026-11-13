@@ -1,3 +1,4 @@
+import { connection } from 'next/server';
 import { getEvent } from '@/lib/data';
 import { dateLabel, eventType, timeLabel } from '@/lib/events';
 import { ogCard, ogSize } from '@/lib/og-card';
@@ -5,9 +6,11 @@ import { ogCard, ogSize } from '@/lib/og-card';
 export const alt = 'KrowdKraft event';
 export const size = ogSize;
 export const contentType = 'image/png';
+export const dynamic = 'force-dynamic';
 
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
-  const event = await getEvent((await params).slug);
+  await connection();
+  const event = await getEvent((await params).slug).catch(() => null);
   if (!event) {
     return ogCard({
       eyebrow: 'Event',

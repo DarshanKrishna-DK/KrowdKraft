@@ -1,3 +1,4 @@
+import { connection } from 'next/server';
 import { getArticles } from '@/lib/data';
 import { dateLabel } from '@/lib/events';
 import { ogCard, ogSize } from '@/lib/og-card';
@@ -5,10 +6,14 @@ import { ogCard, ogSize } from '@/lib/og-card';
 export const alt = 'KrowdKraft blog';
 export const size = ogSize;
 export const contentType = 'image/png';
+export const dynamic = 'force-dynamic';
 
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
+  await connection();
   const { slug } = await params;
-  const article = (await getArticles()).find((item) => item.slug === slug) ?? null;
+  const article = await getArticles()
+    .then((articles) => articles.find((item) => item.slug === slug) ?? null)
+    .catch(() => null);
   if (!article) {
     return ogCard({
       eyebrow: 'Blogs to read',
