@@ -59,7 +59,7 @@ export async function Footer() {
           </nav>
         </div>
         <p className="footer-tagline">
-          Crafted by the <span>krowd</span>
+          Krafted by the <span>krowd</span>
         </p>
         <p className="footer-about">{community.description}</p>
         <FooterSkyline />

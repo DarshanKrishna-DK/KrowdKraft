@@ -31,40 +31,17 @@
   }
 }
 
-/* Hero computer: cursor light and parallax */
+/* Hero computer: scroll parallax */
 .computer-figure {
-  --light-x: 0px;
-  --light-y: 0px;
-  --tilt-x: 0deg;
-  --tilt-y: 0deg;
   --rise: 0px;
-  perspective: 1400px;
 }
 .computer-art {
-  transform: translate3d(0, var(--rise), 0) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+  transform: translate3d(0, var(--rise), 0);
   transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
 }
 .computer-aura {
   transform: translate3d(0, calc(var(--rise) * -0.5), 0);
-}
-.computer-light {
-  position: absolute;
-  inset: -40%;
-  z-index: 2;
-  background: radial-gradient(
-    circle 220px at calc(50% + var(--light-x)) calc(50% + var(--light-y)),
-    #ffd9ea30,
-    #ffc6df12 45%,
-    transparent
-  );
-  mix-blend-mode: screen;
-  opacity: 0;
-  transition: opacity 500ms ease;
-  pointer-events: none;
-}
-.computer-figure.is-lit .computer-light {
-  opacity: 1;
 }
 
 /* Poster shine */
