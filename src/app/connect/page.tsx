@@ -30,7 +30,7 @@ export default async function Connect({
       <PageIntro
         eyebrow="Optional GitHub connection"
         title="Let your work show up."
-        description="Join the monthly leaderboard with your public commits and pull requests. Everyone can browse the community without signing in."
+        description="Connect GitHub to share projects on Builds. Everyone can browse the community without signing in."
       />
       <div className="wrap">
         <div className="connection-panel">

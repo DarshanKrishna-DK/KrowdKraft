@@ -2,21 +2,25 @@ import Link from 'next/link';
 import { DateRefresh } from '@/components/date-refresh';
 import { ShareProjectLink } from '@/components/share-project-link';
 import { getArticles, getCommunity, getEvents, getProjects } from '@/lib/data';
-import { dateLabel, eventState, registrationState, timeLabel, officialEventUrl } from '@/lib/events';
+import { dateLabel, eventState, registrationState, timeLabel } from '@/lib/events';
 import { ComputerFigure, PrinterFigure, ArcadeFigure } from '@/components/figures/art';
 import { Icon } from '@/components/icon';
 import { SocialRail } from '@/components/social-rail';
 import { SectionHeading } from '@/components/shell';
 import { ArticleList, EventCard, ProjectCard } from '@/components/content-cards';
 import { CommunityTabs } from '@/components/community-tabs';
-import { LeaderboardPreview } from '@/components/leaderboard';
+import { QuarterBoard } from '@/components/leaderboard';
+import { getLeaderboard } from '@/lib/leaderboard';
 import { PartnerTapes } from '@/components/partner-tapes';
+import { MembershipCircles } from '@/components/membership-circles';
+import { CountUp } from '@/components/count-up';
 export default async function Home() {
-  const [community, events, articles, projects] = await Promise.all([
+  const [community, events, articles, projects, board] = await Promise.all([
     getCommunity(),
     getEvents(),
     getArticles(),
     getProjects(),
+    getLeaderboard(),
   ]);
   const upcoming = events
     .filter((e) => ['Upcoming', 'Happening now'].includes(eventState(e)))
@@ -54,7 +58,9 @@ export default async function Home() {
         <dl className="community-stats">
           {community.stats.map((s) => (
             <div key={s.label}>
-              <dt>{s.value}</dt>
+              <dt>
+                <CountUp value={s.value} />
+              </dt>
               <dd>{s.label}</dd>
             </div>
           ))}
@@ -66,7 +72,12 @@ export default async function Home() {
           {upcoming ? (
             <article className="event-ticket">
               {upcoming.image && (
-                <a href={officialEventUrl(upcoming)} target="_blank" rel="noreferrer">
+                <a
+                  className="ticket-poster-link"
+                  href={`/events/${upcoming.slug}`}
+                  target="_blank"
+                  rel="noopener"
+                >
                   <img
                     className="ticket-poster"
                     src={upcoming.image}
@@ -88,7 +99,7 @@ export default async function Home() {
                   {upcoming.starts_at ? ' · ' + timeLabel(upcoming.starts_at) + ' IST' : ''}
                 </p>
                 <div className="ticket-actions">
-                  <a href={officialEventUrl(upcoming)} className="button" target="_blank" rel="noreferrer">
+                  <a href={`/events/${upcoming.slug}`} className="button" target="_blank" rel="noopener">
                     Event details
                     <Icon name="diagonal" size={17} />
                   </a>
@@ -128,24 +139,36 @@ export default async function Home() {
           <p>Our past gatherings will appear here.</p>
         )}
       </section>
+      <MembershipCircles />
       <section className="section wrap" id="leaderboard">
         <div className="leaderboard-preview">
-          <div>
-            <SectionHeading label="" title="A little progress, every day." />
-            <p>Public commits. Pull requests. A monthly record of what our community is making.</p>
-            <div className="button-row">
-              <Link className="button" href="/connect">
-                <Icon name="github" size={18} />
-                Connect your GitHub
-                <Icon name="diagonal" size={17} />
-              </Link>
-              <Link className="text-link" href="/leaderboard">
-                See the leaderboard
-                <Icon name="diagonal" />
-              </Link>
-            </div>
+          <div className="leaderboard-copy">
+            <SectionHeading label="" title="Two boards. Every quarter." />
+            <p>
+              Developers and content creators each get their own leaderboard, reset every quarter. Points come
+              from what you actually do: hackathons you enter and win, talks you give, things you write, film
+              and ship.
+            </p>
+            <ol className="leaderboard-steps">
+              <li>
+                <strong>Do the thing</strong>
+                <span>Enter a hackathon, publish a post, speak at a meetup.</span>
+              </li>
+              <li>
+                <strong>Share the proof</strong>
+                <span>Results page, article, video or event link.</span>
+              </li>
+              <li>
+                <strong>Organizers verify it</strong>
+                <span>Points land on your track for the quarter.</span>
+              </li>
+            </ol>
+            <Link className="text-link" href="/leaderboard">
+              See the full leaderboard
+              <Icon name="diagonal" />
+            </Link>
           </div>
-          <LeaderboardPreview />
+          <QuarterBoard quarter={board.quarter} boards={board} limit={5} />
         </div>
       </section>
       <section id="builds" className="section wrap">

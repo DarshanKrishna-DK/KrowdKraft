@@ -3,93 +3,45 @@
 import { useRef } from 'react';
 import { useLoopingFigure } from './use-looping-figure';
 
-function playArcade(root: HTMLDivElement) {
-  const animations: Animation[] = [];
-  const animate = (selector: string, frames: Keyframe[], duration: number, easing = 'ease-in-out') => {
-    root.querySelectorAll<SVGElement>(selector).forEach((element) => {
-      animations.push(element.animate(frames, { duration, iterations: Infinity, easing }));
-    });
-  };
-  root
-    .querySelectorAll('.ac-marquee, [data-name="marquee.tube"], [data-name="marquee.plexi"], .ac-led')
-    .forEach((element) => element.setAttribute('data-on', ''));
+const DURATION = 15000;
+const FADE = 0.025;
+const turns = [
+  { id: 'girl', from: 0.06, to: 0.24 },
+  { id: 'rose', from: 0.4, to: 0.58 },
+  { id: 'ink', from: 0.74, to: 0.9 },
+];
 
-  // The raster remains in the illustration's original projected screen plane.
-  animate(
-    '[data-part="ship"]',
+function swap(element: Element | null, from: number, to: number, shown: boolean) {
+  if (!element) return null;
+  const off = shown ? 1 : 0;
+  const on = shown ? 0 : 1;
+  return element.animate(
     [
-      { transform: 'translate(70px, 250px)' },
-      { transform: 'translate(153px, 250px)' },
-      { transform: 'translate(94px, 250px)' },
-      { transform: 'translate(70px, 250px)' },
+      { opacity: off, offset: 0 },
+      { opacity: off, offset: from },
+      { opacity: on, offset: from + FADE },
+      { opacity: on, offset: to - FADE },
+      { opacity: off, offset: to },
+      { opacity: off, offset: 1 },
     ],
-    9000,
+    { duration: DURATION, iterations: Infinity, easing: 'ease-in-out' },
   );
-  animate(
-    '[data-part="formation"]',
+}
+
+function playArcade(root: HTMLDivElement) {
+  return turns.flatMap(({ id, from, to }) =>
     [
-      { transform: 'translate(-11px, 0)' },
-      { transform: 'translate(11px, 7px)' },
-      { transform: 'translate(-11px, 0)' },
-    ],
-    9000,
+      swap(root.querySelector(`[data-part="rest-${id}"]`), from, to, true),
+      swap(root.querySelector(`[data-part="point-${id}"]`), from, to, false),
+    ].filter((animation): animation is Animation => animation !== null),
   );
-  animate(
-    '[data-part="shot"]',
-    [
-      { transform: 'translate(111px, 244px)', opacity: 0, offset: 0 },
-      { transform: 'translate(111px, 244px)', opacity: 1, offset: 0.12 },
-      { transform: 'translate(111px, 111px)', opacity: 1, offset: 0.76 },
-      { transform: 'translate(111px, 105px)', opacity: 0, offset: 0.8 },
-      { transform: 'translate(111px, 244px)', opacity: 0, offset: 1 },
-    ],
-    3000,
-    'linear',
-  );
-  animate(
-    '[data-part="stick-upper"]',
-    [
-      { transform: 'rotate(-5deg)' },
-      { transform: 'rotate(5deg)' },
-      { transform: 'rotate(-2deg)' },
-      { transform: 'rotate(-5deg)' },
-    ],
-    9000,
-  );
-  animate(
-    '[data-button="fire"]',
-    [
-      { transform: 'translate(0, 0)', offset: 0 },
-      { transform: 'translate(0, 0)', offset: 0.1 },
-      { transform: 'translate(-0.6px, 2px)', offset: 0.14 },
-      { transform: 'translate(0, 0)', offset: 0.24 },
-      { transform: 'translate(0, 0)', offset: 1 },
-    ],
-    3000,
-  );
-  animate(
-    '[data-button="jump"]',
-    [
-      { transform: 'translate(0, 0)', offset: 0 },
-      { transform: 'translate(0, 0)', offset: 0.54 },
-      { transform: 'translate(-0.6px, 2px)', offset: 0.58 },
-      { transform: 'translate(0, 0)', offset: 0.64 },
-      { transform: 'translate(0, 0)', offset: 1 },
-    ],
-    9000,
-  );
-  animate('[data-part="fan"]', [{ transform: 'rotate(0)' }, { transform: 'rotate(360deg)' }], 5000, 'linear');
-  animate('.ac-led circle', [{ opacity: 0.45 }, { opacity: 1 }, { opacity: 0.45 }], 3400);
-  animate('[data-frame="a"]', [{ opacity: 1 }, { opacity: 0 }, { opacity: 1 }], 1500, 'steps(1, end)');
-  animate('[data-frame="b"]', [{ opacity: 0 }, { opacity: 1 }, { opacity: 0 }], 1500, 'steps(1, end)');
-  return animations;
 }
 
 export function Arcade({ children }: { children: React.ReactNode }) {
   const root = useRef<HTMLDivElement>(null);
   useLoopingFigure(root, playArcade);
   return (
-    <div className="arcade-figure arcade-animated" ref={root}>
+    <div className="iso arcade-figure arcade-animated" ref={root}>
       {children}
     </div>
   );

@@ -527,20 +527,6 @@
   color: var(--muted);
   font-size: 10px;
 }
-.directory-ranking-empty {
-  text-align: center;
-  padding: 46px 24px;
-}
-.directory-ranking-empty h3 {
-  margin: 27px 0 14px;
-  font-size: 19px;
-}
-.directory-ranking-empty p {
-  max-width: 48ch;
-  margin: 0 auto 25px;
-  font-size: 13px;
-  line-height: 1.8;
-}
 .directory-ranking-footnote {
   display: flex;
   align-items: flex-start;
@@ -566,42 +552,6 @@
   font-size: 32px;
   line-height: 1.2;
   margin: 0 0 24px;
-}
-.directory-score-rule {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 19px 0;
-  border-top: 1px solid var(--line);
-}
-.directory-score-rule > svg {
-  color: var(--rose);
-  flex: none;
-}
-.directory-score-rule > div {
-  flex: 1;
-}
-.directory-score-rule h3 {
-  font-size: 14px;
-  margin: 0 0 6px;
-}
-.directory-score-rule p {
-  font-size: 11px;
-  line-height: 1.6;
-  margin: 0;
-}
-.directory-score-rule strong {
-  font-size: 27px;
-  font-weight: 400;
-  color: #f2c5de;
-  line-height: 1;
-  text-align: center;
-}
-.directory-score-rule strong > span {
-  display: block;
-  font-size: 10px;
-  color: var(--muted);
-  margin-top: 5px;
 }
 .directory-scoring > p {
   font-size: 12px;
@@ -920,27 +870,6 @@
   }
   .directory-ranking-heading h2 {
     font-size: 32px;
-  }
-  .directory-ranking-empty {
-    padding: 35px 2px;
-  }
-  .directory-ranking-empty h3 {
-    font-size: 17px;
-  }
-  .directory-ranking-empty p {
-    font-size: 12px;
-  }
-  .directory-ranking-panel .leaderboard-row {
-    column-gap: 9px;
-  }
-  .directory-ranking-panel .leaderboard-row > div {
-    min-width: 0;
-  }
-  .directory-ranking-panel .leaderboard-row a {
-    overflow-wrap: anywhere;
-  }
-  .directory-ranking-panel .leaderboard-row small {
-    font-size: 9px;
   }
   .directory-scoring {
     display: block;

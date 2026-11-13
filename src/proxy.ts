@@ -1,6 +1,46 @@
 import { createServerClient } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
+import { officialEventUrl } from '@/lib/events';
+import { isShareCrawlerUa } from '@/lib/share-crawler';
+import type { EventRecord } from '@/lib/types';
+
+async function publicRow(table: string, slug: string, select: string) {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+  if (!url || !key) return null;
+  const response = await fetch(
+    `${url}/rest/v1/${table}?slug=eq.${encodeURIComponent(slug)}&published=eq.true&select=${select}&limit=1`,
+    {
+      headers: { apikey: key, Authorization: `Bearer ${key}` },
+      signal: AbortSignal.timeout(8000),
+    },
+  );
+  if (!response.ok) return null;
+  const rows = (await response.json()) as unknown[];
+  return rows[0] ?? null;
+}
+
+async function shareRedirect(request: NextRequest) {
+  if (isShareCrawlerUa(request.headers.get('user-agent') ?? '')) return null;
+  const event = request.nextUrl.pathname.match(/^\/events\/([^/]+)$/);
+  const article = request.nextUrl.pathname.match(/^\/journal\/([^/]+)$/);
+  const slug = decodeURIComponent((event || article)?.[1] ?? '');
+  if (!slug || slug === 'opengraph-image') return null;
+  try {
+    if (event) {
+      const row = await publicRow('workshop_events', slug, 'source_url,registration_url');
+      return row ? NextResponse.redirect(officialEventUrl(row as EventRecord)) : null;
+    }
+    const row = (await publicRow('workshop_articles', slug, 'href')) as { href?: string } | null;
+    return row?.href ? NextResponse.redirect(row.href) : null;
+  } catch {
+    return null;
+  }
+}
+
 export async function proxy(request: NextRequest) {
+  const redirected = await shareRedirect(request);
+  if (redirected) return redirected;
   const nonce = Buffer.from(crypto.randomUUID()).toString('base64');
   const dev = process.env.NODE_ENV === 'development';
   const csp = `default-src 'self'; script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${dev ? " 'unsafe-eval'" : ''}; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.supabase.co https://avatars.githubusercontent.com https://cdn-images-1.medium.com https://cdn-images-2.medium.com; font-src 'self'; connect-src 'self' https://*.supabase.co${dev ? ' ws:' : ''}; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'`;

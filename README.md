@@ -1,84 +1,84 @@
+<div align="center">
+
+<img src="public/brand/mark.png" width="120" alt="KrowdKraft mark" />
+
 # KrowdKraft
 
-A community workshop for curious builders. The site uses Next.js, React, TypeScript, Three.js, and Supabase Postgres, Auth, and Storage.
+### Where “what is” becomes “look what I made.”
+
+**A Bengaluru community for people who learn together, build in public, and share what works.**
+
+[Open KrowdKraft](https://krowd-kraft.vercel.app)
+
+![Next.js](https://img.shields.io/badge/Next.js-16-332435?style=for-the-badge&logo=nextdotjs&logoColor=white)
+![React](https://img.shields.io/badge/React-19-4a3348?style=for-the-badge&logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-6b445c?style=for-the-badge&logo=typescript&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-Postgres-8a5a78?style=for-the-badge&logo=supabase&logoColor=white)
+![Three.js](https://img.shields.io/badge/Three.js-Scenes-b56e94?style=for-the-badge&logo=threedotjs&logoColor=white)
+
+[What it is](#what-it-is) · [Run locally](#run-locally) · [Configuration](#configuration) · [Telegram](#telegram) · [Layout](#layout)
+
+</div>
+
+---
+
+## What it is
+
+KrowdKraft is the site for the community: events, blogs, membership, an opt-in leaderboard, and a board of shared projects. Event registration stays with the official host. Blog posts open on their original publication. Project and leaderboard areas can sit behind a coming-soon notice until they are ready.
 
 ## Run locally
 
-Use Node.js 22.14 or later and npm. The existing `.env.local` connects this checkout to KrowdKraft's database. Keep it private.
+Use Node.js 22.14 or later.
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Open http://localhost:3000. To run the optimized application, stop the development server, run `npm run build`, then `npm start`. Both commands bind to loopback by default. A public production deployment remains a separate owner-approved step.
-
-For another checkout, copy `.env.example` to `.env.local`, then set the Supabase URL and publishable key, `SITE_URL`, and `GITHUB_AUTH_ENABLED`. The application requires a real database; it does not substitute fixtures when a connection fails. `SUPABASE_SECRET_KEY` is optional setup tooling only, never a runtime requirement or a public environment variable.
-
-## What is connected
-
-- Public event directory, filters, official external event links, registration state, calendar choices, automatically refreshed Medium posts, approved project board, and community links.
-- Optional GitHub connection through Supabase, an opt-in monthly developer leaderboard, project submissions with optional images, and private collaboration proposals. There is no viewer account dashboard, editable member profile, or bookmark interface.
-- Organizer desk for event and article drafts/publication, poster uploads, site settings, project review/unpublishing, proposal triage, and audit records.
-- Anatomy desktop with repeating typing, original isometric agenda printer with a calendar popup, three distinct Three.js learning/building/sharing scenes, and the branded Anatomy arcade cabinet. The background is still; operating-system reduced-motion preferences are respected. The global motion button has been removed.
-- Events, builds and leaderboard directories have pale isometric illustrations. Accessible event/month filters update automatically. Project sharing opens a native dialog during site navigation and retains a direct `/share` fallback. Two continuous logo strips include all 17 verified collaborators and institutions.
-
-Event registration remains with the event's official provider. Calendar downloads are not reservations. Journal entries link to the original articles. Collaboration proposals are saved in the organizer inbox; no email notification provider is configured. Empty project and leaderboard states are genuine, with no fabricated activity.
-
-## Database and authentication
-
-The existing project is **KrowdKraft Community**, reference `qbmvzxucumzwvrizgbiy`, in the KrowdKraft organization. The new tables use the `workshop_` prefix. Earlier `kk_*` tables and local archives are preserved.
-
-Ten new workshop migrations in `supabase/migrations/` define tables, constraints, row-level security, storage policies, immutable ownership, review transactions, write limits, audit triggers, opt-in GitHub participation, scheduled public GitHub ingestion, community statistics and partner data, and a private Medium RSS importer. They are already applied to the existing project. The earlier clubhouse migration is retained unchanged to preserve migration history. For an empty Supabase development project, apply the migrations in filename order, then apply `supabase/seeds/content.sql` through trusted database tooling. The sync migration requires Supabase's `http` and `pg_cron` extensions. Do not reset the existing project.
-
-`npm run db:prepare` regenerates the content seed from retained `details/*.json`. It does not connect to a database. `npm run db:seed` applies those same content records using a server-only setup key. Both seed paths preserve existing rows and never grant organizer roles. Public pages read database records after setup; editing the JSON files does not change live content.
-
-The existing GitHub OAuth provider is reused. Supabase allows `http://localhost:3000/auth/callback` for local sign-in. The GitHub OAuth App callback stays at the Supabase Auth callback. For a future deployment, set `SITE_URL` to its canonical HTTPS origin and add that exact application's `/auth/callback` to Supabase's redirect allowlist. Do not use broad wildcard callbacks for production.
-
-Organizer access comes exclusively from `workshop_roles`, using the Supabase Auth user UUID. The owner approved the existing DarshanKrishna-DK account and its owner role. Future grants must verify the precise account and approved privileges through trusted database administration. User metadata, public names, and client form fields cannot grant roles. There is no public role-management API.
-
-## GitHub leaderboard
-
-The selected scoring is **one point per indexed public commit and one point per public pull request opened**, counted within a UTC calendar month. Commit search covers default branches. Equal scores share a rank; timestamps and source limitations appear in the UI. GitHub OAuth verifies identity, and a separate explicit action controls listing. Signing out does not change participation; Leave the leaderboard hides the entry.
-
-The database cron runs every minute and selects a listed participant due for a daily update. Ingestion verifies the GitHub numeric identity, rejects incomplete or failed responses, and preserves the last verified score. Manual refresh is limited to once an hour. The unauthenticated API budget is capped at 16 participant updates / 48 requests per hour; monitor queue age as participation grows. Historical months retain their last saved snapshot, not a guaranteed month-end total. No GitHub provider token or runtime service-role key is stored.
-
-## Medium and source data
-
-The fixed official feed at https://medium.com/feed/@cryptech_dk refreshes every 15 minutes through a private database function. The homepage shows the newest three published posts and their original covers. Failed refreshes preserve the last successful data. Monitor workshop_private.medium_sync and the krowdkraft-medium-feed cron job.
-
-Verified event, organizer, partner and component sources are recorded in [REDESIGN-RESEARCH.md](details/REDESIGN-RESEARCH.md). The one-time research importer is not needed for ordinary builds; all runtime assets are retained in public/.
-
-The font and partner sources, popup behavior, directory changes and earlier responsive evidence are recorded in [REFINEMENT-VERIFICATION.md](details/REFINEMENT-VERIFICATION.md). The latest navigation, animated figures and spacing changes, including the browser-verification limitation, are recorded in [MOTION-REFINEMENT.md](details/MOTION-REFINEMENT.md). Both requested font examples are personal-use-only; the bundled Jaini typeface uses the SIL Open Font License.
-
-## Validation
+Open http://127.0.0.1:3000. `npm run build` then `npm start` runs the production build on the same machine.
 
 ```sh
 npm test
 npm run typecheck
 npm run format:check
-npm run build
-npm audit --omit=dev
-npm run check:connections
-# Start the local server before this read-only check:
-npm run check:http
 ```
 
-Tests run the policy migrations and adversarial RLS scenarios in isolated PGlite, plus URL validation, upload signatures, and event/calendar boundary tests. The extension-backed GitHub and Medium syncs are checked against the real Supabase project separately; PGlite does not emulate that network job. Tests do not create fake participants or submissions in the connected project. Browser verification and its limits are recorded in [IMPLEMENTATION-STATUS.md](details/IMPLEMENTATION-STATUS.md). The local GitHub Actions workflow runs source checks after you push; it performs no deployment.
+## Configuration
 
-## Repository layout
+Two environment files, and only these two:
 
-- `src/app/`: public, optional GitHub, submission, organizer, authentication, calendar, and health routes.
-- `src/components/`: reusable forms, navigation, content, and interactive figures.
-- `src/lib/`: database access, server actions, validation, dates, and shared types.
-- `supabase/`: additive migrations and idempotent content seed.
-- `scripts/`: figure generation, setup, and connection/HTTP verification.
-- `tests/`: application tests.
-- `public/`: runtime fonts, branding, posters, and generated illustrations.
-- `details/`: community, event, and journal records used to seed the database.
-- `.local-data/`: preserved private databases and files, ignored by Git.
-- `.vercel/`: preserved historical project link, ignored by Git.
+| File | Where it lives | Purpose |
+| --- | --- | --- |
+| `.env.example` | Committed | Empty template. Copy this when you set up a new checkout. |
+| `.env.local` | This machine only | Real values. Git ignores every `.env*` file except the example. |
 
-The computer adapts the MIT-licensed Anatomy drawing kit; the printer is an original KrowdKraft construction using that kit. The arcade cabinet adapts an existing Anatomy example. The pin field is an original Hairline figure. Unmodified Hairline kernel and bench tooling are vendored under `scripts/hairline/` so builds do not depend on a local skill installation. Attribution is in `public/licenses/`.
+```sh
+copy .env.example .env.local
+```
 
-Never include `.env*` files, credentials, `.local-data/`, or signed image URLs in a commit.
+Fill in the Supabase URL and publishable key, `SITE_URL`, and `GITHUB_AUTH_ENABLED`. `SUPABASE_SECRET_KEY` is server-only. It is used by setup tooling and the Telegram bot, and it must never be a `NEXT_PUBLIC_` variable. The app expects a real database. It does not fall back to fixtures when the connection fails.
+
+`next-env.d.ts` is a TypeScript reference generated by Next.js. It is not an environment file and holds no secrets.
+
+## Telegram
+
+Organizers can update events, blogs, and leaderboard points from Telegram. The bot asks one question at a time and writes through the same checks as the organizer desk.
+
+- `/new_event` adds an event, with an optional poster.
+- `/new_article` adds a blog card. `/add_points` records a quarterly activity.
+- `/recent` lists the latest records. `/publish_event` and `/hide_event` change visibility.
+- `/skip` skips an optional question. `/cancel` drops the form.
+
+Set `TELEGRAM_BOT_TOKEN`, `TELEGRAM_WEBHOOK_SECRET`, and `TELEGRAM_ADMIN_CHAT_IDS` in `.env.local`. Locally, run `npm run dev` and `npm run telegram:poll`. After a deploy, set the same variables on the host and run `npm run telegram:setup -- https://krowd-kraft.vercel.app` once.
+
+## Layout
+
+- `src/app/` routes, including the organizer desk, auth, and the Telegram webhook.
+- `src/components/` interface, forms, and the illustrated figures.
+- `src/lib/` database access, validation, scoring, and the bot.
+- `supabase/` migrations and the content seed.
+- `public/` logo, fonts, posters, and generated figures.
+- `details/` records used to rebuild the content seed.
+- `scripts/` figure builds, seed tooling, and the Telegram helpers.
+
+`.local-data/` stays on this machine and is not part of the repository.

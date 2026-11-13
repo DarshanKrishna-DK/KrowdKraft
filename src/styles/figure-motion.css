@@ -1,19 +1,96 @@
 /* Pale Anatomy artwork with motion confined to the machine's moving parts. */
 .arcade-animated .iso {
-  --anatomy-hi: #fff0f5;
-  --anatomy-mid: #9b6e86;
-  --anatomy-lo: #734f68;
-  --anatomy-paper: #f2dbe4;
-  --anatomy-face: #e7bfce;
-  --anatomy-top: #fae8ed;
-  --anatomy-shade-0: #a77e96;
-  --anatomy-shade-1: #c299b0;
-  --anatomy-shade-2: #e2bace;
-  --anatomy-shade-3: #f4d9e4;
-  --anatomy-lit: #fff5ee;
-  --anatomy-lit-top: #fff2ed;
-  --anatomy-lit-shade: #dec1cc;
+  --anatomy-hi: #6e3255;
+  --anatomy-mid: #8a496d;
+  --anatomy-lo: #4a2438;
+  --anatomy-paper: #f4d9df;
+  --anatomy-face: #fff0f4;
+  --anatomy-top: #fff0f4;
+  --anatomy-shade-0: #c9a3b4;
+  --anatomy-shade-1: #dbb8c6;
+  --anatomy-shade-2: #eac9d4;
+  --anatomy-shade-3: #f4d9df;
+  --anatomy-lit: #ffc6df;
+  --anatomy-lit-top: #ffe4ef;
+  --anatomy-lit-shade: #e7a3c0;
   --anatomy-halo: #08050d;
+}
+.arcade-animated .gallery-board {
+  --anatomy-paper: #f4d9df;
+  --anatomy-top: #fff4f7;
+  --anatomy-shade-0: #c9a3b4;
+  --anatomy-shade-1: #dbb8c6;
+  --anatomy-shade-2: #eac9d4;
+  --anatomy-shade-3: #f4d9df;
+  --anatomy-hi: #6e3255;
+  --anatomy-mid: #8a496d;
+  --anatomy-lo: #b58299;
+}
+.arcade-animated .gallery-paper {
+  --anatomy-paper: #f6ece8;
+  --anatomy-top: #fffaf6;
+  --anatomy-shade-0: #d5c4bc;
+  --anatomy-shade-1: #e4d5ce;
+  --anatomy-shade-2: #efe4de;
+  --anatomy-shade-3: #f6ece8;
+  --anatomy-hi: #6e3255;
+  --anatomy-mid: #8a496d;
+  --anatomy-lo: #c5aec4;
+}
+.arcade-animated .gallery-blush {
+  --anatomy-paper: #ffc6df;
+  --anatomy-top: #ffe4f0;
+  --anatomy-shade-0: #e09ab8;
+  --anatomy-shade-1: #eeafc8;
+  --anatomy-shade-2: #f7bdd4;
+  --anatomy-shade-3: #ffc6df;
+  --anatomy-hi: #6e3255;
+  --anatomy-mid: #b56e94;
+  --anatomy-lo: #8a496d;
+}
+.arcade-animated .gallery-note {
+  --anatomy-paper: #ffc6df;
+  --anatomy-top: #ffe8f2;
+  --anatomy-shade-0: #e09ab8;
+  --anatomy-shade-1: #eeafc8;
+  --anatomy-shade-2: #f7bdd4;
+  --anatomy-shade-3: #ffc6df;
+  --anatomy-hi: #6e3255;
+  --anatomy-mid: #8a496d;
+  --anatomy-lo: #b56e94;
+}
+.arcade-animated .gallery-rose {
+  --anatomy-paper: #b56e94;
+  --anatomy-top: #d9a0bc;
+  --anatomy-shade-0: #6e3255;
+  --anatomy-shade-1: #8a496d;
+  --anatomy-shade-2: #a35d82;
+  --anatomy-shade-3: #c37aa1;
+  --anatomy-hi: #ffc6df;
+  --anatomy-mid: #f4d9df;
+  --anatomy-lo: #4a2438;
+}
+.arcade-animated .gallery-skin {
+  --anatomy-paper: #f6ece8;
+  --anatomy-top: #fff8f4;
+  --anatomy-shade-0: #d7c4bc;
+  --anatomy-shade-1: #e4d4cc;
+  --anatomy-shade-2: #efe2dc;
+  --anatomy-shade-3: #f6ece8;
+  --anatomy-hi: #6e3255;
+  --anatomy-mid: #8a496d;
+  --anatomy-lo: #c5aec4;
+}
+.arcade-animated .gallery-ink {
+  --anatomy-paper: #332435;
+  --anatomy-top: #4a3348;
+  --anatomy-shade-0: #140c16;
+  --anatomy-shade-1: #1e1422;
+  --anatomy-shade-2: #281a2a;
+  --anatomy-shade-3: #332435;
+  --anatomy-hi: #ffc6df;
+  --anatomy-mid: #b56e94;
+  --anatomy-lo: #6e3255;
 }
 .arcade-animated .ac-glass,
 .arcade-animated .ac-glass[data-on] {

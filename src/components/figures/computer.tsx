@@ -63,9 +63,57 @@ export function Computer({ children }: { children: React.ReactNode }) {
       animations.forEach((a) => a.cancel());
     };
   }, []);
+  useEffect(() => {
+    const figure = root.current;
+    const hero = figure?.closest<HTMLElement>('.hero');
+    if (!figure || !hero) return;
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    const finePointer = matchMedia('(pointer: fine)');
+    const frames = { move: 0, scroll: 0 };
+    const schedule = (kind: keyof typeof frames, update: () => void) => {
+      cancelAnimationFrame(frames[kind]);
+      frames[kind] = requestAnimationFrame(update);
+    };
+    const onMove = (event: PointerEvent) => {
+      if (reduced.matches || !finePointer.matches) return;
+      schedule('move', () => {
+        const box = figure.getBoundingClientRect();
+        const x = Math.min(1, Math.max(0, (event.clientX - box.left) / box.width));
+        const y = Math.min(1, Math.max(0, (event.clientY - box.top) / box.height));
+        figure.style.setProperty('--light-x', `${((x - 0.5) * box.width).toFixed(1)}px`);
+        figure.style.setProperty('--light-y', `${((y - 0.5) * box.height).toFixed(1)}px`);
+        figure.style.setProperty('--tilt-x', `${((0.5 - y) * 5).toFixed(2)}deg`);
+        figure.style.setProperty('--tilt-y', `${((x - 0.5) * 7).toFixed(2)}deg`);
+        figure.classList.add('is-lit');
+      });
+    };
+    const onLeave = () => {
+      figure.classList.remove('is-lit');
+      figure.style.setProperty('--tilt-x', '0deg');
+      figure.style.setProperty('--tilt-y', '0deg');
+    };
+    const onScroll = () => {
+      if (reduced.matches) return;
+      schedule('scroll', () => {
+        const rise = Math.min(scrollY, hero.offsetHeight) * -0.12;
+        figure.style.setProperty('--rise', `${rise.toFixed(1)}px`);
+      });
+    };
+    hero.addEventListener('pointermove', onMove);
+    hero.addEventListener('pointerleave', onLeave);
+    addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      cancelAnimationFrame(frames.move);
+      cancelAnimationFrame(frames.scroll);
+      hero.removeEventListener('pointermove', onMove);
+      hero.removeEventListener('pointerleave', onLeave);
+      removeEventListener('scroll', onScroll);
+    };
+  }, []);
   return (
     <div className="computer-figure" ref={root}>
       <div className="computer-aura" aria-hidden="true" />
+      <div className="computer-light" aria-hidden="true" />
       <div className="iso computer-art">{children}</div>
     </div>
   );

@@ -2,11 +2,26 @@ import Link from 'next/link';
 import { Navigation } from './navigation';
 import { Icon } from './icon';
 import { JoinCommunity } from './join-community';
+import { FooterSkyline } from './footer-skyline';
 import { getCommunity } from '@/lib/data';
+
+const socials = [
+  ['github', 'GitHub'],
+  ['linkedin', 'LinkedIn'],
+  ['instagram', 'Instagram'],
+  ['x', 'X'],
+  ['whatsapp', 'WhatsApp'],
+] as const;
+const footerLinks = [
+  ['/', 'Home'],
+  ['/#circles', 'Community'],
+  ['/#blogs', 'Blogs'],
+] as const;
+
 export async function Header() {
   const community = await getCommunity();
   return (
-    <header className="site-header">
+    <header className="site-header" style={{ viewTransitionName: 'site-header' }}>
       <div className="header-inner">
         <Link href="/" className="brand" aria-label={`${community.name} home`}>
           <img src="/brand/mark.png" width="38" height="38" alt="" />
@@ -22,40 +37,50 @@ export async function Footer() {
   const community = await getCommunity();
   return (
     <footer className="site-footer">
-      <div className="wrap">
-        <div className="footer-top">
-          <Link href="/" className="brand">
-            <img src="/brand/mark.png" width="36" height="36" alt="" />
+      <div className="footer-card">
+        <img className="footer-mark" src="/brand/mark.png" width="384" height="384" alt="" />
+        <div className="footer-head">
+          <Link href="/" className="footer-brand">
+            <img src="/brand/mark.png" width="26" height="26" alt="" />
             {community.name}
           </Link>
-          <p>
-            Workshops, hack days, and shared projects.
-            <br />
-            {community.city}, India.
-          </p>
-          <a className="text-link" href={`mailto:${community.email}`}>
-            Say hello
-            <Icon name="diagonal" size={18} />
-          </a>
-        </div>
-        <div className="footer-bottom">
-          <span>
-            © {new Date().getFullYear()} {community.name}
-          </span>
-          <div>
-            {['github', 'linkedin', 'instagram', 'x'].map((key) => (
-              <a key={key} href={community.links[key]} target="_blank" rel="noreferrer">
-                {{ github: 'GitHub', linkedin: 'LinkedIn', instagram: 'Instagram', x: 'X' }[key]}
+          <nav className="footer-links" aria-label="Footer">
+            {footerLinks.map(([href, label]) => (
+              <Link key={href} href={href}>
+                {label}
+              </Link>
+            ))}
+            <span className="footer-divider" aria-hidden="true" />
+            {socials.map(([key, label]) => (
+              <a key={key} href={community.links[key]} target="_blank" rel="noreferrer" aria-label={label}>
+                <Icon name={key} size={18} />
               </a>
             ))}
-            <Link href="/privacy">Privacy</Link>
-            <a href="/licenses/anatomy.txt">Art license</a>
-            <a href="/licenses/hairline.txt">Hairline license</a>
-            <a href="/licenses/tabler.txt">Icon license</a>
-            <a href="/licenses/jaini-ofl.txt">Font license</a>
-            <Link href="/admin">Organizer desk</Link>
-          </div>
+          </nav>
         </div>
+        <p className="footer-tagline">
+          Crafted by the <span>krowd</span>
+        </p>
+        <p className="footer-about">{community.description}</p>
+        <FooterSkyline />
+      </div>
+      <div className="footer-legal">
+        <p>
+          {community.name} © {new Date().getFullYear()} · {community.city}
+        </p>
+        <p>
+          <a href={community.links.luma} target="_blank" rel="noreferrer">
+            Luma
+          </a>
+          <span aria-hidden="true">·</span>
+          <a href={community.links.medium} target="_blank" rel="noreferrer">
+            Medium
+          </a>
+          <span aria-hidden="true">·</span>
+          <Link href="/events">Events</Link>
+          <span aria-hidden="true">·</span>
+          <Link href="/#people">People</Link>
+        </p>
       </div>
     </footer>
   );

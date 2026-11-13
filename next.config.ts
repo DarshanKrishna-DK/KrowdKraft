@@ -3,6 +3,9 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   experimental: { serverActions: { bodySizeLimit: '3mb' } },
+  outputFileTracingIncludes: {
+    '/**/opengraph-image*': ['./public/brand/mark.png', './public/events/*'],
+  },
   async headers() {
     return [
       {

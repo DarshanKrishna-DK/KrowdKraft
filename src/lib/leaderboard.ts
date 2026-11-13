@@ -1,21 +1,25 @@
 import 'server-only';
 import { publicClient } from './supabase';
-export const currentMonth = () => new Date().toISOString().slice(0, 7) + '-01';
-export const monthLabel = (month: string) =>
-  new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(month));
-export async function getLeaderboard(month = currentMonth()) {
-  const { data, error } = await publicClient().rpc('workshop_leaderboard', { target_month: month });
-  if (error) throw new Error('The leaderboard is temporarily unavailable.');
+import { activities, quarterOf, quarterRange, standings, type LedgerEntry, type Track } from './scoring';
+
+export const currentQuarter = () => quarterOf(new Date());
+
+async function entriesFor(quarter: string): Promise<LedgerEntry[]> {
+  const [start, end] = quarterRange(quarter);
+  const { data, error } = await publicClient()
+    .from('workshop_leaderboard_entries')
+    .select('member,track,kind,date')
+    .gte('date', start)
+    .lt('date', end);
+  if (error) return [];
+  return (data as LedgerEntry[]).filter((entry) => entry.kind in activities);
+}
+
+export async function getLeaderboard(quarter = currentQuarter()) {
+  const entries = await entriesFor(quarter);
   return {
-    month,
-    rows: (data || []) as {
-      login: string;
-      github_id: string;
-      commits: number;
-      pull_requests: number;
-      score: number;
-      rank: number;
-      synced_at: string;
-    }[],
-  };
+    quarter,
+    developers: standings(entries, 'developers', quarter),
+    creators: standings(entries, 'creators', quarter),
+  } satisfies { quarter: string } & Record<Track, unknown>;
 }

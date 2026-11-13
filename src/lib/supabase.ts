@@ -23,6 +23,15 @@ export function publicClient() {
     global: { fetch: boundedFetch },
   });
 }
+export function serviceClient() {
+  const { url } = connection();
+  const key = process.env.SUPABASE_SECRET_KEY;
+  if (!key) throw new Error('The Supabase secret key is not configured.');
+  return createClient(url, key, {
+    auth: { persistSession: false, autoRefreshToken: false },
+    global: { fetch: boundedFetch },
+  });
+}
 export function siteUrl() {
   return new URL(process.env.SITE_URL || 'http://localhost:3000').origin;
 }

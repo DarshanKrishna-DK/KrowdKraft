@@ -245,9 +245,6 @@ section[id] {
     box-shadow 0.22s;
   white-space: nowrap;
 }
-.button:hover {
-  transform: translateY(-2px);
-}
 .button-silver {
   background: linear-gradient(160deg, #fff 0%, #e3e8f6 55%, #b7bfd7 100%);
   color: #11182a;
@@ -1238,39 +1235,6 @@ section[id] {
   z-index: -1;
   inset: 5% 0 -50%;
   background: radial-gradient(ellipse at 50% 55%, #46317150, transparent 62%);
-}
-.site-footer {
-  border-top: 1px solid var(--line);
-  background: #070a13;
-  padding: 45px 0 25px;
-}
-.footer-top {
-  display: grid;
-  grid-template-columns: 1fr 1fr auto;
-  align-items: center;
-  gap: 25px;
-  padding-bottom: 40px;
-}
-.footer-top p {
-  font-size: 11px;
-  line-height: 1.9;
-}
-.footer-bottom {
-  border-top: 1px solid var(--line);
-  padding-top: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  font-size: 10px;
-  color: #8d9ab5;
-}
-.footer-bottom > div {
-  display: flex;
-  gap: 22px;
-}
-.back-top {
-  white-space: nowrap;
 }
 .page-intro {
   padding-top: 50px;

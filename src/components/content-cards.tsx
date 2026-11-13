@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import { Icon } from './icon';
-import { dateLabel, eventState, eventType, registrationState, officialEventUrl } from '@/lib/events';
+import { dateLabel, eventState, eventType, registrationState } from '@/lib/events';
 import type { ArticleRecord, EventRecord, Project } from '@/lib/types';
 export function EventCard({ event, large = false }: { event: EventRecord; large?: boolean }) {
   return (
     <article className={`event-card ${large ? 'event-card-large' : ''}`}>
-      <a href={officialEventUrl(event)} className="event-image" target="_blank" rel="noreferrer">
+      <a href={`/events/${event.slug}`} className="event-image" target="_blank" rel="noopener">
         {event.image ? (
           <img
             src={event.image}
@@ -38,7 +38,7 @@ export function EventCard({ event, large = false }: { event: EventRecord; large?
         <time dateTime={event.date}>{dateLabel(event.date, { month: 'short' })}</time>
       </div>
       <h3>
-        <a href={officialEventUrl(event)} target="_blank" rel="noreferrer">
+        <a href={`/events/${event.slug}`} target="_blank" rel="noopener">
           {event.title}
         </a>
       </h3>
@@ -57,7 +57,13 @@ export function ArticleList({ articles }: { articles: ArticleRecord[] }) {
   return (
     <div className="article-list">
       {articles.map((article) => (
-        <a key={article.slug} href={article.href} target="_blank" rel="noreferrer" className="article-row">
+        <a
+          key={article.slug}
+          href={`/journal/${article.slug}`}
+          target="_blank"
+          rel="noopener"
+          className="article-row"
+        >
           {article.image ? (
             <img
               className="article-cover"

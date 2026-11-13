@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useId, useLayoutEffect, useRef, useState, type FormEvent } from 'react';
+import { Icon } from '@/components/icon';
 import {
   emptyMembership,
   membershipPaths,
@@ -20,7 +21,7 @@ const copy: Record<MembershipPath, { label: string; description: string; submit:
   amigos: {
     label: 'Amigos',
     description:
-      'Amigos is the inner circle of KrowdKraft, for content creators and active members who want to grow: winning hackathons, getting mentored, building products, hosting, and solo entrepreneurship. The group stays useful through real conversation, not spam.',
+      'Amigos is the inner circle of KrowdKraft, for developers, content creators, and entrepreneurs who want to grow: winning hackathons, getting mentored, building products, hosting, and solo entrepreneurship. The group stays useful through real conversation, not spam.',
     submit: 'Submit',
   },
   core: {
@@ -187,6 +188,14 @@ export function JoinCommunity({ whatsapp }: { whatsapp: string }) {
     if (!open && element.open) element.close();
   }, [open]);
 
+  useEffect(() => {
+    function openFromSection() {
+      setOpen(true);
+    }
+    window.addEventListener('krowdkraft:join', openFromSection);
+    return () => window.removeEventListener('krowdkraft:join', openFromSection);
+  }, []);
+
   function close() {
     setOpen(false);
     setError('');
@@ -219,6 +228,7 @@ export function JoinCommunity({ whatsapp }: { whatsapp: string }) {
   return (
     <>
       <button type="button" className="button header-join" onClick={() => setOpen(true)}>
+        <Icon name="people" size={18} />
         Be a Krafter
       </button>
       <dialog
@@ -377,5 +387,18 @@ export function JoinCommunity({ whatsapp }: { whatsapp: string }) {
         )}
       </dialog>
     </>
+  );
+}
+
+export function JoinKrafterButton() {
+  return (
+    <button
+      type="button"
+      className="button"
+      onClick={() => window.dispatchEvent(new Event('krowdkraft:join'))}
+    >
+      <Icon name="people" size={18} />
+      Be a Krafter
+    </button>
   );
 }

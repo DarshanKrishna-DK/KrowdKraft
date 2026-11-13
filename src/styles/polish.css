@@ -1,0 +1,157 @@
+/* Page transitions */
+::view-transition {
+  pointer-events: none;
+}
+::view-transition-old(.page-exit) {
+  animation: page-out 180ms cubic-bezier(0.4, 0, 1, 1) both;
+}
+::view-transition-new(.page-enter) {
+  animation: page-in 380ms cubic-bezier(0.16, 1, 0.3, 1) 60ms both;
+}
+::view-transition-group(site-header) {
+  z-index: 100;
+  animation: none;
+}
+::view-transition-old(site-header) {
+  display: none;
+}
+::view-transition-new(site-header) {
+  animation: none;
+}
+@keyframes page-out {
+  to {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+/* Hero computer: cursor light and parallax */
+.computer-figure {
+  --light-x: 0px;
+  --light-y: 0px;
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  --rise: 0px;
+  perspective: 1400px;
+}
+.computer-art {
+  transform: translate3d(0, var(--rise), 0) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+.computer-aura {
+  transform: translate3d(0, calc(var(--rise) * -0.5), 0);
+}
+.computer-light {
+  position: absolute;
+  inset: -40%;
+  z-index: 2;
+  background: radial-gradient(
+    circle 220px at calc(50% + var(--light-x)) calc(50% + var(--light-y)),
+    #ffd9ea30,
+    #ffc6df12 45%,
+    transparent
+  );
+  mix-blend-mode: screen;
+  opacity: 0;
+  transition: opacity 500ms ease;
+  pointer-events: none;
+}
+.computer-figure.is-lit .computer-light {
+  opacity: 1;
+}
+
+/* Poster shine */
+.event-image,
+.ticket-poster-link {
+  position: relative;
+  isolation: isolate;
+  transition: box-shadow 400ms ease;
+}
+.ticket-poster-link {
+  display: block;
+  overflow: hidden;
+  border-radius: 9px;
+  line-height: 0;
+}
+.event-image::after,
+.ticket-poster-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(105deg, transparent 35%, #fff3 48%, #ffe3ef1c 54%, transparent 66%);
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+.event-card:hover .event-image::after,
+.event-card:focus-within .event-image::after,
+.ticket-poster-link:hover::after,
+.ticket-poster-link:focus-visible::after {
+  transform: translateX(120%);
+  transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.event-card:hover .event-image,
+.ticket-poster-link:hover {
+  box-shadow:
+    0 0 0 1px #ffc6df38,
+    0 18px 42px -16px #ffc6df4d;
+}
+.image-arrow {
+  z-index: 2;
+}
+
+/* Typography */
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+p,
+li,
+dd {
+  text-wrap: pretty;
+}
+h1 {
+  letter-spacing: -0.035em;
+}
+h2 {
+  letter-spacing: -0.03em;
+}
+.community-stats dt,
+.quarter-rows,
+.quarter-rank,
+.points-table,
+.ticket-date,
+.event-card time,
+time {
+  font-variant-numeric: tabular-nums;
+}
+@media (min-width: 1440px) {
+  .section {
+    padding-block: 104px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 0s !important;
+  }
+  .computer-art,
+  .computer-aura {
+    transform: none;
+    transition: none;
+  }
+  .event-image::after,
+  .ticket-poster-link::after {
+    display: none;
+  }
+}

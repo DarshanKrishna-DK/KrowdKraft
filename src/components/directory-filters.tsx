@@ -3,6 +3,7 @@
 import { useEffect, useId, useRef, useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import { Icon } from './icon';
+import { quarterLabel } from '@/lib/scoring';
 
 type Option = { value: string; label: string };
 type EventFiltersValue = { q: string; when: string; type: string; year: string };
@@ -329,40 +330,22 @@ export function EventFilters({ value, years }: { value: EventFiltersValue; years
   );
 }
 
-export function LeaderboardMonth({ month, current }: { month: string; current: string }) {
+export function LeaderboardQuarter({ quarter, options }: { quarter: string; options: string[] }) {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
-  const [selected, setSelected] = useState(month);
-  useEffect(() => setSelected(month), [month]);
-  const [year, number] = selected.split('-');
-  const years = Array.from({ length: Number(current.slice(0, 4)) - 1999 }, (_, index) =>
-    String(Number(current.slice(0, 4)) - index),
-  );
-  const limit = year === current.slice(0, 4) ? Number(current.slice(5, 7)) : 12;
-  const months = Array.from({ length: limit }, (_, index) => ({
-    value: String(index + 1).padStart(2, '0'),
-    label: new Intl.DateTimeFormat('en', { month: 'long', timeZone: 'UTC' }).format(
-      new Date(Date.UTC(2000, index, 1)),
-    ),
-  }));
-  function change(nextYear: string, nextMonth: string) {
-    const next = `${nextYear}-${nextMonth}` > current ? current : `${nextYear}-${nextMonth}`;
+  const [selected, setSelected] = useState(quarter);
+  useEffect(() => setSelected(quarter), [quarter]);
+  function change(next: string) {
     setSelected(next);
-    startTransition(() => router.push(`/leaderboard?month=${next}`, { scroll: false }));
+    startTransition(() => router.push(`/leaderboard?quarter=${next}`, { scroll: false }));
   }
   return (
-    <div className="directory-month-picker" aria-label="Choose leaderboard month">
+    <div className="directory-month-picker" aria-label="Choose leaderboard quarter">
       <DirectorySelect
-        label="Month"
-        value={number}
-        options={months}
-        onChange={(next) => change(year, next)}
-      />
-      <DirectorySelect
-        label="Year"
-        value={year}
-        options={years.map((value) => ({ value, label: value }))}
-        onChange={(next) => change(next, number)}
+        label="Quarter"
+        value={selected}
+        options={options.map((value) => ({ value, label: quarterLabel(value) }))}
+        onChange={change}
       />
       <span className="directory-month-status" role="status">
         {pending ? 'Updating…' : ''}

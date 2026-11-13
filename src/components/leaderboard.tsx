@@ -1,80 +1,88 @@
-import Link from 'next/link';
+'use client';
+import { useId, useState } from 'react';
 import { Icon } from './icon';
-import { getLeaderboard, monthLabel } from '@/lib/leaderboard';
-export async function LeaderboardPreview() {
-  const { rows, month } = await getLeaderboard();
+import { activitiesFor, quarterLabel, tracks, type Standing, type Track } from '@/lib/scoring';
+
+export function QuarterBoard({
+  quarter,
+  boards,
+  limit,
+  points = true,
+}: {
+  quarter: string;
+  boards: Record<Track, Standing[]>;
+  limit?: number;
+  points?: boolean;
+}) {
+  const [track, setTrack] = useState<Track>('developers');
+  const id = useId();
+  const rows = limit ? boards[track].slice(0, limit) : boards[track];
+  const current = tracks.find((item) => item.id === track)!;
   return (
-    <div className="leaderboard-panel">
-      <h3>{monthLabel(month)}</h3>
-      {rows.length ? (
-        <LeaderboardRows rows={rows.slice(0, 5)} />
-      ) : (
-        <div className="leaderboard-empty">
-          <Icon name="github" size={34} />
-          <h3>The month starts with you.</h3>
-          <p>
-            Connect GitHub and choose to join. Your public activity will appear here after its first sync.
-          </p>
+    <div className="quarter-board">
+      <div className="quarter-board-head">
+        <span className="quarter-label">{quarterLabel(quarter)}</span>
+        <div className="quarter-tabs" role="tablist" aria-label="Leaderboard track">
+          {tracks.map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              role="tab"
+              id={`${id}-${item.id}`}
+              aria-selected={track === item.id}
+              aria-controls={`${id}-panel`}
+              onClick={() => setTrack(item.id)}
+            >
+              <Icon name={item.id === 'developers' ? 'code' : 'mic'} size={15} />
+              {item.name}
+            </button>
+          ))}
         </div>
-      )}
-      <Link className="text-link" href="/leaderboard">
-        How the scores work
-        <Icon name="diagonal" size={16} />
-      </Link>
+      </div>
+      <div role="tabpanel" id={`${id}-panel`} aria-labelledby={`${id}-${track}`}>
+        {rows.length ? (
+          <ol className="quarter-rows">
+            {rows.map((row) => (
+              <li
+                key={row.member}
+                className={row.rank <= 3 ? `quarter-row is-top-${row.rank}` : 'quarter-row'}
+              >
+                <span className="quarter-rank">{row.rank}</span>
+                <span className="quarter-name">
+                  {row.member}
+                  <small>
+                    {row.activities} {row.activities === 1 ? 'activity' : 'activities'}
+                    {row.wins > 0 && ` · ${row.wins} ${row.wins === 1 ? 'win' : 'wins'}`}
+                  </small>
+                </span>
+                <strong>
+                  {row.points}
+                  <small>pts</small>
+                </strong>
+              </li>
+            ))}
+          </ol>
+        ) : (
+          <div className="quarter-empty">
+            <h3>The {current.name.toLowerCase()} board opens this quarter.</h3>
+            <p>{current.summary} Every verified activity earns points toward the quarter.</p>
+          </div>
+        )}
+        {points && <PointsTable track={track} />}
+      </div>
     </div>
   );
 }
-export function LeaderboardRows({
-  rows,
-}: {
-  rows: {
-    login: string;
-    github_id: string;
-    commits: number;
-    pull_requests: number;
-    score: number;
-    rank: number;
-    synced_at: string;
-  }[];
-}) {
+
+export function PointsTable({ track }: { track: Track }) {
   return (
-    <ol className="leaderboard-list">
-      {rows.map((row) => (
-        <li className="leaderboard-row" key={row.github_id}>
-          <span className="leaderboard-rank">{row.rank}</span>
-          <img
-            src={'https://avatars.githubusercontent.com/u/' + row.github_id + '?s=80'}
-            alt=""
-            width="40"
-            height="40"
-          />
-          <div>
-            <a href={'https://github.com/' + row.login} target="_blank" rel="noreferrer">
-              {row.login}
-            </a>
-            <small>
-              {row.commits} commits · {row.pull_requests} pull requests
-            </small>
-            <small>
-              <time dateTime={row.synced_at}>
-                Updated{' '}
-                {new Intl.DateTimeFormat('en-IN', {
-                  month: 'short',
-                  day: 'numeric',
-                  hour: 'numeric',
-                  minute: '2-digit',
-                  timeZone: 'Asia/Kolkata',
-                }).format(new Date(row.synced_at))}{' '}
-                IST
-              </time>
-            </small>
-          </div>
-          <strong>
-            {row.score}
-            <small>points</small>
-          </strong>
+    <ul className="points-table" aria-label="Points per activity">
+      {activitiesFor(track).map(([kind, activity]) => (
+        <li key={kind}>
+          <span>{activity.label}</span>
+          <strong>+{activity.points}</strong>
         </li>
       ))}
-    </ol>
+    </ul>
   );
 }

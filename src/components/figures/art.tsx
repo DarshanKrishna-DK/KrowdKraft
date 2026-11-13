@@ -10,14 +10,8 @@ const computer = fs.readFileSync(path.join(process.cwd(), 'public/figures/comput
 const printer = fs.readFileSync(path.join(process.cwd(), 'public/figures/printer.svg'), 'utf8');
 // This trusted, checked-in artwork is passed as server-rendered children, not a client bundle import.
 // Remove its standalone stylesheet so embedding it cannot change other figures on the page.
-const arcade = fs
-  .readFileSync(path.join(process.cwd(), 'public/figures/arcade.svg'), 'utf8')
-  .replace(/<style>[\s\S]*?<\/style>/g, '')
-  .replace('data-mode="attract" style="display:none"', 'data-mode="attract"')
-  .replace(
-    /aria-label="[^"]*"/,
-    'aria-label="An open KrowdKraft arcade cabinet with a looping pixel game, moving joystick, and glowing circuits."',
-  );
+const arcade = fs.readFileSync(path.join(process.cwd(), 'public/figures/gallery.svg'), 'utf8');
+// Gallery visitors face the board. Each has rest-* and point-* arm parts that Arcade swaps.
 export function ArcadeFigure() {
   return (
     <Arcade>

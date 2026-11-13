@@ -144,7 +144,6 @@ textarea:focus-visible,
 .icon-button:hover,
 .text-button:hover,
 .directory-trigger:hover {
-  transform: translateY(-2px);
   color: #fff2f3;
   border-color: #efd2e36b;
   box-shadow:
@@ -162,7 +161,6 @@ textarea:focus-visible,
 .icon-button:active,
 .text-button:active,
 .directory-trigger:active {
-  transform: translateY(2px);
   box-shadow:
     inset 0 2px 6px #0007,
     0 1px 0 #000;
@@ -348,7 +346,6 @@ textarea:focus-visible,
 }
 .directory-grid a:hover {
   background: #e9b2cd12;
-  transform: translateY(-2px);
 }
 .directory-grid a[aria-current='page'] {
   border-color: #e0adc370;
@@ -518,8 +515,8 @@ textarea:focus-visible,
     box-shadow 0.24s;
 }
 .social-rail a:hover,
-.person-socials a:hover {
-  transform: translateY(-3px);
+.person-socials a:hover,
+.footer-socials a:hover {
   box-shadow:
     inset 0 1px 3px #fff7,
     0 4px 0 #08060c,
@@ -866,12 +863,14 @@ textarea:focus-visible,
   box-shadow: var(--depth);
   min-width: 0;
   transition:
-    transform 0.25s,
-    border-color 0.25s;
+    border-color 0.25s,
+    box-shadow 0.25s;
 }
 .event-card:hover {
-  transform: translateY(-5px);
-  border-color: #e8c4dc65;
+  border-color: #ffc6df88;
+  box-shadow:
+    0 0 0 1px #ffc6df44,
+    0 0 18px #b56e9433;
 }
 .event-image,
 .event-card-large .event-image {
@@ -997,40 +996,6 @@ textarea:focus-visible,
 .leaderboard-preview .section-heading {
   margin-bottom: 20px;
 }
-.leaderboard-panel {
-  position: relative;
-  border: 1px solid #e6c8db42;
-  border-radius: 24px;
-  padding: 28px;
-  background: linear-gradient(130deg, #322733cc, #19131ee6);
-  box-shadow:
-    inset 0 1px 2px #fff3,
-    inset 0 0 0 6px #19131e,
-    0 5px 0 #07050a,
-    0 20px 45px -18px #000d;
-}
-.leaderboard-panel:before {
-  content: '';
-  position: absolute;
-  inset: 11px;
-  border-radius: 15px;
-  border: 1px solid #fff1;
-  pointer-events: none;
-}
-.leaderboard-panel > * {
-  position: relative;
-}
-.leaderboard-row {
-  border-color: var(--line);
-}
-.leaderboard-empty {
-  padding: 35px 14px;
-  background: #0c091240;
-  border: 1px solid #e0b7d015;
-  border-radius: 12px;
-  box-shadow: inset 0 3px 10px #0006;
-  margin: 20px 0;
-}
 .score-explainer,
 .connection-panel,
 .leaderboard-table,
@@ -1095,12 +1060,14 @@ textarea:focus-visible,
   backdrop-filter: blur(12px);
   box-shadow: var(--depth);
   transition:
-    transform 0.25s,
-    border-color 0.25s;
+    border-color 0.25s,
+    box-shadow 0.25s;
 }
 .article-row:hover {
-  transform: translateY(-4px);
-  border-color: #f4d6e866;
+  border-color: #ffc6df99;
+  box-shadow:
+    0 0 0 1px #ffc6df66,
+    0 0 22px #b56e9444;
 }
 .article-cover {
   aspect-ratio: 1.8;
@@ -1335,36 +1302,6 @@ textarea:focus-visible,
 .join-section p {
   margin-top: 15px;
   font-size: 13px;
-}
-.site-footer {
-  background: #0f0b14b3;
-  border-top: 1px solid var(--line);
-  padding-top: 40px;
-}
-.footer-top {
-  gap: 30px;
-  align-items: center;
-}
-.footer-top p {
-  color: var(--muted);
-  font-size: 12px;
-}
-.footer-bottom {
-  border-color: var(--line);
-  color: #aa93a7;
-  font-size: 10px;
-  gap: 25px;
-  flex-wrap: wrap;
-}
-.footer-bottom > div {
-  gap: 20px;
-  flex-wrap: wrap;
-}
-.footer-bottom a:hover {
-  color: #fae9e7;
-}
-.back-top svg {
-  transform: rotate(-90deg);
 }
 .page-intro {
   padding-top: 45px;
@@ -2017,9 +1954,6 @@ input[type='checkbox'] {
   .event-typographic > span:last-child {
     font-size: 8px;
   }
-  .leaderboard-panel {
-    padding: 24px 18px;
-  }
   .leaderboard-preview .button-row {
     gap: 12px;
   }
@@ -2128,25 +2062,6 @@ input[type='checkbox'] {
   .join-section p {
     font-size: 12px;
   }
-  .site-footer {
-    padding-top: 30px;
-  }
-  .footer-top {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
-  }
-  .footer-bottom {
-    padding-block: 25px;
-    flex-direction: column;
-    gap: 20px;
-  }
-  .footer-bottom > div {
-    gap: 14px 20px;
-    justify-content: flex-start;
-  }
-
   .page-intro {
     padding-top: 30px;
     padding-bottom: 30px;

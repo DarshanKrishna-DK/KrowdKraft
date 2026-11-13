@@ -16,7 +16,9 @@
     "db:prepare": "node scripts/prepare-seed.mjs",
     "figures": "node scripts/build-computer.mjs && node scripts/build-printer.mjs && node scripts/build-hairline.mjs && node scripts/hairline/validate.mjs public/figures/hairline-pin-field.html",
     "db:seed": "node --env-file=.env.local scripts/seed.mjs",
-    "check:connections": "node --env-file=.env.local scripts/check-connections.mjs"
+    "check:connections": "node --env-file=.env.local scripts/check-connections.mjs",
+    "telegram:poll": "node --env-file=.env.local scripts/telegram-poll.mjs",
+    "telegram:setup": "node --env-file=.env.local scripts/telegram-setup.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "0.12.7",
@@ -25,6 +27,7 @@
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "server-only": "0.0.1",
+    "sharp": "^0.35.5",
     "three": "^0.186.1",
     "zod": "4.6.7"
   },

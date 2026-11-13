@@ -58,8 +58,8 @@ export default async function Join() {
             </div>
             <h2>Your work, counted.</h2>
             <p>
-              Connect GitHub to take part in the monthly developer leaderboard. Your public commits and pull
-              requests count toward your score.
+              Connect GitHub to share what you build. Shipped projects earn points on the quarterly developer
+              leaderboard.
             </p>
             <Link className="button button-silver" href="/connect">
               Connect GitHub

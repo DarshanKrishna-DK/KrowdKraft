@@ -10,9 +10,12 @@ import '@/styles/globals.css';
 import '@/styles/forms.css';
 import '@/styles/atelier.css';
 import '@/styles/refinement.css';
+import '@/styles/circles.css';
+import '@/styles/leaderboard.css';
 import '@/styles/figure-motion.css';
 import '@/styles/directories.css';
 import '@/styles/project-dialog.css';
+import '@/styles/polish.css';
 const displayFont = localFont({
   src: '../../public/fonts/jaini-latin.woff2',
   variable: '--font-display',
